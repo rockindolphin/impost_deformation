@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+:root {
+  --wrapper-max: 1440px;
+  --page-gap: 15px;
+  --border-rad-lg: 12px;
+  --grey-80: 224 224 224;   		/*#E0E0E0*/
+  --black-50: 128 128 128;   		/*#808080*/
+  --white: 255 255 255;   		/*#FFFFFF*/
+  --vh: 1vh;
+}
+
+@layer components {
+
+  .page{
+      display: flex; /*fix бага ie11 с min-height:100%*/
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      position: relative;
+      z-index: 1;
+      scroll-behavior: smooth;
+      & *{
+          /*old syntax for webkit browsers*/
+          &::-webkit-scrollbar {
+              width: 8px;
+              height: 8px;
+              scrollbar-gutter: auto;
+          }
+          &::-webkit-scrollbar-track {
+              background-color: var(--grey-80);
+              border-radius: var(--border-rad-lg);
+          }
+          &::-webkit-scrollbar-thumb {
+              background-color: var(--black-50);
+              border-radius: var(--border-rad-lg);
+          }
+
+          /*new syntax for firefox*/
+          scrollbar-width: thin;
+          scrollbar-gutter: auto;
+      }
+  }
+
+  .page__wrapper{
+      width: 100%;
+      max-width: calc(var(--wrapper-max) + 2*var(--page-gap));
+      padding-left: var(--page-gap);
+      padding-right: var(--page-gap);
+      margin-left: auto;
+      margin-right: auto;
+  }
+
+  .page__main{
+      width: 100%;
+      flex-grow: 1;
+      min-height: calc(70*var(--vh));
+      display: flex;
+      flex-direction: column;
+  }
+
+  .page__header{
+      width: 100%;
+  }
+
+  .page__footer{
+      width: 100%;
+  }
+
+  .page__body{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      min-height: calc(100*var(--vh));
+      position: relative;
+      z-index: 1;
+      background-color: var(--white);
+  }
+
+}
+
