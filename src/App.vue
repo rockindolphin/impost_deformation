@@ -343,6 +343,163 @@
                             </p>
                         </template>
 
+                        <!--
+                            <template v-if="currentTab === 'tab_5'">
+                                <table class="debug">
+                                    <tr>
+                                        <td>+</td>
+                                        <td>[C53]</td>
+                                        <td>{{C53}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>+</td>
+                                        <td>[C75]</td>
+                                        <td>{{C75}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>+</td>
+                                        <td>[F54]</td>
+                                        <td>{{QW}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>+</td>
+                                        <td>[F30]</td>
+                                        <td>{{WM}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>+</td>
+                                        <td>[F48]</td>
+                                        <td>{{WP}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>+</td>
+                                        <td>[F46]</td>
+                                        <td>{{DZE}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>+</td>
+                                        <td>[F34]</td>
+                                        <td>{{ZE}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>+</td>
+                                        <td>[F47]</td>
+                                        <td>{{V}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>+</td>
+                                        <td>[F29]</td>
+                                        <td>{{W0}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>+</td>
+                                        <td>[F35]</td>
+                                        <td>{{KZE}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>+</td>
+                                        <td>[F36]</td>
+                                        <td>{{C}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>+</td>
+                                        <td>[F64]</td>
+                                        <td>{{L}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>+</td>
+                                        <td>[F57]</td>
+                                        <td>{{LP.toFixed(12)}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>+</td>
+                                        <td>[F58]</td>
+                                        <td>{{LS.toFixed(12)}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>+</td>
+                                        <td>[D21]</td>
+                                        <td>{{D21}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>+</td>
+                                        <td>[F77]</td>
+                                        <td>{{delta}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>+</td>
+                                        <td>[F80]</td>
+                                        <td>{{H1}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>+</td>
+                                        <td>[F79]</td>
+                                        <td>{{H2}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>+</td>
+                                        <td>[F76]</td>
+                                        <td>{{P}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>+</td>
+                                        <td>[F98]</td>
+                                        <td>{{F98}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>+</td>
+                                        <td>[F110]</td>
+                                        <td>{{F110}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>+</td>
+                                        <td>[F115]</td>
+                                        <td>{{F115}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>+</td>
+                                        <td>[F82]</td>
+                                        <td>{{G.toFixed(21)}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>+</td>
+                                        <td>[F89]</td>
+                                        <td>{{AP}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>+</td>
+                                        <td>[F90]</td>
+                                        <td>{{AS}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>+</td>
+                                        <td>[F67]</td>
+                                        <td>{{B1}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>+</td>
+                                        <td>[F68]</td>
+                                        <td>{{B2}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>+</td>
+                                        <td>[F120]</td>
+                                        <td>{{K0}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>+</td>
+                                        <td>[F116]</td>
+                                        <td>{{tk}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>+</td>
+                                        <td>[F118]</td>
+                                        <td>{{impostWidth}}</td>
+                                    </tr>
+                                </table>
+                            </template>
+                        -->
+
                     </div>
                 </div>
 
@@ -387,7 +544,7 @@ export default {
 
             //tab_1
             windRegions: ['Ia', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII'],
-            windRegion: 'Ia', //Ветровой район
+            windRegion: 'I', //Ветровой район
             terrainTypes: ['A', 'B', 'C'],
             terrainType: 'B', //Тип местности
             insideAirTemperature: 20, //Расчетная внутренняя температура воздуха [F15]
@@ -412,7 +569,7 @@ export default {
             //tab_4
             profileTypes: ['T78_AERO', 'T80_AERO', 'T78_SUPER_AERO', 'T80_SUPER_AERO', 'T78_ACLASS', 'T86_60_4', 'T86_70_6'],
             profileType: 'T78_AERO', //Тип профиля
-            reinforcementType: 'rt_1', //Тип армирования
+            reinforcementType: 'rt_2', //Тип армирования
             windowColors: ['white', 'colored'],
             windowColor: 'white', //Цвет профиля
         }
@@ -451,11 +608,11 @@ export default {
         estimatedDeflection(){//Расчётный прогиб
             return (this.C53+this.C75)*1000;
         },
-        C53(){
-            return (this.QW/(ES*this.LS+EP*this.LP)) * (this.B1*Math.pow((Math.pow(this.B1, 2)-5*Math.pow(this.L, 2)),2) + this.B2*Math.pow((Math.pow(this.B2, 2)-5*Math.pow(this.L, 2)), 2))/3840;
+        C53(){// [C53]
+            return (this.QW / (ES * this.LS + EP * this.LP) * (this.B1 * ((this.B1**2 - 5*this.L**2)**2) + this.B2 * ((this.B2**2 - 5*this.L**2)**2))) / 3840;
         },
-        C75(){
-            return (this.K0*Math.pow(this.L, 2)*EP*this.LP-this.delta*(this.H1*Math.pow(this.L, 2)+this.H2*(Math.pow(this.L, 2)-4*Math.pow(this.P, 2))))/(8*(ES*this.LS+EP*this.LP));
+        C75(){// [C75]
+            return ( ( this.K0 * (this.L ** 2) * EP * this.LP - this.delta * ( this.H1 * (this.L ** 2) + this.H2 * ((this.L ** 2) - 4 * (this.P ** 2)) ) ) / (8 * (ES * this.LS + EP * this.LP)) );
         },
         QW(){// Нормативное значение пиковой ветровой нагрузки на оконную конструкцию, Па. [F54]
             return this.WM + this.WP;
@@ -466,39 +623,40 @@ export default {
         WP(){// Нормативное значение пульсационной составляющей основной ветровой нагрузки Wp [F48]
             return this.WM*this.DZE*this.V;
         },
-        DZE(){// Коэффициент пульсации давления ветра          [F46]
+        DZE(){// Коэффициент пульсации давления ветра [F46]
             let scheme = [
-                [   0.75,   0.5,    0.4     ],
-                [   1,	    0.65,   0.4     ],
-                [   1.25,   0.85,   0.55    ],
-                [   1.5,    1.1,    0.8     ],
-                [   1.7,    1.3,    1       ],
-                [   1.85,   1.45,   1.15    ],
-                [   2,	    1.6,    1.25    ],
-                [   2.25,   1.9,    1.55    ],
-                [   2.45,   2.1,    1.8     ],
-                [   2.65,   2.3,    2       ],
-                [   2.75,   2.5,    2.2     ]
+                [   0.85,   1.22,   1.78   ],
+                [   0.76,   1.06,   1.78   ],
+                [   0.69,   0.92,   1.5    ],
+                [   0.62,   0.8,    1.26   ],
+                [   0.58,   0.74,   1.14   ],
+                [   0.56,   0.7,    1.06   ],
+                [   0.54,   0.67,   1      ],
+                [   0.51,   0.62,   0.9    ],
+                [   0.49,   0.58,   0.84   ],
+                [   0.47,   0.56,   0.8    ],
+                [   0.46,   0.54,   0.76   ],
             ],
             rowNum = null,
             colNum = null,
             rowRanges = [
-                { min: 0,       max: 5,     value: 0 },
-                { min: 5,       max: 10,    value: 1 },
-                { min: 10,      max: 20,    value: 2 },
-                { min: 20,      max: 40,    value: 3 },
-                { min: 40,      max: 60,    value: 4 },
-                { min: 60,      max: 80,    value: 5 },
-                { min: 80,      max: 100,   value: 6 },
-                { min: 100,     max: 150,   value: 7 },
-                { min: 150,     max: 200,   value: 8 },
-                { min: 200,     max: 250,   value: 9 },
-                { min: 250,     max: 300,   value: 10 }
+                { min: 0,       max: 5,     value: 0    },
+                { min: 5,       max: 10,    value: 1    },
+                { min: 10,      max: 20,    value: 2    },
+                { min: 20,      max: 40,    value: 3    },
+                { min: 40,      max: 60,    value: 4    },
+                { min: 60,      max: 80,    value: 5    },
+                { min: 80,      max: 100,   value: 6    },
+                { min: 100,     max: 150,   value: 7    },
+                { min: 150,     max: 200,   value: 8    },
+                { min: 200,     max: 250,   value: 9    },
+                { min: 250,     max: 300,   value: 10   }
             ];
-            for (const range of rowRanges) {
-                if (this.ZE > range.min && this.ZE <= range.max){
-                    rowNum = range.value
-                };
+
+            for (let range of rowRanges) {
+                if (this.ZE > range.min && this.ZE <= range.max) {
+                    rowNum = range.value;
+                }
             }
             if( this.terrainType === 'A' ){ colNum = 0; }
             if( this.terrainType === 'B' ){ colNum = 1; }
@@ -582,38 +740,37 @@ export default {
         },
         KZE(){// Коэффициент учитывающий изменение ветрового давления k(ze) [F35]
             let scheme = [
-                [   0.85,   1.22,   1.78   ],
-                [   0.76,   1.06,   1.78   ],
-                [   0.69,   0.92,   1.5    ],
-                [   0.62,   0.8,    1.26   ],
-                [   0.58,   0.74,   1.14   ],
-                [   0.56,   0.7,    1.06   ],
-                [   0.54,   0.67,   1      ],
-                [   0.51,   0.62,   0.9    ],
-                [   0.49,   0.58,   0.84   ],
-                [   0.47,   0.56,   0.8    ],
-                [   0.46,   0.54,   0.76   ],
+                [   0.75,   0.5,    0.4     ],
+                [   1,	    0.65,   0.4     ],
+                [   1.25,   0.85,   0.55    ],
+                [   1.5,    1.1,    0.8     ],
+                [   1.7,    1.3,    1       ],
+                [   1.85,   1.45,   1.15    ],
+                [   2,	    1.6,    1.25    ],
+                [   2.25,   1.9,    1.55    ],
+                [   2.45,   2.1,    1.8     ],
+                [   2.65,   2.3,    2       ],
+                [   2.75,   2.5,    2.2     ]
             ],
             rowNum = null,
             colNum = null,
             rowRanges = [
-                { min: 0,       max: 5,     value: 0    },
-                { min: 5,       max: 10,    value: 1    },
-                { min: 10,      max: 20,    value: 2    },
-                { min: 20,      max: 40,    value: 3    },
-                { min: 40,      max: 60,    value: 4    },
-                { min: 60,      max: 80,    value: 5    },
-                { min: 80,      max: 100,   value: 6    },
-                { min: 100,     max: 150,   value: 7    },
-                { min: 150,     max: 200,   value: 8    },
-                { min: 200,     max: 250,   value: 9    },
-                { min: 250,     max: 300,   value: 10   }
+                { min: 0,       max: 5,     value: 0 },
+                { min: 5,       max: 10,    value: 1 },
+                { min: 10,      max: 20,    value: 2 },
+                { min: 20,      max: 40,    value: 3 },
+                { min: 40,      max: 60,    value: 4 },
+                { min: 60,      max: 80,    value: 5 },
+                { min: 80,      max: 100,   value: 6 },
+                { min: 100,     max: 150,   value: 7 },
+                { min: 150,     max: 200,   value: 8 },
+                { min: 200,     max: 250,   value: 9 },
+                { min: 250,     max: 300,   value: 10 }
             ];
-
-            for (let range of rowRanges) {
-                if (this.ZE > range.min && this.ZE <= range.max) {
-                    rowNum = range.value;
-                }
+            for (const range of rowRanges) {
+                if (this.ZE > range.min && this.ZE <= range.max){
+                    rowNum = range.value
+                };
             }
             if( this.terrainType === 'A' ){ colNum = 0; }
             if( this.terrainType === 'B' ){ colNum = 1; }
@@ -663,7 +820,7 @@ export default {
             }
             return scheme[this.reinforcementType];
         },
-        delta(){//Расстояние между неитральной осью ПВХ профиля и нейтральной осью усилительного вкладыша, м [G77]
+        delta(){//Расстояние между неитральной осью ПВХ профиля и нейтральной осью усилительного вкладыша, м [F77]
             let resp = null;
 
             if (this.profileType === 'T78_AERO') {
@@ -764,28 +921,23 @@ export default {
             return scheme[this.profileType]/1000000;
         },
         AS(){//Площади поперечного сечения (Усилительный вкладыш, м2) [F90]
-            let resp = null;
-            switch (this.reinforcementType) {
-                case 'rt_1':
-                    resp = 148.7;
-                break;
-                case 'rt_2':
-                    resp = 193;
-                break;
-                case 'rt_3':
-                    resp = 105.1;
-                break;
-                case 'rt_4':
-                    resp = 137;
-                break;
-                case 'rt_5':
-                    resp = 133.8;
-                break;
-                case 'rt_6':
-                    resp = 176.3;
-                break;
+            let resp;
+
+            if (this.reinforcementType === 'rt_1') {
+                resp = 148.7;
+            } else if (this.reinforcementType === 'rt_2') {
+                resp = 193;
+            } else if (this.reinforcementType === 'rt_3') {
+                resp = 105.1;
+            } else if (this.reinforcementType === 'rt_4') {
+                resp = 137;
+            } else if (this.reinforcementType === 'rt_5') {
+                resp = 133.8;
+            } else if (this.reinforcementType === 'rt_6') {
+                resp = 176.3;
             }
-            return resp/1000000;
+
+            return resp / 1000000;
         },
         B1(){// Модули упругости (b1) [F67]
             return this.windowSideA/100;
@@ -810,7 +962,7 @@ export default {
                 return 0.85;
             }
         },
-        impostWidth(){//Ширина профиля импоста,м
+        impostWidth(){//Ширина профиля импоста,м [F118]
             if( ['T78_AERO', 'T78_ACLASS', 'T86_60_4', 'T80_AERO'].includes(this.profileType) ){
                 return 0.06;
             }
