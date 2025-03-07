@@ -10,500 +10,513 @@
         <main class="page__main main">
             <div class="page__wrapper">
 
-                <div class="control control--tabs">
-                    <div class="wrapper">
-                        <template
-                            v-for="tab_key in Object.keys(tabs)"
-                            :key="`tab_input_${tab_key}`"
-                            >
+                <details class="control control--details">
+                    <summary>
+                        Шаг №1
+                    </summary>
+                    <div class="grid gap-4 grid-cols-12">
+                        <label class="col-span-6" for="windRegion">
+                            <span class="form__label">
+                                Ветровой район (1):
+                            </span>
+                            <select
+                                id="windRegion"
+                                v-model="windRegion"
+                                class="control control--select"
+                                >
+                                <option
+                                    v-for="item in windRegions"
+                                    :key="item"
+                                    :value="item"
+                                    >
+                                    {{ item }}
+                                </option>
+                            </select>
+                        </label>
+
+                        <label class="col-span-6" for="terrainType">
+                            <span class="form__label">
+                                Тип местности:
+                            </span>
+                            <select
+                                id="terrainType"
+                                v-model="terrainType"
+                                class="control control--select"
+                                >
+                                <option
+                                    v-for="item in terrainTypes"
+                                    :key="item"
+                                    :value="item"
+                                    >
+                                    {{ item }}
+                                </option>
+                            </select>
+                        </label>
+
+                        <label class="col-span-4" for="insideAirTemperature">
+                            <span class="form__label">
+                                Расчетная внутренняя температура воздуха,˚С:
+                            </span>
                             <input
-                                type="radio"
-                                name="tabs"
-                                class="control__input"
-                                :id="`tab_${tab_key}`"
-                                :value="tab_key"
-                                v-model="currentTab"
+                                id="insideAirTemperature"
+                                :value="insideAirTemperature"
+                                type="number"
+                                step="0.1"
+                                class="control control--text"
                             >
-                            <label
-                                class="control__label"
-                                :for="`tab_${tab_key}`"
-                                >
-                                {{ tabs[tab_key] }}
-                            </label>
-                        </template>
+                        </label>
+
+                        <label class="col-span-4" for="outsideAirTemperature">
+                            <span class="form__label">
+                                Расчетная наружная температура воздуха,˚С:
+                            </span>
+                            <input
+                                id="outsideAirTemperature"
+                                :value="outsideAirTemperature"
+                                type="number"
+                                step="0.1"
+                                class="control control--text"
+                            >
+                        </label>
+
+                        <label class="col-span-4" for="instalationAirTemperature">
+                            <span class="form__label">
+                                Температура замыкания (монтажа) оконной конструкции:
+                            </span>
+                            <input
+                                id="instalationAirTemperature"
+                                :value="instalationAirTemperature"
+                                type="number"
+                                step="0.1"
+                                class="control control--text"
+                            >
+                        </label>
                     </div>
-                    <div class="control__content control__content--visible grid gap-4 grid-cols-12">
+                </details>
 
-                        <template v-if="currentTab === 'tab_1'">
-                            <label class="col-span-6" for="windRegion">
-                                <span class="form__label">
-                                    Ветровой район (1):
-                                </span>
-                                <select
-                                    id="windRegion"
-                                    v-model="windRegion"
-                                    class="control control--select"
+                <details class="control control--details">
+                    <summary>
+                        Шаг №2
+                    </summary>
+                    <div class="grid gap-4 grid-cols-12">
+                        <label class="col-span-4" for="buildingHeight">
+                            <span class="form__label">
+                                Высота здания h (м):
+                            </span>
+                            <input
+                                id="buildingHeight"
+                                v-model.number="buildingHeight"
+                                type="number"
+                                step="0.1"
+                                class="control control--text"
+                            >
+                        </label>
+
+                        <label class="col-span-4" for="buildingWidth">
+                            <span class="form__label">
+                                Ширина здания d (м):
+                            </span>
+                            <input
+                                id="buildingWidth"
+                                v-model.number="buildingWidth"
+                                type="number"
+                                step="0.1"
+                                class="control control--text"
+                            >
+                        </label>
+
+                        <label class="col-span-4" for="buildingLength">
+                            <span class="form__label">
+                                Длина здания:
+                            </span>
+                            <input
+                                id="buildingLength"
+                                v-model.number="buildingLength"
+                                type="number"
+                                step="0.1"
+                                class="control control--text"
+                            >
+                        </label>
+
+                        <label class="col-span-4" for="windowInstallationHeight">
+                            <span class="form__label">
+                                Фактическая высота установки окна (м):
+                            </span>
+                            <input
+                                id="windowInstallationHeight"
+                                v-model.number="windowInstallationHeight"
+                                type="number"
+                                step="0.1"
+                                class="control control--text"
+                            >
+                        </label>
+
+                        <label class="col-span-4" for="windSide">
+                            <span class="form__label">
+                                Сторона:
+                            </span>
+                            <select
+                                id="windSide"
+                                v-model="windSide"
+                                class="control control--select"
+                                >
+                                <option
+                                    v-for="item in windSides"
+                                    :key="item"
+                                    :value="item"
                                     >
-                                    <option
-                                        v-for="item in windRegions"
-                                        :key="item"
-                                        :value="item"
-                                        >
-                                        {{ item }}
-                                    </option>
-                                </select>
-                            </label>
+                                    {{ i18n.windSides[item] }}
+                                </option>
+                            </select>
+                        </label>
 
-                            <label class="col-span-6" for="terrainType">
-                                <span class="form__label">
-                                    Тип местности:
-                                </span>
-                                <select
-                                    id="terrainType"
-                                    v-model="terrainType"
-                                    class="control control--select"
-                                    >
-                                    <option
-                                        v-for="item in terrainTypes"
-                                        :key="item"
-                                        :value="item"
-                                        >
-                                        {{ item }}
-                                    </option>
-                                </select>
-                            </label>
+                        <label
+                            v-if="['Боковая стена'].includes(windSide)"
+                            class="col-span-4"
+                            for="buildingSideToWindowLength"
+                            >
+                            <span class="form__label">
+                                Расстояние от края наветренной стены до окна:
+                            </span>
+                            <input
+                                id="buildingSideToWindowLength"
+                                v-model.number="buildingSideToWindowLength"
+                                type="number"
+                                step="0.1"
+                                class="control control--text"
+                            >
+                        </label>
+                    </div>
+                </details>
 
-                            <label class="col-span-4" for="insideAirTemperature">
+                <details class="control control--details" open>
+                    <summary>
+                        Шаг №3
+                    </summary>
+                    <div class="grid gap-4 grid-cols-12">
+                        <div class="col-span-6 grid gap-4 grid-cols-12">
+
+                            <label class="col-span-12" for="impostLength">
                                 <span class="form__label">
-                                    Расчетная внутренняя температура воздуха,˚С:
+                                    Длина импоста L (см):
                                 </span>
                                 <input
-                                    id="insideAirTemperature"
-                                    :value="insideAirTemperature"
+                                    id="impostLength"
+                                    v-model.number="impostLength"
                                     type="number"
                                     step="0.1"
                                     class="control control--text"
                                 >
                             </label>
 
-                            <label class="col-span-4" for="outsideAirTemperature">
+                            <label class="col-span-12" for="windowSideA">
                                 <span class="form__label">
-                                    Расчетная наружная температура воздуха,˚С:
+                                    a (см):
                                 </span>
                                 <input
-                                    id="outsideAirTemperature"
-                                    :value="outsideAirTemperature"
+                                    id="windowSideA"
+                                    v-model.number="windowSideA"
                                     type="number"
                                     step="0.1"
                                     class="control control--text"
                                 >
                             </label>
 
-                            <label class="col-span-4" for="instalationAirTemperature">
+                            <label class="col-span-12" for="windowSideB">
                                 <span class="form__label">
-                                    Температура замыкания (монтажа) оконной конструкции:
+                                    b (см):
                                 </span>
                                 <input
-                                    id="instalationAirTemperature"
-                                    :value="instalationAirTemperature"
-                                    type="number"
-                                    step="0.1"
-                                    class="control control--text"
-                                >
-                            </label>
-                        </template>
-
-                        <template v-if="currentTab === 'tab_2'">
-                            <label class="col-span-4" for="buildingHeight">
-                                <span class="form__label">
-                                    Высота здания h (м):
-                                </span>
-                                <input
-                                    id="buildingHeight"
-                                    v-model.number="buildingHeight"
+                                    id="windowSideB"
+                                    v-model.number="windowSideB"
                                     type="number"
                                     step="0.1"
                                     class="control control--text"
                                 >
                             </label>
 
-                            <label class="col-span-4" for="buildingWidth">
+                            <label class="col-span-12" for="windowSideC">
                                 <span class="form__label">
-                                    Ширина здания d (м):
+                                    c (см):
                                 </span>
                                 <input
-                                    id="buildingWidth"
-                                    v-model.number="buildingWidth"
+                                    id="windowSideC"
+                                    v-model.number="windowSideC"
                                     type="number"
                                     step="0.1"
                                     class="control control--text"
                                 >
                             </label>
 
-                            <label class="col-span-4" for="buildingLength">
-                                <span class="form__label">
-                                    Длина здания:
-                                </span>
-                                <input
-                                    id="buildingLength"
-                                    v-model.number="buildingLength"
-                                    type="number"
-                                    step="0.1"
-                                    class="control control--text"
-                                >
-                            </label>
+                            <p class="col-span-12 font-bold">
+                                d (см): {{ windowSideD.toFixed(2) }}
+                            </p>
 
-                            <label class="col-span-4" for="windowInstallationHeight">
-                                <span class="form__label">
-                                    Фактическая высота установки окна (м):
-                                </span>
-                                <input
-                                    id="windowInstallationHeight"
-                                    v-model.number="windowInstallationHeight"
-                                    type="number"
-                                    step="0.1"
-                                    class="control control--text"
-                                >
-                            </label>
-
-                            <label class="col-span-4" for="windSide">
-                                <span class="form__label">
-                                    Сторона:
-                                </span>
-                                <select
-                                    id="windSide"
-                                    v-model="windSide"
-                                    class="control control--select"
-                                    >
-                                    <option
-                                        v-for="item in windSides"
-                                        :key="item"
-                                        :value="item"
-                                        >
-                                        {{ i18n.windSides[item] }}
-                                    </option>
-                                </select>
-                            </label>
-
-                            <label
-                                v-if="['Боковая стена'].includes(windSide)"
-                                class="col-span-4"
-                                for="buildingSideToWindowLength"
-                                >
-                                <span class="form__label">
-                                    Расстояние от края наветренной стены до окна:
-                                </span>
-                                <input
-                                    id="buildingSideToWindowLength"
-                                    v-model.number="buildingSideToWindowLength"
-                                    type="number"
-                                    step="0.1"
-                                    class="control control--text"
-                                >
-                            </label>
-                        </template>
-
-                        <template v-if="currentTab === 'tab_3'">
-                            <div class="col-span-6 grid gap-4 grid-cols-12">
-
-                                <label class="col-span-12" for="impostLength">
-                                    <span class="form__label">
-                                        Длина импоста L (см):
-                                    </span>
-                                    <input
-                                        id="impostLength"
-                                        v-model.number="impostLength"
-                                        type="number"
-                                        step="0.1"
-                                        class="control control--text"
-                                    >
-                                </label>
-
-                                <label class="col-span-12" for="windowSideA">
-                                    <span class="form__label">
-                                        a (см):
-                                    </span>
-                                    <input
-                                        id="windowSideA"
-                                        v-model.number="windowSideA"
-                                        type="number"
-                                        step="0.1"
-                                        class="control control--text"
-                                    >
-                                </label>
-
-                                <label class="col-span-12" for="windowSideB">
-                                    <span class="form__label">
-                                        b (см):
-                                    </span>
-                                    <input
-                                        id="windowSideB"
-                                        v-model.number="windowSideB"
-                                        type="number"
-                                        step="0.1"
-                                        class="control control--text"
-                                    >
-                                </label>
-
-                                <label class="col-span-12" for="windowSideC">
-                                    <span class="form__label">
-                                        c (см):
-                                    </span>
-                                    <input
-                                        id="windowSideC"
-                                        v-model.number="windowSideC"
-                                        type="number"
-                                        step="0.1"
-                                        class="control control--text"
-                                    >
-                                </label>
-
-                                <label class="col-span-12" for="windowSideD">
-                                    <span class="form__label">
-                                        d (см):
-                                    </span>
-                                    <input
-                                        id="windowSideD"
-                                        :value="windowSideD"
-                                        type="number"
-                                        step="0.1"
-                                        disabled
-                                        class="control control--text"
-                                    >
-                                </label>
-
+                        </div>
+                        <div class="col-span-6">
+                            <!--
+                                <img src="@/assets/images/scheme.png" class="w-full">
+                            -->
+                            <div class="bg-gray-100">
+                                <svg :viewBox="svgComp.viewBox" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect v-bind="svgComp.window" />
+                                    <line v-bind="svgComp.impost_v" />
+                                    <line v-bind="svgComp.impost_h" />
+                                    <line v-bind="svgComp.a_line" />
+                                    <line v-bind="svgComp.b_line" />
+                                    <line v-bind="svgComp.c_line" />
+                                    <line v-bind="svgComp.d_line" />
+                                    <line v-bind="svgComp.l_line" />
+                                    <line v-bind="svgComp.a_sep_l" />
+                                    <line v-bind="svgComp.a_sep_r" />
+                                    <line v-bind="svgComp.b_sep_r" />
+                                    <line v-bind="svgComp.c_sep_b" />
+                                    <line v-bind="svgComp.c_sep_t" />
+                                    <line v-bind="svgComp.d_sep_t" />
+                                    <line v-bind="svgComp.l_sep_b" />
+                                    <line v-bind="svgComp.l_sep_t" />
+                                    <text v-bind="svgComp.a_text" class="svg__text--hint" >a</text>
+                                    <text v-bind="svgComp.b_text" class="svg__text--hint" >b</text>
+                                    <text v-bind="svgComp.c_text" class="svg__text--hint" v-if="windowSideC !== 0">c</text>
+                                    <text v-bind="svgComp.d_text" class="svg__text--hint" >d</text>
+                                    <text v-bind="svgComp.l_text" class="svg__text--hint" >L</text>
+                                </svg>
                             </div>
-                            <img src="@/assets/images/scheme.png" class="col-span-6">
-                        </template>
+                        </div>
 
-                        <template v-if="currentTab === 'tab_4'">
-                            <label class="col-span-12" for="profileType">
-                                <span class="form__label">
-                                    Тип профиля
-                                </span>
-                                <select
-                                    id="profileType"
-                                    v-model="profileType"
-                                    class="control control--select"
-                                    @change="onProfileTypeChange($event)"
-                                    >
-                                    <option
-                                        v-for="item in profileTypes"
-                                        :key="item"
-                                        :value="item"
-                                        >
-                                        {{ item }}
-                                    </option>
-                                </select>
-                            </label>
-
-                            <label class="col-span-12" for="windowColor">
-                                <span class="form__label">
-                                    Цвет профиля
-                                </span>
-                                <select
-                                    id="windowColor"
-                                    v-model="windowColor"
-                                    class="control control--select"
-                                    >
-                                    <option
-                                        v-for="item in windowColors"
-                                        :key="item"
-                                        :value="item"
-                                        >
-                                        {{ i18n.windowColors[item] }}
-                                    </option>
-                                </select>
-                            </label>
-
-                            <label class="col-span-12" for="reinforcementType">
-                                <span class="form__label">
-                                    Тип армирования
-                                </span>
-                                <select
-                                    id="reinforcementType"
-                                    v-model="reinforcementType"
-                                    class="control control--select"
-                                    >
-                                    <option
-                                        v-for="item in reinforcementTypes"
-                                        :key="item"
-                                        :value="item"
-                                        >
-                                        {{ i18n.reinforcementTypes[item] }}
-                                    </option>
-                                </select>
-                            </label>
-
-                            <p class="col-span-12 font-bold">
-                                Максимально допустимый прогиб, мм: {{ maximumAllowableDeflection.toFixed(3) }}
-                            </p>
-                            <p class="col-span-12 font-bold">
-                                Расчётный прогиб, мм: {{ estimatedDeflection.toFixed(3) }}
-                            </p>
-                        </template>
-
-                        <!--
-                            <template v-if="currentTab === 'tab_5'">
-                                <table class="debug">
-                                    <tr>
-                                        <td>+</td>
-                                        <td>[C53]</td>
-                                        <td>{{C53}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>+</td>
-                                        <td>[C75]</td>
-                                        <td>{{C75}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>+</td>
-                                        <td>[F54]</td>
-                                        <td>{{QW}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>+</td>
-                                        <td>[F30]</td>
-                                        <td>{{WM}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>+</td>
-                                        <td>[F48]</td>
-                                        <td>{{WP}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>+</td>
-                                        <td>[F46]</td>
-                                        <td>{{DZE}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>+</td>
-                                        <td>[F34]</td>
-                                        <td>{{ZE}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>+</td>
-                                        <td>[F47]</td>
-                                        <td>{{V}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>+</td>
-                                        <td>[F29]</td>
-                                        <td>{{W0}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>+</td>
-                                        <td>[F35]</td>
-                                        <td>{{KZE}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>+</td>
-                                        <td>[F36]</td>
-                                        <td>{{C}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>+</td>
-                                        <td>[F64]</td>
-                                        <td>{{L}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>+</td>
-                                        <td>[F57]</td>
-                                        <td>{{LP.toFixed(12)}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>+</td>
-                                        <td>[F58]</td>
-                                        <td>{{LS.toFixed(12)}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>+</td>
-                                        <td>[D21]</td>
-                                        <td>{{D21}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>+</td>
-                                        <td>[F77]</td>
-                                        <td>{{delta}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>+</td>
-                                        <td>[F80]</td>
-                                        <td>{{H1}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>+</td>
-                                        <td>[F79]</td>
-                                        <td>{{H2}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>+</td>
-                                        <td>[F76]</td>
-                                        <td>{{P}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>+</td>
-                                        <td>[F98]</td>
-                                        <td>{{F98}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>+</td>
-                                        <td>[F110]</td>
-                                        <td>{{F110}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>+</td>
-                                        <td>[F115]</td>
-                                        <td>{{F115}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>+</td>
-                                        <td>[F82]</td>
-                                        <td>{{G.toFixed(21)}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>+</td>
-                                        <td>[F89]</td>
-                                        <td>{{AP}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>+</td>
-                                        <td>[F90]</td>
-                                        <td>{{AS}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>+</td>
-                                        <td>[F67]</td>
-                                        <td>{{B1}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>+</td>
-                                        <td>[F68]</td>
-                                        <td>{{B2}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>+</td>
-                                        <td>[F120]</td>
-                                        <td>{{K0}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>+</td>
-                                        <td>[F116]</td>
-                                        <td>{{tk}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>+</td>
-                                        <td>[F118]</td>
-                                        <td>{{impostWidth}}</td>
-                                    </tr>
-                                </table>
-                            </template>
-                        -->
 
                     </div>
-                </div>
+                </details>
 
+                <details class="control control--details">
+                    <summary>
+                        Шаг №4
+                    </summary>
+                    <div class="grid gap-4 grid-cols-12">
+                        <label class="col-span-12" for="profileType">
+                            <span class="form__label">
+                                Тип профиля
+                            </span>
+                            <select
+                                id="profileType"
+                                v-model="profileType"
+                                class="control control--select"
+                                @change="onProfileTypeChange($event)"
+                                >
+                                <option
+                                    v-for="item in profileTypes"
+                                    :key="item"
+                                    :value="item"
+                                    >
+                                    {{ item }}
+                                </option>
+                            </select>
+                        </label>
 
+                        <label class="col-span-12" for="windowColor">
+                            <span class="form__label">
+                                Цвет профиля
+                            </span>
+                            <select
+                                id="windowColor"
+                                v-model="windowColor"
+                                class="control control--select"
+                                >
+                                <option
+                                    v-for="item in windowColors"
+                                    :key="item"
+                                    :value="item"
+                                    >
+                                    {{ i18n.windowColors[item] }}
+                                </option>
+                            </select>
+                        </label>
+
+                        <label class="col-span-12" for="reinforcementType">
+                            <span class="form__label">
+                                Тип армирования
+                            </span>
+                            <select
+                                id="reinforcementType"
+                                v-model="reinforcementType"
+                                class="control control--select"
+                                >
+                                <option
+                                    v-for="item in reinforcementTypes"
+                                    :key="item"
+                                    :value="item"
+                                    >
+                                    {{ i18n.reinforcementTypes[item] }}
+                                </option>
+                            </select>
+                        </label>
+
+                        <p class="col-span-12 font-bold">
+                            Максимально допустимый прогиб, мм: {{ maximumAllowableDeflection.toFixed(3) }}
+                        </p>
+
+                        <p class="col-span-12 font-bold">
+                            Расчётный прогиб, мм: {{ estimatedDeflection.toFixed(3) }}
+                        </p>
+                    </div>
+                </details>
+
+                <!--
+                    <template>
+                        <table class="debug">
+                            <tr>
+                                <td>+</td>
+                                <td>[C53]</td>
+                                <td>{{C53}}</td>
+                            </tr>
+                            <tr>
+                                <td>+</td>
+                                <td>[C75]</td>
+                                <td>{{C75}}</td>
+                            </tr>
+                            <tr>
+                                <td>+</td>
+                                <td>[F54]</td>
+                                <td>{{QW}}</td>
+                            </tr>
+                            <tr>
+                                <td>+</td>
+                                <td>[F30]</td>
+                                <td>{{WM}}</td>
+                            </tr>
+                            <tr>
+                                <td>+</td>
+                                <td>[F48]</td>
+                                <td>{{WP}}</td>
+                            </tr>
+                            <tr>
+                                <td>+</td>
+                                <td>[F46]</td>
+                                <td>{{DZE}}</td>
+                            </tr>
+                            <tr>
+                                <td>+</td>
+                                <td>[F34]</td>
+                                <td>{{ZE}}</td>
+                            </tr>
+                            <tr>
+                                <td>+</td>
+                                <td>[F47]</td>
+                                <td>{{V}}</td>
+                            </tr>
+                            <tr>
+                                <td>+</td>
+                                <td>[F29]</td>
+                                <td>{{W0}}</td>
+                            </tr>
+                            <tr>
+                                <td>+</td>
+                                <td>[F35]</td>
+                                <td>{{KZE}}</td>
+                            </tr>
+                            <tr>
+                                <td>+</td>
+                                <td>[F36]</td>
+                                <td>{{C}}</td>
+                            </tr>
+                            <tr>
+                                <td>+</td>
+                                <td>[F64]</td>
+                                <td>{{L}}</td>
+                            </tr>
+                            <tr>
+                                <td>+</td>
+                                <td>[F57]</td>
+                                <td>{{LP.toFixed(12)}}</td>
+                            </tr>
+                            <tr>
+                                <td>+</td>
+                                <td>[F58]</td>
+                                <td>{{LS.toFixed(12)}}</td>
+                            </tr>
+                            <tr>
+                                <td>+</td>
+                                <td>[D21]</td>
+                                <td>{{D21}}</td>
+                            </tr>
+                            <tr>
+                                <td>+</td>
+                                <td>[F77]</td>
+                                <td>{{delta}}</td>
+                            </tr>
+                            <tr>
+                                <td>+</td>
+                                <td>[F80]</td>
+                                <td>{{H1}}</td>
+                            </tr>
+                            <tr>
+                                <td>+</td>
+                                <td>[F79]</td>
+                                <td>{{H2}}</td>
+                            </tr>
+                            <tr>
+                                <td>+</td>
+                                <td>[F76]</td>
+                                <td>{{P}}</td>
+                            </tr>
+                            <tr>
+                                <td>+</td>
+                                <td>[F98]</td>
+                                <td>{{F98}}</td>
+                            </tr>
+                            <tr>
+                                <td>+</td>
+                                <td>[F110]</td>
+                                <td>{{F110}}</td>
+                            </tr>
+                            <tr>
+                                <td>+</td>
+                                <td>[F115]</td>
+                                <td>{{F115}}</td>
+                            </tr>
+                            <tr>
+                                <td>+</td>
+                                <td>[F82]</td>
+                                <td>{{G.toFixed(21)}}</td>
+                            </tr>
+                            <tr>
+                                <td>+</td>
+                                <td>[F89]</td>
+                                <td>{{AP}}</td>
+                            </tr>
+                            <tr>
+                                <td>+</td>
+                                <td>[F90]</td>
+                                <td>{{AS}}</td>
+                            </tr>
+                            <tr>
+                                <td>+</td>
+                                <td>[F67]</td>
+                                <td>{{B1}}</td>
+                            </tr>
+                            <tr>
+                                <td>+</td>
+                                <td>[F68]</td>
+                                <td>{{B2}}</td>
+                            </tr>
+                            <tr>
+                                <td>+</td>
+                                <td>[F120]</td>
+                                <td>{{K0}}</td>
+                            </tr>
+                            <tr>
+                                <td>+</td>
+                                <td>[F116]</td>
+                                <td>{{tk}}</td>
+                            </tr>
+                            <tr>
+                                <td>+</td>
+                                <td>[F118]</td>
+                                <td>{{impostWidth}}</td>
+                            </tr>
+                        </table>
+                    </template>
+                -->
             </div>
         </main>
         <footer class="page__footer footer">
@@ -534,15 +547,8 @@ export default {
     },
     data() {
         return {
-            tabs: {
-                'tab_1': 'Шаг №1',
-                'tab_2': 'Шаг №2',
-                'tab_3': 'Шаг №3',
-                'tab_4': 'Шаг №4'
-            },
-            currentTab: 'tab_1',
 
-            //tab_1
+            //step_1
             windRegions: ['Ia', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII'],
             windRegion: 'I', //Ветровой район
             terrainTypes: ['A', 'B', 'C'],
@@ -551,7 +557,7 @@ export default {
             outsideAirTemperature: 15, //Расчетная наружная температура воздуха [F16]
             instalationAirTemperature: 15, //Температура замыкания (монтажа) оконной конструкции [F17]
 
-            //tab_2
+            //step_2
             buildingHeight: 60, //Высота здания h (м) [B9]
             buildingWidth: 50, //Ширина здания d (м) [B10]
             buildingLength: 30, //Длина здания [E10]
@@ -560,13 +566,13 @@ export default {
             windSide: 'windward_side', //Сторона
             buildingSideToWindowLength: 4, //Расстояние от края наветренной стены до окна
 
-            //tab_3
+            //step_3
             impostLength: 150, //Длина импоста L (см):
             windowSideA: 70, //Рассчитываемый элемент a
             windowSideB: 70, //Рассчитываемый элемент b
             windowSideC: 0, //Рассчитываемый элемент c
 
-            //tab_4
+            //step_4
             profileTypes: ['T78_AERO', 'T80_AERO', 'T78_SUPER_AERO', 'T80_SUPER_AERO', 'T78_ACLASS', 'T86_60_4', 'T86_70_6'],
             profileType: 'T78_AERO', //Тип профиля
             reinforcementType: 'rt_2', //Тип армирования
@@ -595,6 +601,192 @@ export default {
                     colored: 'Цветной'
                 }
             }
+        },
+        svgComp(){
+            let windowWidth = this.windowSideA + this.windowSideB,
+                windowHeight = this.impostLength,
+                side = 300,
+                lineGap = 15,
+                textGap = 4,
+                sepSize = 5,
+                windowCommon = {
+                    'stroke-width': 2,
+                    stroke: '#000'
+                },
+                lineCommon = {
+                    'stroke-width': 1,
+                    stroke: '#000'
+                },
+                textCommon = {
+                    'text-anchor': 'middle',
+                    fill: '#000'
+                },
+                freeSpace = {
+                    x: side - (this.windowSideA + this.windowSideB),
+                    y: side - this.impostLength
+                },
+                window = {
+                    ...windowCommon,
+                    x: freeSpace.x*0.5,
+                    y: freeSpace.y*0.5,
+                    width: windowWidth,
+                    height: windowHeight
+                },
+                impost_v = {
+                    ...windowCommon,
+                    x1: window.x + this.windowSideA,
+                    y1: window.y,
+                    x2: window.x + this.windowSideA,
+                    y2: window.y + windowHeight
+                },
+                impost_h = {
+                    ...windowCommon,
+                    x1: window.x,
+                    y1: window.y + windowHeight - this.windowSideC,
+                    x2: window.x + this.windowSideA,
+                    y2: window.y + windowHeight - this.windowSideC
+                },
+                a_line = {
+                    ...lineCommon,
+                    x1: window.x,
+                    y1: window.y + windowHeight + lineGap,
+                    x2: window.x + this.windowSideA,
+                    y2: window.y + windowHeight + lineGap
+                },
+                b_line = {
+                    ...lineCommon,
+                    x1: window.x + this.windowSideA,
+                    y1: window.y + windowHeight + lineGap,
+                    x2: window.x + windowWidth,
+                    y2: window.y + windowHeight + lineGap
+                },
+                c_line = {
+                    ...lineCommon,
+                    x1: window.x - lineGap,
+                    y1: window.y + windowHeight - this.windowSideC,
+                    x2: window.x - lineGap,
+                    y2: window.y + windowHeight
+                },
+                d_line = {
+                    ...lineCommon,
+                    x1: window.x - lineGap,
+                    y1: window.y,
+                    x2: window.x - lineGap,
+                    y2: window.y + this.windowSideD
+                },
+                l_line = {
+                    ...lineCommon,
+                    x1: window.x + windowWidth + lineGap,
+                    y1: window.y,
+                    x2: window.x + windowWidth + lineGap,
+                    y2: window.y + windowHeight
+                },
+                a_sep_l = {
+                    ...lineCommon,
+                    x1: a_line.x1,
+                    y1: a_line.y1 - sepSize/2,
+                    x2: a_line.x1,
+                    y2: a_line.y1 + sepSize/2
+                },
+                a_sep_r = {
+                    ...lineCommon,
+                    x1: a_line.x2,
+                    y1: a_line.y1 - sepSize/2,
+                    x2: a_line.x2,
+                    y2: a_line.y1 + sepSize/2
+                },
+                b_sep_r = {
+                    ...lineCommon,
+                    x1: b_line.x2,
+                    y1: b_line.y1 - sepSize/2,
+                    x2: b_line.x2,
+                    y2: b_line.y1 + sepSize/2
+                },
+                c_sep_b = {
+                    ...lineCommon,
+                    x1: c_line.x1 - sepSize/2,
+                    y1: c_line.y2,
+                    x2: c_line.x2 + sepSize/2,
+                    y2: c_line.y2
+                },
+                c_sep_t = {
+                    ...lineCommon,
+                    x1: c_line.x1 - sepSize/2,
+                    y1: c_line.y1,
+                    x2: c_line.x2 + sepSize/2,
+                    y2: c_line.y1
+                },
+                d_sep_t = {
+                    ...lineCommon,
+                    x1: d_line.x1 - sepSize/2,
+                    y1: d_line.y1,
+                    x2: d_line.x1 + sepSize/2,
+                    y2: d_line.y1
+                },
+                l_sep_b = {
+                    ...lineCommon,
+                    x1: l_line.x1 - sepSize/2,
+                    y1: l_line.y2,
+                    x2: l_line.x1 + sepSize/2,
+                    y2: l_line.y2
+                },
+                l_sep_t = {
+                    ...lineCommon,
+                    x1: l_line.x1 - sepSize/2,
+                    y1: l_line.y1,
+                    x2: l_line.x1 + sepSize/2,
+                    y2: l_line.y1
+                },
+                a_text = {
+                    ...textCommon,
+                    x: a_line.x1 + (a_line.x2 - a_line.x1)/2,
+                    y: a_line.y1 + (a_line.y2 - a_line.y1)/2 - textGap
+                },
+                b_text = {
+                    ...textCommon,
+                    x: b_line.x1 + (b_line.x2 - b_line.x1)/2,
+                    y: b_line.y1 + (b_line.y2 - b_line.y1)/2 - textGap
+                },
+                c_text = {
+                    ...textCommon,
+                    x: c_line.x1 + (c_line.x2 - c_line.x1)/2 - textGap*2,
+                    y: c_line.y1 + (c_line.y2 - c_line.y1)/2 + textGap/2
+                },
+                d_text = {
+                    ...textCommon,
+                    x: d_line.x1 + (d_line.x2 - d_line.x1)/2 - textGap*2,
+                    y: d_line.y1 + (d_line.y2 - d_line.y1)/2 + textGap/2
+                },
+                l_text = {
+                    ...textCommon,
+                    x: l_line.x1 + (l_line.x2 - l_line.x1)/2 + textGap*2,
+                    y: l_line.y1 + (l_line.y2 - l_line.y1)/2 + textGap/2
+                };
+
+            return {
+                viewBox: `0 0 ${side} ${side}`,
+                window: window,
+                impost_v: impost_v,
+                impost_h: impost_h,
+                a_line: a_line,
+                b_line: b_line,
+                c_line: c_line,
+                d_line: d_line,
+                l_line: l_line,
+                a_sep_l: a_sep_l,
+                a_sep_r: a_sep_r,
+                b_sep_r: b_sep_r,
+                c_sep_b: c_sep_b,
+                c_sep_t: c_sep_t,
+                d_sep_t: d_sep_t,
+                l_sep_b: l_sep_b,
+                l_sep_t: l_sep_t,
+                a_text: a_text,
+                b_text: b_text,
+                c_text: c_text,
+                d_text: d_text,
+                l_text: l_text
+            };
         },
         windowSideD(){ //Рассчитываемый элемент d
             return this.impostLength - this.windowSideC;

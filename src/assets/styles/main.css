@@ -7,8 +7,7 @@
   --control-height: 40px;
   --control-padding-y: 10px;
   --control-padding-x: 12px;
-  --shadow-initial: 0px 0px 0px rgba(0, 0, 0, 0);
-  --shadow-btn-hover: 0px 4px 8px rgba(29, 48, 19, 0.16);
+  --brusbox-red: #e40032;
 }
 
 @layer components {
@@ -189,7 +188,7 @@
         display: block;
         width: 100%;
         border: 1px solid;
-        border-color: var(--color-gray-300);
+        border-color: var(--color-stone-950);
         border-radius: var(--radius-md);
         font-family: Roboto;
         font-size: 16px;
@@ -197,7 +196,7 @@
         line-height: 1.4;
         color: var(--color-stone-800);
         background-color: var(--color-stone-50);
-        box-shadow: var(--shadow-initial);
+        box-shadow: none;
         outline: none;
         appearance: none;
         transition: border-color .15s ease-in-out,
@@ -207,34 +206,26 @@
             opacity: 1;
         }
         &:focus{
-            box-shadow: var(--shadow-btn-hover);
+            box-shadow: none;
         }
         &:disabled{
-            background-color: var(--color-stone-300);
+            background-color: var(--color-slate-300);
             opacity: 1;
         }
         &:not(:disabled){
             &:hover{
-                border-color: var(--color-gray-400);
+                box-shadow: none;
+                border-color: var(--brusbox-red);
                 &::placeholder {
                     color: var(--color-stone-500);
                 }
             }
             &:focus{
-
+                border-color: var(--brusbox-red);
+                box-shadow: none;
             }
         }
 
-        &:not(:disabled){
-            &:hover{
-                box-shadow: var(--shadow-btn-hover);
-            }
-            &:focus{
-                border-color: var(--color-stone-500);
-                box-shadow: var(--shadow-btn-hover),
-                            0 0 0 1px var(--color-stone-500);
-            }
-        }
         & textarea{
             min-height: calc( 2*var(--control-height) );
         }
@@ -261,9 +252,30 @@
         }
     }
 
+    .control--details{
+        background-color: var(--color-gray-300);
+        margin-bottom: 30px;
+        & > .grid{
+            padding: 15px;
+        }
+        summary {
+            background-color: var(--brusbox-red);
+            padding: 10px 15px;
+            font-size: 1em;
+            border-bottom: 1px solid #000000;
+        }
+        summary::marker {
+            color: #000000;
+        }
+    }
+
     .form__label{
         display: inline-block;
         margin-bottom: 4px;
+    }
+
+    .svg__text--hint{
+        font-size: 10px;
     }
 
 }
