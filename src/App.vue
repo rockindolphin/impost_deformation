@@ -25,7 +25,7 @@
                                 class="control control--select"
                                 >
                                 <option
-                                    v-for="item in windRegions"
+                                    v-for="item in Object.keys(windRegions)"
                                     :key="item"
                                     :value="item"
                                     >
@@ -103,16 +103,16 @@
                             <div class="scene" :style="buildingStyles">
                                 <div class="box">
                                     <div class="box__face box__face--front">
-                                        {{ i18n.windSides.windward_side }}
+                                        {{ windSides.windward_side.i18n }}
                                         <div class="box__window" v-if="windSide === 'windward_side'"></div>
                                     </div>
                                     <div class="box__face box__face--back">
-                                        {{ i18n.windSides.leeward_side }}
+                                        {{ windSides.leeward_side.i18n }}
                                         <div class="box__window" v-if="windSide === 'leeward_side'"></div>
                                     </div>
                                     <div class="box__face box__face--right"></div>
                                     <div class="box__face box__face--left">
-                                        {{ i18n.windSides.side_wall }}
+                                        {{ windSides.side_wall.i18n }}
                                         <div class="box__window" v-if="windSide === 'side_wall'"></div>
                                     </div>
                                     <div class="box__face box__face--top"></div>
@@ -183,11 +183,11 @@
                                     class="control control--select"
                                     >
                                     <option
-                                        v-for="item in windSides"
+                                        v-for="item in Object.keys(windSides)"
                                         :key="item"
                                         :value="item"
                                         >
-                                        {{ i18n.windSides[item] }}
+                                        {{ windSides[item].i18n }}
                                     </option>
                                 </select>
                             </label>
@@ -327,7 +327,7 @@
                                     @change="onProfileTypeChange($event)"
                                     >
                                     <option
-                                        v-for="item in profileTypes"
+                                        v-for="item in Object.keys(profileTypes)"
                                         :key="item"
                                         :value="item"
                                         >
@@ -346,11 +346,11 @@
                                     class="control control--select"
                                     >
                                     <option
-                                        v-for="item in windowColors"
+                                        v-for="item in Object.keys(windowColors)"
                                         :key="item"
                                         :value="item"
                                         >
-                                        {{ i18n.windowColors[item] }}
+                                        {{ windowColors[item].i18n }}
                                     </option>
                                 </select>
                             </label>
@@ -365,11 +365,11 @@
                                     class="control control--select"
                                     >
                                     <option
-                                        v-for="item in reinforcementTypes"
+                                        v-for="item in reinforcementTypesOptions"
                                         :key="item"
                                         :value="item"
                                         >
-                                        {{ i18n.reinforcementTypes[item] }}
+                                        {{ reinforcementTypes[item].i18n }}
                                     </option>
                                 </select>
                             </label>
@@ -386,162 +386,6 @@
                     </div>
                 </details>
 
-                <!--
-                    <template>
-                        <table class="debug">
-                            <tr>
-                                <td>+</td>
-                                <td>[C53]</td>
-                                <td>{{C53}}</td>
-                            </tr>
-                            <tr>
-                                <td>+</td>
-                                <td>[C75]</td>
-                                <td>{{C75}}</td>
-                            </tr>
-                            <tr>
-                                <td>+</td>
-                                <td>[F54]</td>
-                                <td>{{QW}}</td>
-                            </tr>
-                            <tr>
-                                <td>+</td>
-                                <td>[F30]</td>
-                                <td>{{WM}}</td>
-                            </tr>
-                            <tr>
-                                <td>+</td>
-                                <td>[F48]</td>
-                                <td>{{WP}}</td>
-                            </tr>
-                            <tr>
-                                <td>+</td>
-                                <td>[F46]</td>
-                                <td>{{DZE}}</td>
-                            </tr>
-                            <tr>
-                                <td>+</td>
-                                <td>[F34]</td>
-                                <td>{{ZE}}</td>
-                            </tr>
-                            <tr>
-                                <td>+</td>
-                                <td>[F47]</td>
-                                <td>{{V}}</td>
-                            </tr>
-                            <tr>
-                                <td>+</td>
-                                <td>[F29]</td>
-                                <td>{{W0}}</td>
-                            </tr>
-                            <tr>
-                                <td>+</td>
-                                <td>[F35]</td>
-                                <td>{{KZE}}</td>
-                            </tr>
-                            <tr>
-                                <td>+</td>
-                                <td>[F36]</td>
-                                <td>{{C}}</td>
-                            </tr>
-                            <tr>
-                                <td>+</td>
-                                <td>[F64]</td>
-                                <td>{{L}}</td>
-                            </tr>
-                            <tr>
-                                <td>+</td>
-                                <td>[F57]</td>
-                                <td>{{LP.toFixed(12)}}</td>
-                            </tr>
-                            <tr>
-                                <td>+</td>
-                                <td>[F58]</td>
-                                <td>{{LS.toFixed(12)}}</td>
-                            </tr>
-                            <tr>
-                                <td>+</td>
-                                <td>[D21]</td>
-                                <td>{{D21}}</td>
-                            </tr>
-                            <tr>
-                                <td>+</td>
-                                <td>[F77]</td>
-                                <td>{{delta}}</td>
-                            </tr>
-                            <tr>
-                                <td>+</td>
-                                <td>[F80]</td>
-                                <td>{{H1}}</td>
-                            </tr>
-                            <tr>
-                                <td>+</td>
-                                <td>[F79]</td>
-                                <td>{{H2}}</td>
-                            </tr>
-                            <tr>
-                                <td>+</td>
-                                <td>[F76]</td>
-                                <td>{{P}}</td>
-                            </tr>
-                            <tr>
-                                <td>+</td>
-                                <td>[F98]</td>
-                                <td>{{F98}}</td>
-                            </tr>
-                            <tr>
-                                <td>+</td>
-                                <td>[F110]</td>
-                                <td>{{F110}}</td>
-                            </tr>
-                            <tr>
-                                <td>+</td>
-                                <td>[F115]</td>
-                                <td>{{F115}}</td>
-                            </tr>
-                            <tr>
-                                <td>+</td>
-                                <td>[F82]</td>
-                                <td>{{G.toFixed(21)}}</td>
-                            </tr>
-                            <tr>
-                                <td>+</td>
-                                <td>[F89]</td>
-                                <td>{{AP}}</td>
-                            </tr>
-                            <tr>
-                                <td>+</td>
-                                <td>[F90]</td>
-                                <td>{{AS}}</td>
-                            </tr>
-                            <tr>
-                                <td>+</td>
-                                <td>[F67]</td>
-                                <td>{{B1}}</td>
-                            </tr>
-                            <tr>
-                                <td>+</td>
-                                <td>[F68]</td>
-                                <td>{{B2}}</td>
-                            </tr>
-                            <tr>
-                                <td>+</td>
-                                <td>[F120]</td>
-                                <td>{{K0}}</td>
-                            </tr>
-                            <tr>
-                                <td>+</td>
-                                <td>[F116]</td>
-                                <td>{{tk}}</td>
-                            </tr>
-                            <tr>
-                                <td>+</td>
-                                <td>[F118]</td>
-                                <td>{{impostWidth}}</td>
-                            </tr>
-                        </table>
-                    </template>
-                -->
             </div>
         </main>
         <footer class="page__footer footer">
@@ -581,7 +425,32 @@
             return {
 
                 //step_1
-                windRegions: ['Ia', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII'],
+                windRegions: {
+                    'Ia': {
+                        w0: 170, // Нормативное значение ветрового давления, Па
+                    },
+                    'I': {
+                        w0: 230,
+                    },
+                    'II': {
+                        w0: 300,
+                    },
+                    'III': {
+                        w0: 380,
+                    },
+                    'IV': {
+                        w0: 480,
+                    },
+                    'V': {
+                        w0: 600,
+                    },
+                    'VI': {
+                        w0: 730,
+                    },
+                    'VII': {
+                        w0: 850,
+                    }
+                },
                 windRegion: 'I', //Ветровой район
                 terrainTypes: ['A', 'B', 'C'],
                 terrainType: 'B', //Тип местности
@@ -594,7 +463,17 @@
                 buildingWidth: 50, //Ширина здания d (м) [B10]
                 buildingLength: 30, //Длина здания [E10]
                 windowInstallationHeight: 40, //Фактическая высота установки окна (м): [B11]
-                windSides: ['windward_side', 'leeward_side', 'side_wall'],
+                windSides: {
+                    'windward_side': {
+                        i18n: 'Наветренная сторона'
+                    },
+                    'leeward_side': {
+                        i18n: 'Подветренная сторона'
+                    },
+                    'side_wall': {
+                        i18n: 'Боковая стена'
+                    }
+                },
                 windSide: 'windward_side', //Сторона
                 buildingSideToWindowLength: 4, //Расстояние от края наветренной стены до окна
 
@@ -605,35 +484,112 @@
                 windowSideC: 0, //Рассчитываемый элемент c
 
                 //step_4
-                profileTypes: ['T78_AERO', 'T80_AERO', 'T78_SUPER_AERO', 'T80_SUPER_AERO', 'T78_ACLASS', 'T86_60_4', 'T86_70_6'],
+                profileTypes: {
+                    'T78_AERO': {
+                        impostWidth: 0.06, //Ширина профиля импоста,м [F118]
+                        tk: 0.78, //Безразмерные коэффициенты, учитывающие неоднородность температурного поля в ПВХ профиле, [F116, N55]
+                        ap: 727, //Площади поперечного сечения (ПВХ профиль)
+                        te: 1.08, // Безразмерные коэффициенты, учитывающие неоднородность температурного поля в ПВХ профиле
+                        f110: 1, // Отношение количества рядов воздушных камер в наружной части попереченого сечения ПВХ профиля к количеству рядов воздушных камер во внутренней части поперечного сечения ПВХ профиля
+                        lp: 349918, // Главные моменты инерции (Сечения профиля)
+                    },
+                    'T80_AERO': {
+                        impostWidth: 0.06,
+                        tk: 0.78,
+                        ap: 757,
+                        te: 1.08,
+                        f110: 1,
+                        lp: 360096,
+                    },
+                    'T78_SUPER_AERO': {
+                        impostWidth: 0.07,
+                        tk: 0.8,
+                        ap: 807,
+                        te: 1.11,
+                        f110: 1,
+                        lp: 519229,
+                    },
+                    'T80_SUPER_AERO': {
+                        impostWidth: 0.07,
+                        tk: 0.8,
+                        ap: 835,
+                        te: 1.11,
+                        f110: 1,
+                        lp: 533651,
+                    },
+                    'T78_ACLASS': {
+                        impostWidth: 0.06,
+                        tk: 0.78,
+                        ap: 3766,
+                        te: 1.08,
+                        f110: 2,
+                        lp: 1169874,
+                    },
+                    'T86_60_4': {
+                        impostWidth: 0.06,
+                        tk: 0.82,
+                        ap: 4628,
+                        te: 1.2,
+                        f110: 0.5,
+                        lp: 1415388,
+                    },
+                    'T86_70_6': {
+                        impostWidth: 0.07,
+                        tk: 0.85,
+                        ap: 5345,
+                        te: 1.32,
+                        f110: 1.25,
+                        lp: 2262298,
+                    }
+                },
                 profileType: 'T78_AERO', //Тип профиля
+                reinforcementTypes: {
+                    rt_1: {
+                        i18n: '35*20*1,5(труба)',
+                        as: 148.7, //Площади поперечного сечения (Усилительный вкладыш)
+                        d21: 2.21, // момент инерции в зависимости от типа армирования [D21]
+                    },
+                    rt_2: {
+                        i18n: '35*20*2(труба)',
+                        as: 193,
+                        d21: 2.82,
+                    },
+                    rt_3: {
+                        i18n: '35*20*1,5',
+                        as: 105.1,
+                        d21: 2.01,
+                    },
+                    rt_4: {
+                        i18n: '35*20*2',
+                        as: 137,
+                        d21: 2.55,
+                    },
+                    rt_5: {
+                        i18n: '35*28*1,5',
+                        as: 133.8,
+                        d21: 2.52,
+                    },
+                    rt_6: {
+                        i18n: '35*28*2',
+                        as: 176.3,
+                        d21: 3.21,
+                    }
+                },
                 reinforcementType: 'rt_2', //Тип армирования
-                windowColors: ['white', 'colored'],
-                windowColor: 'white', //Цвет профиля
+                windowColors: {
+                    'white': {
+                        i18n: 'Белый',
+                        p: 0.3 //Коэффициент
+                    },
+                    'colored': {
+                        i18n: 'Цветной',
+                        p: 0.25
+                    }
+                },
+                windowColor: 'white' //Цвет профиля
             }
         },
         computed: {
-            i18n(){//переводы
-                return {
-                    windSides: {
-                        windward_side: 'Наветренная сторона',
-                        leeward_side: 'Подветренная сторона',
-                        side_wall: 'Боковая стена'
-                    },
-                    reinforcementTypes: {
-                        rt_1: '35*20*1,5(труба)',
-                        rt_2: '35*20*2(труба)',
-                        rt_3: '35*20*1,5',
-                        rt_4: '35*20*2',
-                        rt_5: '35*28*1,5',
-                        rt_6: '35*28*2'
-                    },
-                    windowColors: {
-                        white: 'Белый',
-                        colored: 'Цветной'
-                    }
-                }
-            },
             profilePicSrc(){
                 switch (this.profileType) {
                     case 'T78_AERO':
@@ -858,10 +814,22 @@
                     l_text: l_text
                 };
             },
+            selectedProfileParams(){
+                return this.profileTypes[this.profileType];
+            },
+            selectedColorParams(){
+                return this.windowColors[this.windowColor];
+            },
+            selectedReinforcementTypeParams(){
+                return this.reinforcementTypes[this.reinforcementType];
+            },
+            selectedWindRegionParams(){
+                return this.windRegions[this.windRegion];
+            },
             windowSideD(){ //Рассчитываемый элемент d
                 return this.impostLength - this.windowSideC;
             },
-            reinforcementTypes(){// Тип армирования в зависимости от типа профиля
+            reinforcementTypesOptions(){// Тип армирования в зависимости от типа профиля
                 return  ['T86_60_4', 'T86_70_6'].includes(this.profileType) ?  ['rt_5', 'rt_6'] : ['rt_1', 'rt_2', 'rt_3', 'rt_4'];
             },
             maximumAllowableDeflection(){//Максимально допустимый прогиб
@@ -871,19 +839,20 @@
                 return (this.C53+this.C75)*1000;
             },
             C53(){// [C53]
-                return (this.QW / (ES * this.LS + EP * this.LP) * (this.B1 * ((this.B1**2 - 5*this.L**2)**2) + this.B2 * ((this.B2**2 - 5*this.L**2)**2))) / 3840;
+                let B1 = this.windowSideA/100, // Модули упругости (b1) [F67]
+                    B2 = this.windowSideB/100, // Модули упругости (b2) [F68]
+                    LP = this.selectedProfileParams.lp / 1000000000000, // Главные моменты инерции (Сечения профиля, м4 ) [F57]
+                    WP = this.WM*this.DZE*this.V, // Нормативное значение пульсационной составляющей основной ветровой нагрузки Wp [F48]
+                    QW = this.WM + WP; // Нормативное значение пиковой ветровой нагрузки на оконную конструкцию, Па. [F54]
+                return (QW / (ES * this.LS + EP * LP) * (B1 * ((B1**2 - 5*this.L**2)**2) + B2 * ((B2**2 - 5*this.L**2)**2))) / 3840;
             },
             C75(){// [C75]
-                return ( ( this.K0 * (this.L ** 2) * EP * this.LP - this.delta * ( this.H1 * (this.L ** 2) + this.H2 * ((this.L ** 2) - 4 * (this.P ** 2)) ) ) / (8 * (ES * this.LS + EP * this.LP)) );
-            },
-            QW(){// Нормативное значение пиковой ветровой нагрузки на оконную конструкцию, Па. [F54]
-                return this.WM + this.WP;
+                let LP = this.selectedProfileParams.lp / 1000000000000; // Главные моменты инерции (Сечения профиля, м4 ) [F57]
+                return ( ( this.K0 * (this.L ** 2) * EP * LP - this.delta * ( this.H1 * (this.L ** 2) + this.H2 * ((this.L ** 2) - 4 * (this.selectedColorParams.p ** 2)) ) ) / (8 * (ES * this.LS + EP * LP)) );
             },
             WM(){// Нормативное значение средней составляющей основной ветровой нагрузки Wm (Нормативное значение ветрового давления, Па )    [F30]
-                return this.W0*this.KZE*this.C;
-            },
-            WP(){// Нормативное значение пульсационной составляющей основной ветровой нагрузки Wp [F48]
-                return this.WM*this.DZE*this.V;
+                let W0 = this.selectedWindRegionParams.w0; // Нормативное значение ветрового давления, Па [F29]
+                return W0*this.KZE*this.C;
             },
             DZE(){// Коэффициент пульсации давления ветра [F46]
                 let scheme = [
@@ -987,19 +956,6 @@
                 }
                 return scheme[rowNum][colNum];
             },
-            W0(){// Нормативное значение ветрового давления, Па [F29]
-                let scheme = {
-                    'Ia':   170,
-                    'I':    230,
-                    'II':   300,
-                    'III':  380,
-                    'IV':   480,
-                    'V':    600,
-                    'VI':   730,
-                    'VII':  850
-                }
-                return scheme[this.windRegion];
-            },
             KZE(){// Коэффициент учитывающий изменение ветрового давления k(ze) [F35]
                 let scheme = [
                     [   0.75,   0.5,    0.4     ],
@@ -1056,31 +1012,8 @@
             L(){//Длина импоста, м [F64]
                 return this.impostLength/100;
             },
-            LP(){// Главные моменты инерции (Сечения профиля, м4 ) [F57]
-                let scheme = {
-                    T78_AERO: 349918,
-                    T80_AERO: 360096,
-                    T78_SUPER_AERO: 519229,
-                    T80_SUPER_AERO: 533651,
-                    T78_ACLASS: 1169874,
-                    T86_60_4: 1415388,
-                    T86_70_6: 2262298
-                };
-                return scheme[this.profileType]/1000000000000;
-            },
             LS(){//Главные моменты инерции  (Сечения усилительного вкладыша, м4) [F58]
-                return this.D21/100000000;
-            },
-            D21(){// момент инерции в зависимости от типа армирования [D21]
-                let scheme = {
-                    rt_1: 2.21,
-                    rt_2: 2.82,
-                    rt_3: 2.01,
-                    rt_4: 2.55,
-                    rt_5: 2.52,
-                    rt_6: 3.21
-                }
-                return scheme[this.reinforcementType];
+                return this.selectedReinforcementTypeParams.d21/100000000;
             },
             delta(){//Расстояние между неитральной осью ПВХ профиля и нейтральной осью усилительного вкладыша, м [F77]
                 let resp = null;
@@ -1127,116 +1060,32 @@
                 return resp / 1000;
             },
             H1(){//Продольные силы [F80]
-                return this.H2*(this.P*CSA*(this.G+(2/(CSA*(this.L-2*this.P))))+1);
+                let P = this.selectedColorParams.p; //Коэффициент [F76]
+                return this.H2*(P*CSA*(this.G+(2/(CSA*(this.L-2*P))))+1);
             },
             H2(){//Продольные силы [F79]
-                return ((this.F98-this.instalationAirTemperature)*(LTE_COEFF_PVH*this.F115-MRI))/(this.G*this.P*CSA*(this.G+(2/(CSA*(this.L-2*this.P)))+2*this.G+(2/(CSA*(this.L-2*this.P)))));
-            },
-            P(){//Коэффициент [F76]
-                switch (this.windowColor) {
-                    case 'white':
-                        return 0.3;
-                    case 'colored':
-                        return 0.25;
-                }
+                let F115 = this.selectedProfileParams.te, // Безразмерные коэффициенты, учитывающие неоднородность температурного поля в ПВХ профиле, (te) [F115]
+                    P = this.selectedColorParams.p; //Коэффициент [F76]
+                return ((this.F98-this.instalationAirTemperature)*(LTE_COEFF_PVH*F115-MRI))/(this.G*P*CSA*(this.G+(2/(CSA*(this.L-2*P)))+2*this.G+(2/(CSA*(this.L-2*P)))));
             },
             F98(){// Коэффициенты линейного температурного расширения (Температура во внутренней камере ПВХ профиля) [F98]
-                return (this.insideAirTemperature-(this.insideAirTemperature-this.outsideAirTemperature))*((1/AB+R0/(this.F110+1))/(1/AB+R0+1/AH));
-            },
-            F110(){// Отношение количества рядов воздушных камер в наружной части попереченого сечения ПВХ профиля к количеству рядов воздушных камер во внутренней части поперечного сечения ПВХ профиля [F110]
-                let scheme = {
-                    T78_AERO: 1,
-                    T80_AERO: 1,
-                    T78_SUPER_AERO: 1,
-                    T80_SUPER_AERO: 1,
-                    T78_ACLASS: 2,
-                    T86_60_4: 0.5,
-                    T86_70_6: 1.25
-                }
-                return scheme[this.profileType];
-            },
-            F115(){// Безразмерные коэффициенты, учитывающие неоднородность температурного поля в ПВХ профиле, (te) [F115]
-                let scheme = {
-                    T78_AERO: 1.08,
-                    T80_AERO: 1.08,
-                    T78_ACLASS: 1.08,
-                    T86_60_4: 1.2,
-                    T78_SUPER_AERO: 1.11,
-                    T80_SUPER_AERO: 1.11,
-                    T86_70_6: 1.32
-                }
-                return scheme[this.profileType];
+                let F110 = this.selectedProfileParams.f110; // Отношение количества рядов воздушных камер в наружной части попереченого сечения ПВХ профиля к количеству рядов воздушных камер во внутренней части поперечного сечения ПВХ профиля [F110]
+                return (this.insideAirTemperature-(this.insideAirTemperature-this.outsideAirTemperature))*((1/AB+R0/(F110+1))/(1/AB+R0+1/AH));
             },
             G(){ //Расчёт прогиба оконного импоста от действия температурного клматического воздействия (Коэффициент) [F82]
-                return (1/(this.AP*EP))+(1/(this.AS*ES));
-            },
-            AP(){//Площади поперечного сечения (ПВХ профиль, м2) [F89]
-                let scheme = {
-                    T78_AERO: 727,
-                    T80_AERO: 757,
-                    T78_SUPER_AERO: 807,
-                    T80_SUPER_AERO: 835,
-                    T78_ACLASS: 3766,
-                    T86_60_4: 4628,
-                    T86_70_6: 5345
-                }
-                return scheme[this.profileType]/1000000;
-            },
-            AS(){//Площади поперечного сечения (Усилительный вкладыш, м2) [F90]
-                let resp;
-
-                if (this.reinforcementType === 'rt_1') {
-                    resp = 148.7;
-                } else if (this.reinforcementType === 'rt_2') {
-                    resp = 193;
-                } else if (this.reinforcementType === 'rt_3') {
-                    resp = 105.1;
-                } else if (this.reinforcementType === 'rt_4') {
-                    resp = 137;
-                } else if (this.reinforcementType === 'rt_5') {
-                    resp = 133.8;
-                } else if (this.reinforcementType === 'rt_6') {
-                    resp = 176.3;
-                }
-
-                return resp / 1000000;
-            },
-            B1(){// Модули упругости (b1) [F67]
-                return this.windowSideA/100;
-            },
-            B2(){// Модули упругости (b2) [F68]
-                return this.windowSideB/100;
+                let AS = this.selectedReinforcementTypeParams.as / 1000000, //Площади поперечного сечения (Усилительный вкладыш, м2) [F90]
+                    AP = this.selectedProfileParams.ap / 1000000; //Площади поперечного сечения (ПВХ профиль, м2) [F89]
+                return (1/(AP*EP))+(1/(AS*ES));
             },
             K0(){//Начальная кривизна оси импоста оконной конструкции [F120]
-                return LTE_COEFF_PVH * ((this.insideAirTemperature - this.outsideAirTemperature)/this.impostWidth)*(R0/((1/AB)+R0+(1/AH))) * this.tk;
-            },
-            tk(){//Безразмерные коэффициенты, учитывающие неоднородность температурного поля в ПВХ профиле, [F116, N55]
-                if( ['T78_AERO', 'T78_ACLASS', 'T80_AERO'].includes(this.profileType) ){//трехкамерный ПВХ
-                    return 0.78;
-                }
-                if( ['T86_60_4'].includes(this.profileType) ){//четырехкамерный ПВХ
-                    return 0.82;
-                }
-                if( ['T78_SUPER_AERO', 'T80_SUPER_AERO'].includes(this.profileType) ){//пятикамерный ПВХ
-                    return 0.8;
-                }
-                if( ['T86_70_6'].includes(this.profileType) ){//шестикамерный ПВХ
-                    return 0.85;
-                }
-            },
-            impostWidth(){//Ширина профиля импоста,м [F118]
-                if( ['T78_AERO', 'T78_ACLASS', 'T86_60_4', 'T80_AERO'].includes(this.profileType) ){
-                    return 0.06;
-                }
-                if( ['T78_SUPER_AERO', 'T86_70_6', 'T80_SUPER_AERO'].includes(this.profileType) ){
-                    return 0.07;
-                }
+                let impostWidth = this.selectedProfileParams.impostWidth,
+                    tk = this.selectedProfileParams.tk;
+                return LTE_COEFF_PVH * ((this.insideAirTemperature - this.outsideAirTemperature)/impostWidth)*(R0/((1/AB)+R0+(1/AH))) * tk;
             }
-
         },
         methods: {
             onProfileTypeChange(){// при смене типа профиля, меняем Тип армирования на первый из списка доступных
-                this.reinforcementType = this.reinforcementTypes[0];
+                this.reinforcementType = this.reinforcementTypesOptions[0];
             }
         },
         created(){
