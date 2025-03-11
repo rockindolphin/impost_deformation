@@ -94,7 +94,7 @@
                     </div>
                 </details>
 
-                <details class="control control--details" open>
+                <details class="control control--details">
                     <summary>
                         Шаг №2
                     </summary>
@@ -102,12 +102,21 @@
                         <div class="col-span-12 md:col-span-6 md:order-2 flex items-center justify-center">
                             <div class="scene" :style="buildingStyles">
                                 <div class="box">
-                                    <div class="box__face box__face--front">front</div>
-                                    <div class="box__face box__face--back">back</div>
-                                    <div class="box__face box__face--right">right</div>
-                                    <div class="box__face box__face--left">left</div>
-                                    <div class="box__face box__face--top">top</div>
-                                    <div class="box__face box__face--bottom">bottom</div>
+                                    <div class="box__face box__face--front">
+                                        {{ i18n.windSides.windward_side }}
+                                        <div class="box__window" v-if="windSide === 'windward_side'"></div>
+                                    </div>
+                                    <div class="box__face box__face--back">
+                                        {{ i18n.windSides.leeward_side }}
+                                        <div class="box__window" v-if="windSide === 'leeward_side'"></div>
+                                    </div>
+                                    <div class="box__face box__face--right"></div>
+                                    <div class="box__face box__face--left">
+                                        {{ i18n.windSides.side_wall }}
+                                        <div class="box__window" v-if="windSide === 'side_wall'"></div>
+                                    </div>
+                                    <div class="box__face box__face--top"></div>
+                                    <div class="box__face box__face--bottom"></div>
                                 </div>
                             </div>
                         </div>
@@ -184,8 +193,8 @@
                             </label>
 
                             <label
-                                v-if="['Боковая стена'].includes(windSide)"
-                                class="col-span-4"
+                                v-if="windSide === 'side_wall'"
+                                class="col-span-12"
                                 for="buildingSideToWindowLength"
                                 >
                                 <span class="form__label">
@@ -642,14 +651,25 @@
                 }
             },
             buildingStyles(){
-                let rotateY = 40;
+                let rotateY = 40,
+                    windowWidthMeters = (this.windowSideA + this.windowSideB)/100,
+                    windowHeightMeters = this.impostLength/100,
+                    windowScale = 3,
+                    gap = windowWidthMeters*windowScale*5/4;
                 if( this.windSide === 'leeward_side'){ rotateY = 220; }
-                if( this.windSide === 'side_wall'){ rotateY = 60; }
+                if( this.windSide === 'side_wall'){
+                    rotateY = 60;
+                    gap = (this.buildingLength*5) - (windowWidthMeters*windowScale*5) - this.buildingSideToWindowLength*5;
+                }
                 return `
                     --box-width: ${(this.buildingWidth*5).toFixed(0)}px;
                     --box-height: ${(this.buildingHeight*5).toFixed(0)}px;
                     --box-depth: ${(this.buildingLength*5).toFixed(0)}px;
                     --rotate-y: ${rotateY}deg;
+                    --window-ih: ${(this.windowInstallationHeight*5).toFixed(0)}px;
+                    --window-width: ${(windowWidthMeters*windowScale*5).toFixed(0)}px;
+                    --window-height: ${(windowHeightMeters*windowScale*5).toFixed(0)}px;
+                    --window-gap: ${(gap).toFixed(0)}px;
                 `;
             },
             svgComp(){
