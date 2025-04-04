@@ -53,20 +53,7 @@
                             </select>
                         </label>
 
-                        <label class="col-span-12 md:col-span-4" for="insideAirTemperature">
-                            <span class="form__label">
-                                Расчетная внутренняя температура воздуха,˚С:
-                            </span>
-                            <input
-                                id="insideAirTemperature"
-                                :value="insideAirTemperature"
-                                type="number"
-                                step="0.1"
-                                class="control control--text"
-                            >
-                        </label>
-
-                        <label class="col-span-12 md:col-span-4" for="outsideAirTemperature">
+                        <label class="col-span-12 md:col-span-6" for="outsideAirTemperature">
                             <span class="form__label">
                                 Расчетная наружная температура воздуха,˚С:
                             </span>
@@ -79,7 +66,7 @@
                             >
                         </label>
 
-                        <label class="col-span-12 md:col-span-4" for="instalationAirTemperature">
+                        <label class="col-span-12 md:col-span-6" for="instalationAirTemperature">
                             <span class="form__label">
                                 Температура замыкания (монтажа) оконной конструкции:
                             </span>
@@ -451,18 +438,18 @@
                         w0: 850,
                     }
                 },
-                windRegion: 'I', //Ветровой район
+                windRegion: 'II', //Ветровой район
                 terrainTypes: ['A', 'B', 'C'],
-                terrainType: 'B', //Тип местности
-                insideAirTemperature: 20, //Расчетная внутренняя температура воздуха [F15]
-                outsideAirTemperature: 15, //Расчетная наружная температура воздуха [F16]
+                terrainType: 'C', //Тип местности
+                insideAirTemperature: 21, //Расчетная внутренняя температура воздуха [F15]
+                outsideAirTemperature: -20, //Расчетная наружная температура воздуха [F16]
                 instalationAirTemperature: 15, //Температура замыкания (монтажа) оконной конструкции [F17]
 
                 //step_2
                 buildingHeight: 60, //Высота здания h (м) [B9]
-                buildingWidth: 50, //Ширина здания d (м) [B10]
+                buildingWidth: 47, //Ширина здания d (м) [B10]
                 buildingLength: 30, //Длина здания [E10]
-                windowInstallationHeight: 40, //Фактическая высота установки окна (м): [B11]
+                windowInstallationHeight: 50, //Фактическая высота установки окна (м): [B11]
                 windSides: {
                     'windward_side': {
                         i18n: 'Наветренная сторона'
@@ -478,10 +465,10 @@
                 buildingSideToWindowLength: 4, //Расстояние от края наветренной стены до окна
 
                 //step_3
-                impostLength: 150, //Длина импоста L (см):
-                windowSideA: 70, //Рассчитываемый элемент a
-                windowSideB: 70, //Рассчитываемый элемент b
-                windowSideC: 0, //Рассчитываемый элемент c
+                impostLength: 160, //Длина импоста L (см):
+                windowSideA: 109, //Рассчитываемый элемент a
+                windowSideB: 98, //Рассчитываемый элемент b
+                windowSideC: 100, //Рассчитываемый элемент c
 
                 //step_4
                 profileTypes: {
@@ -542,7 +529,7 @@
                         lp: 2262298,
                     }
                 },
-                profileType: 'T78_AERO', //Тип профиля
+                profileType: 'T86_60_4', //Тип профиля
                 reinforcementTypes: {
                     rt_1: {
                         i18n: '35*20*1,5(труба)',
@@ -575,7 +562,7 @@
                         d21: 3.21,
                     }
                 },
-                reinforcementType: 'rt_2', //Тип армирования
+                reinforcementType: 'rt_6', //Тип армирования
                 windowColors: {
                     'white': {
                         i18n: 'Белый',
@@ -836,7 +823,7 @@
                 return ((this.impostLength/100)/200)*1000;
             },
             estimatedDeflection(){//Расчётный прогиб
-                return (this.C53+this.C75)*1000;
+                return Math.abs( (this.C53+this.C75)*1000 );
             },
             C53(){// [C53]
                 let B1 = this.windowSideA/100, // Модули упругости (b1) [F67]
