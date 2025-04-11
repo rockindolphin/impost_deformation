@@ -361,13 +361,50 @@
                                 </select>
                             </label>
 
-                            <p class="col-span-12 font-bold">
-                                Максимально допустимый прогиб, мм: {{ maximumAllowableDeflection.toFixed(3) }}
-                            </p>
+                            <div class="col-span-12 border-1 p-4">
+                                <p class="font-bold">
+                                    {{ gapPics.impost.title }}
+                                </p>
+                                <img :src="gapPics.impost.src" class="w-1/2" :alt="gapPics.impost.title">
+                                <p class="col-span-12 font-bold">
+                                    Максимально допустимый прогиб, мм: {{ maximumAllowableDeflection.toFixed(3) }}
+                                </p>
 
-                            <p class="col-span-12 font-bold">
-                                Расчётный прогиб, мм: {{ estimatedDeflection.toFixed(3) }}
-                            </p>
+                                <p class="col-span-12 font-bold">
+                                    Расчётный прогиб, мм: {{ estimatedDeflectionImpost.toFixed(3) }}
+                                </p>
+                            </div>
+
+                            <div class="col-span-12 border-1 p-4">
+                                <p class="font-bold">
+                                    {{ gapPics.pilyastr.title }}
+                                </p>
+                                <img :src="gapPics.pilyastr.src" class="w-1/2" :alt="gapPics.pilyastr.title">
+                                <p class="col-span-12 font-bold">
+                                    Расчётный прогиб, мм: {{ estimatedDeflectionPilyastr.toFixed(3) }}
+                                </p>
+                            </div>
+
+                            <div class="col-span-12 border-1 p-4">
+                                <p class="font-bold">
+                                    {{ gapPics.connective3.title }}
+                                </p>
+                                <img :src="gapPics.connective3.src" class="w-1/2" :alt="gapPics.connective3.title">
+                                <p class="col-span-12 font-bold">
+                                    Расчётный прогиб, мм: N/A
+                                </p>
+                            </div>
+
+                            <div class="col-span-12 border-1 p-4">
+                                <p class="font-bold">
+                                    {{ gapPics.universal.title }}
+                                </p>
+                                <img :src="gapPics.universal.src" class="w-1/2" :alt="gapPics.universal.title">
+                                <p class="col-span-12 font-bold">
+                                    Расчётный прогиб, мм: N/A
+                                </p>
+                            </div>
+
                         </div>
 
                     </div>
@@ -392,6 +429,10 @@
     import picAClass from '@/assets/images/ACLASS.png';
     import picAero from '@/assets/images/AERO.png';
     import picSuperAero from '@/assets/images/SUPER_AERO.png';
+    import picGainImpost from '@/assets/images/impost.png';
+    import picGainPilyastr from '@/assets/images/pilyastr.png';
+    import picGainСonnective3 from '@/assets/images/connective3.png';
+    import picGainUniversal from '@/assets/images/universal.png';
 
 
     const LTE_COEFF_PVH = 0.00008, // Коэффициенты линейного температурного расширения (Материал ПВХ,) [F96]
@@ -443,7 +484,7 @@
                 terrainType: 'C', //Тип местности
                 insideAirTemperature: 21, //Расчетная внутренняя температура воздуха [F15]
                 outsideAirTemperature: -20, //Расчетная наружная температура воздуха [F16]
-                instalationAirTemperature: 15, //Температура замыкания (монтажа) оконной конструкции [F17]
+                instalationAirTemperature: 10, //Температура замыкания (монтажа) оконной конструкции [F17]
 
                 //step_2
                 buildingHeight: 60, //Высота здания h (м) [B9]
@@ -462,12 +503,12 @@
                     }
                 },
                 windSide: 'windward_side', //Сторона
-                buildingSideToWindowLength: 4, //Расстояние от края наветренной стены до окна
+                buildingSideToWindowLength: 5, //Расстояние от края наветренной стены до окна
 
                 //step_3
-                impostLength: 160, //Длина импоста L (см):
+                impostLength: 180, //Длина импоста L (см):
                 windowSideA: 109, //Рассчитываемый элемент a
-                windowSideB: 98, //Рассчитываемый элемент b
+                windowSideB: 100, //Рассчитываемый элемент b
                 windowSideC: 100, //Рассчитываемый элемент c
 
                 //step_4
@@ -479,6 +520,7 @@
                         te: 1.08, // Безразмерные коэффициенты, учитывающие неоднородность температурного поля в ПВХ профиле
                         f110: 1, // Отношение количества рядов воздушных камер в наружной части попереченого сечения ПВХ профиля к количеству рядов воздушных камер во внутренней части поперечного сечения ПВХ профиля
                         lp: 349918, // Главные моменты инерции (Сечения профиля)
+                        an51: 0.123
                     },
                     'T80_AERO': {
                         impostWidth: 0.06,
@@ -487,6 +529,7 @@
                         te: 1.08,
                         f110: 1,
                         lp: 360096,
+                        an51: 0.123
                     },
                     'T78_SUPER_AERO': {
                         impostWidth: 0.07,
@@ -495,6 +538,7 @@
                         te: 1.11,
                         f110: 1,
                         lp: 519229,
+                        an51: 0.133
                     },
                     'T80_SUPER_AERO': {
                         impostWidth: 0.07,
@@ -503,6 +547,7 @@
                         te: 1.11,
                         f110: 1,
                         lp: 533651,
+                        an51: 0.133
                     },
                     'T78_ACLASS': {
                         impostWidth: 0.06,
@@ -511,6 +556,7 @@
                         te: 1.08,
                         f110: 2,
                         lp: 1169874,
+                        an51: 0.123
                     },
                     'T86_60_4': {
                         impostWidth: 0.06,
@@ -519,6 +565,7 @@
                         te: 1.2,
                         f110: 0.5,
                         lp: 1415388,
+                        an51: 0.123
                     },
                     'T86_70_6': {
                         impostWidth: 0.07,
@@ -527,9 +574,15 @@
                         te: 1.32,
                         f110: 1.25,
                         lp: 2262298,
+                        an51: 0.133
+                    },
+                    /*
+                    'GLIDE': {
+                        an51: 0.094
                     }
+                    */
                 },
-                profileType: 'T86_60_4', //Тип профиля
+                profileType: 'T80_SUPER_AERO', //Тип профиля
                 reinforcementTypes: {
                     rt_1: {
                         i18n: '35*20*1,5(труба)',
@@ -562,7 +615,7 @@
                         d21: 3.21,
                     }
                 },
-                reinforcementType: 'rt_6', //Тип армирования
+                reinforcementType: 'rt_2', //Тип армирования
                 windowColors: {
                     'white': {
                         i18n: 'Белый',
@@ -591,6 +644,26 @@
                         return pic60_4;
                     case 'T86_70_6':
                         return pic70_6;
+                }
+            },
+            gapPics(){
+                return {
+                    impost: {
+                        src: picGainImpost,
+                        title: 'Импост'
+                    },
+                    pilyastr: {
+                        src: picGainPilyastr,
+                        title: 'Усиление пилястровым профилем'
+                    },
+                    connective3: {
+                        src: picGainСonnective3,
+                        title: 'Соединительный профиль 3'
+                    },
+                    universal: {
+                        src: picGainUniversal,
+                        title: 'Профиль соединительный универсальный'
+                    }
                 }
             },
             buildingStyles(){
@@ -822,16 +895,298 @@
             maximumAllowableDeflection(){//Максимально допустимый прогиб
                 return ((this.impostLength/100)/200)*1000;
             },
-            estimatedDeflection(){//Расчётный прогиб
+            estimatedDeflectionImpost(){//Расчётный прогиб (импост)
                 return Math.abs( (this.C53+this.C75)*1000 );
+            },
+            estimatedDeflectionPilyastr(){// Расчётный прогиб (Усиление пилястровым профилем) [[AN53]]
+                /*
+                    (F164/(F172*AR40+F171*AR39))*(F177*(F177^2-5*F174^2)^2+F178*(F178^2-5*F174^2)^2)/3840
+                */
+
+                let F171 = EP,
+                    F198 = CSA,
+                    F205 = MRI,
+                    F172 = ES,
+                    F210 = R0,
+                    F215 = AB,
+                    F214 = AH,
+                    F206 = LTE_COEFF_PVH,
+                    F164 = this.QW,
+                    F208 = this.F98,
+                    F174 = this.L,
+                    F177 = this.windowSideA/100,
+                    F178 = this.windowSideB/100,
+                    AR40 = this.characteristicsPilyastr.orange,
+                    AR39 = this.characteristicsPilyastr.yellow,
+                    AR41 = this.characteristicsPilyastr.cyan,
+                    AR42 = this.characteristicsPilyastr.purple,
+                    AR43 = this.characteristicsPilyastr.green,
+                    F185 = this.selectedColorParams.p,
+                    F221 = this.selectedProfileParams.te,
+                    AN51 = this.selectedProfileParams.an51,
+                    F222 = this.selectedProfileParams.tk,
+                    F17 = this.instalationAirTemperature,
+                    F200 = this.insideAirTemperature,
+                    F16 = this.outsideAirTemperature;
+
+                let AN52 = F206 * ((F200 - F16) / AN51) * (F210 / ((1 / F215) + F210 + (1 / F214))) * F222;
+                let AN47 = (1 / (AR42 * F171)) + (1 / (AR43 * F172));
+                let AN48 = ((F208 - F17) * (F206 * F221 - F205)) / (AN47 * F185 * F198 * (AN47 + (2 / (F198 * (F174 - 2 * F185))) + 2 * AN47 + (2 / (F198 * (F174 - 2 * F185)))));
+                let AN49 = AN48 * (F185 * F198 * (AN47 + (2 / (F198 * (F174 - 2 * F185)))) + 1);
+                let fw = (F164 / (F172 * AR40 + F171 * AR39)) * (F177 * Math.pow(F177 ** 2 - 5 * F174 ** 2, 2) + F178 * Math.pow(F178 ** 2 - 5 * F174 ** 2, 2)) / 3840;
+                let ft = (AN52 * F174 ** 2 * F171 * AR39 - AR41 * (AN49 * F174 ** 2 + AN48 * (F174 ** 2 - 4 * F185 ** 2))) / (8 * (F172 * AR40 + F171 * AR39));
+
+                return (fw+ft)*1000;
+            },
+            characteristicsPilyastr(){// таблица характеристик (Пилястровый профиль) [[AU29_BC68]] yellow - Сечения профиля м4 / orange - Сечения усилительного вкладыша, м4 / cyan - δ / purple - ПВХ профиль, м2 / green - Усилительный вкладыш, м2
+                let scheme = {
+                    T78_AERO: {
+                        rt_1: {
+                            yellow: 1485455,
+                            orange: 451461,
+                            cyan: 10.44,
+                            purple: 1164,
+                            green: 420
+                        },
+                        rt_2: {
+                            yellow: 1485455,
+                            orange: 517504,
+                            cyan: 6.745,
+                            purple: 1164,
+                            green: 464
+                        },
+                        rt_3: {
+                            yellow: 1485455,
+                            orange: 373983,
+                            cyan: 14.98,
+                            purple: 1164,
+                            green: 376
+                        },
+                        rt_4: {
+                            yellow: 1485455,
+                            orange: 434939,
+                            cyan: 11.56,
+                            purple: 1164,
+                            green: 409
+                        }
+                    },
+                    T80_AERO: {
+                        rt_1: {
+                            yellow: 1521116,
+                            orange: 490519,
+                            cyan: 10.05,
+                            purple: 1195,
+                            green: 420
+                        },
+                        rt_2: {
+                            yellow: 1521116,
+                            orange: 563376,
+                            cyan: 6.237,
+                            purple: 1195,
+                            green: 464
+                        },
+                        rt_3: {
+                            yellow: 1521116,
+                            orange: 404699,
+                            cyan: 14.838,
+                            purple: 1195,
+                            green: 376
+                        },
+                        rt_4: {
+                            yellow: 1521116,
+                            orange: 471948,
+                            cyan: 11.23,
+                            purple: 1195,
+                            green: 409
+                        }
+                    },
+                    T78_SUPER_AERO: {
+                        rt_1: {
+                            yellow: 1861336,
+                            orange: 527922,
+                            cyan: 12.86,
+                            purple: 1245,
+                            green: 420
+                        },
+                        rt_2: {
+                            yellow: 1861336,
+                            orange: 607304,
+                            cyan: 8.77,
+                            purple: 1245,
+                            green: 464
+                        },
+                        rt_3: {
+                            yellow: 1861336,
+                            orange: 434117,
+                            cyan: 17.869,
+                            purple: 1245,
+                            green: 376
+                        },
+                        rt_4: {
+                            yellow: 1861336,
+                            orange: 507393,
+                            cyan: 14.09,
+                            purple: 1245,
+                            green: 409
+                        }
+                    },
+                    T80_SUPER_AERO: {
+                        rt_1: {
+                            yellow: 1905373,
+                            orange: 577729,
+                            cyan: 12.298,
+                            purple: 1272,
+                            green: 420
+                        },
+                        rt_2: {
+                            yellow: 1905373,
+                            orange: 665800,
+                            cyan: 7.97,
+                            purple: 1272,
+                            green: 464
+                        },
+                        rt_3: {
+                            yellow: 1905373,
+                            orange: 473296,
+                            cyan: 17.587,
+                            purple: 1272,
+                            green: 376
+                        },
+                        rt_4: {
+                            yellow: 1905373,
+                            orange: 554599,
+                            cyan: 13.59,
+                            purple: 1272,
+                            green: 409
+                        }
+                    },
+                    T78_ACLASS: {
+                        rt_1: {
+                            yellow: 3179848,
+                            orange: 442297,
+                            cyan: 12.847,
+                            purple: 2624,
+                            green: 420
+                        },
+                        rt_2: {
+                            yellow: 3179848,
+                            orange: 506742,
+                            cyan: 9.238,
+                            purple: 2624,
+                            green: 464
+                        },
+                        rt_3: {
+                            yellow: 3179848,
+                            orange: 366778,
+                            cyan: 17.36,
+                            purple: 2624,
+                            green: 376
+                        },
+                        rt_4: {
+                            yellow: 3179848,
+                            orange: 426257,
+                            cyan: 13.99,
+                            purple: 2624,
+                            green: 409
+                        }
+                    },
+                    T86_60_4: {
+                        rt_5: {
+                            yellow: 1787685,
+                            orange: 421772,
+                            cyan: 17.44,
+                            purple: 1437,
+                            green: 405.5
+                        },
+                        rt_6: {
+                            yellow: 1787685,
+                            orange: 489871,
+                            cyan: 13.66,
+                            purple: 1437,
+                            green: 448
+                        },
+                        /*
+                        rt_5_pipe: {
+                            yellow: 1787685,
+                            orange: 576006,
+                            cyan: 14.69,
+                            purple: 1437,
+                            green: 444
+                        },
+                        rt_6_pipe: {
+                            yellow: 1787685,
+                            orange: 658387,
+                            cyan: 10.519,
+                            purple: 1437,
+                            green: 495
+                        }
+                        */
+                    },
+                    T86_70_6: {
+                        rt_5: {
+                            yellow: 2159130,
+                            orange: 498077,
+                            cyan: 18.67,
+                            purple: 1540,
+                            green: 405.5
+                        },
+                        rt_6: {
+                            yellow: 2159130,
+                            orange: 580948,
+                            cyan: 14.458,
+                            purple: 1540,
+                            green: 448
+                        },
+                        /*
+                        rt_5_pipe: {
+                            yellow: 2159130,
+                            orange: 485726,
+                            cyan: 13.859,
+                            purple: 1540,
+                            green: 444
+                        },
+                        rt_6_pipe: {
+                            yellow: 2159130,
+                            orange: 553484,
+                            cyan: 10.1,
+                            purple: 1540,
+                            green: 495
+                        }
+                        */
+                    },
+                    /*
+                    GLIDE: {
+                        '26_19_1.5': {
+                            yellow: 805444,
+                            orange: 223062,
+                            cyan: 9.738,
+                            purple: 924,
+                            green: 359
+                        }
+                    }
+                    */
+                }
+                let data = scheme[this.profileType][this.reinforcementType];
+                return {
+                    yellow: data?.yellow/1000000000000,
+                    orange: data?.orange/1000000000000,
+                    cyan:   data?.cyan/1000,
+                    purple: data?.purple/1000000,
+                    green:  data?.green/1000000
+                };
             },
             C53(){// [C53]
                 let B1 = this.windowSideA/100, // Модули упругости (b1) [F67]
                     B2 = this.windowSideB/100, // Модули упругости (b2) [F68]
-                    LP = this.selectedProfileParams.lp / 1000000000000, // Главные моменты инерции (Сечения профиля, м4 ) [F57]
-                    WP = this.WM*this.DZE*this.V, // Нормативное значение пульсационной составляющей основной ветровой нагрузки Wp [F48]
-                    QW = this.WM + WP; // Нормативное значение пиковой ветровой нагрузки на оконную конструкцию, Па. [F54]
-                return (QW / (ES * this.LS + EP * LP) * (B1 * ((B1**2 - 5*this.L**2)**2) + B2 * ((B2**2 - 5*this.L**2)**2))) / 3840;
+                    LP = this.selectedProfileParams.lp / 1000000000000; // Главные моменты инерции (Сечения профиля, м4 ) [F57]
+
+                return (this.QW / (ES * this.LS + EP * LP) * (B1 * ((B1**2 - 5*this.L**2)**2) + B2 * ((B2**2 - 5*this.L**2)**2))) / 3840;
+            },
+            WP(){// Нормативное значение пульсационной составляющей основной ветровой нагрузки Wp [F48]
+                return this.WM*this.DZE*this.V;
+            },
+            QW(){// Нормативное значение пиковой ветровой нагрузки на оконную конструкцию, Па. [F54]
+                return this.WM + this.WP;
             },
             C75(){// [C75]
                 let LP = this.selectedProfileParams.lp / 1000000000000; // Главные моменты инерции (Сечения профиля, м4 ) [F57]
