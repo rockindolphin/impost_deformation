@@ -552,33 +552,36 @@
                     'T78_ACLASS': {
                         impostWidth: 0.06,
                         tk: 0.78,
-                        ap: 3766,
+                        ap: 874,
                         te: 1.08,
                         f110: 2,
-                        lp: 1169874,
+                        lp: 406621,
                         an51: 0.123
                     },
                     'T86_60_4': {
                         impostWidth: 0.06,
                         tk: 0.82,
-                        ap: 4628,
+                        ap: 970,
                         te: 1.2,
                         f110: 0.5,
-                        lp: 1415388,
+                        lp: 469124,
                         an51: 0.123
                     },
                     'T86_70_6': {
                         impostWidth: 0.07,
                         tk: 0.85,
-                        ap: 5345,
+                        ap: 1103,
                         te: 1.32,
                         f110: 1.25,
-                        lp: 2262298,
+                        lp: 706133,
                         an51: 0.133
                     },
                     /*
                     'GLIDE': {
-                        an51: 0.094
+                        an51: 0.094,
+                        f110: 1,
+                        lp: 63666
+                        ap: 487
                     }
                     */
                 },
@@ -1385,18 +1388,18 @@
                     if (this.reinforcementType === 'rt_4'){ resp = 11.1; }
                 }
                 if (this.profileType === 'T78_ACLASS') {
-                    if (this.reinforcementType === 'rt_1'){ resp = 5.22; }
-                    if (this.reinforcementType === 'rt_2'){ resp = 5.22; }
-                    if (this.reinforcementType === 'rt_3'){ resp = 5.05; }
-                    if (this.reinforcementType === 'rt_4'){ resp = 5.05; }
+                    if (this.reinforcementType === 'rt_1'){ resp = 6.24; }
+                    if (this.reinforcementType === 'rt_2'){ resp = 6.24; }
+                    if (this.reinforcementType === 'rt_3'){ resp = 6.07; }
+                    if (this.reinforcementType === 'rt_4'){ resp = 6.07; }
                 }
                 if (this.profileType === 'T86_60_4') {
-                    if (this.reinforcementType === 'rt_5'){ resp = 4.49; }
-                    if (this.reinforcementType === 'rt_6'){ resp = 4.45; }
+                    if (this.reinforcementType === 'rt_5'){ resp = 4.834; }
+                    if (this.reinforcementType === 'rt_6'){ resp = 4.5; }
                 }
                 if (this.profileType === 'T86_70_6') {
-                    if (this.reinforcementType === 'rt_5'){ resp = 6.72; }
-                    if (this.reinforcementType === 'rt_6'){ resp = 6.77; }
+                    if (this.reinforcementType === 'rt_5'){ resp = 7.745; }
+                    if (this.reinforcementType === 'rt_6'){ resp = 7.79; }
                 }
 
                 return resp / 1000;
