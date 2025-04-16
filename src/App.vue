@@ -421,7 +421,7 @@
                                 </p>
                                 <img :src="gapPics.connective65.src" class="w-1/2" :alt="gapPics.connective65.title">
                                 <p class="col-span-12 font-bold">
-                                    Расчётный прогиб, мм: N/A
+                                    Расчётный прогиб, мм: {{ estimatedDeflectionСonnective65.toFixed(3) }}
                                 </p>
                             </div>
 
@@ -1982,6 +1982,269 @@
                             cyan: 2.507,
                             purple: 2692,
                             green: 540
+                        }
+                    }
+                }
+                let data = scheme[this.profileType][this.reinforcementType];
+                return {
+                    yellow: data?.yellow/1000000000000,
+                    orange: data?.orange/1000000000000,
+                    cyan:   data?.cyan/1000,
+                    purple: data?.purple/1000000,
+                    green:  data?.green/1000000
+                };
+            },
+            estimatedDeflectionСonnective65(){
+                let F215 = this.V,
+                    F214 = this.DZE,
+                    F231 = ES,
+                    F230 = EP,
+                    F257 = CSA,
+                    F264 = MRI,
+                    F265 = LTE_COEFF_PVH,
+                    F274 = AB,
+                    F269 = R0,
+                    F273 = AH,
+                    W5 = this.selectedWindRegionParams.w0,
+                    F202 = this.KZE,
+                    F203 = this.C,
+                    F197 = this.WM,
+                    F233 = this.L,
+                    F285 = this.K0,
+                    F223 = W5*F202*F203 +F197*F214*F215, // W5*F202*F203 === this.WM
+                    F236 = this.windowSideA/100,
+                    F237 = this.windowSideB/100,
+                    F280 = this.selectedProfileParams.te,
+                    F276 = this.selectedProfileParams.f110,
+                    F244 = this.selectedColorParams.p,
+                    F17 = this.instalationAirTemperature,
+                    F16 = this.outsideAirTemperature,
+                    F259 = this.insideAirTemperature,
+                    BH120 = this.characteristicsСonnective65.yellow,
+                    BH121 = this.characteristicsСonnective65.orange,
+                    BH122 = this.characteristicsСonnective65.cyan,
+                    BH123 = this.characteristicsСonnective65.purple,
+                    BH124 = this.characteristicsСonnective65.green;
+
+                let F267 = (F259 - (F259 - F16)) * ((1 / F274 + F269 / (F276 + 1)) / (1 / F274 + F269 + 1 / F273));
+
+                let BD128 = (1 / (BH123 * F230)) + (1 / (BH124 * F231));
+                let BD129 = ((F267 - F17) * (F265 * F280 - F264)) / (BD128 * F244 * F257 * (BD128 + (2 / (F257 * (F233 - 2 * F244))) + 2 * BD128 + (2 / (F257 * (F233 - 2 * F244)))));
+                let BD130 = BD129 * (F244 * F257 * (BD128 + (2 / (F257 * (F233 - 2 * F244)))) + 1);
+                let fw = (F223 / (F231 * BH121 + F230 * BH120)) * (F236 * Math.pow(F236 ** 2 - 5 * F233 ** 2, 2) + F237 * Math.pow(F237 ** 2 - 5 * F233 ** 2, 2)) / 3840;
+                let ft = (F285 * F233 ** 2 * F230 * BH120 - BH122 * (BD130 * F233 ** 2 + BD129 * (F233 ** 2 - 4 * F244 ** 2))) / (8 * (F231 * BH121 + F230 * BH120));
+                return (fw+ft)*1000;
+            },
+            characteristicsСonnective65(){
+                let scheme = {
+                    T78_AERO: {
+                        rt_1: {
+                            yellow: 1070649,
+                            orange: 134706,
+                            cyan: 6.594,
+                            purple: 2076,
+                            green: 629
+                        },
+                        rt_2: {
+                            yellow: 1070649,
+                            orange: 146778,
+                            cyan: 6.224,
+                            purple: 2076,
+                            green: 717
+                        },
+                        rt_3: {
+                            yellow: 1070649,
+                            orange: 128423,
+                            cyan: 7.01,
+                            purple: 2076,
+                            green: 541
+                        },
+                        rt_4: {
+                            yellow: 1070649,
+                            orange: 139942,
+                            cyan: 6.627,
+                            purple: 2076,
+                            green: 606
+                        }
+                    },
+                    T80_AERO: {
+                        rt_1: {
+                            yellow: 1070649,
+                            orange: 134706,
+                            cyan: 6.594,
+                            purple: 2076,
+                            green: 629
+                        },
+                        rt_2: {
+                            yellow: 1070649,
+                            orange: 146778,
+                            cyan: 6.224,
+                            purple: 2076,
+                            green: 717
+                        },
+                        rt_3: {
+                            yellow: 1070649,
+                            orange: 128423,
+                            cyan: 7.01,
+                            purple: 2076,
+                            green: 541
+                        },
+                        rt_4: {
+                            yellow: 1070649,
+                            orange: 139942,
+                            cyan: 6.627,
+                            purple: 2076,
+                            green: 606
+                        }
+                    },
+                    T78_SUPER_AERO: {
+                        rt_1: {
+                            yellow: 1509491,
+                            orange: 139631,
+                            cyan: 9.289,
+                            purple: 2259,
+                            green: 629
+                        },
+                        rt_2: {
+                            yellow: 1509491,
+                            orange: 152380,
+                            cyan: 8.77,
+                            purple: 2259,
+                            green: 717
+                        },
+                        rt_3: {
+                            yellow: 1509491,
+                            orange: 132564,
+                            cyan: 9.901,
+                            purple: 2259,
+                            green: 541
+                        },
+                        rt_4: {
+                            yellow: 1509491,
+                            orange: 144782,
+                            cyan: 9.367,
+                            purple: 2259,
+                            green: 606
+                        }
+                    },
+                    T80_SUPER_AERO: {
+                        rt_1: {
+                            yellow: 1509491,
+                            orange: 139631,
+                            cyan: 9.289,
+                            purple: 2259,
+                            green: 629
+                        },
+                        rt_2: {
+                            yellow: 1509491,
+                            orange: 152380,
+                            cyan: 8.77,
+                            purple: 2259,
+                            green: 717
+                        },
+                        rt_3: {
+                            yellow: 1509491,
+                            orange: 132564,
+                            cyan: 9.901,
+                            purple: 2259,
+                            green: 541
+                        },
+                        rt_4: {
+                            yellow: 1509491,
+                            orange: 144782,
+                            cyan: 9.367,
+                            purple: 2259,
+                            green: 606
+                        }
+                    },
+                    T78_ACLASS: {
+                        rt_1: {
+                            yellow: 1190747,
+                            orange: 136644,
+                            cyan: 6.195,
+                            purple: 2341,
+                            green: 629
+                        },
+                        rt_2: {
+                            yellow: 1190747,
+                            orange: 148983,
+                            cyan: 5.761,
+                            purple: 2341,
+                            green: 717
+                        },
+                        rt_3: {
+                            yellow: 1190747,
+                            orange: 130058,
+                            cyan: 6.697,
+                            purple: 2341,
+                            green: 541
+                        },
+                        rt_4: {
+                            yellow: 1190747,
+                            orange: 141852,
+                            cyan: 6.248,
+                            purple: 2341,
+                            green: 606
+                        }
+                    },
+                    T86_60_4: {
+                        rt_1: {
+                            yellow: 1269019,
+                            orange: 136232,
+                            cyan: 5.736,
+                            purple: 2470,
+                            green: 629
+                        },
+                        rt_2: {
+                            yellow: 1269019,
+                            orange: 148513,
+                            cyan: 5.315,
+                            purple: 2470,
+                            green: 717
+                        },
+                        rt_3_pipe: {
+                            yellow: 1269019,
+                            orange: 129710,
+                            cyan: 6.22,
+                            purple: 2470,
+                            green: 541
+                        },
+                        rt_4_pipe: {
+                            yellow: 1269019,
+                            orange: 141446,
+                            cyan: 5.785,
+                            purple: 2470,
+                            green: 606
+                        }
+                    },
+                    T86_70_6: {
+                        rt_1: {
+                            yellow: 1845430,
+                            orange: 139653,
+                            cyan: 9.355,
+                            purple: 2810,
+                            green: 629
+                        },
+                        rt_2: {
+                            yellow: 1845430,
+                            orange: 152405,
+                            cyan: 8.835,
+                            purple: 2810,
+                            green: 717
+                        },
+                        rt_3_pipe: {
+                            yellow: 1845430,
+                            orange: 132583,
+                            cyan: 9.967,
+                            purple: 2810,
+                            green: 541
+                        },
+                        rt_4_pipe: {
+                            yellow: 1845430,
+                            orange: 144804,
+                            cyan: 9.433,
+                            purple: 2810,
+                            green: 606
                         }
                     }
                 }
