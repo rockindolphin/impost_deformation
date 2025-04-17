@@ -361,67 +361,35 @@
                                 </select>
                             </label>
 
-                            <div class="col-span-12 border-1 p-4">
-                                <p class="font-bold">
-                                    {{ gapPics.impost.title }}
-                                </p>
-                                <img :src="gapPics.impost.src" class="w-1/2" :alt="gapPics.impost.title">
-                                <p class="col-span-12 font-bold">
-                                    Максимально допустимый прогиб, мм: {{ maximumAllowableDeflection.toFixed(3) }}
-                                </p>
+                            <p class="col-span-12 font-bold">
+                                Максимально допустимый прогиб, мм: {{ maximumAllowableDeflection.toFixed(3) }}
+                            </p>
 
-                                <p class="col-span-12 font-bold">
-                                    Расчётный прогиб, мм: {{ estimatedDeflectionImpost.toFixed(3) }}
-                                </p>
-                            </div>
-
-                            <div class="col-span-12 border-1 p-4">
+                            <div
+                                v-for="(value, key) in gapTypes"
+                                :key="`result_${key}`"
+                                class="col-span-12 border-1 p-4"
+                                :class="{
+                                    'border-green-600': value.result <= maximumAllowableDeflection,
+                                    'border-red-600': value.result > maximumAllowableDeflection
+                                }"
+                                >
                                 <p class="font-bold">
-                                    {{ gapPics.pilyastr.title }}
+                                    {{ value.title }}
                                 </p>
-                                <img :src="gapPics.pilyastr.src" class="w-1/2" :alt="gapPics.pilyastr.title">
+                                <img :src="value.src" class="w-1/2" :alt="value.title">
                                 <p class="col-span-12 font-bold">
-                                    Расчётный прогиб, мм: {{ estimatedDeflectionPilyastr.toFixed(3) }}
-                                </p>
-                            </div>
-
-                            <div class="col-span-12 border-1 p-4">
-                                <p class="font-bold">
-                                    {{ gapPics.connective3.title }}
-                                </p>
-                                <img :src="gapPics.connective3.src" class="w-1/2" :alt="gapPics.connective3.title">
-                                <p class="col-span-12 font-bold">
-                                    Расчётный прогиб, мм: {{ estimatedDeflectionConnective3.toFixed(3) }}
-                                </p>
-                            </div>
-
-                            <div class="col-span-12 border-1 p-4">
-                                <p class="font-bold">
-                                    {{ gapPics.universal.title }}
-                                </p>
-                                <img :src="gapPics.universal.src" class="w-1/2" :alt="gapPics.universal.title">
-                                <p class="col-span-12 font-bold">
-                                    Расчётный прогиб, мм: {{ estimatedDeflectionUniversal.toFixed(3) }}
-                                </p>
-                            </div>
-
-                            <div class="col-span-12 border-1 p-4">
-                                <p class="font-bold">
-                                    {{ gapPics.connective38.title }}
-                                </p>
-                                <img :src="gapPics.connective38.src" class="w-1/2" :alt="gapPics.connective38.title">
-                                <p class="col-span-12 font-bold">
-                                    Расчётный прогиб, мм: {{ estimatedDeflectionСonnective38.toFixed(3) }}
-                                </p>
-                            </div>
-
-                            <div class="col-span-12 border-1 p-4">
-                                <p class="font-bold">
-                                    {{ gapPics.connective65.title }}
-                                </p>
-                                <img :src="gapPics.connective65.src" class="w-1/2" :alt="gapPics.connective65.title">
-                                <p class="col-span-12 font-bold">
-                                    Расчётный прогиб, мм: {{ estimatedDeflectionСonnective65.toFixed(3) }}
+                                    <span>
+                                        Расчётный прогиб, мм: {{ value.result.toFixed(3) }}
+                                    </span>
+                                    <span class="block mt-3">
+                                        <span class="text-green-600" v-if="value.result <= maximumAllowableDeflection">
+                                            Удовлетворяет условию прочности!
+                                        </span>
+                                        <span class="text-red-600" v-else>
+                                            Не удовлетворяет условию прочности!
+                                        </span>
+                                    </span>
                                 </p>
                             </div>
 
@@ -671,31 +639,37 @@
                         return pic70_6;
                 }
             },
-            gapPics(){
+            gapTypes(){
                 return {
                     impost: {
                         src: picGainImpost,
-                        title: 'Импост'
+                        title: 'Импост',
+                        result: this.estimatedDeflectionImpost
                     },
                     pilyastr: {
                         src: picGainPilyastr,
-                        title: 'Усиление пилястровым профилем'
+                        title: 'Усиление пилястровым профилем',
+                        result: this.estimatedDeflectionPilyastr
                     },
                     connective3: {
                         src: picGainСonnective3,
-                        title: 'Соединительный профиль 3'
+                        title: 'Соединительный профиль 3',
+                        result: this.estimatedDeflectionConnective3
                     },
                     universal: {
                         src: picGainUniversal,
-                        title: 'Профиль соединительный универсальный'
+                        title: 'Профиль соединительный универсальный',
+                        result: this.estimatedDeflectionUniversal
                     },
                     connective38: {
                         src: picGainСonnective38,
-                        title: 'Профиль соединительный 38'
+                        title: 'Профиль соединительный 38',
+                        result: this.estimatedDeflectionСonnective38
                     },
                     connective65: {
                         src: picGainСonnective65,
-                        title: 'Профиль соединительный 65'
+                        title: 'Профиль соединительный 65',
+                        result: this.estimatedDeflectionСonnective65
                     }
                 }
             },
