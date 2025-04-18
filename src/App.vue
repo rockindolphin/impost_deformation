@@ -417,6 +417,7 @@
     import picAClass from '@/assets/images/ACLASS.png';
     import picAero from '@/assets/images/AERO.png';
     import picSuperAero from '@/assets/images/SUPER_AERO.png';
+    import picGlide from '@/assets/images/GLIDE.png';
     import picGainImpost from '@/assets/images/impost.png';
     import picGainPilyastr from '@/assets/images/pilyastr.png';
     import picGainСonnective3 from '@/assets/images/connective3.png';
@@ -566,14 +567,15 @@
                         lp: 706133,
                         an51: 0.133
                     },
-                    /*
                     'GLIDE': {
-                        an51: 0.094,
+                        impostWidth: 0.031,
+                        tk: 0.78,
+                        ap: 487,
+                        te: 1.08,
                         f110: 1,
-                        lp: 63666
-                        ap: 487
+                        lp: 63666,
+                        an51: 0.094
                     }
-                    */
                 },
                 profileType: 'T80_SUPER_AERO', //Тип профиля
                 reinforcementTypes: {
@@ -606,6 +608,21 @@
                         i18n: '35*28*2',
                         as: 176.3,
                         d21: 3.21,
+                    },
+                    rt_7: {
+                        i18n: '35*28*1,5(труба)',
+                        as: 172.7,
+                        d21: 2.96,
+                    },
+                    rt_8: {
+                        i18n: '35*28*2(труба)',
+                        as: 223.69,
+                        d21: 3.7,
+                    },
+                    rt_9: {//GLIDE
+                        i18n: '26*19*1,5',
+                        as: 87.3,
+                        d21: 0.94
                     }
                 },
                 reinforcementType: 'rt_2', //Тип армирования
@@ -637,10 +654,12 @@
                         return pic60_4;
                     case 'T86_70_6':
                         return pic70_6;
+                    case 'GLIDE':
+                        return picGlide;
                 }
             },
             gapTypes(){
-                return {
+                let resp = {
                     impost: {
                         src: picGainImpost,
                         title: 'Импост',
@@ -650,28 +669,34 @@
                         src: picGainPilyastr,
                         title: 'Усиление пилястровым профилем',
                         result: this.estimatedDeflectionPilyastr
-                    },
-                    connective3: {
-                        src: picGainСonnective3,
-                        title: 'Соединительный профиль 3',
-                        result: this.estimatedDeflectionConnective3
-                    },
-                    universal: {
-                        src: picGainUniversal,
-                        title: 'Профиль соединительный универсальный',
-                        result: this.estimatedDeflectionUniversal
-                    },
-                    connective38: {
-                        src: picGainСonnective38,
-                        title: 'Профиль соединительный 38',
-                        result: this.estimatedDeflectionСonnective38
-                    },
-                    connective65: {
-                        src: picGainСonnective65,
-                        title: 'Профиль соединительный 65',
-                        result: this.estimatedDeflectionСonnective65
                     }
                 }
+                if( this.profileType !== 'GLIDE' ){
+                    resp = {
+                        ...resp,
+                        connective3: {
+                            src: picGainСonnective3,
+                            title: 'Соединительный профиль 3',
+                            result: this.estimatedDeflectionConnective3
+                        },
+                        universal: {
+                            src: picGainUniversal,
+                            title: 'Профиль соединительный универсальный',
+                            result: this.estimatedDeflectionUniversal
+                        },
+                        connective38: {
+                            src: picGainСonnective38,
+                            title: 'Профиль соединительный 38',
+                            result: this.estimatedDeflectionСonnective38
+                        },
+                        connective65: {
+                            src: picGainСonnective65,
+                            title: 'Профиль соединительный 65',
+                            result: this.estimatedDeflectionСonnective65
+                        }
+                    }
+                }
+                return resp;
             },
             buildingStyles(){
                 let rotateY = 40,
@@ -897,7 +922,13 @@
                 return this.impostLength - this.windowSideC;
             },
             reinforcementTypesOptions(){// Тип армирования в зависимости от типа профиля
-                return  ['T86_60_4', 'T86_70_6'].includes(this.profileType) ?  ['rt_5', 'rt_6'] : ['rt_1', 'rt_2', 'rt_3', 'rt_4'];
+                if( ['T86_60_4', 'T86_70_6'].includes(this.profileType) ){
+                    return ['rt_5', 'rt_6', 'rt_7', 'rt_8'];
+                }else if( ['GLIDE'].includes(this.profileType) ){
+                    return ['rt_9'];
+                }else{//для всех остальных
+                    return ['rt_1', 'rt_2', 'rt_3', 'rt_4'];
+                }
             },
             maximumAllowableDeflection(){//Максимально допустимый прогиб
                 return ((this.impostLength/100)/200)*1000;
@@ -906,10 +937,6 @@
                 return Math.abs( (this.C53+this.C75)*1000 );
             },
             estimatedDeflectionPilyastr(){// Расчётный прогиб (Усиление пилястровым профилем) [[AN53]]
-                /*
-                    (F164/(F172*AR40+F171*AR39))*(F177*(F177^2-5*F174^2)^2+F178*(F178^2-5*F174^2)^2)/3840
-                */
-
                 let F171 = EP,
                     F198 = CSA,
                     F205 = MRI,
@@ -1112,22 +1139,20 @@
                             purple: 1437,
                             green: 448
                         },
-                        /*
-                        rt_5_pipe: {
+                        rt_7: {
                             yellow: 1787685,
                             orange: 576006,
                             cyan: 14.69,
                             purple: 1437,
                             green: 444
                         },
-                        rt_6_pipe: {
+                        rt_8: {
                             yellow: 1787685,
                             orange: 658387,
                             cyan: 10.519,
                             purple: 1437,
                             green: 495
                         }
-                        */
                     },
                     T86_70_6: {
                         rt_5: {
@@ -1144,26 +1169,23 @@
                             purple: 1540,
                             green: 448
                         },
-                        /*
-                        rt_5_pipe: {
+                        rt_7: {
                             yellow: 2159130,
                             orange: 485726,
                             cyan: 13.859,
                             purple: 1540,
                             green: 444
                         },
-                        rt_6_pipe: {
+                        rt_8: {
                             yellow: 2159130,
                             orange: 553484,
                             cyan: 10.1,
                             purple: 1540,
                             green: 495
                         }
-                        */
                     },
-                    /*
                     GLIDE: {
-                        '26_19_1.5': {
+                        rt_9: {
                             yellow: 805444,
                             orange: 223062,
                             cyan: 9.738,
@@ -1171,9 +1193,8 @@
                             green: 359
                         }
                     }
-                    */
                 }
-                let data = scheme[this.profileType][this.reinforcementType];
+                let data = scheme[this.profileType] ? scheme[this.profileType][this.reinforcementType] : null;
                 return {
                     yellow: data?.yellow/1000000000000,
                     orange: data?.orange/1000000000000,
@@ -1435,7 +1456,7 @@
                         }
                     }
                 }
-                let data = scheme[this.profileType][this.reinforcementType];
+                let data = scheme[this.profileType] ? scheme[this.profileType][this.reinforcementType] : null;
                 return {
                     yellow: data?.yellow/1000000000000,
                     orange: data?.orange/1000000000000,
@@ -1697,7 +1718,7 @@
                         }
                     }
                 }
-                let data = scheme[this.profileType][this.reinforcementType];
+                let data = scheme[this.profileType] ? scheme[this.profileType][this.reinforcementType] : null;
                 return {
                     yellow: data?.yellow/1000000000000,
                     orange: data?.orange/1000000000000,
@@ -1959,7 +1980,7 @@
                         }
                     }
                 }
-                let data = scheme[this.profileType][this.reinforcementType];
+                let data = scheme[this.profileType] ? scheme[this.profileType][this.reinforcementType] : null;
                 return {
                     yellow: data?.yellow/1000000000000,
                     orange: data?.orange/1000000000000,
@@ -2222,7 +2243,7 @@
                         }
                     }
                 }
-                let data = scheme[this.profileType][this.reinforcementType];
+                let data = scheme[this.profileType] ? scheme[this.profileType][this.reinforcementType] : null;
                 return {
                     yellow: data?.yellow/1000000000000,
                     orange: data?.orange/1000000000000,
