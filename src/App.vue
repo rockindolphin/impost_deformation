@@ -900,15 +900,15 @@
                 return ((this.impostLength/100)/200)*1000;
             },
             estimatedDeflectionImpost(){//Расчётный прогиб (импост)
-                return this.computeEstimatedDeflection(this.characteristicsImpost);
+                return this.computeEstimatedDeflection(this.specsImpost);
             },
-            characteristicsImpost(){
+            specsImpost(){
                 let scheme = {
                     T78_AERO: {
                         rt_1: {
                             yellow: 349918, // Главные моменты инерции (Сечения профиля)
                             orange: 2.21, // момент инерции в зависимости от типа армирования
-                            cyan: 6.6,
+                            cyan: 6.6, //Расстояние между неитральной осью ПВХ профиля и нейтральной осью усилительного вкладыша
                             purple: 727, //Площади поперечного сечения (ПВХ профиль)
                             green: 148.7 //Площади поперечного сечения (Усилительный вкладыш)
                         },
@@ -1134,9 +1134,9 @@
                 };
             },
             estimatedDeflectionPilyastr(){// Расчётный прогиб (Усиление пилястровым профилем) [[AN53]]
-                return this.computeEstimatedDeflection(this.characteristicsPilyastr, 'pilyastr');
+                return this.computeEstimatedDeflection(this.specsPilyastr, 'pilyastr');
             },
-            characteristicsPilyastr(){// таблица характеристик (Пилястровый профиль) [[AU29_BC68]] yellow - Сечения профиля м4 / orange - Сечения усилительного вкладыша, м4 / cyan - δ / purple - ПВХ профиль, м2 / green - Усилительный вкладыш, м2
+            specsPilyastr(){// таблица характеристик (Пилястровый профиль) [[AU29_BC68]] yellow - Сечения профиля м4 / orange - Сечения усилительного вкладыша, м4 / cyan - δ / purple - ПВХ профиль, м2 / green - Усилительный вкладыш, м2
                 let scheme = {
                     T78_AERO: {
                         rt_1: {
@@ -1368,9 +1368,9 @@
                 };
             },
             estimatedDeflectionConnective3(){
-                return this.computeEstimatedDeflection(this.characteristicsConnective3);
+                return this.computeEstimatedDeflection(this.specsConnective3);
             },
-            characteristicsConnective3(){// таблица характеристик (Профиль соединительный 3) [[BK29_BP63]] yellow - Сечения профиля м4 / orange - Сечения усилительного вкладыша, м4 / cyan - δ / purple - ПВХ профиль, м2 / green - Усилительный вкладыш, м2
+            specsConnective3(){// таблица характеристик (Профиль соединительный 3) [[BK29_BP63]] yellow - Сечения профиля м4 / orange - Сечения усилительного вкладыша, м4 / cyan - δ / purple - ПВХ профиль, м2 / green - Усилительный вкладыш, м2
                 let scheme = {
                     T78_AERO: {
                         rt_1: {
@@ -1593,9 +1593,9 @@
                 };
             },
             estimatedDeflectionUniversal(){
-                return this.computeEstimatedDeflection(this.characteristicsUniversal);
+                return this.computeEstimatedDeflection(this.specsUniversal);
             },
-            characteristicsUniversal(){// таблица характеристик (Профиль соединительный универсальный) [[BZ29_CE63]] yellow - Сечения профиля м4 / orange - Сечения усилительного вкладыша, м4 / cyan - δ / purple - ПВХ профиль, м2 / green - Усилительный вкладыш, м2
+            specsUniversal(){// таблица характеристик (Профиль соединительный универсальный) [[BZ29_CE63]] yellow - Сечения профиля м4 / orange - Сечения усилительного вкладыша, м4 / cyan - δ / purple - ПВХ профиль, м2 / green - Усилительный вкладыш, м2
                 let scheme = {
                     T78_AERO: {
                         rt_1: {
@@ -1818,9 +1818,9 @@
                 };
             },
             estimatedDeflectionСonnective38(){
-                return this.computeEstimatedDeflection(this.characteristicsСonnective38);
+                return this.computeEstimatedDeflection(this.specsСonnective38);
             },
-            characteristicsСonnective38(){
+            specsСonnective38(){
                 let scheme = {
                     T78_AERO: {
                         rt_1: {
@@ -2043,9 +2043,9 @@
                 };
             },
             estimatedDeflectionСonnective65(){
-                return this.computeEstimatedDeflection(this.characteristicsСonnective65);
+                return this.computeEstimatedDeflection(this.specsСonnective65);
             },
-            characteristicsСonnective65(){
+            specsСonnective65(){
                 let scheme = {
                     T78_AERO: {
                         rt_1: {
@@ -2267,10 +2267,6 @@
                     green:  data?.green/1000000
                 };
             },
-            WM(){// Нормативное значение средней составляющей основной ветровой нагрузки Wm (Нормативное значение ветрового давления, Па )    [F30]
-                let W0 = this.selectedWindRegionParams.w0; // Нормативное значение ветрового давления, Па [F29]
-                return W0*this.KZE*this.C;
-            },
             DZE(){// Коэффициент пульсации давления ветра [F46]
                 let scheme = [
                     [   0.85,   1.22,   1.78   ],
@@ -2426,57 +2422,6 @@
                     }
                 }
             },
-            delta(){//Расстояние между неитральной осью ПВХ профиля и нейтральной осью усилительного вкладыша, м [F77]
-                let resp = null;
-
-                if (this.profileType === 'T78_AERO') {
-                    if (this.reinforcementType === 'rt_1'){ resp = 6.6; }
-                    if (this.reinforcementType === 'rt_2'){ resp = 6.6; }
-                    if (this.reinforcementType === 'rt_3'){ resp = 6.46; }
-                    if (this.reinforcementType === 'rt_4'){ resp = 6.46; }
-                }
-                if (this.profileType === 'T80_AERO') {
-                    if (this.reinforcementType === 'rt_1'){ resp = 9.27; }
-                    if (this.reinforcementType === 'rt_2'){ resp = 9.27; }
-                    if (this.reinforcementType === 'rt_3'){ resp = 9.1; }
-                    if (this.reinforcementType === 'rt_4'){ resp = 9.1; }
-                }
-                if (this.profileType === 'T78_SUPER_AERO') {
-                    if (this.reinforcementType === 'rt_1'){ resp = 7.9; }
-                    if (this.reinforcementType === 'rt_2'){ resp = 7.9; }
-                    if (this.reinforcementType === 'rt_3'){ resp = 7.7; }
-                    if (this.reinforcementType === 'rt_4'){ resp = 7.7; }
-                }
-                if (this.profileType === 'T80_SUPER_AERO') {
-                    if (this.reinforcementType === 'rt_1'){ resp = 11.27; }
-                    if (this.reinforcementType === 'rt_2'){ resp = 11.27; }
-                    if (this.reinforcementType === 'rt_3'){ resp = 11.1; }
-                    if (this.reinforcementType === 'rt_4'){ resp = 11.1; }
-                }
-                if (this.profileType === 'T78_ACLASS') {
-                    if (this.reinforcementType === 'rt_1'){ resp = 6.24; }
-                    if (this.reinforcementType === 'rt_2'){ resp = 6.24; }
-                    if (this.reinforcementType === 'rt_3'){ resp = 6.07; }
-                    if (this.reinforcementType === 'rt_4'){ resp = 6.07; }
-                }
-                if (this.profileType === 'T86_60_4') {
-                    if (this.reinforcementType === 'rt_5'){ resp = 4.834; }
-                    if (this.reinforcementType === 'rt_6'){ resp = 4.5; }
-                    if (this.reinforcementType === 'rt_7'){ resp = 4.74; }
-                    if (this.reinforcementType === 'rt_8'){ resp = 4.74; }
-                }
-                if (this.profileType === 'T86_70_6') {
-                    if (this.reinforcementType === 'rt_5'){ resp = 7.745; }
-                    if (this.reinforcementType === 'rt_6'){ resp = 7.79; }
-                    if (this.reinforcementType === 'rt_7'){ resp = 9.589; }
-                    if (this.reinforcementType === 'rt_8'){ resp = 9.59; }
-                }
-                if (this.profileType === 'GLIDE') {
-                    if (this.reinforcementType === 'rt_9'){ resp = 1.529; }
-                }
-
-                return resp / 1000;
-            },
             K0(){//Начальная кривизна оси импоста оконной конструкции [F120]
                 let IW = this.selectedProfileParams.impostWidth;
                 return LTE_COEFF_PVH * ((this.insideAirTemperature - this.outsideAirTemperature)/IW)*(R0/((1/AB)+R0+(1/AH))) * this.selectedProfileParams.tk;
@@ -2490,36 +2435,31 @@
             onProfileTypeChange(){// при смене типа профиля, меняем Тип армирования на первый из списка доступных
                 this.reinforcementType = this.reinforcementTypesOptions[0];
             },
-            computeEstimatedDeflection(characteristics, type = null){
-                let V = this.V,
-                    DZE = this.DZE,
-                    K0 = this.K0,
+            computeEstimatedDeflection(specs, type = null){
+                let K0 = type === 'pilyastr' ? this.K0_pilyastr : this.K0,
                     IL = this.impostLength/100,
-                    F223 = this.WM +this.WM*DZE*V,
+                    WM = this.selectedWindRegionParams.w0*this.KZE*this.C, // Нормативное значение средней составляющей основной ветровой нагрузки Wm (Нормативное значение ветрового давления, Па )
+                    QW = WM + WM*this.DZE*this.V,//Нормативное значение пиковой ветровой нагрузки на оконную конструкцию, Па.
                     SA = this.windowSideA/100,
                     SB = this.windowSideB/100,
                     TE = this.selectedProfileParams.te,
-                    F276 = this.selectedProfileParams.f110,
+                    KR = this.selectedProfileParams.f110,
                     P = this.selectedColorParams.p,
                     AT_INST = this.instalationAirTemperature,
                     AT_OUT = this.outsideAirTemperature,
                     AT_IN = this.insideAirTemperature,
 
-                    yellow = characteristics.yellow,
-                    orange = characteristics.orange,
-                    cyan = characteristics.cyan,
-                    purple = characteristics.purple,
-                    green = characteristics.green;
+                    yellow = specs.yellow,
+                    orange = specs.orange,
+                    cyan = specs.cyan,
+                    purple = specs.purple,
+                    green = specs.green;
 
-                if( type === 'pilyastr' ){
-                    K0 = this.K0_pilyastr;
-                }
-
-                let F267 = (AT_IN - (AT_IN - AT_OUT)) * ((1 / AB + R0 / (F276 + 1)) / (1 / AB + R0 + 1 / AH));
+                let F267 = (AT_IN - (AT_IN - AT_OUT)) * ((1 / AB + R0 / (KR + 1)) / (1 / AB + R0 + 1 / AH));
                 let TMP1 = (1 / (purple * EP)) + (1 / (green * ES));
                 let TMP2 = ((F267 - AT_INST) * (LTE_COEFF_PVH * TE - MRI)) / (TMP1 * P * CSA * (TMP1 + (2 / (CSA * (IL - 2 * P))) + 2 * TMP1 + (2 / (CSA * (IL - 2 * P)))));
                 let TMP3 = TMP2 * (P * CSA * (TMP1 + (2 / (CSA * (IL - 2 * P)))) + 1);
-                let fw = (F223 / (ES * orange + EP * yellow)) * (SA * Math.pow(SA ** 2 - 5 * IL ** 2, 2) + SB * Math.pow(SB ** 2 - 5 * IL ** 2, 2)) / 3840;
+                let fw = (QW / (ES * orange + EP * yellow)) * (SA * Math.pow(SA ** 2 - 5 * IL ** 2, 2) + SB * Math.pow(SB ** 2 - 5 * IL ** 2, 2)) / 3840;
                 let ft = (K0 * IL ** 2 * EP * yellow - cyan * (TMP3 * IL ** 2 + TMP2 * (IL ** 2 - 4 * P ** 2))) / (8 * (ES * orange + EP * yellow));
                 return (fw+ft)*1000;
             }
