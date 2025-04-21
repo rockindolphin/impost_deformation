@@ -2292,10 +2292,17 @@
                 if (this.profileType === 'T86_60_4') {
                     if (this.reinforcementType === 'rt_5'){ resp = 4.834; }
                     if (this.reinforcementType === 'rt_6'){ resp = 4.5; }
+                    if (this.reinforcementType === 'rt_7'){ resp = 4.74; }
+                    if (this.reinforcementType === 'rt_8'){ resp = 4.74; }
                 }
                 if (this.profileType === 'T86_70_6') {
                     if (this.reinforcementType === 'rt_5'){ resp = 7.745; }
                     if (this.reinforcementType === 'rt_6'){ resp = 7.79; }
+                    if (this.reinforcementType === 'rt_7'){ resp = 9.589; }
+                    if (this.reinforcementType === 'rt_8'){ resp = 9.59; }
+                }
+                if (this.profileType === 'GLIDE') {
+                    if (this.reinforcementType === 'rt_9'){ resp = 1.529; }
                 }
 
                 return resp / 1000;
