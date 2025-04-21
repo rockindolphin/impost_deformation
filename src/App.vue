@@ -934,90 +934,37 @@
                 return ((this.impostLength/100)/200)*1000;
             },
             estimatedDeflectionImpost(){//Расчётный прогиб (импост)
-                let W5 = this.selectedWindRegionParams.w0,
-                    F280 = this.selectedProfileParams.te,
-                    F244 = this.selectedColorParams.p,
-                    F259 = this.insideAirTemperature,
-                    F16 = this.outsideAirTemperature,
-                    F17 = this.instalationAirTemperature,
-                    F257 = CSA,
-                    F265 = LTE_COEFF_PVH,
-                    F264 = MRI,
-                    F215 = this.V,
-                    F214 = this.DZE,
-                    F202 = this.KZE,
-                    F197 = this.WM,
-                    F203 = this.C,
-                    F223 = (W5*F202*F203)+(F197*F214*F215), // W5*F202*F203 === this.WM
-                    F231 = ES,
-                    F227 = this.selectedReinforcementTypeParams.d21/100000000, //Главные моменты инерции  (Сечения усилительного вкладыша, м4)
-                    F230 = EP,
-                    F226 = this.selectedProfileParams.lp / 1000000000000,
-                    F236 = this.windowSideA/100,
-                    F233 = this.impostLength/100,
-                    F237 = this.windowSideB/100,
-                    F269 = R0,
-                    F274 = AB,
-                    F273 = AH,
-                    F285 = this.K0,
-                    F245 = this.delta,
+                let V = this.V,
+                    DZE = this.DZE,
+                    IL = this.impostLength/100,
+                    K0 = this.K0,
+                    F223 = this.WM +this.WM*DZE*V,
+                    SA = this.windowSideA/100,
+                    SB = this.windowSideB/100,
+                    TE = this.selectedProfileParams.te,
                     F276 = this.selectedProfileParams.f110,
+                    P = this.selectedColorParams.p,
+                    AT_INST = this.instalationAirTemperature,
+                    AT_OUT = this.outsideAirTemperature,
+                    AT_IN = this.insideAirTemperature,
+
+                    F227 = this.selectedReinforcementTypeParams.d21/100000000, //Главные моменты инерции  (Сечения усилительного вкладыша, м4)
+                    F226 = this.selectedProfileParams.lp / 1000000000000,
+                    F245 = this.delta,
                     H110 = this.selectedProfileParams.ap / 1000000,
                     H111 = this.selectedReinforcementTypeParams.as / 1000000;
 
-                let F250 = (1/(H110*F230))+(1/(H111*F231));
-                let F267 = (F259 - (F259 - F16)) * ((1 / F274 + F269 / (F276 + 1)) / (1 / F274 + F269 + 1 / F273));
-                let F247 = ((F267-F17)*(F265*F280-F264))/(F250*F244*F257*(F250+(2/(F257*(F233-2*F244)))+2*F250+(2/(F257*(F233-2*F244)))));
-                let F248 = F247*(F244*F257*(F250+(2/(F257*(F233-2*F244))))+1);
+                let F250 = (1/(H110*EP))+(1/(H111*ES));
+                let F267 = (AT_IN - (AT_IN - AT_OUT)) * ((1 / AB + R0 / (F276 + 1)) / (1 / AB + R0 + 1 / AH));
+                let F247 = ((F267-AT_INST)*(LTE_COEFF_PVH*TE-MRI))/(F250*P*CSA*(F250+(2/(CSA*(IL-2*P)))+2*F250+(2/(CSA*(IL-2*P)))));
+                let F248 = F247*(P*CSA*(F250+(2/(CSA*(IL-2*P))))+1);
 
-                let fw = (F223 / (F231 * F227 + F230 * F226)) * (F236 * Math.pow(F236 ** 2 - 5 * F233 ** 2, 2) + F237 * Math.pow(F237 ** 2 - 5 * F233 ** 2, 2)) / 3840;
-                let ft = (F285 * F233 ** 2 * F230 * F226 - F245 * (F248 * F233 ** 2 + F247 * (F233 ** 2 - 4 * F244 ** 2))) / (8 * (F231 * F227 + F230 * F226));
+                let fw = (F223 / (ES * F227 + EP * F226)) * (SA * Math.pow(SA ** 2 - 5 * IL ** 2, 2) + SB * Math.pow(SB ** 2 - 5 * IL ** 2, 2)) / 3840;
+                let ft = (K0 * IL ** 2 * EP * F226 - F245 * (F248 * IL ** 2 + F247 * (IL ** 2 - 4 * P ** 2))) / (8 * (ES * F227 + EP * F226));
                 return (fw+ft)*1000;
             },
             estimatedDeflectionPilyastr(){// Расчётный прогиб (Усиление пилястровым профилем) [[AN53]]
-                    //diff F215 = this.V,
-                    //diff F214 = this.DZE,
-                let F172 = ES,
-                    F171 = EP,
-                    F198 = CSA,
-                    F205 = MRI,
-                    F206 = LTE_COEFF_PVH,
-                    F215 = AB,
-                    F210 = R0,
-                    F214 = AH,
-                    //diff W5 = this.selectedWindRegionParams.w0,
-                    //diff F202 = this.KZE,
-                    //diff F203 = this.C,
-                    //diff F197 = this.WM,
-                    F174 = this.impostLength/100, //Длина импоста, м [F64]
-                    F177 = this.windowSideA/100,
-                    F178 = this.windowSideB/100,
-                    F221 = this.selectedProfileParams.te,
-                    F276 = this.selectedProfileParams.f110,
-                    F185 = this.selectedColorParams.p,
-                    F17 = this.instalationAirTemperature,
-                    F200 = this.insideAirTemperature,
-                    F16 = this.outsideAirTemperature,
-                    AR40 = this.characteristicsPilyastr.orange,
-                    AR39 = this.characteristicsPilyastr.yellow,
-                    AR41 = this.characteristicsPilyastr.cyan,
-                    AR42 = this.characteristicsPilyastr.purple,
-                    AR43 = this.characteristicsPilyastr.green,
-
-                    WP = this.WM*this.DZE*this.V, // Нормативное значение пульсационной составляющей основной ветровой нагрузки Wp
-                    F164 = this.WM + WP, // Нормативное значение пиковой ветровой нагрузки на оконную конструкцию, Па.
-                    AN51 = this.selectedProfileParams.an51,
-                    F222 = this.selectedProfileParams.tk;
-
-                let F208 = (F200-(F200-F16))*((1/AB+R0/(F276+1))/(1/AB+R0+1/AH)); // Коэффициенты линейного температурного расширения (Температура во внутренней камере ПВХ профиля)
-                let AN52 = F206 * ((F200 - F16) / AN51) * (F210 / ((1 / F215) + F210 + (1 / F214))) * F222;
-                let AN47 = (1 / (AR42 * F171)) + (1 / (AR43 * F172));
-                let AN48 = ((F208 - F17) * (F206 * F221 - F205)) / (AN47 * F185 * F198 * (AN47 + (2 / (F198 * (F174 - 2 * F185))) + 2 * AN47 + (2 / (F198 * (F174 - 2 * F185)))));
-                let AN49 = AN48 * (F185 * F198 * (AN47 + (2 / (F198 * (F174 - 2 * F185)))) + 1);
-                let fw = (F164 / (F172 * AR40 + F171 * AR39)) * (F177 * Math.pow(F177 ** 2 - 5 * F174 ** 2, 2) + F178 * Math.pow(F178 ** 2 - 5 * F174 ** 2, 2)) / 3840;
-                let ft = (AN52 * F174 ** 2 * F171 * AR39 - AR41 * (AN49 * F174 ** 2 + AN48 * (F174 ** 2 - 4 * F185 ** 2))) / (8 * (F172 * AR40 + F171 * AR39));
-
-                return (fw+ft)*1000;
+                return this.computeEstimatedDeflection(this.characteristicsPilyastr, 'pilyastr');
             },
             characteristicsPilyastr(){// таблица характеристик (Пилястровый профиль) [[AU29_BC68]] yellow - Сечения профиля м4 / orange - Сечения усилительного вкладыша, м4 / cyan - δ / purple - ПВХ профиль, м2 / green - Усилительный вкладыш, м2
                 let scheme = {
@@ -1251,44 +1198,7 @@
                 };
             },
             estimatedDeflectionConnective3(){
-                let F215 = this.V,
-                    F214 = this.DZE,
-                    F231 = ES,
-                    F230 = EP,
-                    F257 = CSA,
-                    F264 = MRI,
-                    F265 = LTE_COEFF_PVH,
-                    F274 = AB,
-                    F269 = R0,
-                    F273 = AH,
-                    W5 = this.selectedWindRegionParams.w0,
-                    F202 = this.KZE,
-                    F203 = this.C,
-                    F197 = this.WM,
-                    F233 = this.impostLength/100, //Длина импоста, м
-                    F285 = this.K0,
-                    F223 = W5*F202*F203 +F197*F214*F215, // W5*F202*F203 === this.WM
-                    F236 = this.windowSideA/100,
-                    F237 = this.windowSideB/100,
-                    F280 = this.selectedProfileParams.te,
-                    F276 = this.selectedProfileParams.f110,
-                    F244 = this.selectedColorParams.p,
-                    F17 = this.instalationAirTemperature,
-                    F16 = this.outsideAirTemperature,
-                    F259 = this.insideAirTemperature,
-                    BH70 = this.characteristicsConnective3.yellow,
-                    BH71 = this.characteristicsConnective3.orange,
-                    BH72 = this.characteristicsConnective3.cyan,
-                    BH73 = this.characteristicsConnective3.purple,
-                    BH74 = this.characteristicsConnective3.green;
-
-                let F267 = (F259 - (F259 - F16)) * ((1 / F274 + F269 / (F276 + 1)) / (1 / F274 + F269 + 1 / F273));
-                let BD78 = (1 / (BH73 * F230)) + (1 / (BH74 * F231));
-                let BD79 = ((F267 - F17) * (F265 * F280 - F264)) / (BD78 * F244 * F257 * (BD78 + (2 / (F257 * (F233 - 2 * F244))) + 2 * BD78 + (2 / (F257 * (F233 - 2 * F244)))));
-                let BD80 = BD79 * (F244 * F257 * (BD78 + (2 / (F257 * (F233 - 2 * F244)))) + 1);
-                let fw = (F223 / (F231 * BH71 + F230 * BH70)) * (F236 * Math.pow(F236 ** 2 - 5 * F233 ** 2, 2) + F237 * Math.pow(F237 ** 2 - 5 * F233 ** 2, 2)) / 3840;
-                let ft = (F285 * F233 ** 2 * F230 * BH70 - BH72 * (BD80 * F233 ** 2 + BD79 * (F233 ** 2 - 4 * F244 ** 2))) / (8 * (F231 * BH71 + F230 * BH70));
-                return (fw+ft)*1000;
+                return this.computeEstimatedDeflection(this.characteristicsConnective3);
             },
             characteristicsConnective3(){// таблица характеристик (Профиль соединительный 3) [[BK29_BP63]] yellow - Сечения профиля м4 / orange - Сечения усилительного вкладыша, м4 / cyan - δ / purple - ПВХ профиль, м2 / green - Усилительный вкладыш, м2
                 let scheme = {
@@ -1513,44 +1423,7 @@
                 };
             },
             estimatedDeflectionUniversal(){
-                let F215 = this.V,
-                    F214 = this.DZE,
-                    F231 = ES,
-                    F230 = EP,
-                    F257 = CSA,
-                    F264 = MRI,
-                    F265 = LTE_COEFF_PVH,
-                    F274 = AB,
-                    F269 = R0,
-                    F273 = AH,
-                    W5 = this.selectedWindRegionParams.w0,
-                    F202 = this.KZE,
-                    F203 = this.C,
-                    F197 = this.WM,
-                    F233 = this.impostLength/100, //Длина импоста, м
-                    F285 = this.K0,
-                    F223 = W5*F202*F203 +F197*F214*F215, // W5*F202*F203 === this.WM
-                    F236 = this.windowSideA/100,
-                    F237 = this.windowSideB/100,
-                    F280 = this.selectedProfileParams.te,
-                    F276 = this.selectedProfileParams.f110,
-                    F244 = this.selectedColorParams.p,
-                    F17 = this.instalationAirTemperature,
-                    F16 = this.outsideAirTemperature,
-                    F259 = this.insideAirTemperature,
-                    BW39 = this.characteristicsUniversal.yellow,
-                    BW40 = this.characteristicsUniversal.orange,
-                    BW41 = this.characteristicsUniversal.cyan,
-                    BW42 = this.characteristicsUniversal.purple,
-                    BW43 = this.characteristicsUniversal.green;
-
-                let F267 = (F259 - (F259 - F16)) * ((1 / F274 + F269 / (F276 + 1)) / (1 / F274 + F269 + 1 / F273));
-                let BS47 = (1 / (BW42 * F230)) + (1 / (BW43 * F231));
-                let BS48 = ((F267 - F17) * (F265 * F280 - F264)) / (BS47 * F244 * F257 * (BS47 + (2 / (F257 * (F233 - 2 * F244))) + 2 * BS47 + (2 / (F257 * (F233 - 2 * F244)))));
-                let BS49 = BS48 * (F244 * F257 * (BS47 + (2 / (F257 * (F233 - 2 * F244)))) + 1);
-                let fw = (F223 / (F231 * BW40 + F230 * BW39)) * (F236 * Math.pow(Math.pow(F236, 2) - 5 * Math.pow(F233, 2), 2) + F237 * Math.pow(Math.pow(F237, 2) - 5 * Math.pow(F233, 2), 2)) / 3840;
-                let ft = (F285 * Math.pow(F233, 2) * F230 * BW39 - BW41 * (BS49 * Math.pow(F233, 2) + BS48 * (Math.pow(F233, 2) - 4 * Math.pow(F244, 2)))) / (8 * (F231 * BW40 + F230 * BW39));
-                return (fw+ft)*1000;
+                return this.computeEstimatedDeflection(this.characteristicsUniversal);
             },
             characteristicsUniversal(){// таблица характеристик (Профиль соединительный универсальный) [[BZ29_CE63]] yellow - Сечения профиля м4 / orange - Сечения усилительного вкладыша, м4 / cyan - δ / purple - ПВХ профиль, м2 / green - Усилительный вкладыш, м2
                 let scheme = {
@@ -1775,44 +1648,7 @@
                 };
             },
             estimatedDeflectionСonnective38(){
-                let F215 = this.V,
-                    F214 = this.DZE,
-                    F231 = ES,
-                    F230 = EP,
-                    F257 = CSA,
-                    F264 = MRI,
-                    F265 = LTE_COEFF_PVH,
-                    F274 = AB,
-                    F269 = R0,
-                    F273 = AH,
-                    W5 = this.selectedWindRegionParams.w0,
-                    F202 = this.KZE,
-                    F203 = this.C,
-                    F197 = this.WM,
-                    F233 = this.impostLength/100, //Длина импоста, м
-                    F285 = this.K0,
-                    F223 = W5*F202*F203 +F197*F214*F215, // W5*F202*F203 === this.WM
-                    F236 = this.windowSideA/100,
-                    F237 = this.windowSideB/100,
-                    F280 = this.selectedProfileParams.te,
-                    F276 = this.selectedProfileParams.f110,
-                    F244 = this.selectedColorParams.p,
-                    F17 = this.instalationAirTemperature,
-                    F16 = this.outsideAirTemperature,
-                    F259 = this.insideAirTemperature,
-                    AR120 = this.characteristicsСonnective38.yellow,
-                    AR121 = this.characteristicsСonnective38.orange,
-                    AR122 = this.characteristicsСonnective38.cyan,
-                    AR123 = this.characteristicsСonnective38.purple,
-                    AR124 = this.characteristicsСonnective38.green;
-
-                let F267 = (F259 - (F259 - F16)) * ((1 / F274 + F269 / (F276 + 1)) / (1 / F274 + F269 + 1 / F273));
-                let AN128 = (1 / (AR123 * F230)) + (1 / (AR124 * F231));
-                let AN129 = ((F267 - F17) * (F265 * F280 - F264)) / (AN128 * F244 * F257 * (AN128 + (2 / (F257 * (F233 - 2 * F244))) + 2 * AN128 + (2 / (F257 * (F233 - 2 * F244)))));
-                let AN130 = AN129 * (F244 * F257 * (AN128 + (2 / (F257 * (F233 - 2 * F244)))) + 1);
-                let fw = (F223 / (F231 * AR121 + F230 * AR120)) * (F236 * Math.pow(F236 ** 2 - 5 * F233 ** 2, 2) + F237 * Math.pow(F237 ** 2 - 5 * F233 ** 2, 2)) / 3840;
-                let ft = (F285 * F233 ** 2 * F230 * AR120 - AR122 * (AN130 * F233 ** 2 + AN129 * (F233 ** 2 - 4 * F244 ** 2))) / (8 * (F231 * AR121 + F230 * AR120));
-                return (fw+ft)*1000;
+                return this.computeEstimatedDeflection(this.characteristicsСonnective38);
             },
             characteristicsСonnective38(){
                 let scheme = {
@@ -2037,45 +1873,7 @@
                 };
             },
             estimatedDeflectionСonnective65(){
-                let F215 = this.V,
-                    F214 = this.DZE,
-                    F231 = ES,
-                    F230 = EP,
-                    F257 = CSA,
-                    F264 = MRI,
-                    F265 = LTE_COEFF_PVH,
-                    F274 = AB,
-                    F269 = R0,
-                    F273 = AH,
-                    W5 = this.selectedWindRegionParams.w0,
-                    F202 = this.KZE,
-                    F203 = this.C,
-                    F197 = this.WM,
-                    F233 = this.impostLength/100, //Длина импоста, м
-                    F285 = this.K0,
-                    F223 = W5*F202*F203 +F197*F214*F215, // W5*F202*F203 === this.WM
-                    F236 = this.windowSideA/100,
-                    F237 = this.windowSideB/100,
-                    F280 = this.selectedProfileParams.te,
-                    F276 = this.selectedProfileParams.f110,
-                    F244 = this.selectedColorParams.p,
-                    F17 = this.instalationAirTemperature,
-                    F16 = this.outsideAirTemperature,
-                    F259 = this.insideAirTemperature,
-                    BH120 = this.characteristicsСonnective65.yellow,
-                    BH121 = this.characteristicsСonnective65.orange,
-                    BH122 = this.characteristicsСonnective65.cyan,
-                    BH123 = this.characteristicsСonnective65.purple,
-                    BH124 = this.characteristicsСonnective65.green;
-
-                let F267 = (F259 - (F259 - F16)) * ((1 / F274 + F269 / (F276 + 1)) / (1 / F274 + F269 + 1 / F273));
-                let BD128 = (1 / (BH123 * F230)) + (1 / (BH124 * F231));
-                let BD129 = ((F267 - F17) * (F265 * F280 - F264)) / (BD128 * F244 * F257 * (BD128 + (2 / (F257 * (F233 - 2 * F244))) + 2 * BD128 + (2 / (F257 * (F233 - 2 * F244)))));
-                let BD130 = BD129 * (F244 * F257 * (BD128 + (2 / (F257 * (F233 - 2 * F244)))) + 1);
-                let fw = (F223 / (F231 * BH121 + F230 * BH120)) * (F236 * Math.pow(F236 ** 2 - 5 * F233 ** 2, 2) + F237 * Math.pow(F237 ** 2 - 5 * F233 ** 2, 2)) / 3840;
-                let ft = (F285 * F233 ** 2 * F230 * BH120 - BH122 * (BD130 * F233 ** 2 + BD129 * (F233 ** 2 - 4 * F244 ** 2))) / (8 * (F231 * BH121 + F230 * BH120));
-
-                return (fw+ft)*1000;
+                return this.computeEstimatedDeflection(this.characteristicsСonnective65);
             },
             characteristicsСonnective65(){
                 let scheme = {
@@ -2503,14 +2301,50 @@
                 return resp / 1000;
             },
             K0(){//Начальная кривизна оси импоста оконной конструкции [F120]
-                let impostWidth = this.selectedProfileParams.impostWidth,
-                    tk = this.selectedProfileParams.tk;
-                return LTE_COEFF_PVH * ((this.insideAirTemperature - this.outsideAirTemperature)/impostWidth)*(R0/((1/AB)+R0+(1/AH))) * tk;
+                let IW = this.selectedProfileParams.impostWidth;
+                return LTE_COEFF_PVH * ((this.insideAirTemperature - this.outsideAirTemperature)/IW)*(R0/((1/AB)+R0+(1/AH))) * this.selectedProfileParams.tk;
+            },
+            K0_pilyastr(){
+                let IW = this.selectedProfileParams.an51;
+                return LTE_COEFF_PVH * ((this.insideAirTemperature - this.outsideAirTemperature)/IW)*(R0/((1/AB)+R0+(1/AH))) * this.selectedProfileParams.tk;
             }
         },
         methods: {
             onProfileTypeChange(){// при смене типа профиля, меняем Тип армирования на первый из списка доступных
                 this.reinforcementType = this.reinforcementTypesOptions[0];
+            },
+            computeEstimatedDeflection(characteristics, type = null){
+                let V = this.V,
+                    DZE = this.DZE,
+                    K0 = this.K0,
+                    IL = this.impostLength/100,
+                    F223 = this.WM +this.WM*DZE*V,
+                    SA = this.windowSideA/100,
+                    SB = this.windowSideB/100,
+                    TE = this.selectedProfileParams.te,
+                    F276 = this.selectedProfileParams.f110,
+                    P = this.selectedColorParams.p,
+                    AT_INST = this.instalationAirTemperature,
+                    AT_OUT = this.outsideAirTemperature,
+                    AT_IN = this.insideAirTemperature,
+
+                    yellow = characteristics.yellow,
+                    orange = characteristics.orange,
+                    cyan = characteristics.cyan,
+                    purple = characteristics.purple,
+                    green = characteristics.green;
+
+                if( type === 'pilyastr' ){
+                    K0 = this.K0_pilyastr;
+                }
+
+                let F267 = (AT_IN - (AT_IN - AT_OUT)) * ((1 / AB + R0 / (F276 + 1)) / (1 / AB + R0 + 1 / AH));
+                let TMP1 = (1 / (purple * EP)) + (1 / (green * ES));
+                let TMP2 = ((F267 - AT_INST) * (LTE_COEFF_PVH * TE - MRI)) / (TMP1 * P * CSA * (TMP1 + (2 / (CSA * (IL - 2 * P))) + 2 * TMP1 + (2 / (CSA * (IL - 2 * P)))));
+                let TMP3 = TMP2 * (P * CSA * (TMP1 + (2 / (CSA * (IL - 2 * P)))) + 1);
+                let fw = (F223 / (ES * orange + EP * yellow)) * (SA * Math.pow(SA ** 2 - 5 * IL ** 2, 2) + SB * Math.pow(SB ** 2 - 5 * IL ** 2, 2)) / 3840;
+                let ft = (K0 * IL ** 2 * EP * yellow - cyan * (TMP3 * IL ** 2 + TMP2 * (IL ** 2 - 4 * P ** 2))) / (8 * (ES * orange + EP * yellow));
+                return (fw+ft)*1000;
             }
         },
         created(){
