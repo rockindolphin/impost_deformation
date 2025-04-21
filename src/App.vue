@@ -507,122 +507,88 @@
                     'T78_AERO': {
                         impostWidth: 0.06, //Ширина профиля импоста,м [F118]
                         tk: 0.78, //Безразмерные коэффициенты, учитывающие неоднородность температурного поля в ПВХ профиле, [F116, N55]
-                        ap: 727, //Площади поперечного сечения (ПВХ профиль)
                         te: 1.08, // Безразмерные коэффициенты, учитывающие неоднородность температурного поля в ПВХ профиле
                         f110: 1, // Отношение количества рядов воздушных камер в наружной части попереченого сечения ПВХ профиля к количеству рядов воздушных камер во внутренней части поперечного сечения ПВХ профиля
-                        lp: 349918, // Главные моменты инерции (Сечения профиля)
                         an51: 0.123
                     },
                     'T80_AERO': {
                         impostWidth: 0.06,
                         tk: 0.78,
-                        ap: 757,
                         te: 1.08,
                         f110: 1,
-                        lp: 360096,
                         an51: 0.123
                     },
                     'T78_SUPER_AERO': {
                         impostWidth: 0.07,
                         tk: 0.8,
-                        ap: 807,
                         te: 1.11,
                         f110: 1,
-                        lp: 519229,
                         an51: 0.133
                     },
                     'T80_SUPER_AERO': {
                         impostWidth: 0.07,
                         tk: 0.8,
-                        ap: 835,
                         te: 1.11,
                         f110: 1,
-                        lp: 533651,
                         an51: 0.133
                     },
                     'T78_ACLASS': {
                         impostWidth: 0.06,
                         tk: 0.78,
-                        ap: 874,
                         te: 1.08,
                         f110: 2,
-                        lp: 406621,
                         an51: 0.123
                     },
                     'T86_60_4': {
                         impostWidth: 0.06,
                         tk: 0.82,
-                        ap: 970,
                         te: 1.2,
                         f110: 0.5,
-                        lp: 469124,
                         an51: 0.123
                     },
                     'T86_70_6': {
                         impostWidth: 0.07,
                         tk: 0.85,
-                        ap: 1103,
                         te: 1.32,
                         f110: 1.25,
-                        lp: 706133,
                         an51: 0.133
                     },
                     'GLIDE': {
                         impostWidth: 0.031,
                         tk: 0.78,
-                        ap: 487,
                         te: 1.08,
                         f110: 1,
-                        lp: 63666,
                         an51: 0.094
                     }
                 },
                 profileType: 'T80_SUPER_AERO', //Тип профиля
                 reinforcementTypes: {
                     rt_1: {
-                        i18n: '35*20*1,5(труба)',
-                        as: 148.7, //Площади поперечного сечения (Усилительный вкладыш)
-                        d21: 2.21, // момент инерции в зависимости от типа армирования [[X69:X79]]
+                        i18n: '35*20*1,5(труба)'
                     },
                     rt_2: {
-                        i18n: '35*20*2(труба)',
-                        as: 193,
-                        d21: 2.82,
+                        i18n: '35*20*2(труба)'
                     },
                     rt_3: {
-                        i18n: '35*20*1,5',
-                        as: 105.1,
-                        d21: 2.01,
+                        i18n: '35*20*1,5'
                     },
                     rt_4: {
-                        i18n: '35*20*2',
-                        as: 137,
-                        d21: 2.55,
+                        i18n: '35*20*2'
                     },
                     rt_5: {
-                        i18n: '35*28*1,5',
-                        as: 133.8,
-                        d21: 2.52,
+                        i18n: '35*28*1,5'
                     },
                     rt_6: {
-                        i18n: '35*28*2',
-                        as: 176.3,
-                        d21: 3.21,
+                        i18n: '35*28*2'
                     },
                     rt_7: {
-                        i18n: '35*28*1,5(труба)',
-                        as: 172.7,
-                        d21: 2.96,
+                        i18n: '35*28*1,5(труба)'
                     },
                     rt_8: {
-                        i18n: '35*28*2(труба)',
-                        as: 223.69,
-                        d21: 3.7,
+                        i18n: '35*28*2(труба)'
                     },
                     rt_9: {//GLIDE
-                        i18n: '26*19*1,5',
-                        as: 87.3,
-                        d21: 0.94
+                        i18n: '26*19*1,5'
                     }
                 },
                 reinforcementType: 'rt_2', //Тип армирования
@@ -934,34 +900,238 @@
                 return ((this.impostLength/100)/200)*1000;
             },
             estimatedDeflectionImpost(){//Расчётный прогиб (импост)
-                let V = this.V,
-                    DZE = this.DZE,
-                    IL = this.impostLength/100,
-                    K0 = this.K0,
-                    F223 = this.WM +this.WM*DZE*V,
-                    SA = this.windowSideA/100,
-                    SB = this.windowSideB/100,
-                    TE = this.selectedProfileParams.te,
-                    F276 = this.selectedProfileParams.f110,
-                    P = this.selectedColorParams.p,
-                    AT_INST = this.instalationAirTemperature,
-                    AT_OUT = this.outsideAirTemperature,
-                    AT_IN = this.insideAirTemperature,
-
-                    F227 = this.selectedReinforcementTypeParams.d21/100000000, //Главные моменты инерции  (Сечения усилительного вкладыша, м4)
-                    F226 = this.selectedProfileParams.lp / 1000000000000,
-                    F245 = this.delta,
-                    H110 = this.selectedProfileParams.ap / 1000000,
-                    H111 = this.selectedReinforcementTypeParams.as / 1000000;
-
-                let F250 = (1/(H110*EP))+(1/(H111*ES));
-                let F267 = (AT_IN - (AT_IN - AT_OUT)) * ((1 / AB + R0 / (F276 + 1)) / (1 / AB + R0 + 1 / AH));
-                let F247 = ((F267-AT_INST)*(LTE_COEFF_PVH*TE-MRI))/(F250*P*CSA*(F250+(2/(CSA*(IL-2*P)))+2*F250+(2/(CSA*(IL-2*P)))));
-                let F248 = F247*(P*CSA*(F250+(2/(CSA*(IL-2*P))))+1);
-
-                let fw = (F223 / (ES * F227 + EP * F226)) * (SA * Math.pow(SA ** 2 - 5 * IL ** 2, 2) + SB * Math.pow(SB ** 2 - 5 * IL ** 2, 2)) / 3840;
-                let ft = (K0 * IL ** 2 * EP * F226 - F245 * (F248 * IL ** 2 + F247 * (IL ** 2 - 4 * P ** 2))) / (8 * (ES * F227 + EP * F226));
-                return (fw+ft)*1000;
+                return this.computeEstimatedDeflection(this.characteristicsImpost);
+            },
+            characteristicsImpost(){
+                let scheme = {
+                    T78_AERO: {
+                        rt_1: {
+                            yellow: 349918, // Главные моменты инерции (Сечения профиля)
+                            orange: 2.21, // момент инерции в зависимости от типа армирования
+                            cyan: 6.6,
+                            purple: 727, //Площади поперечного сечения (ПВХ профиль)
+                            green: 148.7 //Площади поперечного сечения (Усилительный вкладыш)
+                        },
+                        rt_2: {
+                            yellow: 349918,
+                            orange: 2.82,
+                            cyan: 6.6,
+                            purple: 727,
+                            green: 193
+                        },
+                        rt_3: {
+                            yellow: 349918,
+                            orange: 2.01,
+                            cyan: 6.46,
+                            purple: 727,
+                            green: 105.1
+                        },
+                        rt_4: {
+                            yellow: 349918,
+                            orange: 2.55,
+                            cyan: 6.46,
+                            purple: 727,
+                            green: 137
+                        }
+                    },
+                    T80_AERO: {
+                        rt_1: {
+                            yellow: 360096,
+                            orange: 2.21,
+                            cyan: 9.27,
+                            purple: 757,
+                            green: 148.7
+                        },
+                        rt_2: {
+                            yellow: 360096,
+                            orange: 2.82,
+                            cyan: 9.27,
+                            purple: 757,
+                            green: 193
+                        },
+                        rt_3: {
+                            yellow: 360096,
+                            orange: 2.01,
+                            cyan: 9.1,
+                            purple: 757,
+                            green: 105.1
+                        },
+                        rt_4: {
+                            yellow: 360096,
+                            orange: 2.55,
+                            cyan: 9.1,
+                            purple: 757,
+                            green: 137
+                        }
+                    },
+                    T78_SUPER_AERO: {
+                        rt_1: {
+                            yellow: 519229,
+                            orange: 2.21,
+                            cyan: 7.9,
+                            purple: 807,
+                            green: 148.7
+                        },
+                        rt_2: {
+                            yellow: 519229,
+                            orange: 2.82,
+                            cyan: 7.9,
+                            purple: 807,
+                            green: 193
+                        },
+                        rt_3: {
+                            yellow: 519229,
+                            orange: 2.01,
+                            cyan: 7.7,
+                            purple: 807,
+                            green: 105.1
+                        },
+                        rt_4: {
+                            yellow: 519229,
+                            orange: 2.55,
+                            cyan: 7.7,
+                            purple: 807,
+                            green: 137
+                        }
+                    },
+                    T80_SUPER_AERO: {
+                        rt_1: {
+                            yellow: 533651,
+                            orange: 2.21,
+                            cyan: 11.27,
+                            purple: 835,
+                            green: 148.7
+                        },
+                        rt_2: {
+                            yellow: 533651,
+                            orange: 2.82,
+                            cyan: 11.27,
+                            purple: 835,
+                            green: 193
+                        },
+                        rt_3: {
+                            yellow: 533651,
+                            orange: 2.01,
+                            cyan: 11.1,
+                            purple: 835,
+                            green: 105.1
+                        },
+                        rt_4: {
+                            yellow: 533651,
+                            orange: 2.55,
+                            cyan: 11.1,
+                            purple: 835,
+                            green: 137
+                        }
+                    },
+                    T78_ACLASS: {
+                        rt_1: {
+                            yellow: 406621,
+                            orange: 2.21,
+                            cyan: 6.24,
+                            purple: 874,
+                            green: 148.7
+                        },
+                        rt_2: {
+                            yellow: 406621,
+                            orange: 2.82,
+                            cyan: 6.24,
+                            purple: 874,
+                            green: 193
+                        },
+                        rt_3: {
+                            yellow: 406621,
+                            orange: 2.01,
+                            cyan: 6.07,
+                            purple: 874,
+                            green: 105.1
+                        },
+                        rt_4: {
+                            yellow: 406621,
+                            orange: 2.55,
+                            cyan: 6.07,
+                            purple: 874,
+                            green: 137
+                        }
+                    },
+                    T86_60_4: {
+                        rt_5: {
+                            yellow: 469124,
+                            orange: 2.52,
+                            cyan: 4.834,
+                            purple: 970,
+                            green: 133.8
+                        },
+                        rt_6: {
+                            yellow: 469124,
+                            orange: 3.21,
+                            cyan: 4.5,
+                            purple: 970,
+                            green: 176.3
+                        },
+                        rt_7: {
+                            yellow: 469124,
+                            orange: 2.96,
+                            cyan: 4.74,
+                            purple: 970,
+                            green: 172.7
+                        },
+                        rt_8: {
+                            yellow: 469124,
+                            orange: 3.7,
+                            cyan: 4.74,
+                            purple: 970,
+                            green: 223.69
+                        }
+                    },
+                    T86_70_6: {
+                        rt_5: {
+                            yellow: 706133,
+                            orange: 2.52,
+                            cyan: 7.745,
+                            purple: 1103,
+                            green: 133.8
+                        },
+                        rt_6: {
+                            yellow: 706133,
+                            orange: 3.21,
+                            cyan: 7.79,
+                            purple: 1103,
+                            green: 176.3
+                        },
+                        rt_7: {
+                            yellow: 706133,
+                            orange: 2.96,
+                            cyan: 9.589,
+                            purple: 1103,
+                            green: 172.7
+                        },
+                        rt_8: {
+                            yellow: 706133,
+                            orange: 3.7,
+                            cyan: 9.59,
+                            purple: 1103,
+                            green: 223.69
+                        }
+                    },
+                    GLIDE: {
+                        rt_9: {
+                            yellow: 63666,
+                            orange: 0.94,
+                            cyan: 1.529,
+                            purple: 487,
+                            green: 87.3
+                        }
+                    }
+                }
+                let data = scheme[this.profileType][this.reinforcementType];
+                return {
+                    yellow: data?.yellow/1000000000000,
+                    orange: data?.orange/100000000,
+                    cyan:   data?.cyan/1000,
+                    purple: data?.purple/1000000,
+                    green:  data?.green/1000000
+                };
             },
             estimatedDeflectionPilyastr(){// Расчётный прогиб (Усиление пилястровым профилем) [[AN53]]
                 return this.computeEstimatedDeflection(this.characteristicsPilyastr, 'pilyastr');
