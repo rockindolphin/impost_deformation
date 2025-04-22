@@ -17,7 +17,7 @@
                     <div class="grid gap-4 grid-cols-12 items-end">
                         <label class="col-span-12 md:col-span-6" for="windRegion">
                             <span class="form__label">
-                                Ветровой район (1):
+                                Ветровой район:
                             </span>
                             <select
                                 id="windRegion"
@@ -53,26 +53,26 @@
                             </select>
                         </label>
 
-                        <label class="col-span-12 md:col-span-6" for="outsideAirTemperature">
+                        <label class="col-span-12 md:col-span-6" for="Tn">
                             <span class="form__label">
                                 Расчетная наружная температура воздуха,˚С:
                             </span>
                             <input
-                                id="outsideAirTemperature"
-                                :value="outsideAirTemperature"
+                                id="Tn"
+                                :value="Tn"
                                 type="number"
                                 step="0.1"
                                 class="control control--text"
                             >
                         </label>
 
-                        <label class="col-span-12 md:col-span-6" for="instalationAirTemperature">
+                        <label class="col-span-12 md:col-span-6" for="Tref">
                             <span class="form__label">
-                                Температура замыкания (монтажа) оконной конструкции:
+                                Температура замыкания (монтажа) оконной конструкции, ˚С:
                             </span>
                             <input
-                                id="instalationAirTemperature"
-                                :value="instalationAirTemperature"
+                                id="Tref"
+                                :value="Tref"
                                 type="number"
                                 step="0.1"
                                 class="control control--text"
@@ -108,52 +108,52 @@
                             </div>
                         </div>
                         <div class="col-span-12 md:col-span-6 md:order-1 grid gap-4 grid-cols-12">
-                            <label class="col-span-12" for="buildingHeight">
+                            <label class="col-span-12" for="Bh">
                                 <span class="form__label">
                                     Высота здания h (м):
                                 </span>
                                 <input
-                                    id="buildingHeight"
-                                    v-model.number="buildingHeight"
+                                    id="Bh"
+                                    v-model.number="Bh"
                                     type="number"
                                     step="0.1"
                                     class="control control--text"
                                 >
                             </label>
 
-                            <label class="col-span-12" for="buildingWidth">
+                            <label class="col-span-12" for="Bw">
                                 <span class="form__label">
                                     Ширина здания d (м):
                                 </span>
                                 <input
-                                    id="buildingWidth"
-                                    v-model.number="buildingWidth"
+                                    id="Bw"
+                                    v-model.number="Bw"
                                     type="number"
                                     step="0.1"
                                     class="control control--text"
                                 >
                             </label>
 
-                            <label class="col-span-12" for="buildingLength">
+                            <label class="col-span-12" for="Bl">
                                 <span class="form__label">
                                     Длина здания:
                                 </span>
                                 <input
-                                    id="buildingLength"
-                                    v-model.number="buildingLength"
+                                    id="Bl"
+                                    v-model.number="Bl"
                                     type="number"
                                     step="0.1"
                                     class="control control--text"
                                 >
                             </label>
 
-                            <label class="col-span-12" for="windowInstallationHeight">
+                            <label class="col-span-12" for="Wh">
                                 <span class="form__label">
                                     Фактическая высота установки окна (м):
                                 </span>
                                 <input
-                                    id="windowInstallationHeight"
-                                    v-model.number="windowInstallationHeight"
+                                    id="Wh"
+                                    v-model.number="Wh"
                                     type="number"
                                     step="0.1"
                                     class="control control--text"
@@ -182,14 +182,14 @@
                             <label
                                 v-if="windSide === 'side_wall'"
                                 class="col-span-12"
-                                for="buildingSideToWindowLength"
+                                for="Wgap"
                                 >
                                 <span class="form__label">
-                                    Расстояние от края наветренной стены до окна:
+                                    Расстояние от края наветренной стены до окна, м:
                                 </span>
                                 <input
-                                    id="buildingSideToWindowLength"
-                                    v-model.number="buildingSideToWindowLength"
+                                    id="Wgap"
+                                    v-model.number="Wgap"
                                     type="number"
                                     step="0.1"
                                     class="control control--text"
@@ -226,7 +226,7 @@
                                     <line v-bind="svgComp.l_sep_t" />
                                     <text v-bind="svgComp.a_text" class="svg__text--hint" >a</text>
                                     <text v-bind="svgComp.b_text" class="svg__text--hint" >b</text>
-                                    <text v-bind="svgComp.c_text" class="svg__text--hint" v-if="windowSideC !== 0">c</text>
+                                    <text v-bind="svgComp.c_text" class="svg__text--hint" v-if="c !== 0">c</text>
                                     <text v-bind="svgComp.d_text" class="svg__text--hint" >d</text>
                                     <text v-bind="svgComp.l_text" class="svg__text--hint" >L</text>
                                 </svg>
@@ -234,52 +234,52 @@
                         </div>
 
                         <div class="col-span-12 md:col-span-6 md:order-1 grid gap-4 grid-cols-12">
-                            <label class="col-span-12" for="impostLength">
+                            <label class="col-span-12" for="L">
                                 <span class="form__label">
                                     Длина импоста L (см):
                                 </span>
                                 <input
-                                    id="impostLength"
-                                    v-model.number="impostLength"
+                                    id="L"
+                                    v-model.number="L"
                                     type="number"
                                     step="0.1"
                                     class="control control--text"
                                 >
                             </label>
 
-                            <label class="col-span-12" for="windowSideA">
+                            <label class="col-span-12" for="a">
                                 <span class="form__label">
                                     a (см):
                                 </span>
                                 <input
-                                    id="windowSideA"
-                                    v-model.number="windowSideA"
+                                    id="a"
+                                    v-model.number="a"
                                     type="number"
                                     step="0.1"
                                     class="control control--text"
                                 >
                             </label>
 
-                            <label class="col-span-12" for="windowSideB">
+                            <label class="col-span-12" for="b">
                                 <span class="form__label">
                                     b (см):
                                 </span>
                                 <input
-                                    id="windowSideB"
-                                    v-model.number="windowSideB"
+                                    id="b"
+                                    v-model.number="b"
                                     type="number"
                                     step="0.1"
                                     class="control control--text"
                                 >
                             </label>
 
-                            <label class="col-span-12" for="windowSideC">
+                            <label class="col-span-12" for="c">
                                 <span class="form__label">
                                     c (см):
                                 </span>
                                 <input
-                                    id="windowSideC"
-                                    v-model.number="windowSideC"
+                                    id="c"
+                                    v-model.number="c"
                                     type="number"
                                     step="0.1"
                                     class="control control--text"
@@ -287,7 +287,7 @@
                             </label>
 
                             <p class="col-span-12 font-bold">
-                                d (см): {{ windowSideD.toFixed(2) }}
+                                d (см): {{ d.toFixed(2) }}
                             </p>
                         </div>
 
@@ -323,55 +323,82 @@
                                 </select>
                             </label>
 
-                            <label class="col-span-12" for="windowColor">
+                            <label class="col-span-12" for="profileColor">
                                 <span class="form__label">
                                     Цвет профиля
                                 </span>
                                 <select
-                                    id="windowColor"
-                                    v-model="windowColor"
+                                    id="profileColor"
+                                    v-model="profileColor"
                                     class="control control--select"
                                     >
                                     <option
-                                        v-for="item in Object.keys(windowColors)"
+                                        v-for="item in Object.keys(profileColors)"
                                         :key="item"
                                         :value="item"
                                         >
-                                        {{ windowColors[item].i18n }}
+                                        {{ profileColors[item].i18n }}
                                     </option>
                                 </select>
                             </label>
 
-                            <label class="col-span-12" for="reinforcementType">
+                            <label class="col-span-12" for="reinType">
                                 <span class="form__label">
-                                    Тип армирования
+                                    Армирование импоста
                                 </span>
                                 <select
-                                    id="reinforcementType"
-                                    v-model="reinforcementType"
+                                    id="reinType"
+                                    v-model="reinType"
                                     class="control control--select"
                                     >
                                     <option
-                                        v-for="item in reinforcementTypesOptions"
+                                        v-for="item in reinTypesOptions"
                                         :key="item"
                                         :value="item"
                                         >
-                                        {{ reinforcementTypes[item].i18n }}
+                                        {{ reinTypes[item].i18n }}
+                                    </option>
+                                </select>
+                            </label>
+
+                            <label
+                                v-if="['T86_60_4', 'T86_70_6'].includes(profileType)"
+                                class="col-span-12"
+                                for="reinType_60_70"
+                                >
+                                <span class="form__label">
+                                    Армирование для коробок 60-4 и 70-6
+                                </span>
+                                <select
+                                    id="reinType_60_70"
+                                    v-model="reinType_60_70"
+                                    class="control control--select"
+                                    >
+                                    <option
+                                        v-for="item in reinTypesOptions"
+                                        :key="item"
+                                        :value="item"
+                                        >
+                                        {{ reinTypes[item].i18n }}
                                     </option>
                                 </select>
                             </label>
 
                             <p class="col-span-12 font-bold">
-                                Максимально допустимый прогиб, мм: {{ maximumAllowableDeflection.toFixed(3) }}
+                                Максимально допустимый прогиб, мм: {{ maxСurve.toFixed(3) }}
                             </p>
 
+                            <h4>
+                                Исполнение
+                            </h4>
+
                             <div
-                                v-for="(value, key) in gapTypes"
+                                v-for="(value, key) in resultViews"
                                 :key="`result_${key}`"
                                 class="col-span-12 border-1 p-4"
                                 :class="{
-                                    'border-green-600': value.result <= maximumAllowableDeflection,
-                                    'border-red-600': value.result > maximumAllowableDeflection
+                                    'border-green-600': value.result <= maxСurve,
+                                    'border-red-600': value.result > maxСurve
                                 }"
                                 >
                                 <p class="font-bold">
@@ -383,7 +410,7 @@
                                         Расчётный прогиб, мм: {{ value.result.toFixed(3) }}
                                     </span>
                                     <span class="block mt-3">
-                                        <span class="text-green-600" v-if="value.result <= maximumAllowableDeflection">
+                                        <span class="text-green-600" v-if="value.result <= maxСurve">
                                             Удовлетворяет условию прочности!
                                         </span>
                                         <span class="text-red-600" v-else>
@@ -426,10 +453,10 @@
     import picGainСonnective65 from '@/assets/images/connective65.png';
 
 
-    const LTE_COEFF_PVH = 0.00008, // Коэффициенты линейного температурного расширения (Материал ПВХ,) [F96]
-        R0 = 0.76, //Термическое сопротивление профиля импоста оконной конструкции [F101]
-        AH = 23, //Коэффициенты теплоотдачи и тепловосприятия, Вт/(м²∙℃) [F105]
-        AB = 8, //Коэффициенты теплоотдачи и тепловосприятия, Вт/(м²∙℃) [F106]
+    let AP = 0.00008, // Коэффициенты линейного температурного расширения (Материал ПВХ,) [[F65]]
+        R0 = 0.76, //Термическое сопротивление профиля импоста оконной конструкции,Вт/(м²∙℃) [[F269]]
+        AH = 23, //Коэффициенты теплоотдачи и тепловосприятия, Вт/(м²∙℃) [[F273]]
+        AB = 8, //Коэффициенты теплоотдачи и тепловосприятия, Вт/(м²∙℃) [[F274]]
         EP = 3400000000, //Модули упругости (ПВХ, Па) [F61]
         ES = 210000000000, //Модули упругости (Материала  вкладыша, Па) [F62]
         CSA = 3400000, //Площади поперечного сечения (Константа,принимаемая) [F91]
@@ -443,7 +470,7 @@
         data() {
             return {
 
-                //step_1
+                //Шаг 1
                 windRegions: {
                     'Ia': {
                         w0: 170, // Нормативное значение ветрового давления, Па
@@ -470,18 +497,18 @@
                         w0: 850,
                     }
                 },
-                windRegion: 'II', //Ветровой район
+                windRegion: 'II', //Ветровой район [[B8]]
                 terrainTypes: ['A', 'B', 'C'],
-                terrainType: 'C', //Тип местности
-                insideAirTemperature: 21, //Расчетная внутренняя температура воздуха [F15]
-                outsideAirTemperature: -20, //Расчетная наружная температура воздуха [F16]
-                instalationAirTemperature: 10, //Температура замыкания (монтажа) оконной конструкции [F17]
+                terrainType: 'C', //Тип местности [[B12]]
+                Tn: -20, //Расчетная наружная температура воздуха (температура воздуха наиболее холодной пятидневки),˚С  [[F16]]
+                Tref: 10, //Температура замыкания (монтажа) оконной конструкции, ˚С [[F17]]
+                Tv: 21, //Расчетная внутренняя температура воздуха,˚С [[F18]]
 
-                //step_2
-                buildingHeight: 60, //Высота здания h (м) [B9]
-                buildingWidth: 47, //Ширина здания d (м) [B10]
-                buildingLength: 30, //Длина здания [E10]
-                windowInstallationHeight: 50, //Фактическая высота установки окна (м): [B11]
+                //Шаг 2
+                Bh: 60, //Высота здания h (м) [[B9]]
+                Bw: 47, //Ширина здания d (м) [[B10]]
+                Bl: 30, //Длина здания [[E10]]
+                Wh: 50, //Фактическая высота установки окна (м): [[B11]]
                 windSides: {
                     'windward_side': {
                         i18n: 'Наветренная сторона'
@@ -493,20 +520,20 @@
                         i18n: 'Боковая стена'
                     }
                 },
-                windSide: 'windward_side', //Сторона
-                buildingSideToWindowLength: 5, //Расстояние от края наветренной стены до окна
+                windSide: 'windward_side', //Сторона [[D8]]
+                Wgap: 5, //Расстояние от края наветренной стены до окна [[E11]]
 
-                //step_3
-                impostLength: 180, //Длина импоста L (см):
-                windowSideA: 109, //Рассчитываемый элемент a
-                windowSideB: 100, //Рассчитываемый элемент b
-                windowSideC: 100, //Рассчитываемый элемент c
+                //Шаг 3
+                L: 180, //Длина импоста L (см) [[B13]]
+                a: 109, //Рассчитываемый элемент a [[B14]]
+                b: 100, //Рассчитываемый элемент b [[B15]]
+                c: 100, //Рассчитываемый элемент c [[B16]]
 
-                //step_4
+                //Шаг 4
                 profileTypes: {
                     'T78_AERO': {
-                        impostWidth: 0.06, //Ширина профиля импоста,м [F118]
-                        tk: 0.78, //Безразмерные коэффициенты, учитывающие неоднородность температурного поля в ПВХ профиле, [F116, N55]
+                        impostWidth: 0.06, //Ширина профиля импоста,м [[F283]]
+                        tk: 0.78, //Безразмерные коэффициенты, учитывающие неоднородность температурного поля в ПВХ профиле, [[R50, R53]]
                         te: 1.08, // Безразмерные коэффициенты, учитывающие неоднородность температурного поля в ПВХ профиле
                         f110: 1, // Отношение количества рядов воздушных камер в наружной части попереченого сечения ПВХ профиля к количеству рядов воздушных камер во внутренней части поперечного сечения ПВХ профиля
                         an51: 0.123
@@ -561,8 +588,19 @@
                         an51: 0.094
                     }
                 },
-                profileType: 'T80_SUPER_AERO', //Тип профиля
-                reinforcementTypes: {
+                profileType: 'T80_SUPER_AERO', //Профильная система [[F20]]
+                profileColors: {
+                    'white': {
+                        i18n: 'Белый',
+                        p: 0.3 //Коэффициент
+                    },
+                    'colored': {
+                        i18n: 'Цветной',
+                        p: 0.25
+                    }
+                },
+                profileColor: 'white', //Цвет профиля [[F21]]
+                reinTypes: {
                     rt_1: {
                         i18n: '35*20*1,5(труба)'
                     },
@@ -591,22 +629,12 @@
                         i18n: '26*19*1,5'
                     }
                 },
-                reinforcementType: 'rt_2', //Тип армирования
-                windowColors: {
-                    'white': {
-                        i18n: 'Белый',
-                        p: 0.3 //Коэффициент
-                    },
-                    'colored': {
-                        i18n: 'Цветной',
-                        p: 0.25
-                    }
-                },
-                windowColor: 'white' //Цвет профиля
+                reinType: 'rt_2', //Армирование импоста [[F22]]
+                reinType_60_70: 'rt_2', // Армирование для коробок 60-4 и 70-6  [[F23]]
             }
         },
         computed: {
-            profilePicSrc(){
+            profilePicSrc(){// ссылка на картинку в зависимости от типа профиля
                 switch (this.profileType) {
                     case 'T78_AERO':
                     case 'T80_AERO':
@@ -624,71 +652,31 @@
                         return picGlide;
                 }
             },
-            gapTypes(){
-                let resp = {
-                    impost: {
-                        src: picGainImpost,
-                        title: 'Импост',
-                        result: this.estimatedDeflectionImpost
-                    },
-                    pilyastr: {
-                        src: picGainPilyastr,
-                        title: 'Усиление пилястровым профилем',
-                        result: this.estimatedDeflectionPilyastr
-                    }
-                }
-                if( this.profileType !== 'GLIDE' ){
-                    resp = {
-                        ...resp,
-                        connective3: {
-                            src: picGainСonnective3,
-                            title: 'Соединительный профиль 3',
-                            result: this.estimatedDeflectionConnective3
-                        },
-                        universal: {
-                            src: picGainUniversal,
-                            title: 'Профиль соединительный универсальный',
-                            result: this.estimatedDeflectionUniversal
-                        },
-                        connective38: {
-                            src: picGainСonnective38,
-                            title: 'Профиль соединительный 38',
-                            result: this.estimatedDeflectionСonnective38
-                        },
-                        connective65: {
-                            src: picGainСonnective65,
-                            title: 'Профиль соединительный 65',
-                            result: this.estimatedDeflectionСonnective65
-                        }
-                    }
-                }
-                return resp;
-            },
-            buildingStyles(){
+            buildingStyles(){// стили для отрисовки здания
                 let rotateY = 40,
-                    windowWidthMeters = (this.windowSideA + this.windowSideB)/100,
-                    windowHeightMeters = this.impostLength/100,
+                    windowWidthMeters = (this.a + this.b)/100,
+                    windowHeightMeters = this.L/100,
                     windowScale = 3,
                     gap = windowWidthMeters*windowScale*5/4;
                 if( this.windSide === 'leeward_side'){ rotateY = 220; }
                 if( this.windSide === 'side_wall'){
                     rotateY = 60;
-                    gap = (this.buildingLength*5) - (windowWidthMeters*windowScale*5) - this.buildingSideToWindowLength*5;
+                    gap = (this.Bl*5) - (windowWidthMeters*windowScale*5) - this.Wgap*5;
                 }
                 return `
-                    --box-width: ${(this.buildingWidth*5).toFixed(0)}px;
-                    --box-height: ${(this.buildingHeight*5).toFixed(0)}px;
-                    --box-depth: ${(this.buildingLength*5).toFixed(0)}px;
+                    --box-width: ${(this.Bw*5).toFixed(0)}px;
+                    --box-height: ${(this.Bh*5).toFixed(0)}px;
+                    --box-depth: ${(this.Bl*5).toFixed(0)}px;
                     --rotate-y: ${rotateY}deg;
-                    --window-ih: ${(this.windowInstallationHeight*5).toFixed(0)}px;
+                    --window-ih: ${(this.Wh*5).toFixed(0)}px;
                     --window-width: ${(windowWidthMeters*windowScale*5).toFixed(0)}px;
                     --window-height: ${(windowHeightMeters*windowScale*5).toFixed(0)}px;
                     --window-gap: ${(gap).toFixed(0)}px;
                 `;
             },
-            svgComp(){
-                let windowWidth = this.windowSideA + this.windowSideB,
-                    windowHeight = this.impostLength,
+            svgComp(){// картинка с окном
+                let windowWidth = this.a + this.b,
+                    windowHeight = this.L,
                     side = 300,
                     lineGap = 15,
                     textGap = 4,
@@ -706,8 +694,8 @@
                         fill: '#000'
                     },
                     freeSpace = {
-                        x: side - (this.windowSideA + this.windowSideB),
-                        y: side - this.impostLength
+                        x: side - (this.a + this.b),
+                        y: side - this.L
                     },
                     window = {
                         ...windowCommon,
@@ -718,28 +706,28 @@
                     },
                     impost_v = {
                         ...windowCommon,
-                        x1: window.x + this.windowSideA,
+                        x1: window.x + this.a,
                         y1: window.y,
-                        x2: window.x + this.windowSideA,
+                        x2: window.x + this.a,
                         y2: window.y + windowHeight
                     },
                     impost_h = {
                         ...windowCommon,
                         x1: window.x,
-                        y1: window.y + windowHeight - this.windowSideC,
-                        x2: window.x + this.windowSideA,
-                        y2: window.y + windowHeight - this.windowSideC
+                        y1: window.y + windowHeight - this.c,
+                        x2: window.x + this.a,
+                        y2: window.y + windowHeight - this.c
                     },
                     a_line = {
                         ...lineCommon,
                         x1: window.x,
                         y1: window.y + windowHeight + lineGap,
-                        x2: window.x + this.windowSideA,
+                        x2: window.x + this.a,
                         y2: window.y + windowHeight + lineGap
                     },
                     b_line = {
                         ...lineCommon,
-                        x1: window.x + this.windowSideA,
+                        x1: window.x + this.a,
                         y1: window.y + windowHeight + lineGap,
                         x2: window.x + windowWidth,
                         y2: window.y + windowHeight + lineGap
@@ -747,7 +735,7 @@
                     c_line = {
                         ...lineCommon,
                         x1: window.x - lineGap,
-                        y1: window.y + windowHeight - this.windowSideC,
+                        y1: window.y + windowHeight - this.c,
                         x2: window.x - lineGap,
                         y2: window.y + windowHeight
                     },
@@ -756,7 +744,7 @@
                         x1: window.x - lineGap,
                         y1: window.y,
                         x2: window.x - lineGap,
-                        y2: window.y + this.windowSideD
+                        y2: window.y + this.d
                     },
                     l_line = {
                         ...lineCommon,
@@ -872,22 +860,53 @@
                     l_text: l_text
                 };
             },
-            selectedProfileParams(){
+            d(){ //Рассчитываемый элемент d [[B17]]
+                return this.L - this.c;
+            },
+            selectedProfileParams(){// параметры выбранного профиля
                 return this.profileTypes[this.profileType];
             },
-            selectedColorParams(){
-                return this.windowColors[this.windowColor];
+            resultViews(){// варианты расчетов в зависимости от типа профиля
+                let resp = {
+                    impost: {
+                        src: picGainImpost,
+                        title: 'Импост',
+                        result: this.computeEstimatedDeflection(this.specsImpost)
+                    },
+                    pilyastr: {
+                        src: picGainPilyastr,
+                        title: 'Усиление пилястровым профилем',
+                        result: this.computeEstimatedDeflection(this.specsPilyastr, 'pilyastr')
+                    }
+                }
+                if( this.profileType !== 'GLIDE' ){
+                    resp = {
+                        ...resp,
+                        connective3: {
+                            src: picGainСonnective3,
+                            title: 'Соединительный профиль 3',
+                            result: this.computeEstimatedDeflection(this.specsConnective3)
+                        },
+                        universal: {
+                            src: picGainUniversal,
+                            title: 'Профиль соединительный универсальный',
+                            result: this.computeEstimatedDeflection(this.specsUniversal)
+                        },
+                        connective38: {
+                            src: picGainСonnective38,
+                            title: 'Профиль соединительный 38',
+                            result: this.computeEstimatedDeflection(this.specsСonnective38)
+                        },
+                        connective65: {
+                            src: picGainСonnective65,
+                            title: 'Профиль соединительный 65',
+                            result: this.computeEstimatedDeflection(this.specsСonnective65)
+                        }
+                    }
+                }
+                return resp;
             },
-            selectedReinforcementTypeParams(){
-                return this.reinforcementTypes[this.reinforcementType];
-            },
-            selectedWindRegionParams(){
-                return this.windRegions[this.windRegion];
-            },
-            windowSideD(){ //Рассчитываемый элемент d
-                return this.impostLength - this.windowSideC;
-            },
-            reinforcementTypesOptions(){// Тип армирования в зависимости от типа профиля
+            reinTypesOptions(){// Тип армирования в зависимости от типа профиля
                 if( ['T86_60_4', 'T86_70_6'].includes(this.profileType) ){
                     return ['rt_5', 'rt_6', 'rt_7', 'rt_8'];
                 }else if( ['GLIDE'].includes(this.profileType) ){
@@ -896,21 +915,180 @@
                     return ['rt_1', 'rt_2', 'rt_3', 'rt_4'];
                 }
             },
-            maximumAllowableDeflection(){//Максимально допустимый прогиб
-                return ((this.impostLength/100)/200)*1000;
+            maxСurve(){//Максимально допустимый прогиб, мм [[D25]]
+                return ((this.L/100)/200)*1000;
             },
-            estimatedDeflectionImpost(){//Расчётный прогиб (импост)
-                return this.computeEstimatedDeflection(this.specsImpost);
+            DZE(){// Коэффициент пульсации давления ветра [[F214]]
+                let scheme = [
+                    [   0.85,   1.22,   1.78   ],
+                    [   0.76,   1.06,   1.78   ],
+                    [   0.69,   0.92,   1.5    ],
+                    [   0.62,   0.8,    1.26   ],
+                    [   0.58,   0.74,   1.14   ],
+                    [   0.56,   0.7,    1.06   ],
+                    [   0.54,   0.67,   1      ],
+                    [   0.51,   0.62,   0.9    ],
+                    [   0.49,   0.58,   0.84   ],
+                    [   0.47,   0.56,   0.8    ],
+                    [   0.46,   0.54,   0.76   ],
+                ],
+                rowNum = null,
+                colNum = null,
+                rowRanges = [
+                    { min: 0,       max: 5,     value: 0    },
+                    { min: 5,       max: 10,    value: 1    },
+                    { min: 10,      max: 20,    value: 2    },
+                    { min: 20,      max: 40,    value: 3    },
+                    { min: 40,      max: 60,    value: 4    },
+                    { min: 60,      max: 80,    value: 5    },
+                    { min: 80,      max: 100,   value: 6    },
+                    { min: 100,     max: 150,   value: 7    },
+                    { min: 150,     max: 200,   value: 8    },
+                    { min: 200,     max: 250,   value: 9    },
+                    { min: 250,     max: 300,   value: 10   }
+                ];
+
+                for (let range of rowRanges) {
+                    if (this.ZE > range.min && this.ZE <= range.max) {
+                        rowNum = range.value;
+                    }
+                }
+                if( this.terrainType === 'A' ){ colNum = 0; }
+                if( this.terrainType === 'B' ){ colNum = 1; }
+                if( this.terrainType === 'C' ){ colNum = 2; }
+                return scheme[rowNum][colNum];
             },
-            specsImpost(){
+            ZE(){//Эквивалентная высота  [[F201]]
+                if (this.Bh <= this.Bw) {
+                    return this.Bh;
+                } else if (this.Bh < this.Bw && this.Bh <= 2*this.Bw) {
+                    if ((this.Bh - this.Bw) <= this.Wh) {
+                        return this.Bh;
+                    } else {
+                        return this.Bw;
+                    }
+                } else {
+                    if ((this.Bh - this.Bw) <= this.Wh) {
+                        return this.Bh;
+                    } else if (this.Wh > 0 && this.Wh <= this.Bw) {
+                        return this.Bw;
+                    } else {
+                        return this.Wh;
+                    }
+                }
+            },
+            V(){// Коэффициент пространственной корреляции пульсации давления ветра [[F215]]
+                let scheme = [
+                    [   0.95,   0.92,   0.88,   0.83,   0.76,   0.67,   0.56  ],
+                    [   0.89,   0.87,   0.84,   0.8,    0.73,   0.65,   0.54  ],
+                    [   0.85,   0.84,   0.81,   0.77,   0.71,   0.64,   0.53  ],
+                    [   0.8,    0.78,   0.76,   0.73,   0.68,   0.61,   0.51  ],
+                    [   0.72,   0.72,   0.7,    0.67,   0.63,   0.57,   0.48  ],
+                    [   0.63,   0.63,   0.61,   0.59,   0.56,   0.51,   0.44  ],
+                    [   0.53,   0.53,   0.52,   0.5,    0.47,   0.44,   0.38  ]
+                ],
+                rowNum = null,
+                colNum = null,
+                rowRanges = [
+                    { min: 0,       max: 0.1,       value: 0 },
+                    { min: 0.1,     max: 5,         value: 1 },
+                    { min: 5,       max: 10,        value: 2 },
+                    { min: 10,      max: 20,        value: 3 },
+                    { min: 20,      max: 40,        value: 4 },
+                    { min: 40,      max: 80,        value: 5 },
+                    { min: 80,      max: 160,       value: 6 }
+                ],
+                colRanges = [
+                    { min: 0,       max: 5,         value: 0 },
+                    { min: 5,       max: 10,        value: 1 },
+                    { min: 10,      max: 20,        value: 2 },
+                    { min: 20,      max: 40,        value: 3 },
+                    { min: 40,      max: 80,        value: 4 },
+                    { min: 80,      max: 160,       value: 5 },
+                    { min: 160,     max: 350,       value: 6 }
+                ];
+
+                for (let range of rowRanges) {
+                    if (this.Bw > range.min && this.Bw <= range.max){
+                        rowNum = range.value;
+                    };
+                }
+                for (let range of colRanges) {
+                    if (this.Bl >= range.min && this.Bl <= range.max){
+                        colNum = range.value;
+                    };
+                }
+                return scheme[rowNum][colNum];
+            },
+            KZE(){// Коэффициент учитывающий изменение ветрового давления k(ze) [[F202]]
+                let scheme = [
+                    [   0.75,   0.5,    0.4     ],
+                    [   1,	    0.65,   0.4     ],
+                    [   1.25,   0.85,   0.55    ],
+                    [   1.5,    1.1,    0.8     ],
+                    [   1.7,    1.3,    1       ],
+                    [   1.85,   1.45,   1.15    ],
+                    [   2,	    1.6,    1.25    ],
+                    [   2.25,   1.9,    1.55    ],
+                    [   2.45,   2.1,    1.8     ],
+                    [   2.65,   2.3,    2       ],
+                    [   2.75,   2.5,    2.2     ]
+                ],
+                rowNum = null,
+                colNum = null,
+                rowRanges = [
+                    { min: 0,       max: 5,     value: 0 },
+                    { min: 5,       max: 10,    value: 1 },
+                    { min: 10,      max: 20,    value: 2 },
+                    { min: 20,      max: 40,    value: 3 },
+                    { min: 40,      max: 60,    value: 4 },
+                    { min: 60,      max: 80,    value: 5 },
+                    { min: 80,      max: 100,   value: 6 },
+                    { min: 100,     max: 150,   value: 7 },
+                    { min: 150,     max: 200,   value: 8 },
+                    { min: 200,     max: 250,   value: 9 },
+                    { min: 250,     max: 300,   value: 10 }
+                ];
+                for (const range of rowRanges) {
+                    if (this.ZE > range.min && this.ZE <= range.max){
+                        rowNum = range.value
+                    };
+                }
+                if( this.terrainType === 'A' ){ colNum = 0; }
+                if( this.terrainType === 'B' ){ colNum = 1; }
+                if( this.terrainType === 'C' ){ colNum = 2; }
+                return scheme[rowNum][colNum];
+            },
+            CZE(){// Аэродинамический   коэфф [[F203]]
+                let e = Math.min(this.Bw, this.Bl), //[[AB59]]
+                    e5 = e / 5;
+                if (this.windSide === 'windward_side'){ return 0.8; }
+                if (this.windSide === 'leeward_side'){ return -0.5; }
+                if (this.windSide === 'side_wall'){
+                    if (this.Wgap <= e5){ return -1; }
+                    if (this.Wgap > e5 && this.Wgap <= e){ return -0.8; }
+                    if (this.Wgap > e){ return -0.5; }
+                }
+            },
+            K0(){//Начальная кривизна оси импоста оконной конструкции, м-1 [[F285]]
+                let IW = this.selectedProfileParams.impostWidth, //[[F283]]
+                    tk = this.selectedProfileParams.tk;// [[F281]]
+                return AP * ((this.Tv - this.Tn)/IW)*(R0/((1/AB)+R0+(1/AH))) * tk;
+            },
+            K0_pilyastr(){
+                let IW = this.selectedProfileParams.an51,
+                    tk = this.selectedProfileParams.tk;
+                return AP * ((this.Tv - this.Tn)/IW)*(R0/((1/AB)+R0+(1/AH))) * tk;
+            },
+            specsImpost(){// таблица характеристик для импоста (собрана из разных таблиц в excel файле чтобы не плодить лишние формулы)
                 let scheme = {
                     T78_AERO: {
                         rt_1: {
-                            yellow: 349918, // Главные моменты инерции (Сечения профиля)
-                            orange: 2.21, // момент инерции в зависимости от типа армирования
-                            cyan: 6.6, //Расстояние между неитральной осью ПВХ профиля и нейтральной осью усилительного вкладыша
-                            purple: 727, //Площади поперечного сечения (ПВХ профиль)
-                            green: 148.7 //Площади поперечного сечения (Усилительный вкладыш)
+                            yellow: 349918, // Момент инерции [[K10]]
+                            orange: 2.21, //момент инерции  [[X69]]
+                            cyan: 6.6, //Расстояние между нейтральными осями [[N78]]
+                            purple: 727, //Площадь [[I11]]
+                            green: 148.7 //Площади поперечного сечения армирования [[P78]]
                         },
                         rt_2: {
                             yellow: 349918,
@@ -1124,7 +1302,7 @@
                         }
                     }
                 }
-                let data = scheme[this.profileType][this.reinforcementType];
+                let data = scheme[this.profileType][this.reinType];
                 return {
                     yellow: data?.yellow/1000000000000,
                     orange: data?.orange/100000000,
@@ -1133,18 +1311,15 @@
                     green:  data?.green/1000000
                 };
             },
-            estimatedDeflectionPilyastr(){// Расчётный прогиб (Усиление пилястровым профилем) [[AN53]]
-                return this.computeEstimatedDeflection(this.specsPilyastr, 'pilyastr');
-            },
-            specsPilyastr(){// таблица характеристик (Пилястровый профиль) [[AU29_BC68]] yellow - Сечения профиля м4 / orange - Сечения усилительного вкладыша, м4 / cyan - δ / purple - ПВХ профиль, м2 / green - Усилительный вкладыш, м2
+            specsPilyastr(){// таблица характеристик (Пилястровый профиль) [[AU29_BC68]]
                 let scheme = {
                     T78_AERO: {
                         rt_1: {
-                            yellow: 1485455,
-                            orange: 451461,
-                            cyan: 10.44,
-                            purple: 1164,
-                            green: 420
+                            yellow: 1485455, //Главные моменты инерции (Сечения профиля, м4) [[AU29]]
+                            orange: 451461, //Главные моменты инерции (Сечения усилительного вкладыша, м4) [[AU30]]
+                            cyan: 10.44, // Главные моменты инерции (δ) [[AU31]]
+                            purple: 1164, //площади сеч (ПВХ профиль, м2) [[AU32]]
+                            green: 420 // площади сеч (Усилительный вкладыш, м2) [[AU33]]
                         },
                         rt_2: {
                             yellow: 1485455,
@@ -1358,7 +1533,7 @@
                         }
                     }
                 }
-                let data = scheme[this.profileType] ? scheme[this.profileType][this.reinforcementType] : null;
+                let data = scheme[this.profileType] ? scheme[this.profileType][this.reinType] : null;
                 return {
                     yellow: data?.yellow/1000000000000,
                     orange: data?.orange/1000000000000,
@@ -1367,10 +1542,7 @@
                     green:  data?.green/1000000
                 };
             },
-            estimatedDeflectionConnective3(){
-                return this.computeEstimatedDeflection(this.specsConnective3);
-            },
-            specsConnective3(){// таблица характеристик (Профиль соединительный 3) [[BK29_BP63]] yellow - Сечения профиля м4 / orange - Сечения усилительного вкладыша, м4 / cyan - δ / purple - ПВХ профиль, м2 / green - Усилительный вкладыш, м2
+            specsConnective3(){// таблица характеристик (Профиль соединительный 3) [[BK29_BP63]]
                 let scheme = {
                     T78_AERO: {
                         rt_1: {
@@ -1583,7 +1755,7 @@
                         }
                     }
                 }
-                let data = scheme[this.profileType] ? scheme[this.profileType][this.reinforcementType] : null;
+                let data = scheme[this.profileType] ? scheme[this.profileType][this.reinType] : null;
                 return {
                     yellow: data?.yellow/1000000000000,
                     orange: data?.orange/1000000000000,
@@ -1592,10 +1764,7 @@
                     green:  data?.green/1000000
                 };
             },
-            estimatedDeflectionUniversal(){
-                return this.computeEstimatedDeflection(this.specsUniversal);
-            },
-            specsUniversal(){// таблица характеристик (Профиль соединительный универсальный) [[BZ29_CE63]] yellow - Сечения профиля м4 / orange - Сечения усилительного вкладыша, м4 / cyan - δ / purple - ПВХ профиль, м2 / green - Усилительный вкладыш, м2
+            specsUniversal(){// таблица характеристик (Профиль соединительный универсальный) [[BZ29_CE63]]
                 let scheme = {
                     T78_AERO: {
                         rt_1: {
@@ -1808,7 +1977,7 @@
                         }
                     }
                 }
-                let data = scheme[this.profileType] ? scheme[this.profileType][this.reinforcementType] : null;
+                let data = scheme[this.profileType] ? scheme[this.profileType][this.reinType] : null;
                 return {
                     yellow: data?.yellow/1000000000000,
                     orange: data?.orange/1000000000000,
@@ -1817,10 +1986,7 @@
                     green:  data?.green/1000000
                 };
             },
-            estimatedDeflectionСonnective38(){
-                return this.computeEstimatedDeflection(this.specsСonnective38);
-            },
-            specsСonnective38(){
+            specsСonnective38(){// таблица характеристик (Профиль соединительный 38) [[AU95_AZ129]]
                 let scheme = {
                     T78_AERO: {
                         rt_1: {
@@ -2033,7 +2199,7 @@
                         }
                     }
                 }
-                let data = scheme[this.profileType] ? scheme[this.profileType][this.reinforcementType] : null;
+                let data = scheme[this.profileType] ? scheme[this.profileType][this.reinType] : null;
                 return {
                     yellow: data?.yellow/1000000000000,
                     orange: data?.orange/1000000000000,
@@ -2042,10 +2208,7 @@
                     green:  data?.green/1000000
                 };
             },
-            estimatedDeflectionСonnective65(){
-                return this.computeEstimatedDeflection(this.specsСonnective65);
-            },
-            specsСonnective65(){
+            specsСonnective65(){// таблица характеристик (Профиль соединительный 65) [[BK95_BP129]]
                 let scheme = {
                     T78_AERO: {
                         rt_1: {
@@ -2258,7 +2421,7 @@
                         }
                     }
                 }
-                let data = scheme[this.profileType] ? scheme[this.profileType][this.reinforcementType] : null;
+                let data = scheme[this.profileType] ? scheme[this.profileType][this.reinType] : null;
                 return {
                     yellow: data?.yellow/1000000000000,
                     orange: data?.orange/1000000000000,
@@ -2266,188 +2429,28 @@
                     purple: data?.purple/1000000,
                     green:  data?.green/1000000
                 };
-            },
-            DZE(){// Коэффициент пульсации давления ветра [F46]
-                let scheme = [
-                    [   0.85,   1.22,   1.78   ],
-                    [   0.76,   1.06,   1.78   ],
-                    [   0.69,   0.92,   1.5    ],
-                    [   0.62,   0.8,    1.26   ],
-                    [   0.58,   0.74,   1.14   ],
-                    [   0.56,   0.7,    1.06   ],
-                    [   0.54,   0.67,   1      ],
-                    [   0.51,   0.62,   0.9    ],
-                    [   0.49,   0.58,   0.84   ],
-                    [   0.47,   0.56,   0.8    ],
-                    [   0.46,   0.54,   0.76   ],
-                ],
-                rowNum = null,
-                colNum = null,
-                rowRanges = [
-                    { min: 0,       max: 5,     value: 0    },
-                    { min: 5,       max: 10,    value: 1    },
-                    { min: 10,      max: 20,    value: 2    },
-                    { min: 20,      max: 40,    value: 3    },
-                    { min: 40,      max: 60,    value: 4    },
-                    { min: 60,      max: 80,    value: 5    },
-                    { min: 80,      max: 100,   value: 6    },
-                    { min: 100,     max: 150,   value: 7    },
-                    { min: 150,     max: 200,   value: 8    },
-                    { min: 200,     max: 250,   value: 9    },
-                    { min: 250,     max: 300,   value: 10   }
-                ];
-
-                for (let range of rowRanges) {
-                    if (this.ZE > range.min && this.ZE <= range.max) {
-                        rowNum = range.value;
-                    }
-                }
-                if( this.terrainType === 'A' ){ colNum = 0; }
-                if( this.terrainType === 'B' ){ colNum = 1; }
-                if( this.terrainType === 'C' ){ colNum = 2; }
-                return scheme[rowNum][colNum];
-            },
-            ZE(){//Коэффициент учитывающий изменение ветрового давления k(ze) (Эквивалентная высота) [F34]
-                if (this.buildingHeight <= this.buildingWidth) {
-                    return this.buildingHeight;
-                } else if (this.buildingHeight < this.buildingWidth && this.buildingHeight <= 2*this.buildingWidth) {
-                    if ((this.buildingHeight - this.buildingWidth) <= this.windowInstallationHeight) {
-                        return this.buildingHeight;
-                    } else {
-                        return this.buildingWidth;
-                    }
-                } else {
-                    if ((this.buildingHeight - this.buildingWidth) <= this.windowInstallationHeight) {
-                        return this.buildingHeight;
-                    } else if (this.windowInstallationHeight > 0 && this.windowInstallationHeight <= this.buildingWidth) {
-                        return this.buildingWidth;
-                    } else {
-                        return this.windowInstallationHeight;
-                    }
-                }
-            },
-            V(){// Коэффициент пространственной корреляции пульсации давления ветра   [F47]
-                let scheme = [
-                    [   0.95,   0.92,   0.88,   0.83,   0.76,   0.67,   0.56  ],
-                    [   0.89,   0.87,   0.84,   0.8,    0.73,   0.65,   0.54  ],
-                    [   0.85,   0.84,   0.81,   0.77,   0.71,   0.64,   0.53  ],
-                    [   0.8,    0.78,   0.76,   0.73,   0.68,   0.61,   0.51  ],
-                    [   0.72,   0.72,   0.7,    0.67,   0.63,   0.57,   0.48  ],
-                    [   0.63,   0.63,   0.61,   0.59,   0.56,   0.51,   0.44  ],
-                    [   0.53,   0.53,   0.52,   0.5,    0.47,   0.44,   0.38  ]
-                ],
-                rowNum = null,
-                colNum = null,
-                rowRanges = [
-                    { min: 0,       max: 0.1,       value: 0 },
-                    { min: 0.1,     max: 5,         value: 1 },
-                    { min: 5,       max: 10,        value: 2 },
-                    { min: 10,      max: 20,        value: 3 },
-                    { min: 20,      max: 40,        value: 4 },
-                    { min: 40,      max: 80,        value: 5 },
-                    { min: 80,      max: 160,       value: 6 }
-                ],
-                colRanges = [
-                    { min: 0,       max: 5,         value: 0 },
-                    { min: 5,       max: 10,        value: 1 },
-                    { min: 10,      max: 20,        value: 2 },
-                    { min: 20,      max: 40,        value: 3 },
-                    { min: 40,      max: 80,        value: 4 },
-                    { min: 80,      max: 160,       value: 5 },
-                    { min: 160,     max: 350,       value: 6 }
-                ];
-
-                for (let range of rowRanges) {
-                    if (this.buildingWidth > range.min && this.buildingWidth <= range.max){
-                        rowNum = range.value;
-                    };
-                }
-                for (let range of colRanges) {
-                    if (this.buildingLength >= range.min && this.buildingLength <= range.max){
-                        colNum = range.value;
-                    };
-                }
-                return scheme[rowNum][colNum];
-            },
-            KZE(){// Коэффициент учитывающий изменение ветрового давления k(ze) [F35]
-                let scheme = [
-                    [   0.75,   0.5,    0.4     ],
-                    [   1,	    0.65,   0.4     ],
-                    [   1.25,   0.85,   0.55    ],
-                    [   1.5,    1.1,    0.8     ],
-                    [   1.7,    1.3,    1       ],
-                    [   1.85,   1.45,   1.15    ],
-                    [   2,	    1.6,    1.25    ],
-                    [   2.25,   1.9,    1.55    ],
-                    [   2.45,   2.1,    1.8     ],
-                    [   2.65,   2.3,    2       ],
-                    [   2.75,   2.5,    2.2     ]
-                ],
-                rowNum = null,
-                colNum = null,
-                rowRanges = [
-                    { min: 0,       max: 5,     value: 0 },
-                    { min: 5,       max: 10,    value: 1 },
-                    { min: 10,      max: 20,    value: 2 },
-                    { min: 20,      max: 40,    value: 3 },
-                    { min: 40,      max: 60,    value: 4 },
-                    { min: 60,      max: 80,    value: 5 },
-                    { min: 80,      max: 100,   value: 6 },
-                    { min: 100,     max: 150,   value: 7 },
-                    { min: 150,     max: 200,   value: 8 },
-                    { min: 200,     max: 250,   value: 9 },
-                    { min: 250,     max: 300,   value: 10 }
-                ];
-                for (const range of rowRanges) {
-                    if (this.ZE > range.min && this.ZE <= range.max){
-                        rowNum = range.value
-                    };
-                }
-                if( this.terrainType === 'A' ){ colNum = 0; }
-                if( this.terrainType === 'B' ){ colNum = 1; }
-                if( this.terrainType === 'C' ){ colNum = 2; }
-                return scheme[rowNum][colNum];
-            },
-            C(){//Коэффициент учитывающий изменение ветрового давления k(ze)  (Аэродинамический   коэфф     ) [F36]
-                let e = Math.min(this.buildingWidth, this.buildingLength);
-                if (this.windSide === 'windward_side'){ return 0.8; }
-                if (this.windSide === 'leeward_side'){ return -0.5; }
-                if (this.windSide === 'side_wall') {
-                    if (this.buildingSideToWindowLength <= (e/5)){ return -1; }
-                    if (this.buildingSideToWindowLength > (e/5) && this.buildingSideToWindowLength <= (e/5) + (e-e/5) ){
-                        return -0.8;
-                    };
-                    if (this.buildingSideToWindowLength > e){
-                        return -0.5;
-                    }
-                }
-            },
-            K0(){//Начальная кривизна оси импоста оконной конструкции [F120]
-                let IW = this.selectedProfileParams.impostWidth;
-                return LTE_COEFF_PVH * ((this.insideAirTemperature - this.outsideAirTemperature)/IW)*(R0/((1/AB)+R0+(1/AH))) * this.selectedProfileParams.tk;
-            },
-            K0_pilyastr(){
-                let IW = this.selectedProfileParams.an51;
-                return LTE_COEFF_PVH * ((this.insideAirTemperature - this.outsideAirTemperature)/IW)*(R0/((1/AB)+R0+(1/AH))) * this.selectedProfileParams.tk;
             }
         },
         methods: {
             onProfileTypeChange(){// при смене типа профиля, меняем Тип армирования на первый из списка доступных
-                this.reinforcementType = this.reinforcementTypesOptions[0];
+                this.reinType = this.reinTypesOptions[0];
+                if( ['T86_60_4', 'T86_70_6'].includes(this.profileType) ){// если выбрали 'T86_60_4' или 'T86_70_6' то меняем доп. список
+                    this.reinType_60_70 = this.reinTypesOptions[0];
+                }
             },
             computeEstimatedDeflection(specs, type = null){
                 let K0 = type === 'pilyastr' ? this.K0_pilyastr : this.K0,
-                    IL = this.impostLength/100,
-                    WM = this.selectedWindRegionParams.w0*this.KZE*this.C, // Нормативное значение средней составляющей основной ветровой нагрузки Wm (Нормативное значение ветрового давления, Па )
+                    IL = this.L/100,
+                    WM = this.windRegions[this.windRegion].w0*this.KZE*this.CZE, // Нормативное значение средней составляющей основной ветровой нагрузки Wm (Нормативное значение ветрового давления, Па )
                     QW = WM + WM*this.DZE*this.V,//Нормативное значение пиковой ветровой нагрузки на оконную конструкцию, Па.
-                    SA = this.windowSideA/100,
-                    SB = this.windowSideB/100,
+                    SA = this.a/100,
+                    SB = this.b/100,
                     TE = this.selectedProfileParams.te,
                     KR = this.selectedProfileParams.f110,
-                    P = this.selectedColorParams.p,
-                    AT_INST = this.instalationAirTemperature,
-                    AT_OUT = this.outsideAirTemperature,
-                    AT_IN = this.insideAirTemperature,
+                    P = this.profileColors[this.profileColor].p,
+                    Tref = this.Tref,
+                    Tn = this.Tn,
+                    Tv = this.Tv,
 
                     yellow = specs.yellow,
                     orange = specs.orange,
@@ -2455,9 +2458,9 @@
                     purple = specs.purple,
                     green = specs.green;
 
-                let F267 = (AT_IN - (AT_IN - AT_OUT)) * ((1 / AB + R0 / (KR + 1)) / (1 / AB + R0 + 1 / AH));
+                let F267 = (Tv - (Tv - Tn)) * ((1 / AB + R0 / (KR + 1)) / (1 / AB + R0 + 1 / AH));
                 let TMP1 = (1 / (purple * EP)) + (1 / (green * ES));
-                let TMP2 = ((F267 - AT_INST) * (LTE_COEFF_PVH * TE - MRI)) / (TMP1 * P * CSA * (TMP1 + (2 / (CSA * (IL - 2 * P))) + 2 * TMP1 + (2 / (CSA * (IL - 2 * P)))));
+                let TMP2 = ((F267 - Tref) * (AP * TE - MRI)) / (TMP1 * P * CSA * (TMP1 + (2 / (CSA * (IL - 2 * P))) + 2 * TMP1 + (2 / (CSA * (IL - 2 * P)))));
                 let TMP3 = TMP2 * (P * CSA * (TMP1 + (2 / (CSA * (IL - 2 * P)))) + 1);
                 let fw = (QW / (ES * orange + EP * yellow)) * (SA * Math.pow(SA ** 2 - 5 * IL ** 2, 2) + SB * Math.pow(SB ** 2 - 5 * IL ** 2, 2)) / 3840;
                 let ft = (K0 * IL ** 2 * EP * yellow - cyan * (TMP3 * IL ** 2 + TMP2 * (IL ** 2 - 4 * P ** 2))) / (8 * (ES * orange + EP * yellow));
