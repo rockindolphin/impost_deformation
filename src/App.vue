@@ -59,7 +59,7 @@
                             </span>
                             <input
                                 id="Tn"
-                                :value="Tn"
+                                v-model="Tn"
                                 type="number"
                                 step="0.1"
                                 class="control control--text"
@@ -72,7 +72,7 @@
                             </span>
                             <input
                                 id="Tref"
-                                :value="Tref"
+                                v-model="Tref"
                                 type="number"
                                 step="0.1"
                                 class="control control--text"
@@ -375,7 +375,7 @@
                                     class="control control--select"
                                     >
                                     <option
-                                        v-for="item in reinTypesOptions"
+                                        v-for="item in reinTypes_60_70_Options"
                                         :key="item"
                                         :value="item"
                                         >
@@ -392,6 +392,20 @@
                                 Исполнение
                             </h4>
 
+                            <!--
+                                <div class="bg-yellow-300 col-span-12 text-right">
+                                    <div
+                                        v-for="(value, key) in resultViews"
+                                        :key="`result_${key}`"
+                                        >
+                                        {{ value.result.toFixed(2) }}
+                                    </div>
+                                    <button class="border-1 m-4"@click="runTest()">
+                                        runTest
+                                    </button>
+                                </div>
+                            -->
+
                             <div
                                 v-for="(value, key) in resultViews"
                                 :key="`result_${key}`"
@@ -407,7 +421,7 @@
                                 <img :src="value.src" class="w-1/2" :alt="value.title">
                                 <p class="col-span-12 font-bold">
                                     <span>
-                                        Расчётный прогиб, мм: {{ value.result.toFixed(3) }}
+                                        Расчётный прогиб, мм: {{ value.result.toFixed(2) }}
                                     </span>
                                     <span class="block mt-3">
                                         <span class="text-green-600" v-if="value.result <= maxСurve">
@@ -451,16 +465,17 @@
     import picGainUniversal from '@/assets/images/universal.png';
     import picGainСonnective38 from '@/assets/images/connective38.png';
     import picGainСonnective65 from '@/assets/images/connective65.png';
+    import { tests } from '@/testsData.js';
 
 
-    let AP = 0.00008, // Коэффициенты линейного температурного расширения (Материал ПВХ,) [[F65]]
+    let EP = 3400000000, //Модули упругости (ПВХ, Па) [[F230]]
+        ES = 210000000000, //Модули упругости (Материала  вкладыша, Па) [[F231]]
+        CSA = 3400000, //Площади поперечного сечения (Константа,принимаемая) [[F257]]
+        MRI = 0.00001, //Коэффициенты линейного температурного расширения (Материал усилительного вкладыша,К-1) [[F264]]
+        AP = 0.00008, // Коэффициенты линейного температурного расширения (Материал ПВХ, К-1) [[F265]]
         R0 = 0.76, //Термическое сопротивление профиля импоста оконной конструкции,Вт/(м²∙℃) [[F269]]
         AH = 23, //Коэффициенты теплоотдачи и тепловосприятия, Вт/(м²∙℃) [[F273]]
-        AB = 8, //Коэффициенты теплоотдачи и тепловосприятия, Вт/(м²∙℃) [[F274]]
-        EP = 3400000000, //Модули упругости (ПВХ, Па) [F61]
-        ES = 210000000000, //Модули упругости (Материала  вкладыша, Па) [F62]
-        CSA = 3400000, //Площади поперечного сечения (Константа,принимаемая) [F91]
-        MRI = 0.00001; //Коэффициенты линейного температурного расширения ( Материал усилительного вкладыша , ) [F95]
+        AB = 8; //Коэффициенты теплоотдачи и тепловосприятия, Вт/(м²∙℃) [[F274]]
 
     export default {
         name: 'App',
@@ -535,56 +550,56 @@
                         impostWidth: 0.06, //Ширина профиля импоста,м [[F283]]
                         tk: 0.78, //Безразмерные коэффициенты, учитывающие неоднородность температурного поля в ПВХ профиле, [[R50, R53]]
                         te: 1.08, // Безразмерные коэффициенты, учитывающие неоднородность температурного поля в ПВХ профиле
-                        f110: 1, // Отношение количества рядов воздушных камер в наружной части попереченого сечения ПВХ профиля к количеству рядов воздушных камер во внутренней части поперечного сечения ПВХ профиля
-                        an51: 0.123
+                        kR: 1, // Отношение количества рядов воздушных камер в наружной части попереченого сечения ПВХ профиля к количеству рядов воздушных камер во внутренней части поперечного сечения ПВХ профиля
+                        an51: 0.123 //[[AP51]]
                     },
                     'T80_AERO': {
                         impostWidth: 0.06,
                         tk: 0.78,
                         te: 1.08,
-                        f110: 1,
+                        kR: 1,
                         an51: 0.123
                     },
                     'T78_SUPER_AERO': {
                         impostWidth: 0.07,
                         tk: 0.8,
                         te: 1.11,
-                        f110: 1,
+                        kR: 1,
                         an51: 0.133
                     },
                     'T80_SUPER_AERO': {
                         impostWidth: 0.07,
                         tk: 0.8,
                         te: 1.11,
-                        f110: 1,
+                        kR: 1,
                         an51: 0.133
                     },
                     'T78_ACLASS': {
                         impostWidth: 0.06,
                         tk: 0.78,
                         te: 1.08,
-                        f110: 2,
+                        kR: 2,
                         an51: 0.123
                     },
                     'T86_60_4': {
                         impostWidth: 0.06,
                         tk: 0.82,
                         te: 1.2,
-                        f110: 0.5,
+                        kR: 0.5,
                         an51: 0.123
                     },
                     'T86_70_6': {
                         impostWidth: 0.07,
                         tk: 0.85,
                         te: 1.32,
-                        f110: 1.25,
+                        kR: 1.25,
                         an51: 0.133
                     },
                     'GLIDE': {
                         impostWidth: 0.031,
                         tk: 0.78,
                         te: 1.08,
-                        f110: 1,
+                        kR: 1,
                         an51: 0.094
                     }
                 },
@@ -915,6 +930,9 @@
                     return ['rt_1', 'rt_2', 'rt_3', 'rt_4'];
                 }
             },
+            reinTypes_60_70_Options(){
+                return ['rt_1', 'rt_2', 'rt_3', 'rt_4'];
+            },
             maxСurve(){//Максимально допустимый прогиб, мм [[D25]]
                 return ((this.L/100)/200)*1000;
             },
@@ -1076,7 +1094,7 @@
                 return AP * ((this.Tv - this.Tn)/IW)*(R0/((1/AB)+R0+(1/AH))) * tk;
             },
             K0_pilyastr(){
-                let IW = this.selectedProfileParams.an51,
+                let IW = 0.07,
                     tk = this.selectedProfileParams.tk;
                 return AP * ((this.Tv - this.Tn)/IW)*(R0/((1/AB)+R0+(1/AH))) * tk;
             },
@@ -1533,14 +1551,7 @@
                         }
                     }
                 }
-                let data = scheme[this.profileType] ? scheme[this.profileType][this.reinType] : null;
-                return {
-                    yellow: data?.yellow/1000000000000,
-                    orange: data?.orange/1000000000000,
-                    cyan:   data?.cyan/1000,
-                    purple: data?.purple/1000000,
-                    green:  data?.green/1000000
-                };
+                return this.computeSpec(scheme);
             },
             specsConnective3(){// таблица характеристик (Профиль соединительный 3) [[BK29_BP63]]
                 let scheme = {
@@ -1709,14 +1720,14 @@
                             purple: 1911,
                             green: 386
                         },
-                        rt_3_pipe: {
+                        rt_3: {
                             yellow: 911177,
                             orange: 40165,
                             cyan: 2.647,
                             purple: 1911,
                             green: 210
                         },
-                        rt_4_pipe: {
+                        rt_4: {
                             yellow: 911177,
                             orange: 50941,
                             cyan: 2.647,
@@ -1739,14 +1750,14 @@
                             purple: 2262,
                             green: 386
                         },
-                        rt_3_pipe: {
+                        rt_3: {
                             yellow: 1456643,
                             orange: 40165,
                             cyan: 5.123,
                             purple: 2262,
                             green: 210
                         },
-                        rt_4_pipe: {
+                        rt_4: {
                             yellow: 1456643,
                             orange: 50941,
                             cyan: 5.123,
@@ -1755,14 +1766,7 @@
                         }
                     }
                 }
-                let data = scheme[this.profileType] ? scheme[this.profileType][this.reinType] : null;
-                return {
-                    yellow: data?.yellow/1000000000000,
-                    orange: data?.orange/1000000000000,
-                    cyan:   data?.cyan/1000,
-                    purple: data?.purple/1000000,
-                    green:  data?.green/1000000
-                };
+                return this.computeSpec(scheme);
             },
             specsUniversal(){// таблица характеристик (Профиль соединительный универсальный) [[BZ29_CE63]]
                 let scheme = {
@@ -1931,14 +1935,14 @@
                             purple: 2218,
                             green: 986
                         },
-                        rt_3_pipe: {
+                        rt_3: {
                             yellow: 1852935,
                             orange: 540171,
                             cyan: 1.914,
                             purple: 2218,
                             green: 810
                         },
-                        rt_4_pipe: {
+                        rt_4: {
                             yellow: 1852935,
                             orange: 550949,
                             cyan: 1.925,
@@ -1961,14 +1965,14 @@
                             purple: 2527,
                             green: 986
                         },
-                        rt_3_pipe: {
+                        rt_3: {
                             yellow: 2532351,
                             orange: 541167,
                             cyan: 2.926,
                             purple: 2527,
                             green: 810
                         },
-                        rt_4_pipe: {
+                        rt_4: {
                             yellow: 2532351,
                             orange: 552155,
                             cyan: 3.065,
@@ -1977,14 +1981,7 @@
                         }
                     }
                 }
-                let data = scheme[this.profileType] ? scheme[this.profileType][this.reinType] : null;
-                return {
-                    yellow: data?.yellow/1000000000000,
-                    orange: data?.orange/1000000000000,
-                    cyan:   data?.cyan/1000,
-                    purple: data?.purple/1000000,
-                    green:  data?.green/1000000
-                };
+                return this.computeSpec(scheme);
             },
             specsСonnective38(){// таблица характеристик (Профиль соединительный 38) [[AU95_AZ129]]
                 let scheme = {
@@ -2153,14 +2150,14 @@
                             purple: 2421,
                             green: 651
                         },
-                        rt_3_pipe: {
+                        rt_3: {
                             yellow: 1693242,
                             orange: 250377,
                             cyan: 0.236,
                             purple: 2421,
                             green: 475
                         },
-                        rt_4_pipe: {
+                        rt_4: {
                             yellow: 1693242,
                             orange: 262914,
                             cyan: 0.429,
@@ -2183,14 +2180,14 @@
                             purple: 2692,
                             green: 651
                         },
-                        rt_3_pipe: {
+                        rt_3: {
                             yellow: 2065323,
                             orange: 244267,
                             cyan: 2.048,
                             purple: 2692,
                             green: 475
                         },
-                        rt_4_pipe: {
+                        rt_4: {
                             yellow: 2065323,
                             orange: 255877,
                             cyan: 2.507,
@@ -2199,14 +2196,7 @@
                         }
                     }
                 }
-                let data = scheme[this.profileType] ? scheme[this.profileType][this.reinType] : null;
-                return {
-                    yellow: data?.yellow/1000000000000,
-                    orange: data?.orange/1000000000000,
-                    cyan:   data?.cyan/1000,
-                    purple: data?.purple/1000000,
-                    green:  data?.green/1000000
-                };
+                return this.computeSpec(scheme);
             },
             specsСonnective65(){// таблица характеристик (Профиль соединительный 65) [[BK95_BP129]]
                 let scheme = {
@@ -2375,14 +2365,14 @@
                             purple: 2470,
                             green: 717
                         },
-                        rt_3_pipe: {
+                        rt_3: {
                             yellow: 1269019,
                             orange: 129710,
                             cyan: 6.22,
                             purple: 2470,
                             green: 541
                         },
-                        rt_4_pipe: {
+                        rt_4: {
                             yellow: 1269019,
                             orange: 141446,
                             cyan: 5.785,
@@ -2405,14 +2395,14 @@
                             purple: 2810,
                             green: 717
                         },
-                        rt_3_pipe: {
+                        rt_3: {
                             yellow: 1845430,
                             orange: 132583,
                             cyan: 9.967,
                             purple: 2810,
                             green: 541
                         },
-                        rt_4_pipe: {
+                        rt_4: {
                             yellow: 1845430,
                             orange: 144804,
                             cyan: 9.433,
@@ -2421,7 +2411,19 @@
                         }
                     }
                 }
-                let data = scheme[this.profileType] ? scheme[this.profileType][this.reinType] : null;
+                return this.computeSpec(scheme);
+            }
+        },
+        methods: {
+            onProfileTypeChange(){// при смене типа профиля, меняем Тип армирования на первый из списка доступных
+                this.reinType = this.reinTypesOptions[0];
+                if( ['T86_60_4', 'T86_70_6'].includes(this.profileType) ){// если выбрали 'T86_60_4' или 'T86_70_6' то меняем доп. список
+                    this.reinType_60_70 = this.reinTypes_60_70_Options[0];
+                }
+            },
+            computeSpec(scheme){
+                let profileData = scheme[this.profileType],
+                    data = profileData ? (profileData[this.reinType] || profileData[this.reinType_60_70]) : null;
                 return {
                     yellow: data?.yellow/1000000000000,
                     orange: data?.orange/1000000000000,
@@ -2429,28 +2431,22 @@
                     purple: data?.purple/1000000,
                     green:  data?.green/1000000
                 };
-            }
-        },
-        methods: {
-            onProfileTypeChange(){// при смене типа профиля, меняем Тип армирования на первый из списка доступных
-                this.reinType = this.reinTypesOptions[0];
-                if( ['T86_60_4', 'T86_70_6'].includes(this.profileType) ){// если выбрали 'T86_60_4' или 'T86_70_6' то меняем доп. список
-                    this.reinType_60_70 = this.reinTypesOptions[0];
-                }
             },
             computeEstimatedDeflection(specs, type = null){
                 let K0 = type === 'pilyastr' ? this.K0_pilyastr : this.K0,
-                    IL = this.L/100,
-                    WM = this.windRegions[this.windRegion].w0*this.KZE*this.CZE, // Нормативное значение средней составляющей основной ветровой нагрузки Wm (Нормативное значение ветрового давления, Па )
-                    QW = WM + WM*this.DZE*this.V,//Нормативное значение пиковой ветровой нагрузки на оконную конструкцию, Па.
-                    SA = this.a/100,
-                    SB = this.b/100,
-                    TE = this.selectedProfileParams.te,
-                    KR = this.selectedProfileParams.f110,
-                    P = this.profileColors[this.profileColor].p,
-                    Tref = this.Tref,
-                    Tn = this.Tn,
-                    Tv = this.Tv,
+                    Tref = this.Tref, //Температура замыкания (монтажа) оконной конструкции, ˚С [[F17]]
+                    Tn = this.Tn, //Расчетная наружная температура воздуха (температура воздуха наиболее холодной пятидневки),˚С  [[F16]]
+                    Tv = this.Tv, //Расчетная внутренняя температура воздуха,˚С [[F18]]
+                    LM = this.L/100, //Длина импоста L (в метрах)
+                    aM = this.a/100, //Рассчитываемый элемент a (в метрах)
+                    bM = this.b/100, //Рассчитываемый элемент b (в метрах)
+                    W0 = this.windRegions[this.windRegion].w0, // [[F196]]
+                    Wm = W0*this.KZE*this.CZE, // Нормативное значение средней составляющей основной ветровой нагрузки Wm [[F197]]
+                    Wp = Wm*this.DZE*this.V, // Нормативное значение пульсационной составляющей основной ветровой нагрузки Wp [[F216]]
+                    qw = Wm + Wp, //Нормативное значение пиковой ветровой нагрузки на оконную конструкцию, Па. [[F223]]
+                    te = this.selectedProfileParams.te, //[[F280]]
+                    kR = this.selectedProfileParams.kR, //Отношение количества рядов воздушных камер в наружной части попереченого сечения ПВХ профиля к количеству рядов воздушных камер во внутренней части поперечного сечения ПВХ профиля [[F276]]
+                    P = this.profileColors[this.profileColor].p, // [[F244]]
 
                     yellow = specs.yellow,
                     orange = specs.orange,
@@ -2458,13 +2454,46 @@
                     purple = specs.purple,
                     green = specs.green;
 
-                let F267 = (Tv - (Tv - Tn)) * ((1 / AB + R0 / (KR + 1)) / (1 / AB + R0 + 1 / AH));
-                let TMP1 = (1 / (purple * EP)) + (1 / (green * ES));
-                let TMP2 = ((F267 - Tref) * (AP * TE - MRI)) / (TMP1 * P * CSA * (TMP1 + (2 / (CSA * (IL - 2 * P))) + 2 * TMP1 + (2 / (CSA * (IL - 2 * P)))));
-                let TMP3 = TMP2 * (P * CSA * (TMP1 + (2 / (CSA * (IL - 2 * P)))) + 1);
-                let fw = (QW / (ES * orange + EP * yellow)) * (SA * Math.pow(SA ** 2 - 5 * IL ** 2, 2) + SB * Math.pow(SB ** 2 - 5 * IL ** 2, 2)) / 3840;
-                let ft = (K0 * IL ** 2 * EP * yellow - cyan * (TMP3 * IL ** 2 + TMP2 * (IL ** 2 - 4 * P ** 2))) / (8 * (ES * orange + EP * yellow));
+                let tm = (Tv - (Tv - Tn)) * ((1 / AB + R0 / (kR + 1)) / (1 / AB + R0 + 1 / AH)); // Температура во внутренней камере ПВХ профиля, ℃ [[F267]]
+                let G = (1 / (purple * EP)) + (1 / (green * ES));
+                let H2 = ((tm - Tref) * (AP * te - MRI)) / (G * P * CSA * (G + (2 / (CSA * (LM - 2 * P))) + 2 * G + (2 / (CSA * (LM - 2 * P)))));
+                let H1 = H2 * (P * CSA * (G + (2 / (CSA * (LM - 2 * P)))) + 1);
+                let fw = (qw / (ES * orange + EP * yellow)) * (aM * Math.pow(aM ** 2 - 5 * LM ** 2, 2) + bM * Math.pow(bM ** 2 - 5 * LM ** 2, 2)) / 3840;
+                let ft = (K0 * LM ** 2 * EP * yellow - cyan * (H1 * LM ** 2 + H2 * (LM ** 2 - 4 * P ** 2))) / (8 * (ES * orange + EP * yellow));
                 return (fw+ft)*1000;
+            },
+            runTest(){
+                console.clear();
+                let failedLog = [];
+                Object.keys(tests.common).map( key => {
+                    this[key] = tests.common[key];
+                });
+                tests.dynamic.map( test => {
+                    this.profileType = test.profileType;
+                    this.profileColor = test.profileColor;
+                    this.reinType = test.reinType;
+                    this.reinType_60_70 = test.reinType_60_70;
+                    Object.keys(test.views).map( key => {
+                        if( test.views[key] !== NaN ){
+                            let testValue = test.views[key].toFixed(2);
+                            let formValue = this.resultViews[key]?.result?.toFixed(2);
+                            if( formValue === undefined ){
+                                formValue = 'NaN'
+                            }
+                            let passed = testValue === formValue;
+
+                            if( !passed ){
+                                failedLog.push( `${this.profileType} - ${this.profileColor} - ${this.reinType} - ${key} - ожидаемое:${testValue} - фактическое:${formValue}` );
+                                console.log('faled');
+                            }else{
+                                console.log('passed');
+                            }
+                        }
+                    });
+                });
+                if( failedLog.length ){
+                    console.log(failedLog);
+                }
             }
         },
         created(){
