@@ -337,7 +337,6 @@
                                     id="profileType"
                                     v-model="profileType"
                                     class="control control--select"
-                                    @change="onProfileTypeChange($event)"
                                     >
                                     <option
                                         v-for="item in Object.keys(profileTypes)"
@@ -673,6 +672,11 @@
                 reinType_60_70: 'rt_35x20x2_pipe', // Армирование для коробок 60-4 и 70-6  [[F23]]
                 showDebug: false,
                 hasShareOpportunity: false
+            }
+        },
+        watch:{
+            profileType(newVal, oldVal){
+                this.onProfileTypeChange();
             }
         },
         computed: {
@@ -1227,16 +1231,16 @@
                 if( params.get('debug') === 'true' ){
                     this.showDebug = true;
                 }
-                ['windRegion', 'terrainType', 'windSide', 'profileType', 'profileColor'].map(key => {
+                let selects = {
+                    windRegion: Object.keys(this.windRegions),
+                    terrainType: this.terrainTypes,
+                    windSide: Object.keys(this.windSides),
+                    profileType: Object.keys(this.profileTypes),
+                    profileColor: Object.keys(this.profileColor)
+                }
+                Object.keys(selects).map(key => {
                     let value = params.get(key);
-                    if( value && Object.keys(this[`${key}s`]).includes(value) ){
-                        this[key] = value;
-                    }
-                });
-                ['reinType', 'reinType_60_70'].map(key => {
-                    let value = params.get(key),
-                        compKey = key === 'reinType' ? 'reinTypesOptions' : 'reinTypes_60_70_Options';
-                    if( value && this[compKey].includes(value) ){
+                    if( value && selects[key].includes(value) ){
                         this[key] = value;
                     }
                 });
@@ -1246,27 +1250,37 @@
                         this[key] = value;
                     }
                 });
-
+                this.$nextTick(() => {// рассчитываем отдельно(после срабатывания watch и пересчета reinTypesOptions)
+                    selects = {
+                        reinType: this.reinTypesOptions,
+                        reinType_60_70: this.reinTypes_60_70_Options
+                    }
+                    Object.keys(selects).map(key => {
+                        let value = params.get(key);
+                        if( value && selects[key].includes(value) ){
+                            this[key] = value;
+                        }
+                    });
+                });
             },
-            generateLink(){
+            generateUrlParams(){
                 let params = new URLSearchParams();
                 ['windRegion', 'terrainType', 'windSide', 'profileType', 'profileColor', 'reinType', 'reinType_60_70', 'Tn', 'Tref', 'Tv', 'Bh', 'Bw', 'Bl', 'Wh', 'Wgap', 'L', 'a','b', 'c'].map(key => {
                     params.set(key, this[key]);
                 });
-                return `${document.location.host}?${params.toString()}`;
+                return params.toString();
             },
             copyLink(){
-                let link = this.generateLink();
+                let link = `${document.location.host}?${this.generateUrlParams()}`;
                 navigator.clipboard.writeText(link).then(() => {
                     alert('Ссылка на форму с параметрами скопирована в буфер обмена');
                 });
             },
             shareLink(){
-                let link = this.generateLink();
                 navigator.share({
                     title: 'Расчет прогиба оконного профиля',
                     text: 'Предзаполненая форма расчета',
-                    url: link
+                    url: `?${this.generateUrlParams()}`
                 });
             }
         },
