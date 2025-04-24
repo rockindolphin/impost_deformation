@@ -2,9 +2,35 @@
     <div class="page__body">
         <header class="page__header header">
             <div class="page__wrapper">
-                <h1 class="text-2xl mb-8">
-                    Расчет прогиба оконного профиля
-                </h1>
+                <div class="flex align-center mb-8 py-3">
+                    <h1 class="text-2xl mr-4">
+                        Расчет прогиба оконного профиля
+                    </h1>
+                    <div class="flex align-center ml-auto">
+                        <button
+                            class="btn"
+                            title="Копировать ссылку на форму"
+                            @click="copyLink()"
+                            >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                        <button
+                            v-if="hasShareOpportunity"
+                            class="btn ml-3"
+                            title="Поделиться ссылку на форму"
+                            @click="shareLink()"
+                            >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                                <polyline points="16 6 12 2 8 6"></polyline>
+                                <line x1="12" y1="2" x2="12" y2="15"></line>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
             </div>
         </header>
         <main class="page__main main">
@@ -392,19 +418,17 @@
                                 Исполнение
                             </h4>
 
-                            <!--
-                                -->
-                                <div class="bg-yellow-300 col-span-12 text-right">
-                                    <div
-                                        v-for="(value, key) in resultViews"
-                                        :key="`result_${key}`"
-                                        >
-                                        {{ value.result.toFixed(2) }}
-                                    </div>
-                                    <button class="border-1 m-4"@click="runTest()">
-                                        runTest
-                                    </button>
+                            <div class="bg-yellow-300 col-span-12 text-right" v-if="showDebug">
+                                <div
+                                    v-for="(value, key) in resultViews"
+                                    :key="`result_${key}`"
+                                    >
+                                    {{ value.result.toFixed(2) }}
                                 </div>
+                                <button class="btn m-4"@click="runTest()">
+                                    Запустить тесты
+                                </button>
+                            </div>
 
                             <div
                                 v-for="(value, key) in resultViews"
@@ -647,6 +671,8 @@
                 },
                 reinType: 'rt_35x20x2_pipe', //Армирование импоста [[F22]]
                 reinType_60_70: 'rt_35x20x2_pipe', // Армирование для коробок 60-4 и 70-6  [[F23]]
+                showDebug: false,
+                hasShareOpportunity: false
             }
         },
         computed: {
@@ -1151,18 +1177,25 @@
             },
             runTest(){
                 console.clear();
-                let failedLog = [];
+                let result = {
+                    counter: {
+                        passed: 0,
+                        failed: 0,
+                        total: 0
+                    },
+                    log: []
+                };
                 Object.keys(tests.common).map( key => {
                     this[key] = tests.common[key];
                 });
                 tests.dynamic.map( test => {
-                    this.profileType = test.profileType;
-                    this.profileColor = test.profileColor;
-                    this.reinType = test.reinType;
-                    this.reinType_60_70 = test.reinType_60_70;
-                    Object.keys(test.views).map( key => {
-                        if( test.views[key] !== NaN ){
-                            let testValue = test.views[key].toFixed(2);
+                    let dynamicProps = Object.keys(test).filter( propKey => propKey !== 'results' );
+                    dynamicProps.map( propKey => {
+                        this[propKey] = test[propKey];
+                    });
+                    Object.keys(test.results).map( key => {
+                        if( test.results[key] !== NaN ){
+                            let testValue = test.results[key].toFixed(2);
                             let formValue = this.resultViews[key]?.result?.toFixed(2);
                             if( formValue === undefined ){
                                 formValue = 'NaN'
@@ -1170,24 +1203,80 @@
                             let passed = testValue === formValue;
 
                             if( !passed ){
-                                failedLog.push( `${this.profileType} - ${this.profileColor} - ${this.reinType} - ${key} - ожидаемое:${testValue} - фактическое:${formValue}` );
-                                console.log('faled');
+                                let logData = [];
+                                dynamicProps.map( propKey => {
+                                    logData.push( `${propKey}:${test[propKey]}` );
+                                });
+                                logData.push(`ожидаемое:${testValue}`);
+                                logData.push(`фактическое:${formValue}`);
+                                result.log.push(logData.join(' - '));
+                                result.counter.failed++;
                             }else{
-                                console.log('passed');
+                                result.counter.passed++;
                             }
+                            result.counter.total++;
                         }
                     });
                 });
-                if( failedLog.length ){
-                    console.log(failedLog);
+                console.log(result.counter);
+                if( result.log.length ){
+                    console.log(result.log);
                 }
+            },
+            setParamsFromRoute(params){
+                if( params.get('debug') === 'true' ){
+                    this.showDebug = true;
+                }
+                ['windRegion', 'terrainType', 'windSide', 'profileType', 'profileColor'].map(key => {
+                    let value = params.get(key);
+                    if( value && Object.keys(this[`${key}s`]).includes(value) ){
+                        this[key] = value;
+                    }
+                });
+                ['reinType', 'reinType_60_70'].map(key => {
+                    let value = params.get(key),
+                        compKey = key === 'reinType' ? 'reinTypesOptions' : 'reinTypes_60_70_Options';
+                    if( value && this[compKey].includes(value) ){
+                        this[key] = value;
+                    }
+                });
+                ['Tn', 'Tref', 'Tv', 'Bh', 'Bw', 'Bl', 'Wh', 'Wgap', 'L', 'a','b', 'c'].map(key => {
+                    let value = parseFloat( params.get(key) );
+                    if( !isNaN(value) ){
+                        this[key] = value;
+                    }
+                });
+
+            },
+            generateLink(){
+                let params = new URLSearchParams();
+                ['windRegion', 'terrainType', 'windSide', 'profileType', 'profileColor', 'reinType', 'reinType_60_70', 'Tn', 'Tref', 'Tv', 'Bh', 'Bw', 'Bl', 'Wh', 'Wgap', 'L', 'a','b', 'c'].map(key => {
+                    params.set(key, this[key]);
+                });
+                return `${document.location.host}?${params.toString()}`;
+            },
+            copyLink(){
+                let link = this.generateLink();
+                navigator.clipboard.writeText(link).then(() => {
+                    alert('Ссылка на форму с параметрами скопирована в буфер обмена');
+                });
+            },
+            shareLink(){
+                let link = this.generateLink();
+                navigator.share({
+                    title: 'Расчет прогиба оконного профиля',
+                    text: 'Предзаполненая форма расчета',
+                    url: link
+                });
             }
         },
         created(){
 
         },
         mounted() {
-
+            this.hasShareOpportunity = typeof navigator.share === 'function';
+            let params = new URLSearchParams(document.location.search);
+            this.setParamsFromRoute(params);
         }
     }
 

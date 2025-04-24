@@ -22,7 +22,7 @@ let tests = {
             profileColor: 'white',
             reinType: 'rt_35x20x1_5_pipe',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {// значения на выходе
+            results: {// значения на выходе
                 impost: 13.46,
                 pilyastr: 1.49,
                 connective3: 8.76,
@@ -36,7 +36,7 @@ let tests = {
             profileColor: 'colored',
             reinType: 'rt_35x20x1_5_pipe',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 13.81,
                 pilyastr: 1.56,
                 connective3: 9.13,
@@ -50,7 +50,7 @@ let tests = {
             profileColor: 'white',
             reinType: 'rt_35x20x2_pipe',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 11.08,
                 pilyastr: 1.19,
                 connective3: 7.35,
@@ -64,7 +64,7 @@ let tests = {
             profileColor: 'colored',
             reinType: 'rt_35x20x2_pipe',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 11.37,
                 pilyastr: 1.23,
                 connective3: 7.66,
@@ -78,7 +78,7 @@ let tests = {
             profileColor: 'white',
             reinType: 'rt_35x20x1_5',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 14.37,
                 pilyastr: 1.97,
                 connective3: 9.57,
@@ -92,7 +92,7 @@ let tests = {
             profileColor: 'colored',
             reinType: 'rt_35x20x1_5',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 14.72,
                 pilyastr: 2.09,
                 connective3: 9.93,
@@ -106,7 +106,7 @@ let tests = {
             profileColor: 'white',
             reinType: 'rt_35x20x2',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 11.94,
                 pilyastr: 1.58,
                 connective3: 7.97,
@@ -120,7 +120,7 @@ let tests = {
             profileColor: 'colored',
             reinType: 'rt_35x20x2',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 12.24,
                 pilyastr: 1.67,
                 connective3: 8.28,
@@ -134,7 +134,7 @@ let tests = {
             profileColor: 'white',
             reinType: 'rt_35x20x1_5_pipe',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 14.44,
                 pilyastr: 1.39,
                 connective3: 8.76,
@@ -148,7 +148,7 @@ let tests = {
             profileColor: 'colored',
             reinType: 'rt_35x20x1_5_pipe',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 14.96,
                 pilyastr: 1.45,
                 connective3: 9.13,
@@ -162,7 +162,7 @@ let tests = {
             profileColor: 'white',
             reinType: 'rt_35x20x2_pipe',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 11.91,
                 pilyastr: 1.10,
                 connective3: 7.35,
@@ -176,7 +176,7 @@ let tests = {
             profileColor: 'colored',
             reinType: 'rt_35x20x2_pipe',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 12.35,
                 pilyastr: 1.14,
                 connective3: 7.66,
@@ -190,7 +190,7 @@ let tests = {
             profileColor: 'white',
             reinType: 'rt_35x20x1_5',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 15.36,
                 pilyastr: 1.86,
                 connective3: 9.57,
@@ -204,7 +204,7 @@ let tests = {
             profileColor: 'colored',
             reinType: 'rt_35x20x1_5',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 15.88,
                 pilyastr: 1.97,
                 connective3: 9.93,
@@ -218,7 +218,7 @@ let tests = {
             profileColor: 'white',
             reinType: 'rt_35x20x2',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 12.80,
                 pilyastr: 1.48,
                 connective3: 7.97,
@@ -232,7 +232,7 @@ let tests = {
             profileColor: 'colored',
             reinType: 'rt_35x20x2',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 13.25,
                 pilyastr: 1.56,
                 connective3: 8.28,
@@ -246,7 +246,7 @@ let tests = {
             profileColor: 'white',
             reinType: 'rt_35x20x1_5_pipe',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 13.82,
                 pilyastr: 1.54,
                 connective3: 9.51,
@@ -260,7 +260,7 @@ let tests = {
             profileColor: 'colored',
             reinType: 'rt_35x20x1_5_pipe',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 14.28,
                 pilyastr: 1.63,
                 connective3: 9.98,
@@ -274,7 +274,7 @@ let tests = {
             profileColor: 'white',
             reinType: 'rt_35x20x2_pipe',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 11.57,
                 pilyastr: 1.23,
                 connective3: 8.12,
@@ -288,7 +288,7 @@ let tests = {
             profileColor: 'colored',
             reinType: 'rt_35x20x2_pipe',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 11.97,
                 pilyastr: 1.28,
                 connective3: 8.53,
@@ -302,7 +302,7 @@ let tests = {
             profileColor: 'white',
             reinType: 'rt_35x20x1_5',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 14.59,
                 pilyastr: 2.05,
                 connective3: 10.24,
@@ -316,7 +316,7 @@ let tests = {
             profileColor: 'colored',
             reinType: 'rt_35x20x1_5',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 15.05,
                 pilyastr: 2.20,
                 connective3: 10.71,
@@ -330,7 +330,7 @@ let tests = {
             profileColor: 'white',
             reinType: 'rt_35x20x2',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 12.35,
                 pilyastr: 1.64,
                 connective3: 8.72,
@@ -344,7 +344,7 @@ let tests = {
             profileColor: 'colored',
             reinType: 'rt_35x20x2',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 12.75,
                 pilyastr: 1.74,
                 connective3: 9.13,
@@ -358,7 +358,7 @@ let tests = {
             profileColor: 'white',
             reinType: 'rt_35x20x1_5_pipe',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 15.08,
                 pilyastr: 1.42,
                 connective3: 9.51,
@@ -372,7 +372,7 @@ let tests = {
             profileColor: 'colored',
             reinType: 'rt_35x20x1_5_pipe',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 15.77,
                 pilyastr: 1.50,
                 connective3: 9.98,
@@ -386,7 +386,7 @@ let tests = {
             profileColor: 'white',
             reinType: 'rt_35x20x2_pipe',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 12.67,
                 pilyastr: 1.12,
                 connective3: 8.12,
@@ -400,7 +400,7 @@ let tests = {
             profileColor: 'colored',
             reinType: 'rt_35x20x2_pipe',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 13.27,
                 pilyastr: 1.16,
                 connective3: 8.53,
@@ -414,7 +414,7 @@ let tests = {
             profileColor: 'white',
             reinType: 'rt_35x20x1_5',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 15.88,
                 pilyastr: 1.92,
                 connective3: 10.24,
@@ -428,7 +428,7 @@ let tests = {
             profileColor: 'colored',
             reinType: 'rt_35x20x1_5',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 16.57,
                 pilyastr: 2.05,
                 connective3: 10.71,
@@ -442,7 +442,7 @@ let tests = {
             profileColor: 'white',
             reinType: 'rt_35x20x2',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 13.49,
                 pilyastr: 1.52,
                 connective3: 8.72,
@@ -456,7 +456,7 @@ let tests = {
             profileColor: 'colored',
             reinType: 'rt_35x20x2',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 14.10,
                 pilyastr: 1.61,
                 connective3: 9.13,
@@ -470,7 +470,7 @@ let tests = {
             profileColor: 'white',
             reinType: 'rt_35x20x1_5_pipe',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 13.57,
                 pilyastr: 2.77,
                 connective3: 8.61,
@@ -484,7 +484,7 @@ let tests = {
             profileColor: 'colored',
             reinType: 'rt_35x20x1_5_pipe',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 13.94,
                 pilyastr: 3.00,
                 connective3: 8.90,
@@ -498,7 +498,7 @@ let tests = {
             profileColor: 'white',
             reinType: 'rt_35x20x2_pipe',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 11.24,
                 pilyastr: 2.20,
                 connective3: 7.25,
@@ -512,7 +512,7 @@ let tests = {
             profileColor: 'colored',
             reinType: 'rt_35x20x2_pipe',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 11.55,
                 pilyastr: 2.35,
                 connective3: 7.50,
@@ -526,7 +526,7 @@ let tests = {
             profileColor: 'white',
             reinType: 'rt_35x20x1_5',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 14.42,
                 pilyastr: 3.68,
                 connective3: 9.37,
@@ -540,7 +540,7 @@ let tests = {
             profileColor: 'colored',
             reinType: 'rt_35x20x1_5',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 14.79,
                 pilyastr: 4.03,
                 connective3: 9.66,
@@ -554,7 +554,7 @@ let tests = {
             profileColor: 'white',
             reinType: 'rt_35x20x2',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 12.06,
                 pilyastr: 2.96,
                 connective3: 7.85,
@@ -568,7 +568,7 @@ let tests = {
             profileColor: 'colored',
             reinType: 'rt_35x20x2',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 12.38,
                 pilyastr: 3.21,
                 connective3: 8.10,
@@ -582,7 +582,7 @@ let tests = {
             profileColor: 'white',
             reinType: 'rt_26x19x1_5',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 26.15,
                 pilyastr: 2.19,
                 connective3: NaN,
@@ -596,7 +596,7 @@ let tests = {
             profileColor: 'colored',
             reinType: 'rt_26x19x1_5',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 26.25,
                 pilyastr: 2.29,
                 connective3: NaN,
@@ -610,7 +610,7 @@ let tests = {
             profileColor: 'white',
             reinType: 'rt_35x28x1_5',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 12.96,
                 pilyastr: 2.44,
                 connective3: 7.91,
@@ -624,7 +624,7 @@ let tests = {
             profileColor: 'colored',
             reinType: 'rt_35x28x1_5',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 13.38,
                 pilyastr: 2.66,
                 connective3: 8.24,
@@ -638,7 +638,7 @@ let tests = {
             profileColor: 'white',
             reinType: 'rt_35x28x2',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 10.64,
                 pilyastr: 1.92,
                 connective3: 7.91,
@@ -652,7 +652,7 @@ let tests = {
             profileColor: 'colored',
             reinType: 'rt_35x28x2',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 10.98,
                 pilyastr: 2.07,
                 connective3: 8.24,
@@ -666,7 +666,7 @@ let tests = {
             profileColor: 'white',
             reinType: 'rt_35x28x1_5_pipe',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 11.46,
                 pilyastr: 1.70,
                 connective3: 7.91,
@@ -680,7 +680,7 @@ let tests = {
             profileColor: 'colored',
             reinType: 'rt_35x28x1_5_pipe',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 11.84,
                 pilyastr: 1.84,
                 connective3: 8.24,
@@ -694,7 +694,7 @@ let tests = {
             profileColor: 'white',
             reinType: 'rt_35x28x2_pipe',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 9.60,
                 pilyastr: 1.32,
                 connective3: 7.91,
@@ -708,7 +708,7 @@ let tests = {
             profileColor: 'colored',
             reinType: 'rt_35x28x2_pipe',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 9.93,
                 pilyastr: 1.41,
                 connective3: 8.24,
@@ -722,7 +722,7 @@ let tests = {
             profileColor: 'white',
             reinType: 'rt_35x28x1_5',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 14.21,
                 pilyastr: 2.33,
                 connective3: 9.79,
@@ -736,7 +736,7 @@ let tests = {
             profileColor: 'colored',
             reinType: 'rt_35x28x1_5',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 14.89,
                 pilyastr: 2.54,
                 connective3: 10.43,
@@ -750,7 +750,7 @@ let tests = {
             profileColor: 'white',
             reinType: 'rt_35x28x2',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 12.10,
                 pilyastr: 1.82,
                 connective3: 9.79,
@@ -764,7 +764,7 @@ let tests = {
             profileColor: 'colored',
             reinType: 'rt_35x28x2',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 12.70,
                 pilyastr: 1.96,
                 connective3: 10.43,
@@ -778,7 +778,7 @@ let tests = {
             profileColor: 'white',
             reinType: 'rt_35x28x1_5_pipe',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 13.60,
                 pilyastr: 2.12,
                 connective3: 9.79,
@@ -792,7 +792,7 @@ let tests = {
             profileColor: 'colored',
             reinType: 'rt_35x28x1_5_pipe',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 14.38,
                 pilyastr: 2.28,
                 connective3: 10.43,
@@ -806,7 +806,7 @@ let tests = {
             profileColor: 'white',
             reinType: 'rt_35x28x2_pipe',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 11.63,
                 pilyastr: 1.69,
                 connective3: 9.79,
@@ -820,7 +820,7 @@ let tests = {
             profileColor: 'colored',
             reinType: 'rt_35x28x2_pipe',
             reinType_60_70: 'rt_35x20x2_pipe',
-            views: {
+            results: {
                 impost: 12.31,
                 pilyastr: 1.80,
                 connective3: 10.43,
