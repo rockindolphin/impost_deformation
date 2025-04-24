@@ -20,8 +20,8 @@ let tests = {
         {
             profileType: 'T78_AERO',
             profileColor: 'white',
-            reinType: 'rt_1',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x1_5_pipe',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {// значения на выходе
                 impost: 13.46,
                 pilyastr: 1.49,
@@ -34,8 +34,8 @@ let tests = {
         {
             profileType: 'T78_AERO',
             profileColor: 'colored',
-            reinType: 'rt_1',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x1_5_pipe',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 13.81,
                 pilyastr: 1.56,
@@ -48,8 +48,8 @@ let tests = {
         {
             profileType: 'T78_AERO',
             profileColor: 'white',
-            reinType: 'rt_2',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x2_pipe',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 11.08,
                 pilyastr: 1.19,
@@ -62,8 +62,8 @@ let tests = {
         {
             profileType: 'T78_AERO',
             profileColor: 'colored',
-            reinType: 'rt_2',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x2_pipe',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 11.37,
                 pilyastr: 1.23,
@@ -76,8 +76,8 @@ let tests = {
         {
             profileType: 'T78_AERO',
             profileColor: 'white',
-            reinType: 'rt_3',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x1_5',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 14.37,
                 pilyastr: 1.97,
@@ -90,8 +90,8 @@ let tests = {
         {
             profileType: 'T78_AERO',
             profileColor: 'colored',
-            reinType: 'rt_3',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x1_5',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 14.72,
                 pilyastr: 2.09,
@@ -104,8 +104,8 @@ let tests = {
         {
             profileType: 'T78_AERO',
             profileColor: 'white',
-            reinType: 'rt_4',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x2',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 11.94,
                 pilyastr: 1.58,
@@ -118,8 +118,8 @@ let tests = {
         {
             profileType: 'T78_AERO',
             profileColor: 'colored',
-            reinType: 'rt_4',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x2',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 12.24,
                 pilyastr: 1.67,
@@ -132,8 +132,8 @@ let tests = {
         {
             profileType: 'T80_AERO',
             profileColor: 'white',
-            reinType: 'rt_1',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x1_5_pipe',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 14.44,
                 pilyastr: 1.39,
@@ -146,8 +146,8 @@ let tests = {
         {
             profileType: 'T80_AERO',
             profileColor: 'colored',
-            reinType: 'rt_1',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x1_5_pipe',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 14.96,
                 pilyastr: 1.45,
@@ -160,8 +160,8 @@ let tests = {
         {
             profileType: 'T80_AERO',
             profileColor: 'white',
-            reinType: 'rt_2',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x2_pipe',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 11.91,
                 pilyastr: 1.10,
@@ -174,8 +174,8 @@ let tests = {
         {
             profileType: 'T80_AERO',
             profileColor: 'colored',
-            reinType: 'rt_2',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x2_pipe',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 12.35,
                 pilyastr: 1.14,
@@ -188,8 +188,8 @@ let tests = {
         {
             profileType: 'T80_AERO',
             profileColor: 'white',
-            reinType: 'rt_3',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x1_5',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 15.36,
                 pilyastr: 1.86,
@@ -202,8 +202,8 @@ let tests = {
         {
             profileType: 'T80_AERO',
             profileColor: 'colored',
-            reinType: 'rt_3',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x1_5',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 15.88,
                 pilyastr: 1.97,
@@ -216,8 +216,8 @@ let tests = {
         {
             profileType: 'T80_AERO',
             profileColor: 'white',
-            reinType: 'rt_4',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x2',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 12.80,
                 pilyastr: 1.48,
@@ -230,8 +230,8 @@ let tests = {
         {
             profileType: 'T80_AERO',
             profileColor: 'colored',
-            reinType: 'rt_4',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x2',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 13.25,
                 pilyastr: 1.56,
@@ -244,8 +244,8 @@ let tests = {
         {
             profileType: 'T78_SUPER_AERO',
             profileColor: 'white',
-            reinType: 'rt_1',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x1_5_pipe',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 13.82,
                 pilyastr: 1.54,
@@ -258,8 +258,8 @@ let tests = {
         {
             profileType: 'T78_SUPER_AERO',
             profileColor: 'colored',
-            reinType: 'rt_1',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x1_5_pipe',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 14.28,
                 pilyastr: 1.63,
@@ -272,8 +272,8 @@ let tests = {
         {
             profileType: 'T78_SUPER_AERO',
             profileColor: 'white',
-            reinType: 'rt_2',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x2_pipe',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 11.57,
                 pilyastr: 1.23,
@@ -286,8 +286,8 @@ let tests = {
         {
             profileType: 'T78_SUPER_AERO',
             profileColor: 'colored',
-            reinType: 'rt_2',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x2_pipe',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 11.97,
                 pilyastr: 1.28,
@@ -300,8 +300,8 @@ let tests = {
         {
             profileType: 'T78_SUPER_AERO',
             profileColor: 'white',
-            reinType: 'rt_3',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x1_5',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 14.59,
                 pilyastr: 2.05,
@@ -314,8 +314,8 @@ let tests = {
         {
             profileType: 'T78_SUPER_AERO',
             profileColor: 'colored',
-            reinType: 'rt_3',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x1_5',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 15.05,
                 pilyastr: 2.20,
@@ -328,8 +328,8 @@ let tests = {
         {
             profileType: 'T78_SUPER_AERO',
             profileColor: 'white',
-            reinType: 'rt_4',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x2',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 12.35,
                 pilyastr: 1.64,
@@ -342,8 +342,8 @@ let tests = {
         {
             profileType: 'T78_SUPER_AERO',
             profileColor: 'colored',
-            reinType: 'rt_4',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x2',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 12.75,
                 pilyastr: 1.74,
@@ -356,8 +356,8 @@ let tests = {
         {
             profileType: 'T80_SUPER_AERO',
             profileColor: 'white',
-            reinType: 'rt_1',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x1_5_pipe',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 15.08,
                 pilyastr: 1.42,
@@ -370,8 +370,8 @@ let tests = {
         {
             profileType: 'T80_SUPER_AERO',
             profileColor: 'colored',
-            reinType: 'rt_1',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x1_5_pipe',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 15.77,
                 pilyastr: 1.50,
@@ -384,8 +384,8 @@ let tests = {
         {
             profileType: 'T80_SUPER_AERO',
             profileColor: 'white',
-            reinType: 'rt_2',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x2_pipe',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 12.67,
                 pilyastr: 1.12,
@@ -398,8 +398,8 @@ let tests = {
         {
             profileType: 'T80_SUPER_AERO',
             profileColor: 'colored',
-            reinType: 'rt_2',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x2_pipe',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 13.27,
                 pilyastr: 1.16,
@@ -412,8 +412,8 @@ let tests = {
         {
             profileType: 'T80_SUPER_AERO',
             profileColor: 'white',
-            reinType: 'rt_3',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x1_5',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 15.88,
                 pilyastr: 1.92,
@@ -426,8 +426,8 @@ let tests = {
         {
             profileType: 'T80_SUPER_AERO',
             profileColor: 'colored',
-            reinType: 'rt_3',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x1_5',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 16.57,
                 pilyastr: 2.05,
@@ -440,8 +440,8 @@ let tests = {
         {
             profileType: 'T80_SUPER_AERO',
             profileColor: 'white',
-            reinType: 'rt_4',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x2',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 13.49,
                 pilyastr: 1.52,
@@ -454,8 +454,8 @@ let tests = {
         {
             profileType: 'T80_SUPER_AERO',
             profileColor: 'colored',
-            reinType: 'rt_4',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x2',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 14.10,
                 pilyastr: 1.61,
@@ -468,8 +468,8 @@ let tests = {
         {
             profileType: 'T78_ACLASS',
             profileColor: 'white',
-            reinType: 'rt_1',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x1_5_pipe',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 13.57,
                 pilyastr: 2.77,
@@ -482,8 +482,8 @@ let tests = {
         {
             profileType: 'T78_ACLASS',
             profileColor: 'colored',
-            reinType: 'rt_1',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x1_5_pipe',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 13.94,
                 pilyastr: 3.00,
@@ -496,8 +496,8 @@ let tests = {
         {
             profileType: 'T78_ACLASS',
             profileColor: 'white',
-            reinType: 'rt_2',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x2_pipe',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 11.24,
                 pilyastr: 2.20,
@@ -510,8 +510,8 @@ let tests = {
         {
             profileType: 'T78_ACLASS',
             profileColor: 'colored',
-            reinType: 'rt_2',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x2_pipe',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 11.55,
                 pilyastr: 2.35,
@@ -524,8 +524,8 @@ let tests = {
         {
             profileType: 'T78_ACLASS',
             profileColor: 'white',
-            reinType: 'rt_3',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x1_5',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 14.42,
                 pilyastr: 3.68,
@@ -538,8 +538,8 @@ let tests = {
         {
             profileType: 'T78_ACLASS',
             profileColor: 'colored',
-            reinType: 'rt_3',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x1_5',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 14.79,
                 pilyastr: 4.03,
@@ -552,8 +552,8 @@ let tests = {
         {
             profileType: 'T78_ACLASS',
             profileColor: 'white',
-            reinType: 'rt_4',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x2',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 12.06,
                 pilyastr: 2.96,
@@ -566,8 +566,8 @@ let tests = {
         {
             profileType: 'T78_ACLASS',
             profileColor: 'colored',
-            reinType: 'rt_4',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x20x2',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 12.38,
                 pilyastr: 3.21,
@@ -580,8 +580,8 @@ let tests = {
         {
             profileType: 'GLIDE',
             profileColor: 'white',
-            reinType: 'rt_9',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_26x19x1_5',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 26.15,
                 pilyastr: 2.19,
@@ -594,8 +594,8 @@ let tests = {
         {
             profileType: 'GLIDE',
             profileColor: 'colored',
-            reinType: 'rt_9',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_26x19x1_5',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 26.25,
                 pilyastr: 2.29,
@@ -608,8 +608,8 @@ let tests = {
         {
             profileType: 'T86_60_4',
             profileColor: 'white',
-            reinType: 'rt_5',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x28x1_5',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 12.96,
                 pilyastr: 2.44,
@@ -622,8 +622,8 @@ let tests = {
         {
             profileType: 'T86_60_4',
             profileColor: 'colored',
-            reinType: 'rt_5',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x28x1_5',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 13.38,
                 pilyastr: 2.66,
@@ -636,8 +636,8 @@ let tests = {
         {
             profileType: 'T86_60_4',
             profileColor: 'white',
-            reinType: 'rt_6',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x28x2',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 10.64,
                 pilyastr: 1.92,
@@ -650,8 +650,8 @@ let tests = {
         {
             profileType: 'T86_60_4',
             profileColor: 'colored',
-            reinType: 'rt_6',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x28x2',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 10.98,
                 pilyastr: 2.07,
@@ -664,8 +664,8 @@ let tests = {
         {
             profileType: 'T86_60_4',
             profileColor: 'white',
-            reinType: 'rt_7',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x28x1_5_pipe',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 11.46,
                 pilyastr: 1.70,
@@ -678,8 +678,8 @@ let tests = {
         {
             profileType: 'T86_60_4',
             profileColor: 'colored',
-            reinType: 'rt_7',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x28x1_5_pipe',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 11.84,
                 pilyastr: 1.84,
@@ -692,8 +692,8 @@ let tests = {
         {
             profileType: 'T86_60_4',
             profileColor: 'white',
-            reinType: 'rt_8',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x28x2_pipe',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 9.60,
                 pilyastr: 1.32,
@@ -706,8 +706,8 @@ let tests = {
         {
             profileType: 'T86_60_4',
             profileColor: 'colored',
-            reinType: 'rt_8',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x28x2_pipe',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 9.93,
                 pilyastr: 1.41,
@@ -720,8 +720,8 @@ let tests = {
         {
             profileType: 'T86_70_6',
             profileColor: 'white',
-            reinType: 'rt_5',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x28x1_5',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 14.21,
                 pilyastr: 2.33,
@@ -734,8 +734,8 @@ let tests = {
         {
             profileType: 'T86_70_6',
             profileColor: 'colored',
-            reinType: 'rt_5',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x28x1_5',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 14.89,
                 pilyastr: 2.54,
@@ -748,8 +748,8 @@ let tests = {
         {
             profileType: 'T86_70_6',
             profileColor: 'white',
-            reinType: 'rt_6',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x28x2',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 12.10,
                 pilyastr: 1.82,
@@ -762,8 +762,8 @@ let tests = {
         {
             profileType: 'T86_70_6',
             profileColor: 'colored',
-            reinType: 'rt_6',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x28x2',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 12.70,
                 pilyastr: 1.96,
@@ -776,8 +776,8 @@ let tests = {
         {
             profileType: 'T86_70_6',
             profileColor: 'white',
-            reinType: 'rt_7',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x28x1_5_pipe',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 13.60,
                 pilyastr: 2.12,
@@ -790,8 +790,8 @@ let tests = {
         {
             profileType: 'T86_70_6',
             profileColor: 'colored',
-            reinType: 'rt_7',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x28x1_5_pipe',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 14.38,
                 pilyastr: 2.28,
@@ -804,8 +804,8 @@ let tests = {
         {
             profileType: 'T86_70_6',
             profileColor: 'white',
-            reinType: 'rt_8',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x28x2_pipe',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 11.63,
                 pilyastr: 1.69,
@@ -818,8 +818,8 @@ let tests = {
         {
             profileType: 'T86_70_6',
             profileColor: 'colored',
-            reinType: 'rt_8',
-            reinType_60_70: 'rt_2',
+            reinType: 'rt_35x28x2_pipe',
+            reinType_60_70: 'rt_35x20x2_pipe',
             views: {
                 impost: 12.31,
                 pilyastr: 1.80,

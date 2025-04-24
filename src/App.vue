@@ -617,36 +617,36 @@
                 },
                 profileColor: 'white', //Цвет профиля [[F21]]
                 reinTypes: {
-                    rt_1: {
+                    rt_35x20x1_5_pipe: {
                         i18n: '35*20*1,5(труба)'
                     },
-                    rt_2: {
+                    rt_35x20x2_pipe: {
                         i18n: '35*20*2(труба)'
                     },
-                    rt_3: {
+                    rt_35x20x1_5: {
                         i18n: '35*20*1,5'
                     },
-                    rt_4: {
+                    rt_35x20x2: {
                         i18n: '35*20*2'
                     },
-                    rt_5: {
+                    rt_35x28x1_5: {
                         i18n: '35*28*1,5'
                     },
-                    rt_6: {
+                    rt_35x28x2: {
                         i18n: '35*28*2'
                     },
-                    rt_7: {
+                    rt_35x28x1_5_pipe: {
                         i18n: '35*28*1,5(труба)'
                     },
-                    rt_8: {
+                    rt_35x28x2_pipe: {
                         i18n: '35*28*2(труба)'
                     },
-                    rt_9: {//GLIDE
+                    rt_26x19x1_5: {//GLIDE
                         i18n: '26*19*1,5'
                     }
                 },
-                reinType: 'rt_2', //Армирование импоста [[F22]]
-                reinType_60_70: 'rt_2', // Армирование для коробок 60-4 и 70-6  [[F23]]
+                reinType: 'rt_35x20x2_pipe', //Армирование импоста [[F22]]
+                reinType_60_70: 'rt_35x20x2_pipe', // Армирование для коробок 60-4 и 70-6  [[F23]]
             }
         },
         computed: {
@@ -924,15 +924,15 @@
             },
             reinTypesOptions(){// Тип армирования в зависимости от типа профиля
                 if( ['T86_60_4', 'T86_70_6'].includes(this.profileType) ){
-                    return ['rt_5', 'rt_6', 'rt_7', 'rt_8'];
+                    return ['rt_35x28x1_5', 'rt_35x28x2', 'rt_35x28x1_5_pipe', 'rt_35x28x2_pipe'];
                 }else if( ['GLIDE'].includes(this.profileType) ){
-                    return ['rt_9'];
+                    return ['rt_26x19x1_5'];
                 }else{//для всех остальных
-                    return ['rt_1', 'rt_2', 'rt_3', 'rt_4'];
+                    return ['rt_35x20x1_5_pipe', 'rt_35x20x2_pipe', 'rt_35x20x1_5', 'rt_35x20x2'];
                 }
             },
             reinTypes_60_70_Options(){
-                return ['rt_1', 'rt_2', 'rt_3', 'rt_4'];
+                return ['rt_35x20x1_5_pipe', 'rt_35x20x2_pipe', 'rt_35x20x1_5', 'rt_35x20x2'];
             },
             maxСurve(){//Максимально допустимый прогиб, мм [[D25]]
                 return ((this.L/100)/200)*1000;
