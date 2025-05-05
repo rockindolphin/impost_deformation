@@ -1,20 +1,31 @@
 <template>
-    <div class="page__body">
+    <div class="page__body" ref="root">
         <header class="page__header header">
             <div class="page__wrapper">
                 <div class="flex align-center mb-8 py-3">
                     <h1 class="text-2xl mr-4">
                         Расчет прогиба оконного профиля
                     </h1>
-                    <div class="flex align-center ml-auto">
+                    <div class="flex align-center ml-auto print:hidden">
                         <button
                             class="btn"
+                            title="Распечатать"
+                            @click="printForm()"
+                            >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+                                <path d="M22.5 17.25a1.5 1.5 0 0 1-1.5 1.5h-1.605A3 3 0 0 0 16.5 16.5h-9a3 3 0 0 0-2.895 2.25H3a1.5 1.5 0 0 1-1.5-1.5v-1.5a1.5 1.5 0 0 1 1.5-1.5h18a1.5 1.5 0 0 1 1.5 1.5Zm-6 3.75h-9a1.5 1.5 0 0 1 0-3h9a1.5 1.5 0 0 1 0 3ZM6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5v8.25H6Zm15 8.25h-1.5V4.5a3 3 0 0 0-3-3h-9a3 3 0 0 0-3 3v8.25H3a3 3 0 0 0-3 3v1.5a3 3 0 0 0 3 3h1.605A2.99 2.99 0 0 0 7.5 22.5h9a2.99 2.99 0 0 0 2.895-2.25H21a3 3 0 0 0 3-3v-1.5a3 3 0 0 0-3-3Zm0 0" id="surface1"/>
+                            </svg>
+                        </button>
+                        <button
+                            class="btn ml-3"
                             title="Копировать ссылку на форму"
                             @click="copyLink()"
                             >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+                                <g fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="1" stroke-miterlimit="4" stroke="#000">
+                                    <path d="M8 18c-2.828 0-4.242 0-5.121-.879C2 16.242 2 14.828 2 12c0-2.828 0-4.242.879-5.121C3.758 6 5.172 6 8 6c2.828 0 4.242 0 5.121.879C14 7.758 14 9.172 14 12"/>
+                                    <path d="M10 12c0 2.828 0 4.242.879 5.121C11.758 18 13.172 18 16 18c2.828 0 4.242 0 5.121-.879.3-.3.496-.66.629-1.121m.25-4c0-2.828 0-4.242-.879-5.121C20.242 6 18.828 6 16 6"/>
+                                </g>
                             </svg>
                         </button>
                         <button
@@ -23,10 +34,8 @@
                             title="Поделиться ссылку на форму"
                             @click="shareLink()"
                             >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
-                                <polyline points="16 6 12 2 8 6"></polyline>
-                                <line x1="12" y1="2" x2="12" y2="15"></line>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+                                <path fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke="#000" stroke-opacity="1" stroke-miterlimit="4" d="M20 13v4.5c0 3.059-4 3-8 3s-8 .059-8-3V13m8-10v12m0-12 4 4m-4-4L8 7" />
                             </svg>
                         </button>
                     </div>
@@ -34,7 +43,7 @@
             </div>
         </header>
         <main class="page__main main">
-            <div class="page__wrapper">
+            <div class="page__wrapper print:hidden">
 
                 <details class="control control--details">
                     <summary>
@@ -43,7 +52,7 @@
                     <div class="grid gap-4 grid-cols-12 items-end">
                         <label class="col-span-12 md:col-span-6" for="windRegion">
                             <span class="form__label">
-                                Ветровой район:
+                                {{ i18n.windRegion }}:
                             </span>
                             <select
                                 id="windRegion"
@@ -62,7 +71,7 @@
 
                         <label class="col-span-12 md:col-span-6" for="terrainType">
                             <span class="form__label">
-                                Тип местности:
+                                {{ i18n.terrainType }}:
                             </span>
                             <select
                                 id="terrainType"
@@ -81,7 +90,7 @@
 
                         <label class="col-span-12 md:col-span-6" for="Tn">
                             <span class="form__label">
-                                Расчетная наружная температура воздуха,˚С:
+                                {{ i18n.Tn }}:
                             </span>
                             <input
                                 id="Tn"
@@ -94,7 +103,7 @@
 
                         <label class="col-span-12 md:col-span-6" for="Tref">
                             <span class="form__label">
-                                Температура замыкания (монтажа) оконной конструкции, ˚С:
+                                {{ i18n.Tref }}
                             </span>
                             <input
                                 id="Tref"
@@ -136,7 +145,7 @@
                         <div class="col-span-12 md:col-span-6 md:order-1 grid gap-4 grid-cols-12">
                             <label class="col-span-12" for="Bh">
                                 <span class="form__label">
-                                    Высота здания h (м):
+                                    {{ i18n.Bh }}:
                                 </span>
                                 <input
                                     id="Bh"
@@ -149,7 +158,7 @@
 
                             <label class="col-span-12" for="Bw">
                                 <span class="form__label">
-                                    Ширина здания d (м):
+                                    {{ i18n.Bw }}:
                                 </span>
                                 <input
                                     id="Bw"
@@ -162,7 +171,7 @@
 
                             <label class="col-span-12" for="Bl">
                                 <span class="form__label">
-                                    Длина здания:
+                                    {{ i18n.Bl }}:
                                 </span>
                                 <input
                                     id="Bl"
@@ -175,7 +184,7 @@
 
                             <label class="col-span-12" for="Wh">
                                 <span class="form__label">
-                                    Фактическая высота установки окна (м):
+                                    {{ i18n.Wh }}:
                                 </span>
                                 <input
                                     id="Wh"
@@ -188,7 +197,7 @@
 
                             <label class="col-span-12" for="windSide">
                                 <span class="form__label">
-                                    Сторона:
+                                    {{ i18n.windSide }}:
                                 </span>
                                 <select
                                     id="windSide"
@@ -206,12 +215,12 @@
                             </label>
 
                             <label
-                                v-if="windSide === 'side_wall'"
+                                v-if="isVisible.Wgap"
                                 class="col-span-12"
                                 for="Wgap"
                                 >
                                 <span class="form__label">
-                                    Расстояние от края наветренной стены до окна, м:
+                                    {{ i18n.Wgap }}:
                                 </span>
                                 <input
                                     id="Wgap"
@@ -262,7 +271,7 @@
                         <div class="col-span-12 md:col-span-6 md:order-1 grid gap-4 grid-cols-12">
                             <label class="col-span-12" for="L">
                                 <span class="form__label">
-                                    Длина импоста L (см):
+                                    {{ i18n.L }}:
                                 </span>
                                 <input
                                     id="L"
@@ -275,7 +284,7 @@
 
                             <label class="col-span-12" for="a">
                                 <span class="form__label">
-                                    a (см):
+                                    {{ i18n.a }}:
                                 </span>
                                 <input
                                     id="a"
@@ -288,7 +297,7 @@
 
                             <label class="col-span-12" for="b">
                                 <span class="form__label">
-                                    b (см):
+                                    {{ i18n.b }}:
                                 </span>
                                 <input
                                     id="b"
@@ -301,7 +310,7 @@
 
                             <label class="col-span-12" for="c">
                                 <span class="form__label">
-                                    c (см):
+                                    {{ i18n.c }}:
                                 </span>
                                 <input
                                     id="c"
@@ -313,7 +322,7 @@
                             </label>
 
                             <p class="col-span-12 font-bold">
-                                d (см): {{ d.toFixed(2) }}
+                                {{ i18n.d }}: {{ d.toFixed(2) }}
                             </p>
                         </div>
 
@@ -331,7 +340,7 @@
                         <div class="col-span-12 md:col-span-6 md:order-1 grid gap-4 grid-cols-12">
                             <label class="col-span-12" for="profileType">
                                 <span class="form__label">
-                                    Тип профиля
+                                    {{ i18n.profileType }}:
                                 </span>
                                 <select
                                     id="profileType"
@@ -350,7 +359,7 @@
 
                             <label class="col-span-12" for="profileColor">
                                 <span class="form__label">
-                                    Цвет профиля
+                                    {{ i18n.profileColor }}:
                                 </span>
                                 <select
                                     id="profileColor"
@@ -369,7 +378,7 @@
 
                             <label class="col-span-12" for="reinType">
                                 <span class="form__label">
-                                    Армирование импоста
+                                    {{ i18n.reinType }}:
                                 </span>
                                 <select
                                     id="reinType"
@@ -387,12 +396,12 @@
                             </label>
 
                             <label
-                                v-if="['T86_60_4', 'T86_70_6'].includes(profileType)"
+                                v-if="isVisible.reinType_60_70"
                                 class="col-span-12"
                                 for="reinType_60_70"
                                 >
                                 <span class="form__label">
-                                    Армирование для коробок 60-4 и 70-6
+                                    {{ i18n.reinType_60_70 }}:
                                 </span>
                                 <select
                                     id="reinType_60_70"
@@ -409,8 +418,8 @@
                                 </select>
                             </label>
 
-                            <p class="col-span-12 font-bold">
-                                Максимально допустимый прогиб, мм: {{ maxСurve.toFixed(3) }}
+                            <p class="col-span-12">
+                                <span class="font-bold">{{ i18n.maxСurve }}:</span> {{ maxСurve.toFixed(3) }}
                             </p>
 
                             <h4>
@@ -441,12 +450,12 @@
                                 <p class="font-bold">
                                     {{ value.title }}
                                 </p>
-                                <img :src="value.src" class="w-1/2" :alt="value.title">
-                                <p class="col-span-12 font-bold">
+                                <img :src="value.src" class="w-1/2 my-2" :alt="value.title">
+                                <p class="col-span-12">
                                     <span>
-                                        Расчётный прогиб, мм: {{ value.result.toFixed(2) }}
+                                        <span class="font-bold">Расчётный прогиб, мм:</span> {{ value.result.toFixed(2) }}
                                     </span>
-                                    <span class="block mt-3">
+                                    <span class="block mt-3 font-bold">
                                         <span class="text-green-600" v-if="value.result <= maxСurve">
                                             Удовлетворяет условию прочности!
                                         </span>
@@ -461,6 +470,60 @@
 
                     </div>
                 </details>
+
+            </div>
+            <div class="page__wrapper hidden print:block">
+
+                <table class="print_table my-4">
+                    <thead>
+                        <tr>
+                            <th>Параметр</th>
+                            <th>Значение</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            v-for="(param, index) in printParams"
+                            :key="`tr_${index}`"
+                            >
+                            <td>
+                                {{ param.title }}
+                            </td>
+                            <td>
+                                {{ param.value }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="col-span-12">
+                    <span class="font-bold">{{ i18n.maxСurve }}:</span> {{ maxСurve.toFixed(3) }}
+                </p>
+                <table class="print_table my-4">
+                    <thead>
+                        <tr>
+                            <th>Исполнение</th>
+                            <th>Расчётный прогиб, мм</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            v-for="(value, key) in resultViews"
+                            :key="`tr_${key}`"
+                            >
+                            <td>
+                                {{ value.title }}
+                            </td>
+                            <td
+                                :class="{
+                                    'bg-green-600': value.result <= maxСurve,
+                                    'bg-red-600': value.result > maxСurve
+                                }"
+                                >
+                                {{ value.result.toFixed(2) }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
             </div>
         </main>
@@ -906,6 +969,109 @@
                     l_text: l_text
                 };
             },
+            i18n(){
+                return {
+                    windRegion: 'Ветровой район',
+                    terrainType: 'Тип местности',
+                    Tn: 'Расчетная наружная температура воздуха,˚С',
+                    Tref: 'Температура замыкания (монтажа) оконной конструкции, ˚С',
+                    Tv: 'Расчетная внутренняя температура воздуха,˚С',
+                    Bh: 'Высота здания h (м)',
+                    Bw: 'Ширина здания d (м)',
+                    Bl: 'Длина здания',
+                    Wh: 'Фактическая высота установки окна (м)',
+                    windSide: 'Сторона',
+                    Wgap: 'Расстояние от края наветренной стены до окна, м',
+                    L: 'Длина импоста L (см)',
+                    a: 'a (см)',
+                    b: 'b (см)',
+                    c: 'c (см)',
+                    d: 'd (см)',
+                    profileType: 'Тип профиля',
+                    profileColor: 'Цвет профиля',
+                    reinType: 'Армирование импоста',
+                    reinType_60_70: 'Армирование для коробок 60-4 и 70-6',
+                    maxСurve: 'Максимально допустимый прогиб, мм'
+                }
+            },
+            isVisible(){
+                return {
+                    Wgap: this.windSide === 'side_wall',
+                    reinType_60_70: ['T86_60_4', 'T86_70_6'].includes(this.profileType)
+                }
+            },
+            printParams(){
+                return [
+                    {
+                        title: this.i18n.windRegion,
+                        value: this.windRegion
+                    },
+                    {
+                        title: this.i18n.terrainType,
+                        value: this.terrainType
+                    },
+                    {
+                        title: this.i18n.Tn,
+                        value: this.Tn
+                    },
+                    {
+                        title: this.i18n.Tref,
+                        value: this.Tref
+                    },
+                    {
+                        title: this.i18n.Tv,
+                        value: this.Tv
+                    },
+                    {
+                        title: this.i18n.windSide,
+                        value: this.windSides[this.windSide].i18n
+                    },
+                    ...(
+                        this.isVisible.Wgap ? [{
+                            title: this.i18n.Wgap,
+                            value: this.Wgap
+                        }] : []
+                    ),
+                    {
+                        title: this.i18n.L,
+                        value: this.L
+                    },
+                    {
+                        title: this.i18n.a,
+                        value: this.a
+                    },
+                    {
+                        title: this.i18n.b,
+                        value: this.b
+                    },
+                    {
+                        title: this.i18n.c,
+                        value: this.c
+                    },
+                    {
+                        title: this.i18n.d,
+                        value: this.d.toFixed(2)
+                    },
+                    {
+                        title: this.i18n.profileType,
+                        value: this.profileType
+                    },
+                    {
+                        title: this.i18n.profileColor,
+                        value: this.profileColors[this.profileColor].i18n
+                    },
+                    {
+                        title: this.i18n.reinType,
+                        value: this.reinTypes[this.reinType].i18n
+                    },
+                    ...(
+                        this.isVisible.reinType_60_70 ? [{
+                            title: this.i18n.reinType_60_70,
+                            value: this.reinTypes[this.reinType_60_70].i18n
+                        }] : []
+                    )
+                ];
+            },
             d(){ //Рассчитываемый элемент d [[B17]]
                 return this.L - this.c;
             },
@@ -1269,6 +1435,9 @@
                     params.set(key, this[key]);
                 });
                 return params.toString();
+            },
+            printForm(){
+                window.print();
             },
             copyLink(){
                 let link = `${document.location.host}?${this.generateUrlParams()}`;
