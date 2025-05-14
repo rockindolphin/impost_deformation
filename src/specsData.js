@@ -344,61 +344,61 @@ const specsData = {// таблицы характеристик
         },
         T78_ACLASS: {
             rt_35x20x1_5_pipe: {
-                yellow: 3179848,
+                yellow: 1589924,
                 orange: 442297,
                 cyan: 12.847,
-                purple: 2624,
+                purple: 1312,
                 green: 420
             },
             rt_35x20x2_pipe: {
-                yellow: 3179848,
+                yellow: 1589924,
                 orange: 506742,
                 cyan: 9.238,
-                purple: 2624,
+                purple: 1312,
                 green: 464
             },
             rt_35x20x1_5: {
-                yellow: 3179848,
+                yellow: 1589924,
                 orange: 366778,
                 cyan: 17.36,
-                purple: 2624,
+                purple: 1312,
                 green: 376
             },
             rt_35x20x2: {
-                yellow: 3179848,
+                yellow: 1589924,
                 orange: 426257,
                 cyan: 13.99,
-                purple: 2624,
+                purple: 1312,
                 green: 409
             }
         },
         T86_60_4: {
             rt_35x28x1_5: {
-                yellow: 1787685,
+                yellow: 1733930,
                 orange: 421772,
                 cyan: 17.44,
-                purple: 1437,
+                purple: 1407,
                 green: 405.5
             },
             rt_35x28x2: {
-                yellow: 1787685,
+                yellow: 1733930,
                 orange: 489871,
                 cyan: 13.66,
-                purple: 1437,
+                purple: 1407,
                 green: 448
             },
             rt_35x28x1_5_pipe: {
-                yellow: 1787685,
+                yellow: 1733930,
                 orange: 576006,
                 cyan: 14.69,
-                purple: 1437,
+                purple: 1407,
                 green: 444
             },
             rt_35x28x2_pipe: {
-                yellow: 1787685,
+                yellow: 1733930,
                 orange: 658387,
                 cyan: 10.519,
-                purple: 1437,
+                purple: 1407,
                 green: 495
             }
         },

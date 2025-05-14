@@ -1289,11 +1289,6 @@
                 let IW = this.selectedProfileParams.impostWidth, //[[F283]]
                     tk = this.selectedProfileParams.tk;// [[F281]]
                 return AP * ((this.Tv - this.Tn)/IW)*(R0/((1/AB)+R0+(1/AH))) * tk;
-            },
-            K0_pilyastr(){
-                let IW = 0.07,
-                    tk = this.selectedProfileParams.tk;
-                return AP * ((this.Tv - this.Tn)/IW)*(R0/((1/AB)+R0+(1/AH))) * tk;
             }
         },
         methods: {
@@ -1316,7 +1311,7 @@
             },
             computeEstimatedDeflection(specKey){
                 let specs = this.computeSpec(specsData[specKey]),
-                    K0 = specKey === 'pilyastr' ? this.K0_pilyastr : this.K0,
+                    K0 = this.K0,
                     Tref = this.Tref, //Температура замыкания (монтажа) оконной конструкции, ˚С [[F17]]
                     Tn = this.Tn, //Расчетная наружная температура воздуха (температура воздуха наиболее холодной пятидневки),˚С  [[F16]]
                     Tv = this.Tv, //Расчетная внутренняя температура воздуха,˚С [[F18]]
