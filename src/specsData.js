@@ -151,6 +151,36 @@ const specsData = {// таблицы характеристик
                 green: 137
             }
         },
+        T78_ACLASS_L68: {
+            rt_35x20x1_5_pipe: {
+                yellow: 406621,
+                orange: 22100,
+                cyan: 6.24,
+                purple: 874,
+                green: 148.7
+            },
+            rt_35x20x2_pipe: {
+                yellow: 406621,
+                orange: 28200,
+                cyan: 6.24,
+                purple: 874,
+                green: 193
+            },
+            rt_35x20x1_5: {
+                yellow: 406621,
+                orange: 20100,
+                cyan: 6.07,
+                purple: 874,
+                green: 105.1
+            },
+            rt_35x20x2: {
+                yellow: 406621,
+                orange: 25500,
+                cyan: 6.07,
+                purple: 874,
+                green: 137
+            }
+        },
         T86_60_4: {
             rt_35x28x1_5: {
                 yellow: 469124,
@@ -369,6 +399,36 @@ const specsData = {// таблицы характеристик
                 orange: 426257,
                 cyan: 13.99,
                 purple: 1312,
+                green: 409
+            }
+        },
+        T78_ACLASS_L68: {
+            rt_35x20x1_5_pipe: {
+                yellow: 3179848,
+                orange: 442297,
+                cyan: 12.847,
+                purple: 2624,
+                green: 420
+            },
+            rt_35x20x2_pipe: {
+                yellow: 3179848,
+                orange: 506742,
+                cyan: 9.238,
+                purple: 2624,
+                green: 464
+            },
+            rt_35x20x1_5: {
+                yellow: 3179848,
+                orange: 366778,
+                cyan: 17.36,
+                purple: 2624,
+                green: 376
+            },
+            rt_35x20x2: {
+                yellow: 3179848,
+                orange: 426257,
+                cyan: 13.99,
+                purple: 2624,
                 green: 409
             }
         },
@@ -593,6 +653,36 @@ const specsData = {// таблицы характеристик
                 green: 275
             }
         },
+        T78_ACLASS_L68: {
+            rt_35x28x1_5: {
+                yellow: 914580,
+                orange: 50212,
+                cyan: 3.99,
+                purple: 1905,
+                green: 267
+            },
+            rt_35x28x2: {
+                yellow: 914580,
+                orange: 64218,
+                cyan: 4.04,
+                purple: 1905,
+                green: 352
+            },
+            rt_35x28x1_5_pipe: {
+                yellow: 914580,
+                orange: 59267,
+                cyan: 4.3,
+                purple: 1905,
+                green: 345
+            },
+            rt_35x28x2_pipe: {
+                yellow: 914580,
+                orange: 73785,
+                cyan: 4.29,
+                purple: 1905,
+                green: 447
+            }
+        },
         T86_60_4: {
             rt_35x20x1_5_pipe: {
                 yellow: 911177,
@@ -803,6 +893,36 @@ const specsData = {// таблицы характеристик
                 cyan: 2.477,
                 purple: 2089,
                 green: 875
+            }
+        },
+        T78_ACLASS_L68: {
+            rt_35x28x1_5: {
+                yellow: 1857508,
+                orange: 550418,
+                cyan: 2.61,
+                purple: 2212,
+                green: 867
+            },
+            rt_35x28x2: {
+                yellow: 1857508,
+                orange: 564488,
+                cyan: 2.696,
+                purple: 2212,
+                green: 952
+            },
+            rt_35x28x1_5_pipe: {
+                yellow: 1857508,
+                orange: 559675,
+                cyan: 2.786,
+                purple: 2212,
+                green: 945
+            },
+            rt_35x28x2_pipe: {
+                yellow: 1857508,
+                orange: 574250,
+                cyan: 2.86,
+                purple: 2212,
+                green: 1047
             }
         },
         T86_60_4: {
@@ -1017,6 +1137,36 @@ const specsData = {// таблицы характеристик
                 green: 540
             }
         },
+        T78_ACLASS_L68: {
+            rt_35x28x1_5: {
+                yellow: 1691618,
+                orange: 264372,
+                cyan: 1.189,
+                purple: 2415,
+                green: 533
+            },
+            rt_35x28x2: {
+                yellow: 1691618,
+                orange: 280654,
+                cyan: 1.95,
+                purple: 2415,
+                green: 618
+            },
+            rt_35x28x1_5_pipe: {
+                yellow: 1691618,
+                orange: 276409,
+                cyan: 2.048,
+                purple: 2415,
+                green: 611
+            },
+            rt_35x28x2_pipe: {
+                yellow: 1691618,
+                orange: 292906,
+                cyan: 2.729,
+                purple: 2415,
+                green: 713
+            }
+        },
         T86_60_4: {
             rt_35x20x1_5_pipe: {
                 yellow: 1693242,
@@ -1227,6 +1377,36 @@ const specsData = {// таблицы характеристик
                 cyan: 6.248,
                 purple: 2341,
                 green: 606
+            }
+        },
+        T78_ACLASS_L68: {
+            rt_35x28x1_5: {
+                yellow: 1273469,
+                orange: 139041,
+                cyan: 6.59,
+                purple: 2465,
+                green: 599
+            },
+            rt_35x28x2: {
+                yellow: 1273469,
+                orange: 153722,
+                cyan: 6.22,
+                purple: 2465,
+                green: 684
+            },
+            rt_35x28x1_5_pipe: {
+                yellow: 1273469,
+                orange: 148214,
+                cyan: 6.38,
+                purple: 2465,
+                green: 677
+            },
+            rt_35x28x2_pipe: {
+                yellow: 1273469,
+                orange: 163408,
+                cyan: 6.02,
+                purple: 2465,
+                green: 779
             }
         },
         T86_60_4: {

@@ -418,6 +418,29 @@
                                 </select>
                             </label>
 
+                            <label
+                                v-if="isVisible.reinType_L68"
+                                class="col-span-12"
+                                for="reinType_L68"
+                                >
+                                <span class="form__label">
+                                    {{ i18n.reinType_L68 }}:
+                                </span>
+                                <select
+                                    id="reinType_L68"
+                                    v-model="reinType_L68"
+                                    class="control control--select"
+                                    >
+                                    <option
+                                        v-for="item in reinTypes_L68_Options"
+                                        :key="item"
+                                        :value="item"
+                                        >
+                                        {{ reinTypes[item].i18n }}
+                                    </option>
+                                </select>
+                            </label>
+
                             <p class="col-span-12">
                                 <span class="font-bold">{{ i18n.maxСurve }}:</span> {{ maxСurve.toFixed(3) }}
                             </p>
@@ -542,6 +565,7 @@
     import pic60_4 from '@/assets/images/60_4.png';
     import pic70_6 from '@/assets/images/70_6.png';
     import picAClass from '@/assets/images/ACLASS.png';
+    import picAClass_L68 from '@/assets/images/ACLASS.png';
     import picAero from '@/assets/images/AERO.png';
     import picSuperAero from '@/assets/images/SUPER_AERO.png';
     import picGlide from '@/assets/images/GLIDE.png';
@@ -636,58 +660,56 @@
                     'T78_AERO': {
                         impostWidth: 0.06, //Ширина профиля импоста,м [[F283]]
                         tk: 0.78, //Безразмерные коэффициенты, учитывающие неоднородность температурного поля в ПВХ профиле, [[R50, R53]]
-                        te: 1.08, // Безразмерные коэффициенты, учитывающие неоднородность температурного поля в ПВХ профиле
-                        kR: 1, // Отношение количества рядов воздушных камер в наружной части попереченого сечения ПВХ профиля к количеству рядов воздушных камер во внутренней части поперечного сечения ПВХ профиля
-                        an51: 0.123 //[[AP51]]
+                        te: 1.08, // Безразмерные коэффициенты, учитывающие неоднородность температурного поля в ПВХ профиле [[Q50, Q53]]
+                        kR: 1, // Отношение количества рядов воздушных камер в наружной части попереченого сечения ПВХ профиля к количеству рядов воздушных камер во внутренней части поперечного сечения ПВХ профиля [[F276]]
                     },
                     'T80_AERO': {
                         impostWidth: 0.06,
                         tk: 0.78,
                         te: 1.08,
-                        kR: 1,
-                        an51: 0.123
+                        kR: 1
                     },
                     'T78_SUPER_AERO': {
                         impostWidth: 0.07,
                         tk: 0.8,
                         te: 1.11,
-                        kR: 1,
-                        an51: 0.133
+                        kR: 1
                     },
                     'T80_SUPER_AERO': {
                         impostWidth: 0.07,
                         tk: 0.8,
                         te: 1.11,
-                        kR: 1,
-                        an51: 0.133
+                        kR: 1
                     },
                     'T78_ACLASS': {
                         impostWidth: 0.06,
                         tk: 0.78,
                         te: 1.08,
-                        kR: 2,
-                        an51: 0.123
+                        kR: 2
+                    },
+                    'T78_ACLASS_L68': {
+                        impostWidth: 0.06,
+                        tk: 0.78,
+                        te: 1.08,
+                        kR: 2
                     },
                     'T86_60_4': {
                         impostWidth: 0.06,
                         tk: 0.82,
                         te: 1.2,
-                        kR: 0.5,
-                        an51: 0.123
+                        kR: 0.5
                     },
                     'T86_70_6': {
                         impostWidth: 0.07,
                         tk: 0.85,
                         te: 1.32,
-                        kR: 1.25,
-                        an51: 0.133
+                        kR: 1.25
                     },
                     'GLIDE': {
                         impostWidth: 0.031,
                         tk: 0.78,
                         te: 1.08,
-                        kR: 1,
-                        an51: 0.094
+                        kR: 1
                     }
                 },
                 profileType: 'T80_SUPER_AERO', //Профильная система [[F20]]
@@ -733,6 +755,7 @@
                 },
                 reinType: 'rt_35x20x2_pipe', //Армирование импоста [[F22]]
                 reinType_60_70: 'rt_35x20x2_pipe', // Армирование для коробок 60-4 и 70-6  [[F23]]
+                reinType_L68: 'rt_35x28x1_5', // Армирование для коробок L68
                 showDebug: false,
                 hasShareOpportunity: false
             }
@@ -753,6 +776,8 @@
                         return picSuperAero;
                     case 'T78_ACLASS':
                         return picAClass;
+                    case 'T78_ACLASS_L68':
+                        return picAClass_L68;
                     case 'T86_60_4':
                         return pic60_4;
                     case 'T86_70_6':
@@ -991,13 +1016,15 @@
                     profileColor: 'Цвет профиля',
                     reinType: 'Армирование импоста',
                     reinType_60_70: 'Армирование для коробок 60-4 и 70-6',
+                    reinType_L68: 'Армирование для коробок L68',
                     maxСurve: 'Максимально допустимый прогиб, мм'
                 }
             },
             isVisible(){
                 return {
                     Wgap: this.windSide === 'side_wall',
-                    reinType_60_70: ['T86_60_4', 'T86_70_6'].includes(this.profileType)
+                    reinType_60_70: ['T86_60_4', 'T86_70_6'].includes(this.profileType),
+                    reinType_L68: ['T78_ACLASS_L68'].includes(this.profileType)
                 }
             },
             printParams(){
@@ -1069,6 +1096,12 @@
                             title: this.i18n.reinType_60_70,
                             value: this.reinTypes[this.reinType_60_70].i18n
                         }] : []
+                    ),
+                    ...(
+                        this.isVisible.reinType_L68 ? [{
+                            title: this.i18n.reinType_L68,
+                            value: this.reinTypes[this.reinType_L68].i18n
+                        }] : []
                     )
                 ];
             },
@@ -1129,6 +1162,9 @@
             },
             reinTypes_60_70_Options(){
                 return ['rt_35x20x1_5_pipe', 'rt_35x20x2_pipe', 'rt_35x20x1_5', 'rt_35x20x2'];
+            },
+            reinTypes_L68_Options(){
+                return ['rt_35x28x1_5', 'rt_35x28x2', 'rt_35x28x1_5_pipe', 'rt_35x28x2_pipe'];
             },
             maxСurve(){//Максимально допустимый прогиб, мм [[D25]]
                 return ((this.L/100)/200)*1000;
@@ -1297,10 +1333,25 @@
                 if( ['T86_60_4', 'T86_70_6'].includes(this.profileType) ){// если выбрали 'T86_60_4' или 'T86_70_6' то меняем доп. список
                     this.reinType_60_70 = this.reinTypes_60_70_Options[0];
                 }
+                if( ['T78_ACLASS_L68'].includes(this.profileType) ){// если выбрали 'T78_ACLASS_L68' то меняем доп. список
+                    this.reinType_L68 = this.reinTypes_L68_Options[0];
+                }
             },
             computeSpec(scheme){
-                let profileData = scheme[this.profileType],
-                    data = profileData ? (profileData[this.reinType] || profileData[this.reinType_60_70]) : null;
+                let profileData = scheme[this.profileType],//данные по профилю
+                    data = null;
+                if( profileData ){//если данные есть
+                    if( profileData[this.reinType] ){//если есть данные по основному выпадающему списку
+                        data = profileData[this.reinType];
+                    }else{//ищем данные по дополнительным выпадающим спискам
+                        if( this.isVisible.reinType_60_70 && profileData[this.reinType_60_70] ){
+                            data = profileData[this.reinType_60_70];
+                        }
+                        if( this.isVisible.reinType_L68 && profileData[this.reinType_L68] ){
+                            data = profileData[this.reinType_L68];
+                        }
+                    }
+                }
                 return {
                     yellow: data?.yellow/1000000000000,
                     orange: data?.orange/1000000000000,
@@ -1414,7 +1465,8 @@
                 this.$nextTick(() => {// рассчитываем отдельно(после срабатывания watch и пересчета reinTypesOptions)
                     selects = {
                         reinType: this.reinTypesOptions,
-                        reinType_60_70: this.reinTypes_60_70_Options
+                        reinType_60_70: this.reinTypes_60_70_Options,
+                        reinType_L68: this.reinTypes_L68_Options
                     }
                     Object.keys(selects).map(key => {
                         let value = params.get(key);
@@ -1426,7 +1478,7 @@
             },
             generateUrlParams(){
                 let params = new URLSearchParams();
-                ['windRegion', 'terrainType', 'windSide', 'profileType', 'profileColor', 'reinType', 'reinType_60_70', 'Tn', 'Tref', 'Tv', 'Bh', 'Bw', 'Bl', 'Wh', 'Wgap', 'L', 'a','b', 'c'].map(key => {
+                ['windRegion', 'terrainType', 'windSide', 'profileType', 'profileColor', 'reinType', 'reinType_60_70', 'reinType_L68', 'Tn', 'Tref', 'Tv', 'Bh', 'Bw', 'Bl', 'Wh', 'Wgap', 'L', 'a','b', 'c'].map(key => {
                     params.set(key, this[key]);
                 });
                 return params.toString();
