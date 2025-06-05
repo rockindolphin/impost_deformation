@@ -1,4 +1,5 @@
-import './assets/styles/main.css'
+import '@/styles/tailwind.css';
+import '@/styles/vendors/multiselect.css';
 
 import { createApp } from 'vue'
 import App from './App.vue'

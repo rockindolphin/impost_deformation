@@ -1,0 +1,53 @@
+@layer components {
+
+    .wrapper{
+
+    }
+
+    .wrapper--result{
+        color: white;
+        background-color: black;
+        padding: 16px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 32px;
+        & > strong{
+            text-transform: uppercase;
+            font-size: 20px;
+            font-weight: var(--fw-normal);
+            line-height: 1.2;
+            margin-bottom: 30px;
+        }
+        & > .icon__wrapper{
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 25px;
+        }
+        & .text{
+            font-size: 16px;
+            font-weight: var(--fw-medium);
+            line-height: 1;
+            margin: 0;
+        }
+        & .text--success,
+        & .text--warning{
+            font-size: 12px;
+            font-weight: var(--fw-normal);
+            line-height: 1.33;
+        }
+    }
+
+    .wrapper--profile-pic{
+        width: 365px;
+        height: 365px;
+        border-radius: 50%;
+        overflow: hidden;
+        background-color: var(--alabaster);
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 28px;
+    }
+
+}

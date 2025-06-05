@@ -1,0 +1,53 @@
+@layer components {
+
+    .page{
+        display: flex; /*fix бага ie11 с min-height:100%*/
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        position: relative;
+        z-index: 1;
+        scroll-behavior: smooth;
+    }
+
+    .page__wrapper{
+        width: 100%;
+        max-width: calc(var(--wrapper-max) + 2*var(--page-gap));
+        padding-left: var(--page-gap);
+        padding-right: var(--page-gap);
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .page__main{
+        width: 100%;
+        flex-grow: 1;
+        min-height: calc(70*var(--vh));
+        display: flex;
+        flex-direction: column;
+    }
+
+    .page__header{
+        width: 100%;
+    }
+
+    .page__footer{
+        width: 100%;
+    }
+
+    .page__body{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        min-height: calc(100*var(--vh));
+        position: relative;
+        z-index: 1;
+        background-color: white;
+    }
+
+    .page--noscroll{
+        overflow: hidden;
+    }
+
+}

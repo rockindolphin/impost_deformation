@@ -1,0 +1,21 @@
+@layer base {
+
+	@font-face {
+		font-family: HelveticaNeueCyr;
+		src: url('@/assets/fonts/HelveticaNeueCyrRegular.woff2') format('woff2'),
+			 url('@/assets/fonts/HelveticaNeueCyrRegular.woff') format('woff');
+		font-style: normal;
+		font-weight: 400;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: HelveticaNeueCyr;
+		src: url('@/assets/fonts/HelveticaNeueCyrMedium.woff2') format('woff2'),
+			 url('@/assets/fonts/HelveticaNeueCyrMedium.woff') format('woff');
+		font-style: normal;
+		font-weight: 500;
+		font-display: swap;
+	}
+
+}

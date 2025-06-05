@@ -1,0 +1,86 @@
+@layer components{
+
+    .scene {
+        --box-width: 250px;
+        --box-height: 300px;
+        --box-depth: 150px;
+        --rotate-y: 40deg;
+        --window-width: 25px;
+        --window-height: 30px;
+        --window-ih: 0px;
+        --window-gap: 4px;
+        width: var(--box-width);
+        height: var(--box-height);
+        margin: 80px;
+        perspective: 400px;
+    }
+
+    .box {
+        width: var(--box-width);
+        height: var(--box-height);
+        position: relative;
+        transform-style: preserve-3d;
+        transform: translateZ(0px) rotateX(0deg) rotateY(var(--rotate-y)) rotateX(0deg);
+        transition: transform 1s;
+    }
+
+    .box__face {
+        position: absolute;
+        border: 1px solid var(--color-stone-950);
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+        color: var(--color-stone-950);
+        white-space: normal;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .box__face--front,
+    .box__face--back {
+        width: var(--box-width);
+        height: var(--box-height);
+    }
+
+    .box__face--right,
+    .box__face--left {
+        width: var(--box-depth);
+        height: var(--box-height);
+        left: calc(var(--box-width) / 2 - var(--box-depth) / 2);
+    }
+
+    .box__face--top,
+    .box__face--bottom {
+        width: var(--box-width);
+        height: var(--box-depth);
+        top: calc(var(--box-height) / 2 - var(--box-depth) / 2);
+    }
+
+    .box__face--front  { background: color-mix(in srgb, var(--brand-red) 80%, transparent); }
+    .box__face--right  { background: color-mix(in srgb, var(--brand-red) 80%, transparent); }
+    .box__face--back   { background: color-mix(in srgb, var(--brand-red) 80%, transparent); }
+    .box__face--left   { background: color-mix(in srgb, var(--brand-red) 80%, transparent); }
+    .box__face--top    { background: color-mix(in srgb, var(--brand-red) 80%, transparent); }
+    .box__face--bottom { background: color-mix(in srgb, var(--brand-red) 80%, transparent); }
+
+    .box__face--front  { transform: rotateY(  0deg) translateZ(calc(var(--box-depth) / 2)); }
+    .box__face--back   { transform: rotateY(180deg) translateZ(calc(var(--box-depth) / 2)); }
+
+    .box__face--right  { transform: rotateY( 90deg) translateZ(calc(var(--box-width) / 2)); }
+    .box__face--left   { transform: rotateY(-90deg) translateZ(calc(var(--box-width) / 2)); }
+
+    .box__face--top    { transform: rotateX( 90deg) translateZ(calc(var(--box-height) / 2)); }
+    .box__face--bottom { transform: rotateX(-90deg) translateZ(calc(var(--box-height) / 2)); }
+
+    .box__window{
+        position: absolute;
+        bottom: var(--window-ih);
+        left: var(--window-gap);
+        width: var(--window-width);
+        height: var(--window-height);
+        border: 1px solid;
+        background: white;
+    }
+
+}

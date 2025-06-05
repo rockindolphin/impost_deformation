@@ -1,0 +1,52 @@
+@theme {
+	--breakpoint-xs: 0px;
+	--breakpoint-sm: 640px;
+	--breakpoint-md: 768px;
+	--breakpoint-lg: 1024px;
+	--breakpoint-xl: 1280px;
+	--breakpoint-2xl: 1536px;
+
+    --font-primary: HelveticaNeueCyr, Arial, sans-serif;
+    --wrapper-max: 1920px;
+    --page-gap: 16px;
+    --vh: 1vh;
+    --anim-dur: 0.4s;
+	--control-height: 36px;
+	--control-padding-y: 8px;
+	--control-padding-x: 8px;
+
+	/* Borderds */
+	--border-rad-sm: 2px;
+	--border-rad-md: 4px;
+	--border-rad-lg: 8px;
+
+	/* Fonts */
+	--fw-thin: 100;
+	--fw-extra-light: 200;
+	--fw-light: 300;
+	--fw-normal: 400;
+	--fw-medium: 500;
+	--fw-semi-bold: 600;
+	--fw-bold: 700;
+	--fw-extra-bold: 800;
+	--fw-black: 900;
+
+	/* Colors */
+	--brand-red: 	#E40032;
+	--silver: 		#BBBBBB;
+	--abbey: 		#53555A;
+	--cod-gray:		#171717;
+	--whisper: 		#F5F5Fa;
+	--success:		#05B364;
+	--warning:		#FF8800;
+	--alabaster: 	#F9F9F9;
+
+}
+
+:root{
+	@media (min-width: theme(--breakpoint-lg) ) {
+		--page-gap: 48px;
+	}
+
+}
+

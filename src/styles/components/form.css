@@ -1,0 +1,47 @@
+@layer components {
+
+    .form{
+
+    }
+
+    .form--impost{
+        & .fieldset{
+            border-left: 1px solid;
+            border-color: var(--silver);
+        }
+        & .fieldset--last{
+            border-bottom: 1px solid;
+            border-color: var(--silver);
+        }
+        & .fieldset__title{
+            color: var(--brand-red);
+            text-transform: uppercase;
+            padding: 24px 16px;
+            display: block;
+            border-bottom: 1px solid;
+            border-color: var(--abbey);
+            position: relative;
+            &::after{
+                content: '';
+                display: block;
+                position: absolute;
+                z-index: 1;
+                left: -6px;
+                bottom: -6px;
+                width: 12px;
+                height: 12px;
+                background-color: var(--brand-red);
+                transform: rotate(45deg);
+            }
+            & strong{
+                display: block;
+                color: black;
+                font-weight: var(--fw-normal);
+            }
+        }
+        & .fieldset__content{
+            padding: 16px;
+        }
+    }
+
+}

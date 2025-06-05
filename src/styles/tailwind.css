@@ -1,0 +1,22 @@
+@import 'tailwindcss';
+
+@import './base/theme.css';
+@import './base/common.css';
+@import './base/fonts.css';
+@import './base/headers.css';
+
+@import './components/page.css';
+@import './components/header.css';
+@import './components/main.css';
+@import './components/footer.css';
+@import './components/wrapper.css';
+@import './components/btn.css';
+@import './components/form.css';
+@import './components/fieldset.css';
+@import './components/controls.css';
+@import './components/scene.css';
+@import './components/text.css';
+
+
+
+

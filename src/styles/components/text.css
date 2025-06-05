@@ -1,0 +1,15 @@
+@layer componnts{
+
+    .text{
+
+    }
+
+    .text--success{
+        color: var(--success);
+    }
+
+    .text--warning{
+        color: var(--warning);
+    }
+
+}

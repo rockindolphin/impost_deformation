@@ -1,0 +1,9 @@
+@layer components {
+
+    .main{
+        & > .page__wrapper{
+            padding-top: 28px;
+        }
+    }
+
+}
