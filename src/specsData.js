@@ -184,7 +184,7 @@ const specsData = {// таблицы характеристик
         T86_60_4: {
             rt_35x28x1_5: {
                 yellow: 469124,
-                orange: 25200,
+                orange: 25100,
                 cyan: 4.834,
                 purple: 970,
                 green: 133.8
@@ -214,7 +214,7 @@ const specsData = {// таблицы характеристик
         T86_70_6: {
             rt_35x28x1_5: {
                 yellow: 706133,
-                orange: 25200,
+                orange: 25100,
                 cyan: 7.745,
                 purple: 1103,
                 green: 133.8
