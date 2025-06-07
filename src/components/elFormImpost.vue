@@ -719,6 +719,9 @@
                     },
                     rt_26x19x1_5: {//GLIDE
                         i18n: '26*19*1,5'
+                    },
+                    rt_26x19x2: {//GLIDE
+                        i18n: '26*19*2'
                     }
                 },
                 reinType: 'rt_35x20x2_pipe', //Армирование импоста [[F22]]
@@ -1132,7 +1135,7 @@
                 if( ['T86_60_4', 'T86_70_6'].includes(this.profileType) ){
                     return ['rt_35x28x1_5', 'rt_35x28x2', 'rt_35x28x1_5_pipe', 'rt_35x28x2_pipe'];
                 }else if( ['GLIDE'].includes(this.profileType) ){
-                    return ['rt_26x19x1_5'];
+                    return ['rt_26x19x1_5', 'rt_26x19x2'];
                 }else{//для всех остальных
                     return ['rt_35x20x1_5_pipe', 'rt_35x20x2_pipe', 'rt_35x20x1_5', 'rt_35x20x2'];
                 }

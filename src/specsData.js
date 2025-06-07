@@ -248,6 +248,13 @@ const specsData = {// таблицы характеристик
                 cyan: 1.529,
                 purple: 487,
                 green: 87.3
+            },
+            rt_26x19x2: {
+                yellow: 63666,
+                orange: 11900,
+                cyan: 1.529,
+                purple: 487,
+                green: 114.8
             }
         }
     },
@@ -499,6 +506,13 @@ const specsData = {// таблицы характеристик
                 cyan: 9.738,
                 purple: 924,
                 green: 359
+            },
+            rt_26x19x2: {
+                yellow: 805444,
+                orange: 254625,
+                cyan: 7.337,
+                purple: 924,
+                green: 386
             }
         }
     },
