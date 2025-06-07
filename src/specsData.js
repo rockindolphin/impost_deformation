@@ -1483,6 +1483,275 @@ const specsData = {// таблицы характеристик
                 green: 606
             }
         }
+    },
+    fake_impost: {
+        AERO_Z60: {
+            rt_35x28x7x1_5: {
+                yellow: 381276,
+                orange: 15124,
+                cyan: 5.93,
+                purple: 776,
+                green: 97
+            },
+            rt_35x28x7x2: {
+                yellow: 381276,
+                orange: 18979,
+                cyan: 5.958,
+                purple: 776,
+                green: 127
+            },
+            rt_35x28x1_5: {
+                yellow: 381276,
+                orange: 25106,
+                cyan: 0.669,
+                purple: 776,
+                green: 133
+            },
+            rt_35x28x2: {
+                yellow: 381276,
+                orange: 32109,
+                cyan: 0.623,
+                purple: 776,
+                green: 176
+            }
+        },
+        SUPER_AERO_Z60: {
+            rt_35x28x7x1_5: {
+                yellow: 558148,
+                orange: 15124,
+                cyan: 4.657,
+                purple: 865,
+                green: 97
+            },
+            rt_35x28x7x2: {
+                yellow: 558148,
+                orange: 18979,
+                cyan: 4.685,
+                purple: 865,
+                green: 127
+            },
+            rt_35x28x1_5: {
+                yellow: 558148,
+                orange: 25106,
+                cyan: 0.604,
+                purple: 865,
+                green: 133
+            },
+            rt_35x28x2: {
+                yellow: 558148,
+                orange: 32109,
+                cyan: 0.65,
+                purple: 865,
+                green: 176
+            }
+        },
+        SUPER_AERO_Z77: {
+            rt_35x28x7x1_5: {
+                yellow: 641822,
+                orange: 15124,
+                cyan: 4.743,
+                purple: 898,
+                green: 97
+            },
+            rt_35x28x7x2: {
+                yellow: 641822,
+                orange: 18979,
+                cyan: 4.771,
+                purple: 898,
+                green: 127
+            },
+            rt_35x28x1_5: {
+                yellow: 641822,
+                orange: 25106,
+                cyan: 0.517,
+                purple: 898,
+                green: 133
+            },
+            rt_35x28x2: {
+                yellow: 641822,
+                orange: 32109,
+                cyan: 0.563,
+                purple: 898,
+                green: 176
+            }
+        },
+        ACLASS_Z60: {
+            rt_35x28x7x1_5: {
+                yellow: 457420,
+                orange: 15124,
+                cyan: 5.959,
+                purple: 950,
+                green: 97
+            },
+            rt_35x28x7x2: {
+                yellow: 457420,
+                orange: 18979,
+                cyan: 5.987,
+                purple: 950,
+                green: 127
+            },
+            rt_35x28x1_5: {
+                yellow: 457420,
+                orange: 25106,
+                cyan: 0.968,
+                purple: 950,
+                green: 133
+            },
+            rt_35x28x2: {
+                yellow: 457420,
+                orange: 32109,
+                cyan: 0.652,
+                purple: 950,
+                green: 176
+            }
+        },
+        ACLASS_T118: {
+            rt_40x50x2_pipe: {
+                yellow: 689840,
+                orange: 83855,
+                cyan: 4.857,
+                purple: 1362,
+                green: 331
+            }
+        },
+        ACLASS_Z118: {
+            rt_40x50x2_pipe: {
+                yellow: 690859,
+                orange: 83855,
+                cyan: 0.993,
+                purple: 1287,
+                green: 331
+            }
+        },
+        ACLASS_T94: {
+            rt_35x28x7x1_5: {
+                yellow: 489390,
+                orange: 15124,
+                cyan: 0.49,
+                purple: 1058,
+                green: 97
+            },
+            rt_35x28x7x2: {
+                yellow: 489390,
+                orange: 18979,
+                cyan: 0.518,
+                purple: 1058,
+                green: 127
+            },
+            rt_35x28x1_5: {
+                yellow: 489390,
+                orange: 25106,
+                cyan: 4.77,
+                purple: 1058,
+                green: 133
+            },
+            rt_35x28x2: {
+                yellow: 489390,
+                orange: 32109,
+                cyan: 4.816,
+                purple: 1058,
+                green: 176
+            }
+        },
+        ACLASS_Z94: {
+            rt_35x28x7x1_5: {
+                yellow: 537763,
+                orange: 15124,
+                cyan: 4.744,
+                purple: 1080,
+                green: 97
+            },
+            rt_35x28x7x2: {
+                yellow: 537763,
+                orange: 18979,
+                cyan: 4.772,
+                purple: 1080,
+                green: 127
+            },
+            rt_35x28x1_5: {
+                yellow: 537763,
+                orange: 25106,
+                cyan: 0.516,
+                purple: 1080,
+                green: 133
+            },
+            rt_35x28x2: {
+                yellow: 537763,
+                orange: 32109,
+                cyan: 0.562,
+                purple: 1080,
+                green: 176
+            }
+        },
+        Z_60_4: {
+            rt_35x28x7x1_5: {
+                yellow: 460055,
+                orange: 15124,
+                cyan: 6.256,
+                purple: 971,
+                green: 97
+            },
+            rt_35x28x7x2: {
+                yellow: 460055,
+                orange: 18979,
+                cyan: 6.284,
+                purple: 971,
+                green: 127
+            },
+            rt_35x28x1_5: {
+                yellow: 460055,
+                orange: 25106,
+                cyan: 0.995,
+                purple: 971,
+                green: 133
+            },
+            rt_35x28x2: {
+                yellow: 460055,
+                orange: 32109,
+                cyan: 0.948,
+                purple: 971,
+                green: 176
+            }
+        },
+        Z_70_6: {
+            rt_35x28x7x1_5: {
+                yellow: 707093,
+                orange: 15124,
+                cyan: 3.571,
+                purple: 1123,
+                green: 97
+            },
+            rt_35x28x7x2: {
+                yellow: 707093,
+                orange: 18979,
+                cyan: 3.599,
+                purple: 1123,
+                green: 127
+            },
+            rt_35x28x1_5: {
+                yellow: 707093,
+                orange: 25106,
+                cyan: 1.689,
+                purple: 1123,
+                green: 133
+            },
+            rt_35x28x2: {
+                yellow: 707093,
+                orange: 32109,
+                cyan: 1.735,
+                purple: 1123,
+                green: 176
+            }
+        },
+        T118_70_6: {
+            rt_40x50x2_pipe: {
+                yellow: 1049669,
+                orange: 83855,
+                cyan: 4.971,
+                purple: 1543,
+                green: 331
+            }
+        }
     }
 }
 

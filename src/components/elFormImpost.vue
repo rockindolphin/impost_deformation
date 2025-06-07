@@ -453,7 +453,43 @@
                             <strong>
                                 {{ value.title }}
                             </strong>
-                            <img :src="value.src" alt="value.title">
+                            <template v-if="key === 'fake_impost'">
+                                <div class="control">
+                                    <label class="control__label">
+                                        {{ i18n.fakeImpostProfileType }}
+                                    </label>
+                                    <multiselect
+                                        class="control--multiselect"
+                                        v-model="fakeImpostProfileType"
+                                        :options="fakeImpostProfileTypes"
+                                        :allow-empty="false"
+                                        :placeholder="i18n.select_placeholder"
+                                        >
+                                    </multiselect>
+                                </div>
+                                <div class="control">
+                                    <label class="control__label">
+                                        {{ i18n.fakeImpostReinType }}
+                                    </label>
+                                    <multiselect
+                                        class="control--multiselect"
+                                        v-model="fakeImpostReinType"
+                                        :options="fakeImpostReinTypesOptions"
+                                        :allow-empty="false"
+                                        :placeholder="i18n.select_placeholder"
+                                        >
+                                        <template #singleLabel="props">
+                                            {{ fakeImpostReinTypes[props.option].i18n }}
+                                        </template>
+                                        <template #option="props">
+                                            <span>
+                                                {{ fakeImpostReinTypes[props.option].i18n }}
+                                            </span>
+                                        </template>
+                                    </multiselect>
+                                </div>
+                            </template>
+                            <img :src="value.src" :alt="value.title">
                             <p class="col-span-12 text">
                                 <span class="block mb-2">
                                     <span>Расчётный прогиб, мм:</span> {{ value.result.toFixed(2) }}
@@ -728,12 +764,47 @@
                 reinType_60_70: 'rt_35x20x2_pipe', // Армирование для коробок 60-4 и 70-6  [[F23]]
                 reinType_L68: 'rt_35x28x1_5', // Армирование для коробок L68
                 showDebug: false,
-                hasShareOpportunity: false
+                hasShareOpportunity: false,
+                fakeImpostProfileTypes: [
+                    'AERO_Z60',
+                    'SUPER_AERO_Z60',
+                    'SUPER_AERO_Z77',
+                    'ACLASS_Z60',
+                    'ACLASS_T118',
+                    'ACLASS_Z118',
+                    'ACLASS_T94',
+                    'ACLASS_Z94',
+                    'Z_60_4',
+                    'Z_70_6',
+                    'T118_70_6'
+                ],
+                fakeImpostProfileType: 'AERO_Z60',
+                fakeImpostReinTypes: {
+                    rt_35x28x7x1_5: {
+                        i18n: '35*28*7*1,5'
+                    },
+                    rt_35x28x7x2: {
+                        i18n: '35*28*7*2'
+                    },
+                    rt_35x28x1_5: {
+                        i18n: '35*28*1,5'
+                    },
+                    rt_35x28x2: {
+                        i18n: '35*28*2'
+                    },
+                    rt_40x50x2_pipe: {
+                        i18n: '40*50*2(труба)'
+                    }
+                },
+                fakeImpostReinType: 'rt_35x28x7x1_5'
             }
         },
         watch:{
             profileType(newVal, oldVal){
                 this.onProfileTypeChange();
+            },
+            fakeImpostProfileType(newVal, oldVal){
+                this.onFakeImpostProfileTypeChange();
             }
         },
         computed: {
@@ -997,7 +1068,9 @@
                     reinType: 'Армирование импоста',
                     reinType_60_70: 'Армирование для коробок 60-4 и 70-6',
                     reinType_L68: 'Армирование для коробок L68',
-                    maxСurve: 'Максимально допустимый прогиб, мм'
+                    maxСurve: 'Максимально допустимый прогиб, мм',
+                    fakeImpostProfileType: 'Створка для конструкции с ложным импостом',
+                    fakeImpostReinType: 'Армирование в створку для конструкции с ложным импостом '
                 }
             },
             isVisible(){
@@ -1102,6 +1175,11 @@
                         src: '',
                         title: 'Усиление пилястровым профилем',
                         result: this.computeEstimatedDeflection('pilyastr')
+                    },
+                    fake_impost: {
+                        src: '',
+                        title: 'Ложный импост',
+                        result: this.computeEstimatedDeflection('fake_impost')
                     }
                 }
                 if( this.profileType !== 'GLIDE' ){
@@ -1145,6 +1223,13 @@
             },
             reinTypes_L68_Options(){
                 return ['rt_35x28x1_5', 'rt_35x28x2', 'rt_35x28x1_5_pipe', 'rt_35x28x2_pipe'];
+            },
+            fakeImpostReinTypesOptions(){
+                if( ['ACLASS_T118', 'ACLASS_Z118', 'T118_70_6'].includes(this.fakeImpostProfileType) ){
+                    return ['rt_40x50x2_pipe'];
+                }else{//для всех остальных
+                    return ['rt_35x28x7x1_5', 'rt_35x28x7x2', 'rt_35x28x1_5', 'rt_35x28x2'];
+                }
             },
             maxСurve(){//Максимально допустимый прогиб, мм [[D25]]
                 return ((this.L/100)/200)*1000;
@@ -1317,13 +1402,19 @@
                     this.reinType_L68 = this.reinTypes_L68_Options[0];
                 }
             },
-            computeSpec(scheme){
-                let profileData = scheme[this.profileType],//данные по профилю
+            onFakeImpostProfileTypeChange(){
+                this.fakeImpostReinType = this.fakeImpostReinTypesOptions[0];
+            },
+            computeSpec(specKey){
+                let scheme = specsData[specKey],
+                    pt = specKey === 'fake_impost' ? this.fakeImpostProfileType : this.profileType,
+                    rt = specKey === 'fake_impost' ? this.fakeImpostReinType : this.reinType,
+                    profileData = scheme[pt],//данные по профилю
                     data = null;
                 if( profileData ){//если данные есть
-                    if( profileData[this.reinType] ){//если есть данные по основному выпадающему списку
-                        data = profileData[this.reinType];
-                    }else{//ищем данные по дополнительным выпадающим спискам
+                    if( profileData[rt] ){//если есть данные по основному выпадающему списку
+                        data = profileData[rt];
+                    }else if( specKey !== 'fake_impost' ){//ищем данные по дополнительным выпадающим спискам
                         if( this.isVisible.reinType_60_70 && profileData[this.reinType_60_70] ){
                             data = profileData[this.reinType_60_70];
                         }
@@ -1341,7 +1432,7 @@
                 };
             },
             computeEstimatedDeflection(specKey){
-                let specs = this.computeSpec(specsData[specKey]),
+                let specs = this.computeSpec(specKey),
                     K0 = this.K0,
                     Tref = this.Tref, //Температура замыкания (монтажа) оконной конструкции, ˚С [[F17]]
                     Tn = this.Tn, //Расчетная наружная температура воздуха (температура воздуха наиболее холодной пятидневки),˚С  [[F16]]
@@ -1428,7 +1519,8 @@
                     terrainType: this.terrainTypes,
                     windSide: Object.keys(this.windSides),
                     profileType: Object.keys(this.profileTypes),
-                    profileColor: Object.keys(this.profileColor)
+                    profileColor: Object.keys(this.profileColor),
+                    fakeImpostProfileType: this.fakeImpostProfileTypes
                 }
                 Object.keys(selects).map(key => {
                     let value = params.get(key);
@@ -1446,7 +1538,8 @@
                     selects = {
                         reinType: this.reinTypesOptions,
                         reinType_60_70: this.reinTypes_60_70_Options,
-                        reinType_L68: this.reinTypes_L68_Options
+                        reinType_L68: this.reinTypes_L68_Options,
+                        fakeImpostReinType: this.fakeImpostReinTypesOptions
                     }
                     Object.keys(selects).map(key => {
                         let value = params.get(key);
@@ -1458,7 +1551,7 @@
             },
             generateUrlParams(){
                 let params = new URLSearchParams();
-                ['windRegion', 'terrainType', 'windSide', 'profileType', 'profileColor', 'reinType', 'reinType_60_70', 'reinType_L68', 'Tn', 'Tref', 'Tv', 'Bh', 'Bw', 'Bl', 'Wh', 'Wgap', 'L', 'a','b', 'c'].map(key => {
+                ['windRegion', 'terrainType', 'windSide', 'profileType', 'profileColor', 'reinType', 'reinType_60_70', 'reinType_L68', 'fakeImpostProfileType', 'fakeImpostReinType', 'Tn', 'Tref', 'Tv', 'Bh', 'Bw', 'Bl', 'Wh', 'Wgap', 'L', 'a','b', 'c'].map(key => {
                     params.set(key, this[key]);
                 });
                 return params.toString();
