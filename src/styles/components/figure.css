@@ -1,0 +1,16 @@
+@layer components {
+
+    .figure{
+
+    }
+
+    .figure--window{
+        & .text{
+            font-family: var(--font-primary);
+            color: black;
+            font-weight: var(--fw-normal);
+            font-size: 14px;
+        }
+    }
+
+}

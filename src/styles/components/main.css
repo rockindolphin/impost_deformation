@@ -4,6 +4,11 @@
         & > .page__wrapper{
             padding-top: 28px;
         }
+        @media (min-width: theme(--breakpoint-2xl) ) {
+            & > .page__wrapper{
+                padding-top: 50px;
+            }
+        }
     }
 
 }

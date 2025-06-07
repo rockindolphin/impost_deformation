@@ -16,7 +16,7 @@
         & .fieldset__title{
             color: var(--brand-red);
             text-transform: uppercase;
-            padding: 24px 16px;
+            padding: 24px 12px;
             display: block;
             border-bottom: 1px solid;
             border-color: var(--abbey);
@@ -34,14 +34,35 @@
                 transform: rotate(45deg);
             }
             & strong{
+                font-size: 28px;
                 display: block;
                 color: black;
                 font-weight: var(--fw-normal);
+                margin-bottom: 4px;
             }
         }
         & .fieldset__content{
-            padding: 16px;
+            padding: 20px 15px;
+        }
+        & .control__label{
+            line-height: 1;
+        }
+        & .wrapper--controls{
+
+        }
+        @media (min-width: theme(--breakpoint-lg) ) {
+
+        }
+        @media (min-width: theme(--breakpoint-2xl) ) {
+            & .fieldset--even{
+                border-left: none;
+                & .fieldset__title{
+                    padding: 24px 12px 34px;
+                    &::after{
+                        display: none;
+                    }
+                }
+            }
         }
     }
-
 }

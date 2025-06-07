@@ -9,7 +9,12 @@
 
     .footer__copy{
         text-align: center;
+        text-transform: uppercase;
         margin-bottom: 40px;
+        font-size: 16px;
+        @media (min-width: theme(--breakpoint-2xl) ) {
+            font-size: 20px;
+        }
     }
 
     .footer__company{
@@ -30,6 +35,26 @@
                 background-size: cover;
                 background-position: top center;
                 background-repeat: no-repeat;
+            }
+        }
+        & .icon__vue{
+            width: 383px;
+            height: auto;
+        }
+        @media (min-width: theme(--breakpoint-sm) ) {
+            & > .page__wrapper{
+                padding-top: calc( 0.0837053571*100vw +  36.4285714286px); /*cssLock(padding-top,sm,2xl, 90, 165)*/
+            }
+            & .icon__vue{
+                width: calc( 1.5345982143*100vw -  599.1428571429px); /*cssLock(width,sm,2xl, 383, 1758)*/
+            }
+        }
+        @media (min-width: theme(--breakpoint-2xl) ) {
+            & > .page__wrapper{
+                padding-top: 165px;
+            }
+            & .icon__vue{
+                width: 1758px;
             }
         }
     }

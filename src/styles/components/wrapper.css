@@ -50,4 +50,8 @@
         margin-bottom: 28px;
     }
 
+    .wrapper--controls{
+        max-width: 388px;
+    }
+
 }

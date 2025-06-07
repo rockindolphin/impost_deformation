@@ -57,7 +57,7 @@
         top: calc(var(--box-height) / 2 - var(--box-depth) / 2);
     }
 
-    .box__face--front  { background: color-mix(in srgb, var(--brand-red) 80%, transparent); }
+    .box__face--front  { background: color-mix(in srgb, white 80%, transparent) linear-gradient(165.96deg, rgba(232, 17, 45, 0.25) 2.773%,rgba(201, 24, 47, 0.25) 98.028%); }
     .box__face--right  { background: color-mix(in srgb, var(--brand-red) 80%, transparent); }
     .box__face--back   { background: color-mix(in srgb, var(--brand-red) 80%, transparent); }
     .box__face--left   { background: color-mix(in srgb, var(--brand-red) 80%, transparent); }

@@ -2,8 +2,8 @@
     <form action="#" class="form form--impost">
         <div class="print:hidden">
 
-            <div class="wrapper">
-                <fieldset class="fieldset">
+            <div class="wrapper 2xl:grid grid-cols-12">
+                <fieldset class="fieldset fieldset--odd pb-3 2xl:col-span-4 2xl:pb-0">
                     <h4 class="fieldset__title">
                         <strong>
                             01//
@@ -11,59 +11,61 @@
                         {{ i18n.step_1 }}
                     </h4>
                     <div class="fieldset__content">
-                        <div class="control mb-4">
-                            <label class="control__label">
-                                {{ i18n.windRegion }}
-                            </label>
-                            <multiselect
-                                class="control--multiselect"
-                                v-model="windRegion"
-                                :options="Object.keys(windRegions)"
-                                :allow-empty="false"
-                                :placeholder="i18n.select_palceholder"
+                        <div class="wrapper--controls grid gap-7 grid-cols-12">
+                            <div class="control col-span-12">
+                                <label class="control__label">
+                                    {{ i18n.windRegion }}
+                                </label>
+                                <multiselect
+                                    class="control--multiselect"
+                                    v-model="windRegion"
+                                    :options="Object.keys(windRegions)"
+                                    :allow-empty="false"
+                                    :placeholder="i18n.select_palceholder"
+                                    >
+                                </multiselect>
+                            </div>
+                            <div class="control col-span-12">
+                                <label class="control__label">
+                                    {{ i18n.terrainType }}
+                                </label>
+                                <multiselect
+                                    class="control--multiselect"
+                                    v-model="terrainType"
+                                    :options="terrainTypes"
+                                    :allow-empty="false"
+                                    :placeholder="i18n.select_palceholder"
+                                    >
+                                </multiselect>
+                            </div>
+                            <label class="block col-span-12" for="Tn">
+                                <span class="control__label">
+                                    {{ i18n.Tn }}
+                                </span>
+                                <input
+                                    id="Tn"
+                                    v-model="Tn"
+                                    type="number"
+                                    step="0.1"
+                                    class="control control--text"
                                 >
-                            </multiselect>
-                        </div>
-                        <div class="control mb-4">
-                            <label class="control__label">
-                                {{ i18n.terrainType }}
                             </label>
-                            <multiselect
-                                class="control--multiselect"
-                                v-model="terrainType"
-                                :options="terrainTypes"
-                                :allow-empty="false"
-                                :placeholder="i18n.select_palceholder"
+                            <label class="col-span-12" for="Tref">
+                                <span class="control__label">
+                                    {{ i18n.Tref }}
+                                </span>
+                                <input
+                                    id="Tref"
+                                    v-model="Tref"
+                                    type="number"
+                                    step="0.1"
+                                    class="control control--text"
                                 >
-                            </multiselect>
+                            </label>
                         </div>
-                        <label class="block mb-4" for="Tn">
-                            <span class="control__label">
-                                {{ i18n.Tn }}
-                            </span>
-                            <input
-                                id="Tn"
-                                v-model="Tn"
-                                type="number"
-                                step="0.1"
-                                class="control control--text"
-                            >
-                        </label>
-                        <label class="" for="Tref">
-                            <span class="control__label">
-                                {{ i18n.Tref }}
-                            </span>
-                            <input
-                                id="Tref"
-                                v-model="Tref"
-                                type="number"
-                                step="0.1"
-                                class="control control--text"
-                            >
-                        </label>
                     </div>
                 </fieldset>
-                <fieldset class="fieldset">
+                <fieldset class="fieldset fieldset--even 2xl:col-span-8">
                     <h4 class="fieldset__title">
                         <strong>
                             02//
@@ -71,126 +73,128 @@
                         {{ i18n.step_2 }}
                     </h4>
                     <div class="fieldset__content">
-                        <div class="grid gap-4 grid-cols-12 items-start">
-                            <div class="col-span-12 md:col-span-6 md:order-2 flex items-center justify-center">
+                        <div class="grid gap-7 grid-cols-12 items-start">
+                            <div class="col-span-12 md:col-span-6 md:order-2 flex flex-col items-center justify-center">
                                 <div class="scene" :style="buildingStyles">
                                     <div class="box">
                                         <div class="box__face box__face--front">
-                                            {{ windSides.windward_side.i18n }}
                                             <div class="box__window" v-if="windSide === 'windward_side'"></div>
                                         </div>
                                         <div class="box__face box__face--back">
-                                            {{ windSides.leeward_side.i18n }}
                                             <div class="box__window" v-if="windSide === 'leeward_side'"></div>
                                         </div>
                                         <div class="box__face box__face--right"></div>
                                         <div class="box__face box__face--left">
-                                            {{ windSides.side_wall.i18n }}
                                             <div class="box__window" v-if="windSide === 'side_wall'"></div>
                                         </div>
                                         <div class="box__face box__face--top"></div>
                                         <div class="box__face box__face--bottom"></div>
                                     </div>
                                 </div>
+                                <h5 class="uppercase">
+                                    {{ i18n.windSideViews[windSide] }}
+                                </h5>
                             </div>
-                            <div class="col-span-12 md:col-span-6 md:order-1 grid gap-4 grid-cols-12">
-                                <label class="col-span-12" for="Bh">
-                                    <span class="control__label">
-                                        {{ i18n.Bh }}
-                                    </span>
-                                    <input
-                                        id="Bh"
-                                        v-model.number="Bh"
-                                        type="number"
-                                        step="0.1"
-                                        class="control control--text"
-                                    >
-                                </label>
-
-                                <label class="col-span-12" for="Bw">
-                                    <span class="control__label">
-                                        {{ i18n.Bw }}
-                                    </span>
-                                    <input
-                                        id="Bw"
-                                        v-model.number="Bw"
-                                        type="number"
-                                        step="0.1"
-                                        class="control control--text"
-                                    >
-                                </label>
-
-                                <label class="col-span-12" for="Bl">
-                                    <span class="control__label">
-                                        {{ i18n.Bl }}
-                                    </span>
-                                    <input
-                                        id="Bl"
-                                        v-model.number="Bl"
-                                        type="number"
-                                        step="0.1"
-                                        class="control control--text"
-                                    >
-                                </label>
-
-                                <label class="col-span-12" for="Wh">
-                                    <span class="control__label">
-                                        {{ i18n.Wh }}
-                                    </span>
-                                    <input
-                                        id="Wh"
-                                        v-model.number="Wh"
-                                        type="number"
-                                        step="0.1"
-                                        class="control control--text"
-                                    >
-                                </label>
-
-                                <div class="control col-span-12">
-                                    <label class="control__label">
-                                        {{ i18n.windSide }}
-                                    </label>
-                                    <multiselect
-                                        class="control--multiselect"
-                                        v-model="windSide"
-                                        :options="Object.keys(windSides)"
-                                        :allow-empty="false"
-                                        :placeholder="i18n.select_palceholder"
+                            <div class="col-span-12 md:col-span-6 md:order-1">
+                                <div class="wrapper--controls grid gap-7 grid-cols-12">
+                                    <label class="col-span-12" for="Bh">
+                                        <span class="control__label">
+                                            {{ i18n.Bh }}
+                                        </span>
+                                        <input
+                                            id="Bh"
+                                            v-model.number="Bh"
+                                            type="number"
+                                            step="0.1"
+                                            class="control control--text"
                                         >
-                                        <template #singleLabel="props">
-                                            {{ windSides[props.option].i18n }}
-                                        </template>
-                                        <template #option="props">
-                                            <span>
-                                                {{ windSides[props.option].i18n }}
-                                            </span>
-                                        </template>
-                                    </multiselect>
-                                </div>
+                                    </label>
 
-                                <label
-                                    v-if="isVisible.Wgap"
-                                    class="col-span-12"
-                                    for="Wgap"
-                                    >
-                                    <span class="control__label">
-                                        {{ i18n.Wgap }}:
-                                    </span>
-                                    <input
-                                        id="Wgap"
-                                        v-model.number="Wgap"
-                                        type="number"
-                                        step="0.1"
-                                        class="control control--text"
-                                    >
-                                </label>
+                                    <label class="col-span-12" for="Bw">
+                                        <span class="control__label">
+                                            {{ i18n.Bw }}
+                                        </span>
+                                        <input
+                                            id="Bw"
+                                            v-model.number="Bw"
+                                            type="number"
+                                            step="0.1"
+                                            class="control control--text"
+                                        >
+                                    </label>
+
+                                    <label class="col-span-12" for="Bl">
+                                        <span class="control__label">
+                                            {{ i18n.Bl }}
+                                        </span>
+                                        <input
+                                            id="Bl"
+                                            v-model.number="Bl"
+                                            type="number"
+                                            step="0.1"
+                                            class="control control--text"
+                                        >
+                                    </label>
+
+                                    <label class="col-span-12" for="Wh">
+                                        <span class="control__label">
+                                            {{ i18n.Wh }}
+                                        </span>
+                                        <input
+                                            id="Wh"
+                                            v-model.number="Wh"
+                                            type="number"
+                                            step="0.1"
+                                            class="control control--text"
+                                        >
+                                    </label>
+
+                                    <div class="control col-span-12">
+                                        <label class="control__label">
+                                            {{ i18n.windSide }}
+                                        </label>
+                                        <multiselect
+                                            class="control--multiselect"
+                                            v-model="windSide"
+                                            :options="Object.keys(windSides)"
+                                            :allow-empty="false"
+                                            :placeholder="i18n.select_palceholder"
+                                            >
+                                            <template #singleLabel="props">
+                                                {{ windSides[props.option].i18n }}
+                                            </template>
+                                            <template #option="props">
+                                                <span>
+                                                    {{ windSides[props.option].i18n }}
+                                                </span>
+                                            </template>
+                                        </multiselect>
+                                    </div>
+
+                                    <label
+                                        v-if="isVisible.Wgap"
+                                        class="col-span-12"
+                                        for="Wgap"
+                                        >
+                                        <span class="control__label">
+                                            {{ i18n.Wgap }}:
+                                        </span>
+                                        <input
+                                            id="Wgap"
+                                            v-model.number="Wgap"
+                                            type="number"
+                                            step="0.1"
+                                            class="control control--text"
+                                        >
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </fieldset>
             </div>
-            <div class="wrapper">
-                <fieldset class="fieldset">
+            <div class="wrapper 2xl:grid grid-cols-12">
+                <fieldset class="fieldset fieldset--odd 2xl:col-span-6">
                     <h4 class="fieldset__title">
                         <strong>
                             03//
@@ -198,10 +202,15 @@
                         {{ i18n.step_3 }}
                     </h4>
                     <div class="fieldset__content">
-                        <div class="grid gap-4 grid-cols-12 items-start">
+                        <div class="grid gap-7 grid-cols-12 items-start">
 
                             <div class="col-span-12 md:col-span-6 md:order-2">
-                                <svg :viewBox="svgComp.viewBox" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    :viewBox="svgComp.viewBox"
+                                    fill="none"
+                                    class="figure figure--window"
+                                    >
                                     <rect v-bind="svgComp.window" />
                                     <line v-bind="svgComp.impost_v" />
                                     <line v-bind="svgComp.impost_h" />
@@ -218,76 +227,78 @@
                                     <rect v-bind="svgComp.d_sep_t" />
                                     <rect v-bind="svgComp.l_sep_b" />
                                     <rect v-bind="svgComp.l_sep_t" />
-                                    <text v-bind="svgComp.a_text" class="svg__text--hint" >a</text>
-                                    <text v-bind="svgComp.b_text" class="svg__text--hint" >b</text>
-                                    <text v-bind="svgComp.c_text" class="svg__text--hint" v-if="c !== 0">c</text>
-                                    <text v-bind="svgComp.d_text" class="svg__text--hint" >d</text>
-                                    <text v-bind="svgComp.l_text" class="svg__text--hint" >L</text>
+                                    <text v-bind="svgComp.a_text" class="text" >a</text>
+                                    <text v-bind="svgComp.b_text" class="text" >b</text>
+                                    <text v-bind="svgComp.c_text" class="text" v-if="c !== 0">c</text>
+                                    <text v-bind="svgComp.d_text" class="text" >d</text>
+                                    <text v-bind="svgComp.l_text" class="text" >L</text>
                                 </svg>
                             </div>
 
-                            <div class="col-span-12 md:col-span-6 md:order-1 grid gap-4 grid-cols-12">
-                                <label class="col-span-12" for="L">
-                                    <span class="control__label">
-                                        {{ i18n.L }}
-                                    </span>
-                                    <input
-                                        id="L"
-                                        v-model.number="L"
-                                        type="number"
-                                        step="0.1"
-                                        class="control control--text"
-                                    >
-                                </label>
+                            <div class="col-span-12 md:col-span-6 md:order-1">
+                                <div class="wrapper--controls grid gap-7 grid-cols-12">
+                                    <label class="col-span-12" for="L">
+                                        <span class="control__label">
+                                            {{ i18n.L }}
+                                        </span>
+                                        <input
+                                            id="L"
+                                            v-model.number="L"
+                                            type="number"
+                                            step="0.1"
+                                            class="control control--text"
+                                        >
+                                    </label>
 
-                                <label class="col-span-12" for="a">
-                                    <span class="control__label">
-                                        {{ i18n.a }}
-                                    </span>
-                                    <input
-                                        id="a"
-                                        v-model.number="a"
-                                        type="number"
-                                        step="0.1"
-                                        class="control control--text"
-                                    >
-                                </label>
+                                    <label class="col-span-12" for="a">
+                                        <span class="control__label">
+                                            {{ i18n.a }}
+                                        </span>
+                                        <input
+                                            id="a"
+                                            v-model.number="a"
+                                            type="number"
+                                            step="0.1"
+                                            class="control control--text"
+                                        >
+                                    </label>
 
-                                <label class="col-span-12" for="b">
-                                    <span class="control__label">
-                                        {{ i18n.b }}
-                                    </span>
-                                    <input
-                                        id="b"
-                                        v-model.number="b"
-                                        type="number"
-                                        step="0.1"
-                                        class="control control--text"
-                                    >
-                                </label>
+                                    <label class="col-span-12" for="b">
+                                        <span class="control__label">
+                                            {{ i18n.b }}
+                                        </span>
+                                        <input
+                                            id="b"
+                                            v-model.number="b"
+                                            type="number"
+                                            step="0.1"
+                                            class="control control--text"
+                                        >
+                                    </label>
 
-                                <label class="col-span-12" for="c">
-                                    <span class="control__label">
-                                        {{ i18n.c }}
-                                    </span>
-                                    <input
-                                        id="c"
-                                        v-model.number="c"
-                                        type="number"
-                                        step="0.1"
-                                        class="control control--text"
-                                    >
-                                </label>
+                                    <label class="col-span-12" for="c">
+                                        <span class="control__label">
+                                            {{ i18n.c }}
+                                        </span>
+                                        <input
+                                            id="c"
+                                            v-model.number="c"
+                                            type="number"
+                                            step="0.1"
+                                            class="control control--text"
+                                        >
+                                    </label>
 
-                                <p class="col-span-12 font-bold">
-                                    {{ i18n.d }}: {{ d.toFixed(2) }}
-                                </p>
+                                    <p class="col-span-12 font-bold">
+                                        {{ i18n.d }}: {{ d.toFixed(2) }}
+                                    </p>
+                                </div>
                             </div>
 
                         </div>
                     </div>
                 </fieldset>
-                <fieldset class="fieldset">
+                <fieldset class="fieldset fieldset--even 2xl:col-span-6">
                     <h4 class="fieldset__title">
                         <strong>
                             04//
@@ -295,130 +306,130 @@
                         {{ i18n.step_4 }}
                     </h4>
                     <div class="fieldset__content">
-                        <div class="grid gap-4 grid-cols-12 items-start">
+                        <div class="grid gap-7 grid-cols-12 items-start">
                             <div class="col-span-12 md:col-span-6 md:order-2 wrapper wrapper--profile-pic">
                                 <img :src="profilePicSrc" class="w-full" :title="profileType">
                             </div>
-                            <div class="col-span-12 md:col-span-6 md:order-1 grid gap-4 grid-cols-12">
-
-                                <div class="control col-span-12">
-                                    <label class="control__label">
-                                        {{ i18n.profileType }}
-                                    </label>
-                                    <multiselect
-                                        class="control--multiselect"
-                                        v-model="profileType"
-                                        :options="Object.keys(profileTypes)"
-                                        :allow-empty="false"
-                                        :placeholder="i18n.select_palceholder"
-                                        >
-                                    </multiselect>
-                                </div>
-
-                                <div class="control col-span-12">
-                                    <label class="control__label">
-                                        {{ i18n.profileColor }}
-                                    </label>
-                                    <multiselect
-                                        class="control--multiselect"
-                                        v-model="profileColor"
-                                        :options="Object.keys(profileColors)"
-                                        :allow-empty="false"
-                                        :placeholder="i18n.select_palceholder"
-                                        >
-                                        <template #singleLabel="props">
-                                            {{ profileColors[props.option].i18n }}
-                                        </template>
-                                        <template #option="props">
-                                            <span>
-                                                {{ profileColors[props.option].i18n }}
-                                            </span>
-                                        </template>
-                                    </multiselect>
-                                </div>
-
-                                <div class="control col-span-12">
-                                    <label class="control__label">
-                                        {{ i18n.reinType }}
-                                    </label>
-                                    <multiselect
-                                        class="control--multiselect"
-                                        v-model="reinType"
-                                        :options="reinTypesOptions"
-                                        :allow-empty="false"
-                                        :placeholder="i18n.select_palceholder"
-                                        >
-                                        <template #singleLabel="props">
-                                            {{ reinTypes[props.option].i18n }}
-                                        </template>
-                                        <template #option="props">
-                                            <span>
-                                                {{ reinTypes[props.option].i18n }}
-                                            </span>
-                                        </template>
-                                    </multiselect>
-                                </div>
-
-                                <div class="control col-span-12" v-if="isVisible.reinType_60_70">
-                                    <label class="control__label">
-                                        {{ i18n.reinType_60_70 }}
-                                    </label>
-                                    <multiselect
-                                        class="control--multiselect"
-                                        v-model="reinType_60_70"
-                                        :options="reinTypes_60_70_Options"
-                                        :allow-empty="false"
-                                        :placeholder="i18n.select_palceholder"
-                                        >
-                                        <template #singleLabel="props">
-                                            {{ reinTypes[props.option].i18n }}
-                                        </template>
-                                        <template #option="props">
-                                            <span>
-                                                {{ reinTypes[props.option].i18n }}
-                                            </span>
-                                        </template>
-                                    </multiselect>
-                                </div>
-
-                                <div class="control col-span-12" v-if="isVisible.reinType_L68">
-                                    <label class="control__label">
-                                        {{ i18n.reinType_L68 }}
-                                    </label>
-                                    <multiselect
-                                        class="control--multiselect"
-                                        v-model="reinType_L68"
-                                        :options="reinTypes_L68_Options"
-                                        :allow-empty="false"
-                                        :placeholder="i18n.select_palceholder"
-                                        >
-                                        <template #singleLabel="props">
-                                            {{ reinTypes[props.option].i18n }}
-                                        </template>
-                                        <template #option="props">
-                                            <span>
-                                                {{ reinTypes[props.option].i18n }}
-                                            </span>
-                                        </template>
-                                    </multiselect>
-                                </div>
-
-                                <p class="col-span-12">
-                                    <span>{{ i18n.maxСurve }}:</span> {{ maxСurve.toFixed(3) }}
-                                </p>
-
-                                <div class="bg-yellow-300 col-span-12 text-right" v-if="showDebug">
-                                    <div
-                                        v-for="(value, key) in resultViews"
-                                        :key="`result_${key}`"
-                                        >
-                                        {{ value.result.toFixed(2) }}
+                            <div class="col-span-12 md:col-span-6 md:order-1">
+                                <div class="wrapper--controls grid gap-7 grid-cols-12">
+                                    <div class="control col-span-12">
+                                        <label class="control__label">
+                                            {{ i18n.profileType }}
+                                        </label>
+                                        <multiselect
+                                            class="control--multiselect"
+                                            v-model="profileType"
+                                            :options="Object.keys(profileTypes)"
+                                            :allow-empty="false"
+                                            :placeholder="i18n.select_palceholder"
+                                            >
+                                        </multiselect>
                                     </div>
-                                    <button class="btn m-4"@click="runTest()">
-                                        Запустить тесты
-                                    </button>
-                                </div>
 
+                                    <div class="control col-span-12">
+                                        <label class="control__label">
+                                            {{ i18n.profileColor }}
+                                        </label>
+                                        <multiselect
+                                            class="control--multiselect"
+                                            v-model="profileColor"
+                                            :options="Object.keys(profileColors)"
+                                            :allow-empty="false"
+                                            :placeholder="i18n.select_palceholder"
+                                            >
+                                            <template #singleLabel="props">
+                                                {{ profileColors[props.option].i18n }}
+                                            </template>
+                                            <template #option="props">
+                                                <span>
+                                                    {{ profileColors[props.option].i18n }}
+                                                </span>
+                                            </template>
+                                        </multiselect>
+                                    </div>
+
+                                    <div class="control col-span-12">
+                                        <label class="control__label">
+                                            {{ i18n.reinType }}
+                                        </label>
+                                        <multiselect
+                                            class="control--multiselect"
+                                            v-model="reinType"
+                                            :options="reinTypesOptions"
+                                            :allow-empty="false"
+                                            :placeholder="i18n.select_palceholder"
+                                            >
+                                            <template #singleLabel="props">
+                                                {{ reinTypes[props.option].i18n }}
+                                            </template>
+                                            <template #option="props">
+                                                <span>
+                                                    {{ reinTypes[props.option].i18n }}
+                                                </span>
+                                            </template>
+                                        </multiselect>
+                                    </div>
+
+                                    <div class="control col-span-12" v-if="isVisible.reinType_60_70">
+                                        <label class="control__label">
+                                            {{ i18n.reinType_60_70 }}
+                                        </label>
+                                        <multiselect
+                                            class="control--multiselect"
+                                            v-model="reinType_60_70"
+                                            :options="reinTypes_60_70_Options"
+                                            :allow-empty="false"
+                                            :placeholder="i18n.select_palceholder"
+                                            >
+                                            <template #singleLabel="props">
+                                                {{ reinTypes[props.option].i18n }}
+                                            </template>
+                                            <template #option="props">
+                                                <span>
+                                                    {{ reinTypes[props.option].i18n }}
+                                                </span>
+                                            </template>
+                                        </multiselect>
+                                    </div>
+
+                                    <div class="control col-span-12" v-if="isVisible.reinType_L68">
+                                        <label class="control__label">
+                                            {{ i18n.reinType_L68 }}
+                                        </label>
+                                        <multiselect
+                                            class="control--multiselect"
+                                            v-model="reinType_L68"
+                                            :options="reinTypes_L68_Options"
+                                            :allow-empty="false"
+                                            :placeholder="i18n.select_palceholder"
+                                            >
+                                            <template #singleLabel="props">
+                                                {{ reinTypes[props.option].i18n }}
+                                            </template>
+                                            <template #option="props">
+                                                <span>
+                                                    {{ reinTypes[props.option].i18n }}
+                                                </span>
+                                            </template>
+                                        </multiselect>
+                                    </div>
+
+                                    <p class="col-span-12">
+                                        <span>{{ i18n.maxСurve }}:</span> {{ maxСurve.toFixed(3) }}
+                                    </p>
+
+                                    <div class="bg-yellow-300 col-span-12 text-right" v-if="showDebug">
+                                        <div
+                                            v-for="(value, key) in resultViews"
+                                            :key="`result_${key}`"
+                                            >
+                                            {{ value.result.toFixed(2) }}
+                                        </div>
+                                        <button class="btn m-4"@click="runTest()">
+                                            Запустить тесты
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
@@ -426,15 +437,15 @@
                 </fieldset>
             </div>
             <div class="wrapper">
-                <fieldset class="fieldset fieldset--last">
+                <fieldset class="fieldset fieldset--odd fieldset--last">
                     <h4 class="fieldset__title">
                         {{ i18n.step_5 }}
                     </h4>
-                    <div class="fieldset__content">
+                    <div class="fieldset__content 2xl:grid grid-cols-12">
                         <div
                             v-for="(value, key, index) in resultViews"
                             :key="`result_${key}`"
-                            class="col-span-12 wrapper wrapper--result"
+                            class="col-span-12 wrapper wrapper--result 2xl:col-span-3"
                             :class="{
                                 'mb-0': index === Object.keys(resultViews).length - 1,
                             }"
@@ -442,7 +453,7 @@
                             <strong>
                                 {{ value.title }}
                             </strong>
-                            <component v-bind:is="`icon-${key}`" />
+                            <img :src="value.src" alt="value.title">
                             <p class="col-span-12 text">
                                 <span class="block mb-2">
                                     <span>Расчётный прогиб, мм:</span> {{ value.result.toFixed(2) }}
@@ -521,13 +532,8 @@
 
 <script>
 
+    import { events } from '@/lib/events';
     import Multiselect from 'vue-multiselect';
-    import iconImpost from '@/components/icons/iconImpost.vue';
-    import iconPilyastr from '@/components/icons/iconPilyastr.vue';
-    import iconConnective3 from '@/components/icons/iconConnective3.vue';
-    import iconUniversal from '@/components/icons/iconUniversal.vue';
-    import iconConnective38 from '@/components/icons/iconConnective38.vue';
-    import iconConnective65 from '@/components/icons/iconConnective65.vue';
 
     import pic60_4 from '@/assets/images/60_4.png';
     import pic70_6 from '@/assets/images/70_6.png';
@@ -536,12 +542,7 @@
     import picAero from '@/assets/images/AERO.png';
     import picSuperAero from '@/assets/images/SUPER_AERO.png';
     import picGlide from '@/assets/images/GLIDE.png';
-    import picGainImpost from '@/assets/images/impost.png';
-    import picGainPilyastr from '@/assets/images/pilyastr.png';
-    import picGainСonnective3 from '@/assets/images/connective3.png';
-    import picGainUniversal from '@/assets/images/universal.png';
-    import picGainСonnective38 from '@/assets/images/connective38.png';
-    import picGainСonnective65 from '@/assets/images/connective65.png';
+
     import { specsData } from '@/specsData.js';
     import { tests } from '@/testsData.js';
 
@@ -557,13 +558,7 @@
     export default {
         name: 'elFormImpost',
         components: {
-            Multiselect,
-            iconImpost,
-            iconPilyastr,
-            iconConnective3,
-            iconUniversal,
-            iconConnective38,
-            iconConnective65
+            Multiselect
         },
         data() {
             return {
@@ -982,6 +977,11 @@
                     Bl: 'Длина здания',
                     Wh: 'Фактическая высота установки окна (м)',
                     windSide: 'Сторона',
+                    windSideViews: {
+                        windward_side: 'Наветренная сторона',
+                        leeward_side: 'Подветренная сторона',
+                        side_wall: 'Боковая сторона',
+                    },
                     Wgap: 'Расстояние от края наветренной стены до окна, м',
                     L: 'Длина импоста L (см)',
                     a: 'a (см)',
@@ -1090,12 +1090,12 @@
             resultViews(){// варианты расчетов в зависимости от типа профиля
                 let resp = {
                     impost: {
-                        src: picGainImpost,
+                        src: '',
                         title: 'Импост',
                         result: this.computeEstimatedDeflection('impost')
                     },
                     pilyastr: {
-                        src: picGainPilyastr,
+                        src: '',
                         title: 'Усиление пилястровым профилем',
                         result: this.computeEstimatedDeflection('pilyastr')
                     }
@@ -1104,22 +1104,22 @@
                     resp = {
                         ...resp,
                         connective3: {
-                            src: picGainСonnective3,
+                            src: '',
                             title: 'Соединительный профиль 3',
                             result: this.computeEstimatedDeflection('connective3')
                         },
                         universal: {
-                            src: picGainUniversal,
+                            src: '',
                             title: 'Профиль соединительный универсальный',
                             result: this.computeEstimatedDeflection('universal')
                         },
                         connective38: {
-                            src: picGainСonnective38,
+                            src: '',
                             title: 'Профиль соединительный 38',
                             result: this.computeEstimatedDeflection('connective38')
                         },
                         connective65: {
-                            src: picGainСonnective65,
+                            src: '',
                             title: 'Профиль соединительный 65',
                             result: this.computeEstimatedDeflection('connective65')
                         }
@@ -1483,6 +1483,14 @@
             this.hasShareOpportunity = typeof navigator.share === 'function';
             let params = new URLSearchParams(document.location.search);
             this.setParamsFromRoute(params);
+            window.addEventListener(events.EV_APP_COPY_FORM_PARAMS, this.copyLink);
+            window.addEventListener(events.EV_APP_SHARE_FORM_PARAMS, this.shareLink);
+            window.addEventListener(events.EV_APP_PRINT_FORM_PARAMS, this.printForm);
+        },
+        beforeDestroy(){
+            window.removeEventListener(events.EV_APP_COPY_FORM_PARAMS, this.copyLink);
+            window.removeEventListener(events.EV_APP_SHARE_FORM_PARAMS, this.shareLink);
+            window.removeEventListener(events.EV_APP_PRINT_FORM_PARAMS, this.printForm);
         }
     }
 
