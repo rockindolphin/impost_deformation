@@ -1,9 +1,9 @@
 <template>
-    <form action="#" class="form form--impost">
+    <form action="#" class="form form--impost" @submit.prevent="false">
         <div class="print:hidden">
 
             <div class="wrapper 2xl:grid grid-cols-12">
-                <fieldset class="fieldset fieldset--odd pb-3 2xl:col-span-4 2xl:pb-0">
+                <fieldset class="fieldset fieldset--odd pb-3 2xl:col-span-5 2xl:pb-0">
                     <h4 class="fieldset__title">
                         <strong>
                             01//
@@ -21,7 +21,8 @@
                                     v-model="windRegion"
                                     :options="Object.keys(windRegions)"
                                     :allow-empty="false"
-                                    :placeholder="i18n.select_palceholder"
+                                    :placeholder="i18n.select_placeholder"
+                                    :searchable="false"
                                     >
                                 </multiselect>
                             </div>
@@ -34,7 +35,8 @@
                                     v-model="terrainType"
                                     :options="terrainTypes"
                                     :allow-empty="false"
-                                    :placeholder="i18n.select_palceholder"
+                                    :placeholder="i18n.select_placeholder"
+                                    :searchable="false"
                                     >
                                 </multiselect>
                             </div>
@@ -65,7 +67,7 @@
                         </div>
                     </div>
                 </fieldset>
-                <fieldset class="fieldset fieldset--even 2xl:col-span-8">
+                <fieldset class="fieldset fieldset--even 2xl:col-span-7">
                     <h4 class="fieldset__title">
                         <strong>
                             02//
@@ -158,7 +160,8 @@
                                             v-model="windSide"
                                             :options="Object.keys(windSides)"
                                             :allow-empty="false"
-                                            :placeholder="i18n.select_palceholder"
+                                            :placeholder="i18n.select_placeholder"
+                                            :searchable="false"
                                             >
                                             <template #singleLabel="props">
                                                 {{ windSides[props.option].i18n }}
@@ -307,8 +310,18 @@
                     </h4>
                     <div class="fieldset__content">
                         <div class="grid gap-7 grid-cols-12 items-start">
-                            <div class="col-span-12 md:col-span-6 md:order-2 wrapper wrapper--profile-pic">
-                                <img :src="profilePicSrc" class="w-full" :title="profileType">
+                            <div class="col-span-12 md:col-span-6 md:order-2 mb-7 md:mb-0">
+                                <div class="wrapper wrapper--profile-pic">
+                                    <picture>
+                                        <source :srcset="profilePic.webp" type="image/webp">
+                                        <source :srcset="profilePic.png" type="image/png">
+                                        <img
+                                            :src="profilePic.png"
+                                            :alt="profileType"
+                                            loading="lazy"
+                                            >
+                                    </picture>
+                                </div>
                             </div>
                             <div class="col-span-12 md:col-span-6 md:order-1">
                                 <div class="wrapper--controls grid gap-7 grid-cols-12">
@@ -321,7 +334,8 @@
                                             v-model="profileType"
                                             :options="Object.keys(profileTypes)"
                                             :allow-empty="false"
-                                            :placeholder="i18n.select_palceholder"
+                                            :placeholder="i18n.select_placeholder"
+                                            :searchable="false"
                                             >
                                         </multiselect>
                                     </div>
@@ -335,7 +349,8 @@
                                             v-model="profileColor"
                                             :options="Object.keys(profileColors)"
                                             :allow-empty="false"
-                                            :placeholder="i18n.select_palceholder"
+                                            :placeholder="i18n.select_placeholder"
+                                            :searchable="false"
                                             >
                                             <template #singleLabel="props">
                                                 {{ profileColors[props.option].i18n }}
@@ -357,7 +372,8 @@
                                             v-model="reinType"
                                             :options="reinTypesOptions"
                                             :allow-empty="false"
-                                            :placeholder="i18n.select_palceholder"
+                                            :placeholder="i18n.select_placeholder"
+                                            :searchable="false"
                                             >
                                             <template #singleLabel="props">
                                                 {{ reinTypes[props.option].i18n }}
@@ -379,7 +395,8 @@
                                             v-model="reinType_60_70"
                                             :options="reinTypes_60_70_Options"
                                             :allow-empty="false"
-                                            :placeholder="i18n.select_palceholder"
+                                            :placeholder="i18n.select_placeholder"
+                                            :searchable="false"
                                             >
                                             <template #singleLabel="props">
                                                 {{ reinTypes[props.option].i18n }}
@@ -401,7 +418,8 @@
                                             v-model="reinType_L68"
                                             :options="reinTypes_L68_Options"
                                             :allow-empty="false"
-                                            :placeholder="i18n.select_palceholder"
+                                            :placeholder="i18n.select_placeholder"
+                                            :searchable="false"
                                             >
                                             <template #singleLabel="props">
                                                 {{ reinTypes[props.option].i18n }}
@@ -420,10 +438,10 @@
 
                                     <div class="bg-yellow-300 col-span-12 text-right" v-if="showDebug">
                                         <div
-                                            v-for="(value, key) in resultViews"
-                                            :key="`result_${key}`"
+                                            v-for="item in resultViews"
+                                            :key="`result_${item.key}`"
                                             >
-                                            {{ value.result.toFixed(2) }}
+                                            {{ item.result.toFixed(2) }}
                                         </div>
                                         <button class="btn m-4"@click="runTest()">
                                             Запустить тесты
@@ -443,18 +461,18 @@
                     </h4>
                     <div class="fieldset__content 2xl:grid grid-cols-12">
                         <div
-                            v-for="(value, key, index) in resultViews"
-                            :key="`result_${key}`"
+                            v-for="(item, index) in resultViews"
+                            :key="`result_${item.key}`"
                             class="col-span-12 wrapper wrapper--result 2xl:col-span-3"
                             :class="{
-                                'mb-0': index === Object.keys(resultViews).length - 1,
+                                'mb-0': index === resultViews.length - 1,
                             }"
                             >
                             <strong>
-                                {{ value.title }}
+                                {{ item.title }}
                             </strong>
-                            <template v-if="key === 'fake_impost'">
-                                <div class="control">
+                            <template v-if="item.key === 'fake_impost'">
+                                <div class="control mb-4">
                                     <label class="control__label">
                                         {{ i18n.fakeImpostProfileType }}
                                     </label>
@@ -464,6 +482,7 @@
                                         :options="fakeImpostProfileTypes"
                                         :allow-empty="false"
                                         :placeholder="i18n.select_placeholder"
+                                        :searchable="false"
                                         >
                                     </multiselect>
                                 </div>
@@ -477,6 +496,7 @@
                                         :options="fakeImpostReinTypesOptions"
                                         :allow-empty="false"
                                         :placeholder="i18n.select_placeholder"
+                                        :searchable="false"
                                         >
                                         <template #singleLabel="props">
                                             {{ fakeImpostReinTypes[props.option].i18n }}
@@ -489,13 +509,25 @@
                                     </multiselect>
                                 </div>
                             </template>
-                            <img :src="value.src" :alt="value.title">
+                            <fake-impost
+                                v-if="item.key === 'fake_impost'"
+                                :pt="fakeImpostProfileType"
+                                :rt="fakeImpostReinType"
+                                >
+                            </fake-impost>
+                            <component
+                                v-else
+                                v-bind:is="`scheme_-${profileType}`"
+                                :view="item.key"
+                                :rt="getReinType(item.key)"
+                                >
+                            </component>
                             <p class="col-span-12 text">
                                 <span class="block mb-2">
-                                    <span>Расчётный прогиб, мм:</span> {{ value.result.toFixed(2) }}
+                                    <span>Расчётный прогиб, мм:</span> {{ item.result.toFixed(2) }}
                                 </span>
                                 <span class="block">
-                                    <span class="text--success" v-if="value.result <= maxСurve">
+                                    <span class="text--success" v-if="item.result <= maxСurve">
                                         Удовлетворяет условию прочности!
                                     </span>
                                     <span class="text--warning" v-else>
@@ -504,6 +536,7 @@
                                 </span>
                             </p>
                         </div>
+
                     </div>
                 </fieldset>
             </div>
@@ -544,25 +577,35 @@
                 </thead>
                 <tbody>
                     <tr
-                        v-for="(value, key) in resultViews"
-                        :key="`tr_${key}`"
+                        v-for="item in resultViews"
+                        :key="`tr_${item.key}`"
                         >
                         <td>
-                            {{ value.title }}
+                            {{ item.title }}
                         </td>
                         <td
                             :class="{
-                                'bg-green-600': value.result <= maxСurve,
-                                'bg-red-600': value.result > maxСurve
+                                'bg-green-600': item.result <= maxСurve,
+                                'bg-red-600': item.result > maxСurve
                             }"
                             >
-                            {{ value.result.toFixed(2) }}
+                            {{ item.result.toFixed(2) }}
                         </td>
                     </tr>
                 </tbody>
             </table>
 
         </div>
+        <!--
+
+        -->
+        <div class="wrapper--result grid grid-cols-2" style="background-color: #000">
+            <scheme-full class="col-span-1" />
+            <scheme-simple class="col-span-1" />
+        </div>
+        <button class="btn" @click="toggle()">
+            toggle
+        </button>
     </form>
 </template>
 
@@ -571,13 +614,32 @@
     import { events } from '@/lib/events';
     import Multiselect from 'vue-multiselect';
 
-    import pic60_4 from '@/assets/images/60_4.png';
-    import pic70_6 from '@/assets/images/70_6.png';
-    import picAClass from '@/assets/images/ACLASS.png';
-    import picAClass_L68 from '@/assets/images/ACLASS.png';
-    import picAero from '@/assets/images/AERO.png';
-    import picSuperAero from '@/assets/images/SUPER_AERO.png';
-    import picGlide from '@/assets/images/GLIDE.png';
+    import pngPic60_4 from '@/assets/images/profiles/60_4.png';
+    import webpPic60_4 from '@/assets/images/profiles/60_4.webp';
+    import pngPic70_6 from '@/assets/images/profiles/70_6.png';
+    import webpPic70_6 from '@/assets/images/profiles/70_6.webp';
+    import pngPicAClass from '@/assets/images/profiles/ACLASS.png';
+    import webpPicAClass from '@/assets/images/profiles/ACLASS.webp';
+    import pngPicAero from '@/assets/images/profiles/AERO.png';
+    import webpPicAero from '@/assets/images/profiles/AERO.webp';
+    import pngPicSuperAero from '@/assets/images/profiles/SUPER_AERO.png';
+    import webpPicSuperAero from '@/assets/images/profiles/SUPER_AERO.webp';
+    import pngPicGlide from '@/assets/images/profiles/GLIDE.png';
+    import webpPicGlide from '@/assets/images/profiles/GLIDE.webp';
+
+    import schemeFull from '@/components/schemas/schemeFull.vue';
+    import schemeSimple from '@/components/schemas/schemeSimple.vue';
+
+    import scheme_T78_AERO from '@/components/schemas/T78_AERO.vue';
+    import scheme_T80_AERO from '@/components/schemas/T80_AERO.vue';
+    import scheme_T78_SUPER_AERO from '@/components/schemas/T78_SUPER_AERO.vue';
+    import scheme_T80_SUPER_AERO from '@/components/schemas/T80_SUPER_AERO.vue';
+    import scheme_T78_ACLASS from '@/components/schemas/T78_ACLASS.vue';
+    import scheme_T78_ACLASS_L68 from '@/components/schemas/T78_ACLASS_L68.vue';
+    import scheme_T86_60_4 from '@/components/schemas/T86_60_4.vue';
+    import scheme_T86_70_6 from '@/components/schemas/T86_70_6.vue';
+    import scheme_GLIDE from '@/components/schemas/GLIDE.vue';
+    import fakeImpost from '@/components/schemas/fakeImpost.vue';
 
     import { specsData } from '@/specsData.js';
     import { tests } from '@/testsData.js';
@@ -595,7 +657,19 @@
     export default {
         name: 'elFormImpost',
         components: {
-            Multiselect
+            Multiselect,
+            scheme_T78_AERO,
+            scheme_T80_AERO,
+            scheme_T78_SUPER_AERO,
+            scheme_T80_SUPER_AERO,
+            scheme_T78_ACLASS,
+            scheme_T78_ACLASS_L68,
+            scheme_T86_60_4,
+            scheme_T86_70_6,
+            scheme_GLIDE,
+            fakeImpost,
+            schemeFull,
+            schemeSimple
         },
         data() {
             return {
@@ -808,24 +882,41 @@
             }
         },
         computed: {
-            profilePicSrc(){// ссылка на картинку в зависимости от типа профиля
+            profilePic(){// ссылка на картинку в зависимости от типа профиля
                 switch (this.profileType) {
                     case 'T78_AERO':
                     case 'T80_AERO':
-                        return picAero;
+                        return {
+                            png: pngPicAero,
+                            webp: webpPicAero
+                        };
                     case 'T78_SUPER_AERO':
                     case 'T80_SUPER_AERO':
-                        return picSuperAero;
+                        return {
+                            png: pngPicSuperAero,
+                            webp: webpPicSuperAero
+                        };
                     case 'T78_ACLASS':
-                        return picAClass;
                     case 'T78_ACLASS_L68':
-                        return picAClass_L68;
+                        return {
+                            png: pngPicAClass,
+                            webp: webpPicAClass
+                        };
                     case 'T86_60_4':
-                        return pic60_4;
+                        return {
+                            png: pngPic60_4,
+                            webp: webpPic60_4
+                        };
                     case 'T86_70_6':
-                        return pic70_6;
+                        return {
+                            png: pngPic70_6,
+                            webp: webpPic70_6
+                        };
                     case 'GLIDE':
-                        return picGlide;
+                        return {
+                            png: pngPicGlide,
+                            webp: webpPicGlide
+                        };
                 }
             },
             buildingStyles(){// стили для отрисовки здания
@@ -1040,7 +1131,7 @@
                     step_3: 'Параметры оконного блока',
                     step_4: 'Тип профиля',
                     step_5: 'Варианты исполнений',
-                    select_palceholder: 'Выберите значение',
+                    select_placeholder: 'Выберите значение',
 
                     windRegion: 'Ветровой район',
                     terrainType: 'Тип местности',
@@ -1165,48 +1256,57 @@
                 return this.profileTypes[this.profileType];
             },
             resultViews(){// варианты расчетов в зависимости от типа профиля
-                let resp = {
-                    impost: {
+                let resp = [
+                    {
+                        key: 'impost',
                         src: '',
                         title: 'Импост',
                         result: this.computeEstimatedDeflection('impost')
                     },
-                    pilyastr: {
+                    {
+                        key: 'pilyastr',
                         src: '',
                         title: 'Усиление пилястровым профилем',
                         result: this.computeEstimatedDeflection('pilyastr')
-                    },
-                    fake_impost: {
-                        src: '',
-                        title: 'Ложный импост',
-                        result: this.computeEstimatedDeflection('fake_impost')
                     }
-                }
+                ];
                 if( this.profileType !== 'GLIDE' ){
-                    resp = {
+                    resp = [
                         ...resp,
-                        connective3: {
-                            src: '',
-                            title: 'Соединительный профиль 3',
-                            result: this.computeEstimatedDeflection('connective3')
-                        },
-                        universal: {
-                            src: '',
-                            title: 'Профиль соединительный универсальный',
-                            result: this.computeEstimatedDeflection('universal')
-                        },
-                        connective38: {
-                            src: '',
-                            title: 'Профиль соединительный 38',
-                            result: this.computeEstimatedDeflection('connective38')
-                        },
-                        connective65: {
-                            src: '',
-                            title: 'Профиль соединительный 65',
-                            result: this.computeEstimatedDeflection('connective65')
-                        }
-                    }
+                        ...[
+                            {
+                                key: 'connective3',
+                                src: '',
+                                title: 'Соединительный профиль 3',
+                                result: this.computeEstimatedDeflection('connective3')
+                            },
+                            {
+                                key: 'universal',
+                                src: '',
+                                title: 'Профиль соединительный универсальный',
+                                result: this.computeEstimatedDeflection('universal')
+                            },
+                            {
+                                key: 'connective38',
+                                src: '',
+                                title: 'Профиль соединительный 38',
+                                result: this.computeEstimatedDeflection('connective38')
+                            },
+                            {
+                                key: 'connective65',
+                                src: '',
+                                title: 'Профиль соединительный 65',
+                                result: this.computeEstimatedDeflection('connective65')
+                            }
+                        ]
+                    ];
                 }
+                resp.push({
+                    key: 'fake_impost',
+                    src: '',
+                    title: 'Ложный импост',
+                    result: this.computeEstimatedDeflection('fake_impost')
+                });
                 return resp;
             },
             reinTypesOptions(){// Тип армирования в зависимости от типа профиля
@@ -1571,6 +1671,30 @@
                     text: 'Предзаполненая форма расчета',
                     url: `?${this.generateUrlParams()}`
                 });
+            },
+            toggle(){
+                window.dispatchEvent(new CustomEvent('toggleScheme'));
+            },
+            getReinType(specKey){
+                if( specKey === 'fake_impost' ){
+                    return this.fakeImpostReinType;
+                }else{
+                    if( ['T78_AERO', 'T80_AERO', 'T78_SUPER_AERO', 'T80_SUPER_AERO', 'T78_ACLASS', 'GLIDE'].includes(this.profileType) ){
+                        return this.reinType;
+                    }else if( ['T78_ACLASS_L68'].includes(this.profileType) ){
+                        if( ['impost', 'pilyastr'].includes(specKey) ){
+                            return this.reinType;
+                        }else{
+                            return this.reinType_L68;
+                        }
+                    }else if( ['T86_60_4', 'T86_70_6'].includes(this.profileType) ){
+                        if( ['impost', 'pilyastr'].includes(specKey) ){
+                            return this.reinType;
+                        }else{
+                            return this.reinType_60_70;
+                        }
+                    }
+                }
             }
         },
         created(){

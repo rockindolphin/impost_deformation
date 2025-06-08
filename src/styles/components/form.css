@@ -54,10 +54,13 @@
 
         }
         @media (min-width: theme(--breakpoint-2xl) ) {
+            & .fieldset__title{
+                white-space: nowrap;
+                padding: 24px 12px 34px;
+            }
             & .fieldset--even{
                 border-left: none;
                 & .fieldset__title{
-                    padding: 24px 12px 34px;
                     &::after{
                         display: none;
                     }
