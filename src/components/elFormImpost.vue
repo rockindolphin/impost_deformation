@@ -486,7 +486,7 @@
                                         >
                                     </multiselect>
                                 </div>
-                                <div class="control">
+                                <div class="control mb-4">
                                     <label class="control__label">
                                         {{ i18n.fakeImpostReinType }}
                                     </label>
@@ -598,7 +598,6 @@
         </div>
         <!--
 
-        -->
         <div class="wrapper--result grid grid-cols-2" style="background-color: #000">
             <scheme-full class="col-span-1" />
             <scheme-simple class="col-span-1" />
@@ -606,6 +605,7 @@
         <button class="btn" @click="toggle()">
             toggle
         </button>
+        -->
     </form>
 </template>
 
