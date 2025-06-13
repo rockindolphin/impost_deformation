@@ -17,6 +17,17 @@
                 padding-bottom: 12px;
             }
         }
+        @media print{
+            border: none;
+            & > .page__wrapper{
+                --page-gap: 12px;
+                padding-top: 16px;
+                padding-bottom: 8px;
+                border-bottom: 1px solid;
+                border-color: var(--silver);
+                justify-content: space-between;
+            }
+        }
     }
 
     .header__logo{
@@ -44,6 +55,14 @@
                 width: 120px;
             }
         }
+        @media print{
+            &::after{
+                display: none;
+            }
+            & .icon__vue--logo{
+                width: 82px;
+            }
+        }
     }
 
     .header__title{
@@ -53,6 +72,9 @@
         @media (min-width: theme(--breakpoint-2xl) ) {
             font-size: 20px;
             line-height: 1.1;
+        }
+        @media print{
+            font-size: 12px;
         }
     }
 
@@ -135,6 +157,9 @@
                     width: 54px;
                 }
             }
+        }
+        @media print{
+            display: none;
         }
     }
 

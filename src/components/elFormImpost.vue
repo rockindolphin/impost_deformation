@@ -1,6 +1,6 @@
 <template>
     <form action="#" class="form form--impost" @submit.prevent="false">
-        <div class="print:hidden">
+        <div class="wrapper wrapper--web">
 
             <div class="wrapper 2xl:grid grid-cols-12">
                 <fieldset class="fieldset fieldset--odd pb-3 2xl:col-span-5 2xl:pb-0">
@@ -77,22 +77,18 @@
                     <div class="fieldset__content">
                         <div class="grid gap-7 grid-cols-12 items-start">
                             <div class="col-span-12 md:col-span-6 md:order-2 flex flex-col items-center justify-center">
-                                <div class="scene" :style="buildingStyles">
-                                    <div class="box">
-                                        <div class="box__face box__face--front">
-                                            <div class="box__window" v-if="windSide === 'windward_side'"></div>
-                                        </div>
-                                        <div class="box__face box__face--back">
-                                            <div class="box__window" v-if="windSide === 'leeward_side'"></div>
-                                        </div>
-                                        <div class="box__face box__face--right"></div>
-                                        <div class="box__face box__face--left">
-                                            <div class="box__window" v-if="windSide === 'side_wall'"></div>
-                                        </div>
-                                        <div class="box__face box__face--top"></div>
-                                        <div class="box__face box__face--bottom"></div>
-                                    </div>
-                                </div>
+                                <el-building
+                                    :wind-side="windSide"
+                                    :a="a"
+                                    :b="b"
+                                    :L="L"
+                                    :Wgap="Wgap"
+                                    :Bl="Bl"
+                                    :Bw="Bw"
+                                    :Bh="Bh"
+                                    :Wh="Wh"
+                                    >
+                                </el-building>
                                 <h5 class="uppercase">
                                     {{ i18n.windSideViews[windSide] }}
                                 </h5>
@@ -208,34 +204,14 @@
                         <div class="grid gap-7 grid-cols-12 items-start">
 
                             <div class="col-span-12 md:col-span-6 md:order-2">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    :viewBox="svgComp.viewBox"
-                                    fill="none"
-                                    class="figure figure--window"
+                                <el-window
+                                    :a="a"
+                                    :b="b"
+                                    :c="c"
+                                    :d="d"
+                                    :L="L"
                                     >
-                                    <rect v-bind="svgComp.window" />
-                                    <line v-bind="svgComp.impost_v" />
-                                    <line v-bind="svgComp.impost_h" />
-                                    <line v-bind="svgComp.a_line" />
-                                    <line v-bind="svgComp.b_line" />
-                                    <line v-bind="svgComp.c_line" />
-                                    <line v-bind="svgComp.d_line" />
-                                    <line v-bind="svgComp.l_line" />
-                                    <rect v-bind="svgComp.a_sep_l" />
-                                    <rect v-bind="svgComp.a_sep_r" />
-                                    <rect v-bind="svgComp.b_sep_r" />
-                                    <rect v-bind="svgComp.c_sep_b" />
-                                    <rect v-bind="svgComp.c_sep_t" />
-                                    <rect v-bind="svgComp.d_sep_t" />
-                                    <rect v-bind="svgComp.l_sep_b" />
-                                    <rect v-bind="svgComp.l_sep_t" />
-                                    <text v-bind="svgComp.a_text" class="text" >a</text>
-                                    <text v-bind="svgComp.b_text" class="text" >b</text>
-                                    <text v-bind="svgComp.c_text" class="text" v-if="c !== 0">c</text>
-                                    <text v-bind="svgComp.d_text" class="text" >d</text>
-                                    <text v-bind="svgComp.l_text" class="text" >L</text>
-                                </svg>
+                                </el-window>
                             </div>
 
                             <div class="col-span-12 md:col-span-6 md:order-1">
@@ -443,9 +419,6 @@
                                             >
                                             {{ item.result.toFixed(2) }}
                                         </div>
-                                        <button class="btn m-4"@click="runTest()">
-                                            Запустить тесты
-                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -536,65 +509,129 @@
                                 </span>
                             </p>
                         </div>
-
                     </div>
                 </fieldset>
             </div>
 
         </div>
-        <div class="hidden print:block">
-
-            <table class="print_table my-4">
-                <thead>
-                    <tr>
-                        <th>Параметр</th>
-                        <th>Значение</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr
-                        v-for="(param, index) in printParams"
-                        :key="`tr_${index}`"
+        <div class="wrapper wrapper--print">
+            <fieldset class="fieldset grid grid-cols-12">
+                <div class="wrapper col-span-8">
+                    <h4 class="fieldset__title">
+                        {{ i18n.step_1_2 }}
+                    </h4>
+                    <table
+                        class="form__table"
+                        v-for="(group, g_index) in printParams"
+                        :key="`table_${g_index}`"
                         >
-                        <td>
-                            {{ param.title }}
-                        </td>
-                        <td>
-                            {{ param.value }}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <p class="col-span-12">
-                <span class="font-bold">{{ i18n.maxСurve }}:</span> {{ maxСurve.toFixed(3) }}
-            </p>
-            <table class="print_table my-4">
-                <thead>
-                    <tr>
-                        <th>Исполнение</th>
-                        <th>Расчётный прогиб, мм</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr
-                        v-for="item in resultViews"
-                        :key="`tr_${item.key}`"
+                        <tbody>
+                            <tr
+                                v-for="(param, p_index) in group"
+                                :key="`tr_${p_index}`"
+                                >
+                                <td>
+                                    {{ param.title }}
+                                </td>
+                                <td class="text-right">
+                                    {{ param.value }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="font-bold">
+                        <span>{{ i18n.maxСurve }}:</span> {{ maxСurve.toFixed(3) }}
+                    </p>
+                </div>
+                <div class="wrapper col-span-4">
+                    <el-window
+                        class="mb-4"
+                        :a="a"
+                        :b="b"
+                        :c="c"
+                        :d="d"
+                        :L="L"
                         >
-                        <td>
-                            {{ item.title }}
-                        </td>
-                        <td
-                            :class="{
-                                'bg-green-600': item.result <= maxСurve,
-                                'bg-red-600': item.result > maxСurve
-                            }"
+                    </el-window>
+                    <div class="wrapper wrapper--profile-pic">
+                        <picture>
+                            <source :srcset="profilePic.webp" type="image/webp">
+                            <source :srcset="profilePic.png" type="image/png">
+                            <img
+                                :src="profilePic.png"
+                                :alt="profileType"
+                                loading="lazy"
+                                >
+                        </picture>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="fieldset">
+                <h4 class="fieldset__title">
+                    {{ i18n.step_5 }}
+                </h4>
+                <div class="grid grid-cols-12">
+                    <div
+                        v-for="(item, index) in resultViews"
+                        :key="`result_${item.key}`"
+                        class="col-span-6 wrapper wrapper--result"
+                        >
+                        <fake-impost
+                            v-if="item.key === 'fake_impost'"
+                            :pt="fakeImpostProfileType"
+                            :rt="fakeImpostReinType"
                             >
-                            {{ item.result.toFixed(2) }}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
+                        </fake-impost>
+                        <component
+                            v-else
+                            v-bind:is="`scheme_-${profileType}`"
+                            :view="item.key"
+                            :rt="getReinType(item.key)"
+                            >
+                        </component>
+                        <div class="wrapper">
+                            <strong>
+                                {{ item.title }}
+                            </strong>
+                            <template v-if="item.key === 'fake_impost'">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                {{ i18n.fakeImpostProfileType }}
+                                            </td>
+                                            <td class="text-right">
+                                                {{ fakeImpostProfileType }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                {{ i18n.fakeImpostReinType }}
+                                            </td>
+                                            <td class="text-right">
+                                                {{ fakeImpostReinTypes[fakeImpostReinType].i18n }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </template>
+                            <p class="col-span-12 text">
+                                <span class="block mb-2">
+                                    <span>Расчётный прогиб, мм:</span> {{ item.result.toFixed(2) }}
+                                </span>
+                                <span class="block">
+                                    <span v-if="item.result <= maxСurve">
+                                        Удовлетворяет условию прочности!
+                                    </span>
+                                    <span v-else>
+                                        Не удовлетворяет условию прочности!
+                                    </span>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
         </div>
         <!--
 
@@ -627,9 +664,6 @@
     import pngPicGlide from '@/assets/images/profiles/GLIDE.png';
     import webpPicGlide from '@/assets/images/profiles/GLIDE.webp';
 
-    import schemeFull from '@/components/schemas/schemeFull.vue';
-    import schemeSimple from '@/components/schemas/schemeSimple.vue';
-
     import scheme_T78_AERO from '@/components/schemas/T78_AERO.vue';
     import scheme_T80_AERO from '@/components/schemas/T80_AERO.vue';
     import scheme_T78_SUPER_AERO from '@/components/schemas/T78_SUPER_AERO.vue';
@@ -641,8 +675,10 @@
     import scheme_GLIDE from '@/components/schemas/GLIDE.vue';
     import fakeImpost from '@/components/schemas/fakeImpost.vue';
 
+    import elWindow from '@/components/elWindow.vue';
+    import elBuilding from '@/components/elBuilding.vue';
+
     import { specsData } from '@/specsData.js';
-    import { tests } from '@/testsData.js';
 
     let EP = 3400000000, //Модули упругости (ПВХ, Па) [[F230]]
         ES = 210000000000, //Модули упругости (Материала  вкладыша, Па) [[F231]]
@@ -668,8 +704,8 @@
             scheme_T86_70_6,
             scheme_GLIDE,
             fakeImpost,
-            schemeFull,
-            schemeSimple
+            elWindow,
+            elBuilding
         },
         data() {
             return {
@@ -919,211 +955,6 @@
                         };
                 }
             },
-            buildingStyles(){// стили для отрисовки здания
-                let rotateY = 40,
-                    windowWidthMeters = (this.a + this.b)/100,
-                    windowHeightMeters = this.L/100,
-                    windowScale = 3,
-                    gap = windowWidthMeters*windowScale*5/4;
-                if( this.windSide === 'leeward_side'){ rotateY = 220; }
-                if( this.windSide === 'side_wall'){
-                    rotateY = 60;
-                    gap = (this.Bl*5) - (windowWidthMeters*windowScale*5) - this.Wgap*5;
-                }
-                return `
-                    --box-width: ${(this.Bw*5).toFixed(0)}px;
-                    --box-height: ${(this.Bh*5).toFixed(0)}px;
-                    --box-depth: ${(this.Bl*5).toFixed(0)}px;
-                    --rotate-y: ${rotateY}deg;
-                    --window-ih: ${(this.Wh*5).toFixed(0)}px;
-                    --window-width: ${(windowWidthMeters*windowScale*5).toFixed(0)}px;
-                    --window-height: ${(windowHeightMeters*windowScale*5).toFixed(0)}px;
-                    --window-gap: ${(gap).toFixed(0)}px;
-                `;
-            },
-            svgComp(){// картинка с окном
-                let windowWidth = this.a + this.b,
-                    windowHeight = this.L,
-                    side = 300,
-                    lineGap = 15,
-                    textGap = 4,
-                    sepSize = 12,
-                    windowCommon = {
-                        'stroke-width': 4,
-                        stroke: '#E40032'
-                    },
-                    lineCommon = {
-                        'stroke-width': 2,
-                        stroke: '#000'
-                    },
-                    sepCommon = {
-                        width: sepSize/2,
-                        height: sepSize/2,
-                        fill: '#000'
-                    },
-                    textCommon = {
-                        'text-anchor': 'middle',
-                        fill: '#000'
-                    },
-                    freeSpace = {
-                        x: side - (this.a + this.b),
-                        y: side - this.L
-                    },
-                    window = {
-                        ...windowCommon,
-                        x: freeSpace.x*0.5,
-                        y: freeSpace.y*0.5,
-                        width: windowWidth,
-                        height: windowHeight
-                    },
-                    impost_v = {
-                        ...windowCommon,
-                        x1: window.x + this.a,
-                        y1: window.y,
-                        x2: window.x + this.a,
-                        y2: window.y + windowHeight
-                    },
-                    impost_h = {
-                        ...windowCommon,
-                        x1: window.x,
-                        y1: window.y + windowHeight - this.c,
-                        x2: window.x + this.a,
-                        y2: window.y + windowHeight - this.c
-                    },
-                    a_line = {
-                        ...lineCommon,
-                        x1: window.x,
-                        y1: window.y + windowHeight + lineGap,
-                        x2: window.x + this.a,
-                        y2: window.y + windowHeight + lineGap
-                    },
-                    b_line = {
-                        ...lineCommon,
-                        x1: window.x + this.a,
-                        y1: window.y + windowHeight + lineGap,
-                        x2: window.x + windowWidth,
-                        y2: window.y + windowHeight + lineGap
-                    },
-                    c_line = {
-                        ...lineCommon,
-                        x1: window.x - lineGap,
-                        y1: window.y + windowHeight - this.c,
-                        x2: window.x - lineGap,
-                        y2: window.y + windowHeight
-                    },
-                    d_line = {
-                        ...lineCommon,
-                        x1: window.x - lineGap,
-                        y1: window.y,
-                        x2: window.x - lineGap,
-                        y2: window.y + this.d
-                    },
-                    l_line = {
-                        ...lineCommon,
-                        x1: window.x + windowWidth + lineGap,
-                        y1: window.y,
-                        x2: window.x + windowWidth + lineGap,
-                        y2: window.y + windowHeight
-                    },
-                    a_sep_l = {
-                        ...sepCommon,
-                        x: a_line.x1 - sepSize/4,
-                        y: a_line.y1 - sepSize/4,
-                        transform: `rotate(45 ${a_line.x1} ${a_line.y1})`
-                    },
-                    a_sep_r = {
-                        ...sepCommon,
-                        x: a_line.x2 - sepSize/4,
-                        y: a_line.y1 - sepSize/4,
-                        transform: `rotate(45 ${a_line.x2} ${a_line.y1})`
-                    },
-                    b_sep_r = {
-                        ...sepCommon,
-                        x: b_line.x2 - sepSize/4,
-                        y: b_line.y1 - sepSize/4,
-                        transform: `rotate(45 ${b_line.x2} ${b_line.y1})`
-                    },
-                    c_sep_b = {
-                        ...sepCommon,
-                        x: c_line.x1 - sepSize/4,
-                        y: c_line.y2 - sepSize/4,
-                        transform: `rotate(45 ${c_line.x1} ${c_line.y2})`
-                    },
-                    c_sep_t = {
-                        ...sepCommon,
-                        x: c_line.x1 - sepSize/4,
-                        y: c_line.y1 - sepSize/4,
-                        transform: `rotate(45 ${c_line.x1} ${c_line.y1})`
-                    },
-                    d_sep_t = {
-                        ...sepCommon,
-                        x: d_line.x1 - sepSize/4,
-                        y: d_line.y1 - sepSize/4,
-                        transform: `rotate(45 ${d_line.x1} ${d_line.y1})`
-                    },
-                    l_sep_b = {
-                        ...sepCommon,
-                        x: l_line.x1 - sepSize/4,
-                        y: l_line.y2 - sepSize/4,
-                        transform: `rotate(45 ${l_line.x1} ${l_line.y2})`
-                    },
-                    l_sep_t = {
-                        ...sepCommon,
-                        x: l_line.x1 - sepSize/4,
-                        y: l_line.y1 - sepSize/4,
-                        transform: `rotate(45 ${l_line.x1} ${l_line.y1})`
-                    },
-                    a_text = {
-                        ...textCommon,
-                        x: a_line.x1 + (a_line.x2 - a_line.x1)/2,
-                        y: a_line.y1 + textGap*4
-                    },
-                    b_text = {
-                        ...textCommon,
-                        x: b_line.x1 + (b_line.x2 - b_line.x1)/2,
-                        y: b_line.y1 + textGap*4
-                    },
-                    c_text = {
-                        ...textCommon,
-                        x: c_line.x1 + (c_line.x2 - c_line.x1)/2 - textGap*2,
-                        y: c_line.y1 + (c_line.y2 - c_line.y1)/2 + textGap/2
-                    },
-                    d_text = {
-                        ...textCommon,
-                        x: d_line.x1 + (d_line.x2 - d_line.x1)/2 - textGap*2,
-                        y: d_line.y1 + (d_line.y2 - d_line.y1)/2 + textGap/2
-                    },
-                    l_text = {
-                        ...textCommon,
-                        x: l_line.x1 + (l_line.x2 - l_line.x1)/2 + textGap*2,
-                        y: l_line.y1 + (l_line.y2 - l_line.y1)/2 + textGap/2
-                    };
-
-                return {
-                    viewBox: `0 0 ${side} ${side}`,
-                    window: window,
-                    impost_v: impost_v,
-                    impost_h: impost_h,
-                    a_line: a_line,
-                    b_line: b_line,
-                    c_line: c_line,
-                    d_line: d_line,
-                    l_line: l_line,
-                    a_sep_l: a_sep_l,
-                    a_sep_r: a_sep_r,
-                    b_sep_r: b_sep_r,
-                    c_sep_b: c_sep_b,
-                    c_sep_t: c_sep_t,
-                    d_sep_t: d_sep_t,
-                    l_sep_b: l_sep_b,
-                    l_sep_t: l_sep_t,
-                    a_text: a_text,
-                    b_text: b_text,
-                    c_text: c_text,
-                    d_text: d_text,
-                    l_text: l_text
-                };
-            },
             i18n(){
                 return {
                     step_1: 'Нормативные значения',
@@ -1132,6 +963,7 @@
                     step_4: 'Тип профиля',
                     step_5: 'Варианты исполнений',
                     select_placeholder: 'Выберите значение',
+                    step_1_2: 'Нормативные значения и параметры',
 
                     windRegion: 'Ветровой район',
                     terrainType: 'Тип местности',
@@ -1173,80 +1005,86 @@
             },
             printParams(){
                 return [
-                    {
-                        title: this.i18n.windRegion,
-                        value: this.windRegion
-                    },
-                    {
-                        title: this.i18n.terrainType,
-                        value: this.terrainType
-                    },
-                    {
-                        title: this.i18n.Tn,
-                        value: this.Tn
-                    },
-                    {
-                        title: this.i18n.Tref,
-                        value: this.Tref
-                    },
-                    {
-                        title: this.i18n.Tv,
-                        value: this.Tv
-                    },
-                    {
-                        title: this.i18n.windSide,
-                        value: this.windSides[this.windSide].i18n
-                    },
-                    ...(
-                        this.isVisible.Wgap ? [{
-                            title: this.i18n.Wgap,
-                            value: this.Wgap
-                        }] : []
-                    ),
-                    {
-                        title: this.i18n.L,
-                        value: this.L
-                    },
-                    {
-                        title: this.i18n.a,
-                        value: this.a
-                    },
-                    {
-                        title: this.i18n.b,
-                        value: this.b
-                    },
-                    {
-                        title: this.i18n.c,
-                        value: this.c
-                    },
-                    {
-                        title: this.i18n.d,
-                        value: this.d.toFixed(2)
-                    },
-                    {
-                        title: this.i18n.profileType,
-                        value: this.profileType
-                    },
-                    {
-                        title: this.i18n.profileColor,
-                        value: this.profileColors[this.profileColor].i18n
-                    },
-                    {
-                        title: this.i18n.reinType,
-                        value: this.reinTypes[this.reinType].i18n
-                    },
-                    ...(
-                        this.isVisible.reinType_60_70 ? [{
-                            title: this.i18n.reinType_60_70,
-                            value: this.reinTypes[this.reinType_60_70].i18n
-                        }] : []
-                    ),
-                    ...(
-                        this.isVisible.reinType_L68 ? [{
-                            title: this.i18n.reinType_L68,
-                            value: this.reinTypes[this.reinType_L68].i18n
-                        }] : []
-                    )
+                    [
+                        {
+                            title: this.i18n.windRegion,
+                            value: this.windRegion
+                        },
+                        {
+                            title: this.i18n.terrainType,
+                            value: this.terrainType
+                        },
+                        {
+                            title: this.i18n.Tn,
+                            value: this.Tn
+                        },
+                        {
+                            title: this.i18n.Tref,
+                            value: this.Tref
+                        },
+                        {
+                            title: this.i18n.Tv,
+                            value: this.Tv
+                        },
+                        {
+                            title: this.i18n.windSide,
+                            value: this.windSides[this.windSide].i18n
+                        }
+                    ],
+                    [
+                        ...(
+                            this.isVisible.Wgap ? [{
+                                title: this.i18n.Wgap,
+                                value: this.Wgap
+                            }] : []
+                        ),
+                        {
+                            title: this.i18n.L,
+                            value: this.L
+                        },
+                        {
+                            title: this.i18n.a,
+                            value: this.a
+                        },
+                        {
+                            title: this.i18n.b,
+                            value: this.b
+                        },
+                        {
+                            title: this.i18n.c,
+                            value: this.c
+                        },
+                        {
+                            title: this.i18n.d,
+                            value: this.d.toFixed(2)
+                        },
+                    ],
+                    [
+                        {
+                            title: this.i18n.profileType,
+                            value: this.profileType
+                        },
+                        {
+                            title: this.i18n.profileColor,
+                            value: this.profileColors[this.profileColor].i18n
+                        },
+                        {
+                            title: this.i18n.reinType,
+                            value: this.reinTypes[this.reinType].i18n
+                        },
+                        ...(
+                            this.isVisible.reinType_60_70 ? [{
+                                title: this.i18n.reinType_60_70,
+                                value: this.reinTypes[this.reinType_60_70].i18n
+                            }] : []
+                        ),
+                        ...(
+                            this.isVisible.reinType_L68 ? [{
+                                title: this.i18n.reinType_L68,
+                                value: this.reinTypes[this.reinType_L68].i18n
+                            }] : []
+                        )
+                    ]
                 ];
             },
             d(){ //Рассчитываемый элемент d [[B17]]
@@ -1562,54 +1400,6 @@
                 let ft = (K0 * LM ** 2 * EP * yellow - cyan * (H1 * LM ** 2 + H2 * (LM ** 2 - 4 * P ** 2))) / (8 * (ES * orange + EP * yellow));
                 return (fw+ft)*1000;
             },
-            runTest(){
-                console.clear();
-                let result = {
-                    counter: {
-                        passed: 0,
-                        failed: 0,
-                        total: 0
-                    },
-                    log: []
-                };
-                Object.keys(tests.common).map( key => {
-                    this[key] = tests.common[key];
-                });
-                tests.dynamic.map( test => {
-                    let dynamicProps = Object.keys(test).filter( propKey => propKey !== 'results' );
-                    dynamicProps.map( propKey => {
-                        this[propKey] = test[propKey];
-                    });
-                    Object.keys(test.results).map( key => {
-                        if( test.results[key] !== NaN ){
-                            let testValue = test.results[key].toFixed(2);
-                            let formValue = this.resultViews[key]?.result?.toFixed(2);
-                            if( formValue === undefined ){
-                                formValue = 'NaN'
-                            }
-                            let passed = testValue === formValue;
-
-                            if( !passed ){
-                                let logData = [];
-                                dynamicProps.map( propKey => {
-                                    logData.push( `${propKey}:${test[propKey]}` );
-                                });
-                                logData.push(`ожидаемое:${testValue}`);
-                                logData.push(`фактическое:${formValue}`);
-                                result.log.push(logData.join(' - '));
-                                result.counter.failed++;
-                            }else{
-                                result.counter.passed++;
-                            }
-                            result.counter.total++;
-                        }
-                    });
-                });
-                console.log(result.counter);
-                if( result.log.length ){
-                    console.log(result.log);
-                }
-            },
             setParamsFromRoute(params){
                 if( params.get('debug') === 'true' ){
                     this.showDebug = true;
@@ -1671,9 +1461,6 @@
                     text: 'Предзаполненая форма расчета',
                     url: `?${this.generateUrlParams()}`
                 });
-            },
-            toggle(){
-                window.dispatchEvent(new CustomEvent('toggleScheme'));
             },
             getReinType(specKey){
                 if( specKey === 'fake_impost' ){

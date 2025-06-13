@@ -1,6 +1,6 @@
 @layer components{
 
-    .scene {
+    .box {
         --box-width: 250px;
         --box-height: 300px;
         --box-depth: 150px;
@@ -15,7 +15,7 @@
         perspective: 400px;
     }
 
-    .box {
+    .box__wrapper {
         width: var(--box-width);
         height: var(--box-height);
         position: relative;

@@ -5,6 +5,9 @@
         & > .page__wrapper{
             padding-top: 40px;
         }
+        @media print{
+            display: none;
+        }
     }
 
     .footer__copy{
