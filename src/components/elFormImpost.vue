@@ -648,6 +648,7 @@
 
 <script>
 
+    import { defineAsyncComponent } from 'vue';
     import { events } from '@/lib/events';
     import Multiselect from 'vue-multiselect';
 
@@ -663,17 +664,6 @@
     import webpPicSuperAero from '@/assets/images/profiles/SUPER_AERO.webp';
     import pngPicGlide from '@/assets/images/profiles/GLIDE.png';
     import webpPicGlide from '@/assets/images/profiles/GLIDE.webp';
-
-    import scheme_T78_AERO from '@/components/schemas/T78_AERO.vue';
-    import scheme_T80_AERO from '@/components/schemas/T80_AERO.vue';
-    import scheme_T78_SUPER_AERO from '@/components/schemas/T78_SUPER_AERO.vue';
-    import scheme_T80_SUPER_AERO from '@/components/schemas/T80_SUPER_AERO.vue';
-    import scheme_T78_ACLASS from '@/components/schemas/T78_ACLASS.vue';
-    import scheme_T78_ACLASS_L68 from '@/components/schemas/T78_ACLASS_L68.vue';
-    import scheme_T86_60_4 from '@/components/schemas/T86_60_4.vue';
-    import scheme_T86_70_6 from '@/components/schemas/T86_70_6.vue';
-    import scheme_GLIDE from '@/components/schemas/GLIDE.vue';
-    import fakeImpost from '@/components/schemas/fakeImpost.vue';
 
     import elWindow from '@/components/elWindow.vue';
     import elBuilding from '@/components/elBuilding.vue';
@@ -694,16 +684,16 @@
         name: 'elFormImpost',
         components: {
             Multiselect,
-            scheme_T78_AERO,
-            scheme_T80_AERO,
-            scheme_T78_SUPER_AERO,
-            scheme_T80_SUPER_AERO,
-            scheme_T78_ACLASS,
-            scheme_T78_ACLASS_L68,
-            scheme_T86_60_4,
-            scheme_T86_70_6,
-            scheme_GLIDE,
-            fakeImpost,
+            scheme_T78_AERO: defineAsyncComponent(() => import('@/components/schemas/T78_AERO.vue')),
+            scheme_T80_AERO: defineAsyncComponent(() => import('@/components/schemas/T80_AERO.vue')),
+            scheme_T78_SUPER_AERO: defineAsyncComponent(() => import('@/components/schemas/T78_SUPER_AERO.vue')),
+            scheme_T80_SUPER_AERO: defineAsyncComponent(() => import('@/components/schemas/T80_SUPER_AERO.vue')),
+            scheme_T78_ACLASS: defineAsyncComponent(() => import('@/components/schemas/T78_ACLASS.vue')),
+            scheme_T78_ACLASS_L68: defineAsyncComponent(() => import('@/components/schemas/T78_ACLASS_L68.vue')),
+            scheme_T86_60_4: defineAsyncComponent(() => import('@/components/schemas/T86_60_4.vue')),
+            scheme_T86_70_6: defineAsyncComponent(() => import('@/components/schemas/T86_70_6.vue')),
+            scheme_GLIDE: defineAsyncComponent(() => import('@/components/schemas/GLIDE.vue')),
+            fakeImpost: defineAsyncComponent(() => import('@/components/schemas/fakeImpost.vue')),
             elWindow,
             elBuilding
         },
