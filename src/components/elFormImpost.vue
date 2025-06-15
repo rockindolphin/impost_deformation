@@ -515,7 +515,7 @@
 
         </div>
         <div class="wrapper wrapper--print">
-            <fieldset class="fieldset grid grid-cols-12">
+            <fieldset class="fieldset grid grid-cols-12 gap-7">
                 <div class="wrapper col-span-8">
                     <h4 class="fieldset__title">
                         {{ i18n.step_1_2 }}
@@ -539,7 +539,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <p class="font-bold">
+                    <p class="text text--accented">
                         <span>{{ i18n.maxСurve }}:</span> {{ maxСurve.toFixed(3) }}
                     </p>
                 </div>
@@ -570,7 +570,7 @@
                 <h4 class="fieldset__title">
                     {{ i18n.step_5 }}
                 </h4>
-                <div class="grid grid-cols-12">
+                <div class="grid grid-cols-12 gap-7">
                     <div
                         v-for="(item, index) in resultViews"
                         :key="`result_${item.key}`"
@@ -616,7 +616,7 @@
                                 </table>
                             </template>
                             <p class="col-span-12 text">
-                                <span class="block mb-2">
+                                <span class="block mb-0">
                                     <span>Расчётный прогиб, мм:</span> {{ item.result.toFixed(2) }}
                                 </span>
                                 <span class="block">
