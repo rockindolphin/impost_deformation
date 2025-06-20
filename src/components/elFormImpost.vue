@@ -508,6 +508,35 @@
                                     </span>
                                 </span>
                             </p>
+                            <table
+                                class="form__table"
+                                v-for="(table, tbl_index) in item.tables"
+                                :key="`table_${tbl_index}`"
+                                >
+                                <thead>
+                                    <tr>
+                                        <th
+                                            v-for="(th, th_index) in table.thead"
+                                            :key="`th_${tbl_index}_${th_index}`"
+                                            >
+                                            {{ th }}
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        v-for="(tr, tr_index) in table.tbody"
+                                        :key="`tr_${tbl_index}_${tr_index}`"
+                                        >
+                                        <td
+                                            v-for="(td, td_index) in tr"
+                                            :key="`td_${tbl_index}_${tr_index}_${td_index}`"
+                                            >
+                                            {{ td }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </fieldset>
@@ -633,16 +662,7 @@
                 </div>
             </fieldset>
         </div>
-        <!--
 
-        <div class="wrapper--result grid grid-cols-2" style="background-color: #000">
-            <scheme-full class="col-span-1" />
-            <scheme-simple class="col-span-1" />
-        </div>
-        <button class="btn" @click="toggle()">
-            toggle
-        </button>
-        -->
     </form>
 </template>
 
@@ -896,7 +916,89 @@
                         i18n: '40*50*2(труба)'
                     }
                 },
-                fakeImpostReinType: 'rt_35x28x7x1_5'
+                fakeImpostReinType: 'rt_35x28x7x1_5',
+                skus: {
+                    impost: {
+                        T78_AERO: '10003078',
+                        T80_AERO: '10003080',
+                        T78_SUPER_AERO: '10603078',
+                        T80_SUPER_AERO: '10603080',
+                        T78_ACLASS: '11103078',
+                        T78_ACLASS_L68: '11103078',//такой же как у T78_ACLASS
+                        T86_60_4: '10203086',
+                        T86_70_6: '10403086',
+                        GLIDE: '10802065'
+                    },
+                    fake_impost: {
+                        AERO_Z60: '10002060',
+                        SUPER_AERO_Z60: '10602060',
+                        SUPER_AERO_Z77: '10602077',
+                        ACLASS_Z60: '11102060',
+                        ACLASS_T118: '10302118',
+                        ACLASS_Z118: '10302060',
+                        ACLASS_T94: '10302094',
+                        ACLASS_Z94: '10302074',
+                        Z_60_4: '10202060',
+                        Z_70_6: '10402060',
+                        T118_70_6: '10702118'
+                    },
+                    box: {
+                        L60_AERO: '10001060',
+                        L60_SUPER_AERO: '10601060',
+                        L60_ACLASS: '11101060',
+                        L64_60_4: '10201064',
+                        L64_70_6: '10401064',
+                        L68_ACLASS: '11101068'
+                    },
+                    view: {
+                        connective3: {
+                            '60': '10105003',
+                            '70': '10405017'
+                        },
+                        connective38:{
+                            '60': '10105038',
+                            '70': '10405038',
+                        },
+                        connective65: {
+                            '60': '10105065',
+                            '70': '10405065',
+                        },
+                        fake_impost: {
+                            '60': '10103062',
+                            '62': '10103034',
+                            '70': '10402064'
+                        },
+                        universal: '10105024',
+                        pilyastr_63: '10105063'
+                    },
+                    rein: {
+                        rt_35x20x1_5: '40108020',
+                        rt_35x20x1_5_pipe: '41108020',
+                        rt_35x20x2: '40408007',
+                        rt_35x20x2_pipe: '40308020',
+                        rt_35x28x1_5: '40108028',
+                        rt_35x28x1_5_pipe: '41108028',
+                        rt_35x28x2: '40408028',
+                        rt_35x28x2_pipe: '40308028',
+                        rt_26x19x1_5: '40108026',
+                        rt_26x19x2: '40808026',
+                        //custom
+                        rt_100x6: '40108100',
+                        rt_80x13x2: '40108013',
+                        rt_50x40: '40108050',
+                        rt_50x25x2_pipe: '40108025'
+                    },
+                    rein_fake_impost: {
+                        rt_35x28x7x1_5: '40108007',
+                        rt_35x28x7x2: '40408007',
+                        rt_35x28x1_5: '40108028',
+                        rt_35x28x2: '40408028',
+                        rt_40x50x2_pipe: '40108050',
+                        //custom
+                        rt_20x26x13: '41108026',
+                        rt_50x15x2: '40408050'
+                    }
+                }
             }
         },
         watch:{
@@ -983,7 +1085,30 @@
                     reinType_L68: 'Армирование для коробок L68',
                     maxСurve: 'Максимально допустимый прогиб, мм',
                     fakeImpostProfileType: 'Створка для конструкции с ложным импостом',
-                    fakeImpostReinType: 'Армирование в створку для конструкции с ложным импостом '
+                    fakeImpostReinType: 'Армирование в створку для конструкции с ложным импостом ',
+                    impost: 'Импост',
+                    pilyastr: 'Усиление пилястровым профилем',
+                    connective3: 'Соединительный профиль 3',
+                    universal: 'Профиль соединительный универсальный',
+                    connective38: 'Профиль соединительный 38',
+                    connective65: 'Профиль соединительный 65',
+                    fake_impost: 'Ложный импост',
+                    L60_AERO: 'Коробка L60 AERO',
+                    L60_SUPER_AERO: 'Коробка L60 SUPER AERO',
+                    L60_ACLASS: 'Коробка L60 ACLASS',
+                    L64_60_4: 'Коробка L64 60-4',
+                    L64_70_6: 'Коробка L64 70-6',
+                    L68_ACLASS: 'Коробка L68 ACLASS',
+                    profile: 'Профиль',
+                    sku: 'Артикул',
+                    rein_profile: 'Профиль армирующий',
+                    pilyastr_63: 'Профиль пилястровый  63',
+                    rt_50x25x2_pipe: '50*25*2 (труба)',
+                    rt_100x6: '100*6',
+                    rt_80x13x2: '80*13*2',
+                    rt_50x40: '50*40',
+                    rt_20x26x13: '20*26*13',
+                    rt_50x15x2: '50*15*2'
                 }
             },
             isVisible(){
@@ -1077,6 +1202,26 @@
                     ]
                 ];
             },
+            boxByProfileType(){
+                switch (this.profileType) {
+                    case 'T78_AERO':
+                    case 'T80_AERO':
+                        return 'L60_AERO';
+                    case 'T78_SUPER_AERO':
+                    case 'T80_SUPER_AERO':
+                        return 'L60_SUPER_AERO';
+                    case 'T78_ACLASS':
+                        return 'L60_ACLASS';
+                    case 'T78_ACLASS_L68':
+                        return 'L68_ACLASS';
+                    case 'T86_60_4':
+                        return 'L64_60_4';
+                    case 'T86_70_6':
+                        return 'L64_70_6';
+                    default:
+                        return '';
+                }
+            },
             d(){ //Рассчитываемый элемент d [[B17]]
                 return this.L - this.c;
             },
@@ -1088,14 +1233,16 @@
                     {
                         key: 'impost',
                         src: '',
-                        title: 'Импост',
-                        result: this.computeEstimatedDeflection('impost')
+                        title: this.i18n.impost,
+                        result: this.computeEstimatedDeflection('impost'),
+                        tables: this.getResultTables('impost')
                     },
                     {
                         key: 'pilyastr',
                         src: '',
-                        title: 'Усиление пилястровым профилем',
-                        result: this.computeEstimatedDeflection('pilyastr')
+                        title: this.i18n.pilyastr,
+                        result: this.computeEstimatedDeflection('pilyastr'),
+                        tables: this.getResultTables('pilyastr')
                     }
                 ];
                 if( this.profileType !== 'GLIDE' ){
@@ -1105,26 +1252,30 @@
                             {
                                 key: 'connective3',
                                 src: '',
-                                title: 'Соединительный профиль 3',
-                                result: this.computeEstimatedDeflection('connective3')
+                                title: `${this.i18n.connective3}/${this.viewSubSize}`,
+                                result: this.computeEstimatedDeflection('connective3'),
+                                tables: this.getResultTables('connective3')
                             },
                             {
                                 key: 'universal',
                                 src: '',
-                                title: 'Профиль соединительный универсальный',
-                                result: this.computeEstimatedDeflection('universal')
+                                title: this.i18n.universal,
+                                result: this.computeEstimatedDeflection('universal'),
+                                tables: this.getResultTables('universal')
                             },
                             {
                                 key: 'connective38',
                                 src: '',
-                                title: 'Профиль соединительный 38',
-                                result: this.computeEstimatedDeflection('connective38')
+                                title: `${this.i18n.connective38}/${this.viewSubSize}`,
+                                result: this.computeEstimatedDeflection('connective38'),
+                                tables: this.getResultTables('connective38')
                             },
                             {
                                 key: 'connective65',
                                 src: '',
-                                title: 'Профиль соединительный 65',
-                                result: this.computeEstimatedDeflection('connective65')
+                                title: `${this.i18n.connective65}/${this.viewSubSize}`,
+                                result: this.computeEstimatedDeflection('connective65'),
+                                tables: this.getResultTables('connective65')
                             }
                         ]
                     ];
@@ -1132,10 +1283,30 @@
                 resp.push({
                     key: 'fake_impost',
                     src: '',
-                    title: 'Ложный импост',
-                    result: this.computeEstimatedDeflection('fake_impost')
+                    title: this.i18n.fake_impost,
+                    result: this.computeEstimatedDeflection('fake_impost'),
+                    tables: this.getResultTables('fake_impost')
                 });
                 return resp;
+            },
+            viewSubSize(){
+                if( ['T78_AERO', 'T80_AERO', 'T78_ACLASS', 'T78_ACLASS_L68', 'T86_60_4'].includes(this.profileType) ){
+                    return  60;
+                }
+                if( ['T78_SUPER_AERO', 'T80_SUPER_AERO', 'T86_70_6' ].includes(this.profileType) ){
+                    return 70;
+                }
+            },
+            fakeImpostSubSize(){
+                if( ['AERO_Z60', 'ACLASS_Z60', 'Z_60_4'].includes(this.fakeImpostProfileType) ){
+                    return 62;
+                }
+                if( ['ACLASS_T118', 'ACLASS_Z118', 'ACLASS_T94', 'ACLASS_Z94'].includes(this.fakeImpostProfileType) ){
+                    return 60;
+                }
+                if( ['SUPER_AERO_Z60', 'SUPER_AERO_Z77', 'Z_70_6', 'T118_70_6'].includes(this.fakeImpostProfileType) ){
+                    return 70;
+                }
             },
             reinTypesOptions(){// Тип армирования в зависимости от типа профиля
                 if( ['T86_60_4', 'T86_70_6'].includes(this.profileType) ){
@@ -1471,6 +1642,256 @@
                             return this.reinType_60_70;
                         }
                     }
+                }
+            },
+            getProfileLabel(){
+                switch (this.profileType) {
+                    case 'T78_AERO':
+                        return 'Импост Т78 AERO';
+                    case 'T80_AERO':
+                        return 'Импост Т80 AERO';
+                    case 'T78_SUPER_AERO':
+                        return 'Импост T78 SUPER AERO';
+                    case 'T80_SUPER_AERO':
+                        return 'Импост T80 SUPER AERO';
+                    case 'T78_ACLASS':
+                    case 'T78_ACLASS_L68':
+                        return 'Импост Т78 ACLASS';
+                    case 'T86_60_4':
+                        return 'Импост T86 60-4';
+                    case 'T86_70_6':
+                        return 'Импост T86 70-6';
+                    case 'GLIDE':
+                        return 'Створка GLIDE';
+                    default:
+                        return '';
+                }
+            },
+            getFakeImpostProfileLabel(){
+                switch (this.fakeImpostProfileType) {
+                    case 'AERO_Z60':
+                        return 'Створка Z60 AERO';
+                    case 'SUPER_AERO_Z60':
+                        return 'Створка Z60 SUPER AERO';
+                    case 'SUPER_AERO_Z77':
+                        return 'Створка Z77 SUPER AERO';
+                    case 'ACLASS_Z60':
+                        return 'Створка Z60 ACLASS';
+                    case 'ACLASS_T118':
+                        return 'Створка дверная Т118';
+                    case 'ACLASS_Z118':
+                        return 'Створка дверная Z118-60';
+                    case 'ACLASS_T94':
+                        return 'Створка дверная Т94';
+                    case 'ACLASS_Z94':
+                        return 'Створка дверная Z94';
+                    case 'Z_60_4':
+                        return 'Створка Z60 60-4';
+                    case 'Z_70_6':
+                        return 'Створка Z60 70-6';
+                    case 'T118_70_6':
+                        return 'Створка дверная Т118-70';
+                    default:
+                        return '';
+                }
+            },
+            getResultTables(specKey){
+                let resp = [];
+                //table 1
+                if( ['impost', 'pilyastr', 'connective3', 'connective38', 'connective65', 'universal', 'fake_impost'].includes(specKey) ){
+                    let profileTable = {
+                        thead: [
+                            this.i18n.profile,
+                            this.i18n.sku
+                        ],
+                        tbody: []
+                    }
+                    if( ['impost', 'pilyastr'].includes(specKey) ){
+                        profileTable.tbody.push([
+                            this.getProfileLabel(),
+                            this.skus.impost[this.profileType]
+                        ]);
+                    }
+                    if( ['fake_impost'].includes(specKey) ){
+                        profileTable.tbody.push([
+                            this.getFakeImpostProfileLabel(),
+                            this.skus.fake_impost[this.fakeImpostProfileType]
+                        ]);
+                        profileTable.tbody.push([
+                            `${this.i18n.fake_impost} ${this.fakeImpostSubSize}`,
+                            this.skus.view['fake_impost'][this.fakeImpostSubSize]
+                        ]);
+                    }
+                    if( ['pilyastr'].includes(specKey) ){
+                        profileTable.tbody.push([
+                            this.i18n.pilyastr_63,
+                            this.skus.view['pilyastr_63']
+                        ]);
+                    }
+                    if( ['connective3'].includes(specKey) ){
+                        profileTable.tbody.push([
+                            `${this.i18n.connective3}/${this.viewSubSize}`,
+                            this.skus.view['connective3'][this.viewSubSize]
+                        ]);
+                        profileTable.tbody.push([
+                            this.i18n[this.boxByProfileType],
+                            this.skus.box[this.boxByProfileType]
+                        ]);
+                    }
+                    if( ['connective38'].includes(specKey) ){
+                        profileTable.tbody.push([
+                            `${this.i18n.connective38}/${this.viewSubSize}`,
+                            this.skus.view['connective38'][this.viewSubSize]
+                        ]);
+                        profileTable.tbody.push([
+                            this.i18n[this.boxByProfileType],
+                            this.skus.box[this.boxByProfileType]
+                        ]);
+                    }
+                    if( ['connective65'].includes(specKey) ){
+                        profileTable.tbody.push([
+                            `${this.i18n.connective65}/${this.viewSubSize}`,
+                            this.skus.view['connective65'][this.viewSubSize]
+                        ]);
+                        profileTable.tbody.push([
+                            this.i18n[this.boxByProfileType],
+                            this.skus.box[this.boxByProfileType]
+                        ]);
+                    }
+                    if( ['universal'].includes(specKey) ){
+                        profileTable.tbody.push([
+                            this.i18n.universal,
+                            this.skus.view['universal']
+                        ]);
+                        profileTable.tbody.push([
+                            this.i18n[this.boxByProfileType],
+                            this.skus.box[this.boxByProfileType]
+                        ]);
+                    }
+                    resp.push(profileTable);
+                }
+
+                //table 2
+                if( ['impost', 'pilyastr', 'connective3', 'connective38', 'connective65', 'universal', 'fake_impost'].includes(specKey) ){
+                    let reinTable = {
+                        thead: [
+                            this.i18n.rein_profile,
+                            this.i18n.sku
+                        ],
+                        tbody: []
+                    }
+                    if( ['impost', 'pilyastr'].includes(specKey) ){
+                        reinTable.tbody.push([
+                            this.reinTypes[this.reinType].i18n,
+                            this.skus.rein[this.reinType]
+                        ]);
+                    }
+                    if( ['pilyastr'].includes(specKey) ){
+                        reinTable.tbody.push([
+                            this.i18n.rt_50x25x2_pipe,
+                            this.skus.rein['rt_50x25x2_pipe']
+                        ]);
+                    }
+                    if( ['connective3'].includes(specKey) ){
+                        reinTable.tbody.push([
+                            this.reinTypes[this.xyeta2()].i18n,
+                            this.skus.rein[this.xyeta2()]
+                        ]);
+                    }
+                    if( ['connective38'].includes(specKey) ){
+                        reinTable.tbody.push([
+                            this.i18n.rt_80x13x2,
+                            this.skus.rein['rt_80x13x2']
+                        ]);
+                        reinTable.tbody.push([
+                            this.reinTypes[this.xyeta2()].i18n,
+                            this.skus.rein[this.xyeta2()]
+                        ]);
+                    }
+                    if( ['connective65'].includes(specKey) ){
+                        reinTable.tbody.push([
+                            this.i18n.rt_50x40,
+                            this.skus.rein['rt_50x40']
+                        ]);
+                        reinTable.tbody.push([
+                            this.reinTypes[this.xyeta2()].i18n,
+                            this.skus.rein[this.xyeta2()]
+                        ]);
+                    }
+                    if( ['universal'].includes(specKey) ){
+                        reinTable.tbody.push([
+                            this.i18n.rt_100x6,
+                            this.skus.rein['rt_100x6']
+                        ]);
+                        reinTable.tbody.push([
+                            this.reinTypes[this.xyeta2()].i18n,
+                            this.skus.rein[this.xyeta2()]
+                        ]);
+                    }
+                    if( ['fake_impost'].includes(specKey) ){
+                        reinTable.tbody.push([
+                            this.fakeImpostReinTypes[this.fakeImpostReinType].i18n,
+                            this.skus.rein_fake_impost[this.fakeImpostReinType]
+                        ]);
+                        let fi_extra_rt = this.fakeImpostSubSize === 70 ? 'rt_50x15x2' : 'rt_20x26x13'
+                        reinTable.tbody.push([
+                            this.i18n[fi_extra_rt],
+                            this.skus.rein_fake_impost[fi_extra_rt]
+                        ]);
+                    }
+                    resp.push(reinTable);
+                }
+                return resp;
+            },
+            kakaya_to_xueta(){
+                if( this.profileType === 'T78_ACLASS_L68' ){
+                    if( this.reinType_L68 === 'rt_35x28x1_5' ){
+                        return 5;
+                    }
+                    if( this.reinType_L68 === 'rt_35x28x2' ){
+                        return 6;
+                    }
+                    if( this.reinType_L68 === 'rt_35x28x1_5_pipe' ){
+                        return 7;
+                    }
+                    if( this.reinType_L68 === 'rt_35x28x2_pipe' ){
+                        return 8;
+                    }
+                }
+                if( this.reinType === 'rt_35x20x2_pipe' || this.reinType_60_70 === 'rt_35x20x2_pipe' ){
+                    return 1;
+                }
+                if( this.reinType === 'rt_35x20x2' || this.reinType_60_70 === 'rt_35x20x2' ){
+                    return 2;
+                }
+                if( this.reinType === 'rt_35x20x1_5' || this.reinType_60_70 === 'rt_35x20x1_5' ){
+                    return 3;
+                }
+                if( this.reinType === 'rt_35x20x1_5_pipe' || this.reinType_60_70 === 'rt_35x20x1_5_pipe' ){
+                    return 4;
+                }
+                return null;
+            },
+            xyeta2(){
+                switch (this.kakaya_to_xueta()) {
+                    case 1:
+                        return 'rt_35x20x2_pipe';
+                    case 2:
+                        return 'rt_35x20x2';
+                    case 3:
+                        return 'rt_35x20x1_5';
+                    case 4:
+                        return 'rt_35x20x1_5_pipe';
+                    case 5:
+                        return 'rt_35x28x1_5';
+                    case 6:
+                        return 'rt_35x28x2';
+                    case 7:
+                        return 'rt_35x28x1_5_pipe';
+                    case 8:
+                        return 'rt_35x28x2_pipe';
+                    default:
+                        return null;
                 }
             }
         },

@@ -41,6 +41,24 @@
             width: 100%;
             height: auto;
         }
+        & .text{
+            width: 100%;
+            text-align: center;
+        }
+        & .form__table{
+            width: 100%;
+            text-align: left;
+            &:not(:last-child){
+                margin-bottom: 10px;
+            }
+            & th{
+                font-weight: var(--fw-medium);
+            }
+            & th:last-of-type,
+            & td:last-of-type{
+                text-align: right;
+            }
+        }
     }
 
     .wrapper--web{
