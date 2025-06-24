@@ -23,7 +23,7 @@
         <rect v-bind="svgComp.l_sep_t" />
         <text v-bind="svgComp.a_text" class="text" >a</text>
         <text v-bind="svgComp.b_text" class="text" >b</text>
-        <text v-bind="svgComp.c_text" class="text" v-if="c !== 0">c</text>
+        <text v-bind="svgComp.c_text" class="text" v-if="form.c !== 0">c</text>
         <text v-bind="svgComp.d_text" class="text" >d</text>
         <text v-bind="svgComp.l_text" class="text" >L</text>
     </svg>
@@ -31,28 +31,14 @@
 
 <script>
 
+    import { useFormStore } from '@/stores/formStore';
+
     export default {
         name: 'elWindow',
-        props: {
-            a: {
-                type: Number,
-                default: 0
-            },
-            b: {
-                type: Number,
-                default: 0
-            },
-            c: {
-                type: Number,
-                default: 0
-            },
-            d: {
-                type: Number,
-                default: 0
-            },
-            L: {
-                type: Number,
-                default: 0
+        setup() {
+            const form = useFormStore();
+            return {
+                form
             }
         },
         data() {
@@ -62,8 +48,8 @@
         },
         computed: {
             svgComp(){// картинка с окном
-                let windowWidth = this.a + this.b,
-                    windowHeight = this.L,
+                let windowWidth = this.form.a + this.form.b,
+                    windowHeight = this.form.L,
                     side = 300,
                     lineGap = 15,
                     textGap = 4,
@@ -86,8 +72,8 @@
                         fill: '#000'
                     },
                     freeSpace = {
-                        x: side - (this.a + this.b),
-                        y: side - this.L
+                        x: side - (this.form.a + this.form.b),
+                        y: side - this.form.L
                     },
                     window = {
                         ...windowCommon,
@@ -98,28 +84,28 @@
                     },
                     impost_v = {
                         ...windowCommon,
-                        x1: window.x + this.a,
+                        x1: window.x + this.form.a,
                         y1: window.y,
-                        x2: window.x + this.a,
+                        x2: window.x + this.form.a,
                         y2: window.y + windowHeight
                     },
                     impost_h = {
                         ...windowCommon,
                         x1: window.x,
-                        y1: window.y + windowHeight - this.c,
-                        x2: window.x + this.a,
-                        y2: window.y + windowHeight - this.c
+                        y1: window.y + windowHeight - this.form.c,
+                        x2: window.x + this.form.a,
+                        y2: window.y + windowHeight - this.form.c
                     },
                     a_line = {
                         ...lineCommon,
                         x1: window.x,
                         y1: window.y + windowHeight + lineGap,
-                        x2: window.x + this.a,
+                        x2: window.x + this.form.a,
                         y2: window.y + windowHeight + lineGap
                     },
                     b_line = {
                         ...lineCommon,
-                        x1: window.x + this.a,
+                        x1: window.x + this.form.a,
                         y1: window.y + windowHeight + lineGap,
                         x2: window.x + windowWidth,
                         y2: window.y + windowHeight + lineGap
@@ -127,7 +113,7 @@
                     c_line = {
                         ...lineCommon,
                         x1: window.x - lineGap,
-                        y1: window.y + windowHeight - this.c,
+                        y1: window.y + windowHeight - this.form.c,
                         x2: window.x - lineGap,
                         y2: window.y + windowHeight
                     },
@@ -136,7 +122,7 @@
                         x1: window.x - lineGap,
                         y1: window.y,
                         x2: window.x - lineGap,
-                        y2: window.y + this.d
+                        y2: window.y + this.form.d
                     },
                     l_line = {
                         ...lineCommon,

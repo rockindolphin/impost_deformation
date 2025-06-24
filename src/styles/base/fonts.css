@@ -18,4 +18,13 @@
 		font-display: swap;
 	}
 
+	@font-face {
+		font-family: HelveticaNeueCyr;
+		src: url('@/assets/fonts/HelveticaNeueCyrBold.woff2') format('woff2'),
+			 url('@/assets/fonts/HelveticaNeueCyrBold.woff') format('woff');
+		font-style: normal;
+		font-weight: 700;
+		font-display: swap;
+	}
+
 }

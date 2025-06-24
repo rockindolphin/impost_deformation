@@ -3,7 +3,12 @@
     .footer{
         background-color: var(--whisper);
         & > .page__wrapper{
-            padding-top: 40px;
+            padding-top: 118px;
+        }
+        @media (min-width: theme(--breakpoint-2xl) ) {
+            & > .page__wrapper{
+                padding-top: 210px;
+            }
         }
         @media print{
             display: none;
@@ -13,10 +18,11 @@
     .footer__copy{
         text-align: center;
         text-transform: uppercase;
-        margin-bottom: 40px;
-        font-size: 16px;
+        margin-bottom: 30px;
+        font-size: 12px;
         @media (min-width: theme(--breakpoint-2xl) ) {
             font-size: 20px;
+            margin-bottom: 85px;
         }
     }
 
@@ -29,7 +35,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding-top: 90px;
+            padding-top: 99px;
             padding-bottom: 115px;
             & > .wrapper{
                 position: absolute;

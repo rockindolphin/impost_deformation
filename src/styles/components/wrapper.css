@@ -4,6 +4,14 @@
 
     }
 
+    .wrapper--active{
+
+    }
+
+    .wrapper--controls{
+        max-width: 388px;
+    }
+
     .wrapper--profile-pic{
         width: 100%;
         max-width: 365px;
@@ -28,67 +36,145 @@
         }
     }
 
-    .wrapper--controls{
-        max-width: 388px;
-    }
-
     .wrapper--result{
+        cursor: pointer;
+        color: white;
+        background-color: black;
+        padding: 12px 18px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+        &.wrapper--active{
+            cursor: initial;
+            outline-width: 3px;
+            outline-style: solid;
+            outline-color: var(--brand-red);
+        }
+        & .bgfill{
+            fill: black;
+        }
         & strong{
             text-transform: uppercase;
             font-weight: var(--fw-normal);
+            font-size: 20px;
+            line-height: 1.2;
+            margin-bottom: 30px;
         }
         & svg{
             width: 100%;
+            max-width: 635px;
             height: auto;
+            margin-left: auto;
+            margin-right: auto;
         }
         & .text{
+            display: block;
             width: 100%;
-            text-align: center;
         }
         & .form__table{
             width: 100%;
             text-align: left;
+            font-size: 12px;
             &:not(:last-child){
                 margin-bottom: 10px;
             }
             & th{
+                font-size: 14px;
                 font-weight: var(--fw-medium);
             }
-            & th:last-of-type,
-            & td:last-of-type{
-                text-align: right;
+            & th,
+            & td{
+                padding: 2px 0px;
+            }
+        }
+        @media (min-width: theme(--breakpoint-2xl) ) {
+            &.wrapper--active{
+                outline-width: 5px;
+            }
+            & strong{
+                font-size: 24px;
+                margin-bottom: 16px;
+            }
+            & svg{
+                margin-bottom: 5px;
+            }
+            & .form__table{
+                font-size: 16px;
+                font-weight: var(--fw-medium);
+                &:not(:last-child){
+                    margin-bottom: 16px;
+                }
+                & th{
+                    font-weight: var(--fw-normal);
+                    text-transform: uppercase;
+                    font-size: 20px;
+                }
+                & th{
+                    padding: 4px 0px;
+                }
+                & td{
+                    padding: 2px 0px;
+                }
             }
         }
     }
 
     .wrapper--web{
-        & .wrapper--result{
-            color: white;
-            background-color: black;
-            padding: 16px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: space-between;
-            margin-bottom: 32px;
-            & .bgfill{
-                fill: black;
+        & .fieldset{
+            border-left: 1px solid;
+            border-color: var(--silver);
+        }
+        & .fieldset--last{
+            border-bottom: 1px solid;
+            border-color: var(--silver);
+        }
+        & .fieldset__title{
+            font-size: 28px;
+            line-height: 1.21;
+            color: var(--brand-red);
+            text-transform: uppercase;
+            padding: 24px 12px;
+            display: block;
+            border-bottom: 1px solid;
+            border-color: var(--abbey);
+            position: relative;
+            &::after{
+                content: '';
+                display: block;
+                position: absolute;
+                z-index: 1;
+                left: -6px;
+                bottom: -6px;
+                width: 12px;
+                height: 12px;
+                background-color: var(--brand-red);
+                transform: rotate(45deg);
             }
             & strong{
-                font-size: 20px;
-                line-height: 1.2;
-                margin-bottom: 30px;
+                font-size: 28px;
+                display: block;
+                color: black;
+                font-weight: var(--fw-normal);
+                margin-bottom: 4px;
             }
+        }
+        & .fieldset__content{
+            padding: 20px 15px;
+        }
+        & .control__label{
+            line-height: 1;
+        }
+        & .wrapper--result{
             & svg{
-                margin-left: auto;
-                margin-right: auto;
-                margin-bottom: 25px;
+                margin-bottom: 45px;
             }
             & .text{
+                text-align: center;
+                margin-bottom: 22px;
                 font-size: 16px;
                 font-weight: var(--fw-medium);
                 line-height: 1;
-                margin: 0;
             }
             & .text--success,
             & .text--warning{
@@ -98,35 +184,43 @@
             }
         }
         @media (min-width: theme(--breakpoint-2xl) ) {
-            & .wrapper--result{
-                margin-bottom: 0;
+            & .fieldset__title{
+                font-size: 40px;
+                line-height: 1;
+                white-space: nowrap;
+                padding: 24px 12px 34px;
+            }
+            & .fieldset--even{
+                border-left: none;
+                & .fieldset__title{
+                    &::after{
+                        display: none;
+                    }
+                }
             }
         }
         @media print{
-            display: none;
+            display: none !important;
         }
     }
 
     .wrapper--print{
         display: none;
+        font-size: 9px;
+        & .section{
+            max-width: 21cm;
+            min-height: 29.7cm;
+        }
+        & .icon__vue--logo{
+            width: 82px;
+            height: auto;
+        }
         & .wrapper--result{
             color: black;
             background-color: transparent;
             display: flex;
             & .bgfill{
                 fill: white;
-            }
-            & > .wrapper{
-                display: flex;
-                flex-direction: column;
-            }
-            & svg{
-                max-width: 112px;
-                margin-right: 6px;
-            }
-            & strong{
-                padding-bottom: 15px;
-                margin-bottom: auto;
             }
         }
         @media print{

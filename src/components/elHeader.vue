@@ -3,12 +3,12 @@
         <div class="page__wrapper">
             <icon-logo class="header__logo"/>
             <h1 class="header__title">
-                Расчет прогиба оконного профиля
+                {{ $t('form_title') }}
             </h1>
             <nav class="header__nav" v-click-outside="hideMenu">
                 <button
                     class="btn btn--action header__nav-toggle"
-                    title="Меню"
+                    :title="$t('btns.menu')"
                     @click="toggleMenu()"
                     >
                     <icon-dots />
@@ -20,33 +20,33 @@
                     <li
                         class="list__item"
                         role="button"
-                        title="Распечатать"
+                        :title="$t('btns.print')"
                         @click="onMenuItemClick('EV_APP_PRINT_FORM_PARAMS')"
                         >
                         <span class="text">
-                            Распечатать
+                            {{ $t('btns.print') }}
                         </span>
                         <icon-print />
                     </li>
                     <li
                         class="list__item"
                         role="button"
-                        title="Скопировать ссылку"
+                        :title="$t('btns.copy_link')"
                         @click="onMenuItemClick('EV_APP_COPY_FORM_PARAMS')"
                         >
                         <span class="text">
-                            Скопировать ссылку
+                            {{ $t('btns.copy_link') }}
                         </span>
                         <icon-copy />
                     </li>
                     <li
                         class="list__item"
                         role="button"
-                        title="Поделиться формой"
+                        :title="$t('btns.share_form')"
                         @click="onMenuItemClick('EV_APP_SHARE_FORM_PARAMS')"
                         >
                         <span class="text">
-                            Поделиться формой
+                            {{ $t('btns.share_form') }}
                         </span>
                         <icon-share />
                     </li>

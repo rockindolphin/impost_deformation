@@ -2,7 +2,7 @@
     <footer class="footer page__footer">
         <div class="page__wrapper">
             <div class="footer__copy">
-                © {{ year }} Расчет прогиба оконного профиля
+                © {{ year }} {{ $t('form_title') }}
             </div>
         </div>
         <div class="footer__company">

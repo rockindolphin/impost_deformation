@@ -12,8 +12,28 @@
         color: var(--warning);
     }
 
-    .text--accented{
+    .text--brand{
+        color: var(--brand-red);
+    }
 
+    .text--gray{
+        color: var(--dove-gray);
+    }
+
+    .text--sz-8{
+        font-size: 8px;
+    }
+
+    .text--sz-10{
+        font-size: 10px;
+    }
+
+    .text--sz-12{
+        font-size: 12px;
+    }
+
+    .text--sz-14{
+        font-size: 14px;
     }
 
 }

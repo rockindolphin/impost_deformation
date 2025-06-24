@@ -5,106 +5,19 @@
     }
 
     .form__table{
-
+        width: 100%;
+        & th,
+        & td{
+            text-align: left;
+            vertical-align: baseline;
+        }
+        & th:last-of-type,
+        & td:last-of-type{
+            text-align: right;
+        }
     }
 
     .form--impost{
-        & .fieldset__title{
-            color: var(--brand-red);
-            text-transform: uppercase;
-        }
-        & .wrapper--web{
-            & .fieldset{
-                border-left: 1px solid;
-                border-color: var(--silver);
-            }
-            & .fieldset--last{
-                border-bottom: 1px solid;
-                border-color: var(--silver);
-            }
-            & .fieldset__title{
-                padding: 24px 12px;
-                display: block;
-                border-bottom: 1px solid;
-                border-color: var(--abbey);
-                position: relative;
-                &::after{
-                    content: '';
-                    display: block;
-                    position: absolute;
-                    z-index: 1;
-                    left: -6px;
-                    bottom: -6px;
-                    width: 12px;
-                    height: 12px;
-                    background-color: var(--brand-red);
-                    transform: rotate(45deg);
-                }
-                & strong{
-                    font-size: 28px;
-                    display: block;
-                    color: black;
-                    font-weight: var(--fw-normal);
-                    margin-bottom: 4px;
-                }
-            }
-            & .fieldset__content{
-                padding: 20px 15px;
-            }
-            & .control__label{
-                line-height: 1;
-            }
-        }
-        & .wrapper--print{
-            font-size: 10px;
-            line-height: 1.6;
-            & .fieldset__title{
-                font-size: 14px;
-                margin-bottom: 18px;
-            }
-            & .form__table{
-                width: 100%;
-                margin-bottom: 8px;
-                margin-left: 12px;
-            }
-            & .text--accented{
-                font-weight: var(--fw-medium);
-                font-size: 12px;
-                margin-left: 12px;
-            }
-            & .figure--window{
-                max-width: 132px;
-                margin-left: auto;
-                margin-right: auto;
-            }
-            & .wrapper--profile-pic{
-                max-width: 107px;
-            }
-            & .fieldset{
-                margin-bottom: 22px;
-            }
-            & .wrapper--result{
-                font-size: 8px;
-            }
-        }
-        @media (min-width: theme(--breakpoint-lg) ) {
 
-        }
-        @media (min-width: theme(--breakpoint-2xl) ) {
-            & .wrapper--web{
-                & .fieldset__title{
-                    white-space: nowrap;
-                    padding: 24px 12px 34px;
-                }
-                & .fieldset--even{
-                    border-left: none;
-                    & .fieldset__title{
-                        &::after{
-                            display: none;
-                        }
-                    }
-                }
-            }
-        }
     }
 }
