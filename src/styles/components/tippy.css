@@ -1,0 +1,13 @@
+@layer components {
+
+    .tippy{
+        display: inline-block;
+        cursor: pointer;
+        & .icon__vue{
+            width: 18px;
+            height: auto;
+            color: var(--abbey);
+        }
+    }
+
+}

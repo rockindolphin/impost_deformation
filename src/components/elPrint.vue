@@ -86,14 +86,6 @@
                             </tr>
                             <tr>
                                 <td>
-                                    {{ $t('c') }}
-                                </td>
-                                <td>
-                                    {{ form.c }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
                                     {{ $t('d') }}
                                 </td>
                                 <td>
@@ -102,7 +94,7 @@
                             </tr>
                             <tr>
                                 <td colspan="2" class="font-bold text-left pt-4 pb-2">
-                                    {{ form.windSides[this.form.windSide].i18n }}
+                                    {{ form.windSides[form.windSide].i18n }}
                                 </td>
                             </tr>
                             <tr>
@@ -132,16 +124,13 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <!--
-                                        {{ $t('Tn') }}
-                                    -->
-                                    Расчетная наружная температура воздуха (температура воздуха наиболее холодной пятидневки),˚С
+                                    {{ $t('Tn_full') }}
                                 </td>
                                 <td class="whitespace-nowrap">
                                     Tn = {{ form.Tn }}
                                 </td>
                                 <td>
-                                    Принимается по СП 131.13331
+                                    {{ $t('Tn_tippy') }}
                                 </td>
                             </tr>
                             <tr>
@@ -163,7 +152,7 @@
                                     Тв = {{ form.Tv }}
                                 </td>
                                 <td>
-                                    Рекомендуемая (средняя) по ГОСТ 30494 ( 21˚С )
+                                    {{ $t('Tv_tippy') }}
                                 </td>
                             </tr>
                         </tbody>
@@ -186,30 +175,6 @@
                                 </td>
                                 <td>
                                     {{ form.profileColors[form.profileColor].i18n }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    {{ $t('reinType') }}
-                                </td>
-                                <td>
-                                    {{ form.reinTypes[form.reinType].i18n }}
-                                </td>
-                            </tr>
-                            <tr v-if="form.isVisible.reinType_60_70">
-                                <td>
-                                    {{ $t('reinType_60_70') }}
-                                </td>
-                                <td>
-                                    {{ form.reinTypes[form.reinType_60_70].i18n }}
-                                </td>
-                            </tr>
-                            <tr v-if="form.isVisible.reinType_L68">
-                                <td>
-                                    {{ $t('reinType_L68') }}
-                                </td>
-                                <td>
-                                    {{ form.reinTypes[form.reinType_L68].i18n }}
                                 </td>
                             </tr>
                         </tbody>
@@ -311,10 +276,10 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    Расчет №
+                                    Расчет № {{ form.printUuid }}
                                 </td>
                                 <td>
-                                    Дата:
+                                    Дата: {{ currentDateTime }}
                                 </td>
                                 <td>
                                     Лист 1 из 3
@@ -366,14 +331,18 @@
                         <mi>C</mi>
                     </mrow>
                 </math>
-                <math xmlns="http://www.w3.org/1998/Math/MathML" class="block">
-                    <mrow>
-                        <msub><mi>w</mi><mi>m</mi></msub>
-                        <mo>=</mo>
-                        <mo>{{ form.Wm.toFixed(1) }}</mo>
-                        <mo>пункт 11.1.3</mo>
-                    </mrow>
-                </math>
+                <div class="flex items-center justify-between">
+                    <math xmlns="http://www.w3.org/1998/Math/MathML" class="block">
+                        <mrow>
+                            <msub><mi>w</mi><mi>m</mi></msub>
+                            <mo>=</mo>
+                            <mo>{{ form.Wm.toFixed(1) }}</mo>
+                        </mrow>
+                    </math>
+                    <span class="font-normal text--sz-10">
+                        пункт 11.1.3
+                    </span>
+                </div>
             </div>
             <table class="form__table">
                 <tbody>
@@ -946,38 +915,48 @@
                             >
                     </picture>
                 </div>
-                <div class="col-span-5">
-                    <picture class="flex justify-center">
-                        <source srcset="../assets/images/print/deflection.webp" type="image/webp">
-                        <source srcset="../assets/images/print/deflection.png" type="image/png">
-                        <img
-                            src="@/assets/images/print/deflection.png"
-                            alt="deflection"
-                            >
-                    </picture>
-                </div>
-                <div class="col-span-1 flex flex-col">
-                    <span>
-                        <span class="block">
-                            Допустимый прогиб
-                        </span>
-                        <span class="font-bold">
-                            <=L/200
-                        </span>
-                    </span>
-                    <span class="font-bold my-auto">
-                        8,25 мм
-                    </span>
+                <div class="col-span-6 flex items-center justify-end">
+                    <div class="wrapper flex items-stretch justify-end">
+                        <picture>
+                            <source srcset="../assets/images/print/deflection.webp" type="image/webp">
+                            <source srcset="../assets/images/print/deflection.png" type="image/png">
+                            <img
+                                src="@/assets/images/print/deflection.png"
+                                alt="deflection"
+                                >
+                        </picture>
+                        <div class="wrapper flex flex-col">
+                            <span>
+                                <span class="block">
+                                    Допустимый прогиб
+                                </span>
+                                <span class="font-bold">
+                                    <=L/200
+                                </span>
+                            </span>
+                            <span class="font-bold my-auto">
+                                {{ form.maxСurve.toFixed(2) }} мм
+                            </span>
+                            <span class="opacity-0 pointer-events-none">
+                                <span class="block">
+                                    Допустимый прогиб
+                                </span>
+                                <span class="font-bold">
+                                    <=L/200
+                                </span>
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <table class="form__table">
                 <tbody>
                     <tr>
                         <td>
-                            Расчет №
+                            Расчет № {{ form.printUuid }}
                         </td>
                         <td>
-                            Дата:
+                            Дата: {{ currentDateTime }}
                         </td>
                         <td>
                             Лист 3 из 3
@@ -1024,7 +1003,15 @@
             }
         },
         computed: {
-
+            currentDateTime() {
+                let now = new Date(),
+                    day = String(now.getDate()).padStart(2, '0'),
+                    month = String(now.getMonth() + 1).padStart(2, '0'), // Месяцы начинаются с 0
+                    year = String(now.getFullYear()).slice(-2), // Последние две цифры года
+                    hours = String(now.getHours()).padStart(2, '0'),
+                    minutes = String(now.getMinutes()).padStart(2, '0');
+                return `${day}.${month}.${year} ${hours}:${minutes}`;
+            }
         }
     }
 

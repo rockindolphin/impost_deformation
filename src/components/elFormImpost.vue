@@ -39,8 +39,14 @@
                             </multiselect>
                         </div>
                         <label class="block col-span-12" for="Tn">
-                            <span class="control__label">
+                            <span class="control__label flex items-center">
                                 {{ $t('Tn') }}
+                                <icon-help-circle
+                                    class="tippy ml-2"
+                                    :content="$t('Tn_tippy')"
+                                    v-tippy="{ trigger : 'mouseenter focus', arrow: true, interactive: true }"
+                                    >
+                                </icon-help-circle>
                             </span>
                             <input
                                 id="Tn"
@@ -57,6 +63,24 @@
                             <input
                                 id="Tref"
                                 v-model="form.Tref"
+                                type="number"
+                                step="0.1"
+                                class="control control--text"
+                            >
+                        </label>
+                        <label class="col-span-12" for="Tv">
+                            <span class="control__label flex items-center">
+                                {{ $t('Tv') }}
+                                <icon-help-circle
+                                    class="tippy ml-2"
+                                    :content="$t('Tv_tippy')"
+                                    v-tippy="{ trigger : 'mouseenter focus', arrow: true, interactive: true }"
+                                    >
+                                </icon-help-circle>
+                            </span>
+                            <input
+                                id="Tv"
+                                v-model="form.Tv"
                                 type="number"
                                 step="0.1"
                                 class="control control--text"
@@ -91,6 +115,8 @@
                                         v-model.number="form.Bh"
                                         type="number"
                                         step="0.1"
+                                        min="1"
+                                        max="75"
                                         class="control control--text"
                                     >
                                 </label>
@@ -104,6 +130,8 @@
                                         v-model.number="form.Bw"
                                         type="number"
                                         step="0.1"
+                                        min="1"
+                                        max="75"
                                         class="control control--text"
                                     >
                                 </label>
@@ -117,6 +145,8 @@
                                         v-model.number="form.Bl"
                                         type="number"
                                         step="0.1"
+                                        min="1"
+                                        max="75"
                                         class="control control--text"
                                     >
                                 </label>
@@ -130,13 +160,21 @@
                                         v-model.number="form.Wh"
                                         type="number"
                                         step="0.1"
+                                        min="1"
+                                        max="75"
                                         class="control control--text"
                                     >
                                 </label>
 
                                 <div class="control col-span-12">
-                                    <label class="control__label">
+                                    <label class="control__label flex items-center">
                                         {{ $t('windSide') }}
+                                        <icon-help-circle
+                                            class="tippy ml-2"
+                                            :content="$t('windSideTippy')"
+                                            v-tippy="{ trigger : 'mouseenter focus', arrow: true, interactive: true }"
+                                            >
+                                        </icon-help-circle>
                                     </label>
                                     <multiselect
                                         class="control--multiselect"
@@ -227,19 +265,6 @@
                                     <input
                                         id="b"
                                         v-model.number="form.b"
-                                        type="number"
-                                        step="0.1"
-                                        class="control control--text"
-                                    >
-                                </label>
-
-                                <label class="col-span-12" for="c">
-                                    <span class="control__label">
-                                        {{ $t('c') }}
-                                    </span>
-                                    <input
-                                        id="c"
-                                        v-model.number="form.c"
                                         type="number"
                                         step="0.1"
                                         class="control control--text"
@@ -407,7 +432,7 @@
                         class="wrapper wrapper--result col-span-12 2xl:col-span-6"
                         :class="{
                             'wrapper--active': item.key === form.selectedViewKey,
-                            '2xl:col-start-4': index === (form.resultViews.length - 1)
+                            '2xl:col-start-4': item.key === 'fake_impost' && index === (form.resultViews.length - 1)
                         }"
                         @click="form.selectedViewKey = item.key"
                         >
@@ -422,7 +447,7 @@
                                 <multiselect
                                     class="control--multiselect"
                                     v-model="form.fakeImpostProfileType"
-                                    :options="Object.keys(form.fakeImpostProfileTypes)"
+                                    :options="form.fakeImpostProfileTypesOptions"
                                     :allow-empty="false"
                                     :placeholder="$t('select_placeholder')"
                                     :searchable="false"
@@ -526,6 +551,7 @@
     import elBuilding from '@/components/elBuilding.vue';
     import elWindow from '@/components/elWindow.vue';
     import elPrint from '@/components/elPrint.vue';
+    import iconHelpCircle from '@/components/icons/iconHelpCircle.vue';
 
     import pngPic60_4 from '@/assets/images/profiles/60_4.png';
     import webpPic60_4 from '@/assets/images/profiles/60_4.webp';
@@ -561,6 +587,7 @@
             elBuilding,
             elWindow,
             elPrint,
+            iconHelpCircle,
             scheme_T78_AERO: defineAsyncComponent(() => import('@/components/schemas/T78_AERO.vue')),
             scheme_T80_AERO: defineAsyncComponent(() => import('@/components/schemas/T80_AERO.vue')),
             scheme_T78_SUPER_AERO: defineAsyncComponent(() => import('@/components/schemas/T78_SUPER_AERO.vue')),
@@ -627,20 +654,37 @@
                 });
                 return params.toString();
             },
+            checkSelectedView(){
+                return new Promise( (resolve, reject) => {
+                    if( this.form.selectedViewKey !== null ){
+                        resolve()
+                    }else{
+                        alert( this.$t('error_view_required') );
+                        reject();
+                    }
+                });
+            },
             printForm(){
-                window.print();
+                this.checkSelectedView().then(() => {
+                    this.form.printUuid++;
+                    window.print();
+                });
             },
             copyLink(){
-                let link = `${document.location.host}?${this.generateUrlParams()}`;
-                navigator.clipboard.writeText(link).then(() => {
-                    alert( this.$t('copy_link_alert') );
+                this.checkSelectedView().then(() => {
+                    let link = `${document.location.host}?${this.generateUrlParams()}`;
+                    navigator.clipboard.writeText(link).then(() => {
+                        alert( this.$t('copy_link_alert') );
+                    });
                 });
             },
             shareLink(){
-                navigator.share({
-                    title: this.$t('share_form_title'),
-                    text: this.$t('share_form_text'),
-                    url: `?${this.generateUrlParams()}`
+                this.checkSelectedView().then(() => {
+                    navigator.share({
+                        title: this.$t('share_form_title'),
+                        text: this.$t('share_form_text'),
+                        url: `?${this.generateUrlParams()}`
+                    });
                 });
             },
         },

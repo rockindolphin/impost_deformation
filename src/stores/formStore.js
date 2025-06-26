@@ -72,7 +72,7 @@ export const useFormStore = defineStore('form', {
         L: 180, //Длина импоста L (см) [[B13]]
         a: 109, //Рассчитываемый элемент a [[B14]]
         b: 100, //Рассчитываемый элемент b [[B15]]
-        c: 100, //Рассчитываемый элемент c [[B16]]
+        c: 0, //Рассчитываемый элемент c [[B16]]
 
         //Шаг 4
         profileTypes: {
@@ -270,7 +270,7 @@ export const useFormStore = defineStore('form', {
                 sku: '10702118'
             }
         },
-        fakeImpostProfileType: 'AERO_Z60',
+        fakeImpostProfileType: 'SUPER_AERO_Z60',
         fakeImpostReinTypes: {
             rt_35x28x7x1_5: {
                 i18n: '35*28*7*1,5',
@@ -345,7 +345,6 @@ export const useFormStore = defineStore('form', {
                 }
             }
         },
-        selectedViewKey: 'impost',
         boxes: {
             L60_AERO: {
                 i18n: 'L60 AERO',
@@ -371,10 +370,11 @@ export const useFormStore = defineStore('form', {
                 i18n: 'L68 ACLASS',
                 sku: '11101068'
             }
-        }
+        },
+        selectedViewKey: null, //ключ выбранного варианта
+        printUuid: Math.floor(100000 + Math.random() * 900000) // рандомное число при печати (номер расчета)
     }),
     getters: {
-        //doubleCount: (state) => state.count * 2,
         isVisible(state){
             return {
                 Wgap: state.windSide === 'side_wall',
@@ -425,6 +425,21 @@ export const useFormStore = defineStore('form', {
         },
         reinTypes_L68_Options(state){
             return ['rt_35x28x1_5', 'rt_35x28x2', 'rt_35x28x1_5_pipe', 'rt_35x28x2_pipe'];
+        },
+        fakeImpostProfileTypesOptions(state){
+            if( ['T78_AERO', 'T80_AERO'].includes(state.profileType) ){
+                return ['AERO_Z60'];
+            }else if( ['T78_SUPER_AERO', 'T80_SUPER_AERO'].includes(state.profileType) ){
+                return ['SUPER_AERO_Z60', 'SUPER_AERO_Z77'];
+            }else if( ['T78_ACLASS', 'T78_ACLASS_L68'].includes(state.profileType) ){
+                return ['ACLASS_Z60', 'ACLASS_T118', 'ACLASS_Z118', 'ACLASS_T94', 'ACLASS_Z94'];
+            }else if( ['T86_60_4'].includes(state.profileType) ){
+                return ['Z_60_4'];
+            }else if( ['T86_70_6'].includes(state.profileType) ){
+                return ['Z_70_6', 'T118_70_6'];
+            }else{
+                return [];
+            }
         },
         fakeImpostReinTypesOptions(state){
             if( ['ACLASS_T118', 'ACLASS_Z118', 'T118_70_6'].includes(state.fakeImpostProfileType) ){
@@ -497,16 +512,16 @@ export const useFormStore = defineStore('form', {
                             title: `${state.views['connective65'].i18n}/${this.viewSubSize}`,
                             result: this.computeEstimatedDeflection('connective65'),
                             tables: this.getResultTables('connective65')
+                        },
+                        {
+                            key: 'fake_impost',
+                            title: state.views['fake_impost'].i18n,
+                            result: this.computeEstimatedDeflection('fake_impost'),
+                            tables: this.getResultTables('fake_impost')
                         }
                     ]
                 ];
             }
-            resp.push({
-                key: 'fake_impost',
-                title: state.views['fake_impost'].i18n,
-                result: this.computeEstimatedDeflection('fake_impost'),
-                tables: this.getResultTables('fake_impost')
-            });
             return resp;
         },
         DZE(state){// Коэффициент пульсации давления ветра [[F214]]
@@ -679,6 +694,7 @@ export const useFormStore = defineStore('form', {
     actions: {
         onProfileTypeChange(){// при смене типа профиля, меняем Тип армирования на первый из списка доступных
             this.reinType = this.reinTypesOptions[0];
+            this.fakeImpostProfileType = this.fakeImpostProfileTypesOptions[0];
             if( ['T86_60_4', 'T86_70_6'].includes(this.profileType) ){// если выбрали 'T86_60_4' или 'T86_70_6' то меняем доп. список
                 this.reinType_60_70 = this.reinTypes_60_70_Options[0];
             }
@@ -919,7 +935,6 @@ export const useFormStore = defineStore('form', {
             }
             return table;
         },
-
         setParamsFromRoute(params){
             let selects = {
                 windRegion: Object.keys(this.windRegions),
@@ -955,6 +970,6 @@ export const useFormStore = defineStore('form', {
                     }
                 });
             }, 1000);
-        },
+        }
     }
 });
