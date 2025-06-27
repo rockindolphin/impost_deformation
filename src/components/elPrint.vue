@@ -3,18 +3,18 @@
         <section class="section">
             <div class="flex items-center">
                 <h1 class="text--brand text--sz-12 mr-4">
-                    Расчет прогибов оконных импостов при совместном действии ветровой нагрузки и температурного климатического воздействия.
+                    {{ $t('form_title_full') }}
                 </h1>
                 <icon-logo />
             </div>
             <small class="text--gray text--sz-8">
-                согласно  СП 20.13330.2016 "Нагрузки и воздействия" и  СП 538.1325800.2024 "Конструкции оконные и балконные"
+                {{ $t('sp_20_sp_538') }}
             </small>
             <p class="text--sz-10">
-                Расчёт произведён в программе компании ООО "Брусбокс" версия 1.1. (для зданий высотой до 75 м.)
+                {{ $t('app_ver') }}
             </p>
             <h4 class="uppercase text--sz-12">
-                Исходные данные
+                {{ $t('data_source') }}
             </h4>
             <div class="grid gap-7 grid-cols-12 items-start">
                 <div class="col-span-6">
@@ -180,7 +180,7 @@
                         </tbody>
                     </table>
                     <h4 class="uppercase text--sz-12">
-                        Исполнение
+                        {{ $t('result_view') }}
                     </h4>
                     <table class="form__table">
                         <tbody>
@@ -276,13 +276,13 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    Расчет № {{ form.printUuid }}
+                                    {{ $t('print_num') }} {{ form.printUuid }}
                                 </td>
                                 <td>
-                                    Дата: {{ currentDateTime }}
+                                    {{ $t('date') }}: {{ currentDateTime }}
                                 </td>
                                 <td>
-                                    Лист 1 из 3
+                                    {{ $t('page_num', {curr: 1, total: 3}) }}
                                 </td>
                             </tr>
                         </tbody>
@@ -292,10 +292,10 @@
         </section>
         <section class="section">
             <p class="text--sz-12 mb-0">
-                1. Нормативное значение основной ветровой нагрузки <span class="font-bold">W</span>
+                {{ $t('wind_load') }} <span class="font-bold">W</span>
             </p>
             <small class="text--sz-8 text--gray">
-                (в соответствии с СП 20.13330.2016)
+                {{ $t('sp_20') }}
             </small>
             <div class="wrapper text--sz-14 font-bold">
                 <math xmlns="http://www.w3.org/1998/Math/MathML" class="block">
@@ -316,7 +316,7 @@
                 </math>
             </div>
             <p class="font-bold">
-                Нормативное значение средней составляющей основной ветровой нагрузки Wm
+                {{ $t('wm_label') }} Wm
             </p>
             <div class="wrapper text--sz-14 font-bold">
                 <math xmlns="http://www.w3.org/1998/Math/MathML" class="block">
@@ -340,7 +340,7 @@
                         </mrow>
                     </math>
                     <span class="font-normal text--sz-10">
-                        пункт 11.1.3
+                        {{ $t('section_1_11_3') }}
                     </span>
                 </div>
             </div>
@@ -359,13 +359,13 @@
                     </tr>
                     <tr>
                         <td>
-                            Нормативное значение ветрового давления, Па
+                            {{ $t('w0_label') }}
                         </td>
                         <td>
                             {{ form.W0 }}
                         </td>
                         <td>
-                            по таблице 11.1
+                            {{ $t('according_to_table') }} 11.1
                         </td>
                     </tr>
                     <tr>
@@ -381,7 +381,7 @@
                     </tr>
                     <tr>
                         <td>
-                            Эквивалентная высота, м
+                            {{ $t('ze_label') }}
                         </td>
                         <td>
                             ze = {{ form.ZE }}
@@ -392,24 +392,24 @@
                     </tr>
                     <tr>
                         <td>
-                            Коэффициент, учитывающий изменение ветрового давления для высоты ze
+                            {{ $t('kze_label') }} ze
                         </td>
                         <td>
                             k(ze) = {{ form.KZE }}
                         </td>
                         <td>
-                            по таблице 11.2
+                            {{ $t('according_to_table') }} 11.2
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            Аэродинамический   коэффициент
+                            {{ $t('cze_label') }}
                         </td>
                         <td>
                             с = {{ form.CZE }}
                         </td>
                         <td>
-                            по таблице В.2
+                            {{ $t('according_to_table') }} В.2
                         </td>
                     </tr>
                 </tbody>
@@ -424,11 +424,11 @@
                         >
                 </picture>
                 <div class="small text-sz-8 text--gray text-center">
-                    Приложение B
+                    {{ $t('appndx') }} B
                 </div>
             </div>
             <p class="font-bold">
-                Нормативное значение пульсационной составляющей основной ветровой нагрузки Wp
+                {{ $t('wp_label') }} Wp
             </p>
             <div class="wrapper text--sz-14 font-bold">
                 <math xmlns="http://www.w3.org/1998/Math/MathML" class="block">
@@ -455,33 +455,33 @@
                 <tbody>
                     <tr>
                         <td>
-                            Коэффициент пульсации давления ветра
+                            {{ $t('dze_label') }}
                         </td>
                         <td>
                             ζ(Ze) = {{ form.DZE.toFixed(2) }}
                         </td>
                         <td>
-                            по таблице 11.4
+                            {{ $t('according_to_table') }} 11.4
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            Коэффициент пространственной корреляции пульсации давления ветра
+                            {{ $t('v_label') }}
                         </td>
                         <td>
                             V= {{ form.V }}
                         </td>
                         <td>
-                            по таблице 11.6
+                            {{ $t('according_to_table') }} 11.6
                         </td>
                     </tr>
                 </tbody>
             </table>
             <p class="text--sz-12 mb-0">
-                2.1 Расчёт прогиба оконного импоста от действия ветровой нагрузки
+                2.1 {{ $t('deflection_calc') }}
             </p>
             <small class="text--sz-8 text--gray">
-                согласно приложению B по СП 538.1325800.2024
+                {{ $t('deflection_calc_note') }}
             </small>
             <div class="grid grid-cols-12">
                 <div class="col-span-6">
@@ -548,12 +548,12 @@
                         <tbody>
                             <tr>
                                 <td colspan="2" class="font-bold text-left pt-4 pb-2">
-                                    Главные моменты инерции
+                                    {{ $t('main_moments_label') }}
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    Сечение профиля, м4
+                                    {{ $t('yellow_label') }}
                                 </td>
                                 <td class="whitespace-nowrap">
                                     Ip = {{ form.selectedView.result.yellow.toFixed(12) }}
@@ -561,7 +561,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Сечение усилительного вкладыша, м4
+                                    {{ $t('orange_label') }}
                                 </td>
                                 <td class="whitespace-nowrap">
                                     Is = {{ form.selectedView.result.orange.toFixed(12) }}
@@ -573,12 +573,12 @@
                         <tbody>
                             <tr>
                                 <td colspan="2" class="font-bold text-left pt-4 pb-2">
-                                    Модули упругости
+                                    {{  $t('elast_mod_label') }}
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    ПВХ, Па
+                                    {{ $t('ep_label') }}
                                 </td>
                                 <td class="whitespace-nowrap">
                                     Ep = {{ form.EP }}
@@ -586,7 +586,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Материал  вкладыша, Па
+                                    {{ $t('es_label') }}
                                 </td>
                                 <td class="whitespace-nowrap">
                                     Es = {{ form.ES }}
@@ -594,7 +594,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Длина импоста, м
+                                    {{ $t('L') }}, {{ $t('m') }}
                                 </td>
                                 <td class="whitespace-nowrap">
                                     L = {{ (form.L/100).toFixed(2) }}
@@ -602,7 +602,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Параметры b1 и b2, м
+                                    {{ $t('params') }} b1 {{ $t('and') }} b2, {{ $t('m') }}
                                 </td>
                                 <td class="whitespace-nowrap">
                                     <span class="block">
@@ -634,7 +634,7 @@
 
                         </td>
                         <td>
-                            Лист 2 из 3
+                            {{ $t('page_num', {curr: 2, total: 3}) }}
                         </td>
                     </tr>
                 </tbody>
@@ -642,7 +642,7 @@
         </section>
         <section class="section">
             <p class="text--sz-12">
-                2.2 Расчёт прогиба оконного импоста от температурного климатического воздействия
+                2.2 {{ $t('termal_deflection') }}
             </p>
             <div class="wrapper text--sz-14 font-bold">
                 <math xmlns="http://www.w3.org/1998/Math/MathML" class="block">
@@ -695,18 +695,18 @@
                 <tbody>
                     <tr>
                         <td>
-                            Коэффициент
+                            {{ $t('coeff') }}
                         </td>
                         <td class="whitespace-nowrap">
                             p = {{ form.profileColors[form.profileColor].p }}
                         </td>
                         <td class="whitespace-nowrap">
-                            согласно B.5.1
+                            {{ $t('according_to') }} B.5.1
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            Расстояние между нейтральной осью ПВХ профиля и нейтральной осью усилительного вкладыша, м
+                            {{ $t('delta_label') }}
                         </td>
                         <td class="whitespace-nowrap">
                             δ = {{ form.selectedView.result.cyan.toFixed(4) }}
@@ -717,7 +717,7 @@
                     </tr>
                     <tr>
                         <td>
-                            Продольные силы
+                            {{ $t('longitudinal_forces') }}
                         </td>
                         <td class="whitespace-nowrap">
                             <span class="block">
@@ -728,18 +728,18 @@
                             </span>
                         </td>
                         <td class="whitespace-nowrap">
-                            согласно В.5.2
+                            {{ $t('according_to') }} В.5.2
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            Коэффициент
+                            {{ $t('coeff') }}
                         </td>
                         <td class="whitespace-nowrap">
                             G= {{ form.selectedView.result.G.toFixed(21) }}
                         </td>
                         <td class="whitespace-nowrap">
-                            согласно В.5.3
+                            {{ $t('according_to') }} В.5.3
                         </td>
                     </tr>
                 </tbody>
@@ -750,12 +750,12 @@
                         <tbody>
                             <tr>
                                 <td colspan="2" class="font-bold text-left pt-4 pb-2">
-                                    Площади поперечного сечения
+                                    {{ $t('cross_sectional_areas') }}
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    ПВХ профиль, м2
+                                    {{ $t('purple_label') }}
                                 </td>
                                 <td class="whitespace-nowrap">
                                     Аp = {{ form.selectedView.result.purple.toFixed(6) }}
@@ -763,7 +763,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Усилительный вкладыш, м2
+                                    {{ $t('green_label') }}
                                 </td>
                                 <td class="whitespace-nowrap">
                                     As = {{ form.selectedView.result.green.toFixed(6) }}
@@ -771,7 +771,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Константа, принимаемая
+                                    {{ $t('csa_label') }}
                                 </td>
                                 <td class="whitespace-nowrap">
                                     ξ = {{ form.CSA }}
@@ -783,12 +783,12 @@
                         <tbody>
                             <tr>
                                 <td colspan="2" class="font-bold text-left pt-4 pb-2">
-                                    Коэффициенты линейного температурного расширения
+                                    {{ $t('termal_coeffs') }}
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    Материал усилительного вкладыша,   К-1
+                                    {{ $t('mri_label') }}
                                 </td>
                                 <td class="whitespace-nowrap">
                                     <span class="block">
@@ -802,18 +802,18 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Температура во внутренней камере ПВХ профиля, ℃
+                                    {{ $t('tm_label') }}
                                 </td>
                                 <td class="whitespace-nowrap">
                                     tm = {{ form.selectedView.result.tm.toFixed(9) }}
                                 </td>
                                 <td class="whitespace-nowrap">
-                                    согласно В.5.2
+                                    {{ $t('according_to') }} В.5.2
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    Термическое сопротивление профиля импоста оконной конструкции,Вт/(м²∙℃)
+                                    {{ $t('r0_label') }}
                                 </td>
                                 <td class="whitespace-nowrap">
                                     R0 = {{ form.R0 }}
@@ -842,7 +842,7 @@
                         <tbody>
                             <tr>
                                 <td colspan="3" class="font-bold text-left pt-4 pb-2">
-                                    Коэффициенты теплоотдачи и тепловосприятия, Вт/(м²∙℃)
+                                    {{ $t('heat_transfer_coeffs') }}
                                 </td>
                             </tr>
                             <tr>
@@ -859,7 +859,7 @@
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    Отношение количества рядов воздушных камер в наружной части попереченого сечения ПВХ профиля к количеству рядов воздушных камер во внутренней части поперечного сечения ПВХ профиля
+                                    {{ $t('kr_label') }}
                                 </td>
                                 <td class="whitespace-nowrap">
                                     kR = {{ form.selectedProfileParams.kR }}
@@ -867,7 +867,7 @@
                             </tr>
                             <tr>
                                 <td colspan="3" class="font-bold text-left pt-4 pb-2">
-                                    Безразмерные коэффициенты, учитывающие неоднородность температурного поля в ПВХ профиле
+                                    {{ $t('te_tk_label') }}
                                 </td>
                             </tr>
                             <tr>
@@ -884,7 +884,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Ширина профиля импоста, м
+                                    {{ $t('impost_w_label') }}
                                 </td>
                                 <td class="whitespace-nowrap">
                                     с = {{ form.selectedProfileParams.impostWidth }}
@@ -895,13 +895,13 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Начальная кривизна оси импоста оконной конструкции, м-1
+                                    {{ $t('k0_label') }}
                                 </td>
                                 <td class="whitespace-nowrap">
                                     K0 = {{ form.K0.toFixed(11) }}
                                 </td>
                                 <td class="whitespace-nowrap">
-                                    согласно В.5.5
+                                    {{ $t('according_to') }} В.5.5
                                 </td>
                             </tr>
                         </tbody>
@@ -928,7 +928,7 @@
                         <div class="wrapper flex flex-col">
                             <span>
                                 <span class="block">
-                                    Допустимый прогиб
+                                    {{ $t('valid_curve') }}
                                 </span>
                                 <span class="font-bold">
                                     <=L/200
@@ -939,7 +939,7 @@
                             </span>
                             <span class="opacity-0 pointer-events-none">
                                 <span class="block">
-                                    Допустимый прогиб
+                                    {{ $t('valid_curve') }}
                                 </span>
                                 <span class="font-bold">
                                     <=L/200
@@ -953,13 +953,13 @@
                 <tbody>
                     <tr>
                         <td>
-                            Расчет № {{ form.printUuid }}
+                            {{ $t('print_num') }} {{ form.printUuid }}
                         </td>
                         <td>
-                            Дата: {{ currentDateTime }}
+                            {{ $t('date') }}: {{ currentDateTime }}
                         </td>
                         <td>
-                            Лист 3 из 3
+                            {{ $t('page_num', {curr: 3, total: 3}) }}
                         </td>
                     </tr>
                 </tbody>

@@ -234,7 +234,7 @@
                             <div class="wrapper--controls grid gap-7 grid-cols-12">
                                 <label class="col-span-12" for="L">
                                     <span class="control__label">
-                                        {{ $t('L') }}
+                                        {{ $t('L') }}({{ $t('cm') }})
                                     </span>
                                     <input
                                         id="L"
@@ -437,10 +437,10 @@
                     <div
                         v-for="(item, index) in form.resultViews"
                         :key="`result_${item.key}`"
-                        class="wrapper wrapper--result col-span-12 2xl:col-span-6"
+                        class="wrapper wrapper--result col-span-12 xl:col-span-6"
                         :class="{
                             'wrapper--active': item.key === form.selectedViewKey,
-                            '2xl:col-start-4': item.key === 'fake_impost' && index === (form.resultViews.length - 1)
+                            'xl:col-start-4': item.key === 'fake_impost' && index === (form.resultViews.length - 1)
                         }"
                         @click="selectView($event, item.key)"
                         >
@@ -545,6 +545,10 @@
                                         >
                                         {{ td }}
                                     </td>
+                                </tr>
+                                <!-- добавляем для следующих комбинаций пустые строки чтобы выровнять таблицы -->
+                                <tr v-if="item.key === 'impost' || (item.key === 'connective3' && tbl_index === 1)">
+                                    <td colspan="2" class="opacity-0">_</td>
                                 </tr>
                             </tbody>
                         </table>

@@ -762,12 +762,12 @@ export const useFormStore = defineStore('form', {
                     `${prefix} ${$t(`profileTypes.${this.profileType}`)}`,
                     this.selectedProfileParams.sku
                 ]);
-            }
-            if( ['pilyastr'].includes(specKey) ){
-                table.tbody.push([
-                    $t('pilyastr_63'),
-                    this.views[specKey].sku
-                ]);
+                if( specKey === 'pilyastr' ){
+                    table.tbody.push([
+                        $t('pilyastr_63'),
+                        this.views[specKey].sku
+                    ]);
+                }
             }
             if( ['fake_impost'].includes(specKey) ){
                 let doorProfiles = [
@@ -820,12 +820,12 @@ export const useFormStore = defineStore('form', {
                     $t(`reinTypes.${this.reinType}`),
                     this.reinTypes[this.reinType].sku
                 ]);
-            }
-            if( ['pilyastr'].includes(specKey) ){
-                table.tbody.push([
-                    $t(`reinTypes.rt_50x25x2_pipe`),
-                    this.reinTypes['rt_50x25x2_pipe'].sku
-                ]);
+                if( specKey === 'pilyastr' ){
+                    table.tbody.push([
+                        $t(`reinTypes.rt_50x25x2_pipe`),
+                        this.reinTypes['rt_50x25x2_pipe'].sku
+                    ]);
+                }
             }
             if( ['fake_impost'].includes(specKey) ){
                 table.tbody.push([
