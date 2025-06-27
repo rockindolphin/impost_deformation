@@ -13,6 +13,8 @@
         <line v-bind="svgComp.c_line" />
         <line v-bind="svgComp.d_line" />
         <line v-bind="svgComp.l_line" />
+        <line v-bind="svgComp.legend_line_1" />
+        <line v-bind="svgComp.legend_line_2" />
         <rect v-bind="svgComp.a_sep_l" />
         <rect v-bind="svgComp.a_sep_r" />
         <rect v-bind="svgComp.b_sep_r" />
@@ -26,6 +28,9 @@
         <text v-bind="svgComp.c_text" class="text" v-if="form.c !== 0">c</text>
         <text v-bind="svgComp.d_text" class="text" >d</text>
         <text v-bind="svgComp.l_text" class="text" >L</text>
+        <text v-bind="svgComp.legend_text" class="text" text-anchor="end" >
+            {{ $t('window_legend') }}
+        </text>
     </svg>
 </template>
 
@@ -131,6 +136,20 @@
                         x2: window.x + windowWidth + lineGap,
                         y2: window.y + windowHeight
                     },
+                    legend_line_1 = {
+                        ...lineCommon,
+                        x1: window.x + this.form.a + lineGap + 1,
+                        y1: window.y - lineGap,
+                        x2: window.x + this.form.a,
+                        y2: window.y + lineGap*2
+                    },
+                    legend_line_2 = {
+                        ...lineCommon,
+                        x1: window.x + this.form.a + lineGap,
+                        y1: window.y - lineGap,
+                        x2: window.x + this.form.a + windowWidth/2 + lineGap*2,
+                        y2: window.y - lineGap
+                    },
                     a_sep_l = {
                         ...sepCommon,
                         x: a_line.x1 - sepSize/4,
@@ -203,6 +222,11 @@
                         ...textCommon,
                         x: l_line.x1 + (l_line.x2 - l_line.x1)/2 + textGap*2,
                         y: l_line.y1 + (l_line.y2 - l_line.y1)/2 + textGap/2
+                    },
+                    legend_text = {
+                        ...textCommon,
+                        x: window.x + this.form.a + windowWidth/2 + lineGap*2,
+                        y: window.y - lineGap - textGap
                     };
 
                 return {
@@ -215,6 +239,8 @@
                     c_line: c_line,
                     d_line: d_line,
                     l_line: l_line,
+                    legend_line_1: legend_line_1,
+                    legend_line_2: legend_line_2,
                     a_sep_l: a_sep_l,
                     a_sep_r: a_sep_r,
                     b_sep_r: b_sep_r,
@@ -227,7 +253,8 @@
                     b_text: b_text,
                     c_text: c_text,
                     d_text: d_text,
-                    l_text: l_text
+                    l_text: l_text,
+                    legend_text: legend_text
                 };
             }
         }

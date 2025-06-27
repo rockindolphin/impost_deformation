@@ -941,8 +941,13 @@ export const useFormStore = defineStore('form', {
                 terrainType: this.terrainTypes,
                 windSide: Object.keys(this.windSides),
                 profileType: Object.keys(this.profileTypes),
-                profileColor: Object.keys(this.profileColor),
-                fakeImpostProfileType: Object.keys(this.fakeImpostProfileTypes)
+                profileColor: Object.keys(this.profileColors),
+                fakeImpostProfileType: Object.keys(this.fakeImpostProfileTypes),
+                reinType: this.reinTypesOptions,
+                reinType_60_70: this.reinTypes_60_70_Options,
+                reinType_L68: this.reinTypes_L68_Options,
+                fakeImpostReinType: this.fakeImpostReinTypesOptions,
+                selectedViewKey: Object.keys(this.views)
             }
             Object.keys(selects).map(key => {
                 let value = params.get(key);
@@ -956,20 +961,6 @@ export const useFormStore = defineStore('form', {
                     this[key] = value;
                 }
             });
-            setTimeout(() => {// проверить работу
-                selects = {
-                    reinType: this.reinTypesOptions,
-                    reinType_60_70: this.reinTypes_60_70_Options,
-                    reinType_L68: this.reinTypes_L68_Options,
-                    fakeImpostReinType: this.fakeImpostReinTypesOptions
-                }
-                Object.keys(selects).map(key => {
-                    let value = params.get(key);
-                    if( value && selects[key].includes(value) ){
-                        this[key] = value;
-                    }
-                });
-            }, 1000);
         }
     }
 });

@@ -434,7 +434,7 @@
                             'wrapper--active': item.key === form.selectedViewKey,
                             '2xl:col-start-4': item.key === 'fake_impost' && index === (form.resultViews.length - 1)
                         }"
-                        @click="form.selectedViewKey = item.key"
+                        @click="selectView($event, item.key)"
                         >
                         <strong>
                             {{ item.title }}
@@ -649,10 +649,15 @@
         methods: {
             generateUrlParams(){
                 let params = new URLSearchParams();
-                ['windRegion', 'terrainType', 'windSide', 'profileType', 'profileColor', 'reinType', 'reinType_60_70', 'reinType_L68', 'fakeImpostProfileType', 'fakeImpostReinType', 'Tn', 'Tref', 'Tv', 'Bh', 'Bw', 'Bl', 'Wh', 'Wgap', 'L', 'a','b', 'c'].map(key => {
-                    params.set(key, this[key]);
+                ['windRegion', 'terrainType', 'windSide', 'profileType', 'profileColor', 'reinType', 'reinType_60_70', 'reinType_L68', 'fakeImpostProfileType', 'fakeImpostReinType', 'Tn', 'Tref', 'Tv', 'Bh', 'Bw', 'Bl', 'Wh', 'Wgap', 'L', 'a','b', 'c', 'selectedViewKey'].map(key => {
+                    params.set(key, this.form[key]);
                 });
                 return params.toString();
+            },
+            selectView(evt, viewKey){
+                if( !evt.target.closest('.multiselect') ){// если не кликаем в выпадающий список
+                    this.form.selectedViewKey = viewKey;
+                }
             },
             checkSelectedView(){
                 return new Promise( (resolve, reject) => {
