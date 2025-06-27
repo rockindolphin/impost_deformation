@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia';
 import { specsData } from '@/specsData.js';
-import { ru } from '@/i18n/ru';
+import i18n from '@/i18n';
+
+let $t = i18n.global.t;
 
 export const useFormStore = defineStore('form', {
     state: () => ({
@@ -54,17 +56,11 @@ export const useFormStore = defineStore('form', {
         Bw: 47, //Ширина здания d (м) [[B10]]
         Bl: 30, //Длина здания [[E10]]
         Wh: 50, //Фактическая высота установки окна (м): [[B11]]
-        windSides: {
-            'windward_side': {
-                i18n: 'Наветренная сторона'
-            },
-            'leeward_side': {
-                i18n: 'Подветренная сторона'
-            },
-            'side_wall': {
-                i18n: 'Боковая стена'
-            }
-        },
+        windSides: [
+            'windward_side',
+            'leeward_side',
+            'side_wall'
+        ],
         windSide: 'windward_side', //Сторона [[D8]]
         Wgap: 5, //Расстояние от края наветренной стены до окна [[E11]]
 
@@ -81,7 +77,6 @@ export const useFormStore = defineStore('form', {
                 tk: 0.78, //Безразмерные коэффициенты, учитывающие неоднородность температурного поля в ПВХ профиле, [[R50, R53]]
                 te: 1.08, // Безразмерные коэффициенты, учитывающие неоднородность температурного поля в ПВХ профиле [[Q50, Q53]]
                 kR: 1, // Отношение количества рядов воздушных камер в наружной части попереченого сечения ПВХ профиля к количеству рядов воздушных камер во внутренней части поперечного сечения ПВХ профиля [[F276]]
-                i18n: 'Т78 AERO', // название для таблицы
                 sku: '10003078' // артикул
             },
             'T80_AERO': {
@@ -89,7 +84,6 @@ export const useFormStore = defineStore('form', {
                 tk: 0.78,
                 te: 1.08,
                 kR: 1,
-                i18n: 'Т80 AERO',
                 sku: '10003080'
             },
             'T78_SUPER_AERO': {
@@ -97,7 +91,6 @@ export const useFormStore = defineStore('form', {
                 tk: 0.8,
                 te: 1.11,
                 kR: 1,
-                i18n: 'T78 SUPER AERO',
                 sku: '10603078'
             },
             'T80_SUPER_AERO': {
@@ -105,7 +98,6 @@ export const useFormStore = defineStore('form', {
                 tk: 0.8,
                 te: 1.11,
                 kR: 1,
-                i18n: 'T80 SUPER AERO',
                 sku: '10603080'
             },
             'T78_ACLASS': {
@@ -113,7 +105,6 @@ export const useFormStore = defineStore('form', {
                 tk: 0.78,
                 te: 1.08,
                 kR: 2,
-                i18n: 'Т78 ACLASS',
                 sku: '11103078'
             },
             'T78_ACLASS_L68': {
@@ -121,7 +112,6 @@ export const useFormStore = defineStore('form', {
                 tk: 0.78,
                 te: 1.08,
                 kR: 2,
-                i18n: 'Т78 ACLASS',
                 sku: '11103078'
             },
             'T86_60_4': {
@@ -129,7 +119,6 @@ export const useFormStore = defineStore('form', {
                 tk: 0.82,
                 te: 1.2,
                 kR: 0.5,
-                i18n: 'T86 60-4',
                 sku: '10203086'
             },
             'T86_70_6': {
@@ -137,7 +126,6 @@ export const useFormStore = defineStore('form', {
                 tk: 0.85,
                 te: 1.32,
                 kR: 1.25,
-                i18n: 'T86 70-6',
                 sku: '10403086'
             },
             'GLIDE': {
@@ -145,79 +133,62 @@ export const useFormStore = defineStore('form', {
                 tk: 0.78,
                 te: 1.08,
                 kR: 1,
-                i18n: 'GLIDE',
                 sku: '10802065'
             }
         },
         profileType: 'T80_SUPER_AERO', //Профильная система [[F20]]
         profileColors: {
-            'white': {
-                i18n: 'Белый',
+            white: {
                 p: 0.3 //Коэффициент
             },
-            'colored': {
-                i18n: 'Цветной',
+            colored: {
                 p: 0.25
             }
         },
         profileColor: 'white', //Цвет профиля [[F21]]
         reinTypes: {
             rt_35x20x1_5_pipe: {
-                i18n: '35*20*1,5(труба)',
                 sku: '41108020'
             },
             rt_35x20x2_pipe: {
-                i18n: '35*20*2(труба)',
                 sku: '40308020'
             },
             rt_35x20x1_5: {
-                i18n: '35*20*1,5',
                 sku: '40108020'
             },
             rt_35x20x2: {
-                i18n: '35*20*2',
                 sku: '40408007'
             },
             rt_35x28x1_5: {
-                i18n: '35*28*1,5',
                 sku: '40108028'
             },
             rt_35x28x2: {
-                i18n: '35*28*2',
                 sku: '40408028'
             },
             rt_35x28x1_5_pipe: {
-                i18n: '35*28*1,5(труба)',
                 sku: '41108028'
             },
             rt_35x28x2_pipe: {
-                i18n: '35*28*2(труба)',
                 sku: '40308028'
             },
             rt_26x19x1_5: {//GLIDE
-                i18n: '26*19*1,5',
                 sku: '40108026'
             },
             rt_26x19x2: {//GLIDE
-                i18n: '26*19*2',
                 sku: '40808026'
             },
 
             //в расчетах не используются но зачем-то выводятся в итоговых таблицах
             rt_50x25x2_pipe: {
-                i18n: '50*25*2 (труба)',
                 sku: '40108025'
             },
             rt_100x6: {
-                i18n: '100*6',
                 sku: '40108100'
             },
             rt_80x13x2: {
-                i18n: '80*13*2',
                 sku: '40108013'
             },
             rt_50x40: {
-                i18n: '50*40',
                 sku: '40108050'
             }
         },
@@ -226,118 +197,94 @@ export const useFormStore = defineStore('form', {
         reinType_L68: 'rt_35x28x1_5', // Армирование для коробок L68
         fakeImpostProfileTypes: {
             AERO_Z60: {
-                i18n: 'Z60 AERO',
                 sku: '10002060'
             },
             SUPER_AERO_Z60: {
-                i18n: 'Z60 SUPER AERO',
                 sku: '10602060'
             },
             SUPER_AERO_Z77: {
-                i18n: 'Z77 SUPER AERO',
                 sku: '10602077'
             },
             ACLASS_Z60: {
-                i18n: 'Z60 ACLASS',
                 sku: '11102060'
             },
             ACLASS_T118: {
-                i18n: 'Т118',
                 sku: '10302118'
             },
             ACLASS_Z118: {
-                i18n: 'Z118-60',
                 sku: '10302060'
             },
             ACLASS_T94: {
-                i18n: 'Т94',
                 sku: '10302094'
             },
             ACLASS_Z94: {
-                i18n: 'Z94',
                 sku: '10302074'
             },
             Z_60_4: {
-                i18n: 'Z60 60-4',
                 sku: '10202060'
             },
             Z_70_6: {
-                i18n: 'Z60 70-6',
                 sku: '10402060'
             },
             T118_70_6: {
-                i18n: 'Т118-70',
                 sku: '10702118'
             }
         },
         fakeImpostProfileType: 'SUPER_AERO_Z60',
         fakeImpostReinTypes: {
             rt_35x28x7x1_5: {
-                i18n: '35*28*7*1,5',
                 sku: '40108007'
             },
             rt_35x28x7x2: {
-                i18n: '35*28*7*2',
                 sku: '40408007'
             },
             rt_35x28x1_5: {
-                i18n: '35*28*1,5',
                 sku: '40108028'
             },
             rt_35x28x2: {
-                i18n: '35*28*2',
                 sku: '40408028'
             },
             rt_40x50x2_pipe: {
-                i18n: '40*50*2(труба)',
                 sku: '40108050'
             },
             //эти 2 в расчетах не используются но зачем-то выводятся в итоговых таблицах
             rt_20x26x13: {
-                i18n: '20*26*13',
                 sku: '41108026'
             },
             rt_50x15x2: {
-                i18n: '50*15*2',
                 sku: '40408050'
             }
         },
         fakeImpostReinType: 'rt_35x28x7x1_5',
         views: {
             impost: {
-                i18n: 'Импост'
+
             },
             pilyastr: {
-                i18n: 'Усиление пилястровым профилем',
                 sku: '10105063'
             },
             connective3: {
-                i18n: 'Соединительный профиль 3',
                 sku: {
                     '60': '10105003',
                     '70': '10405017'
                 }
             },
             universal: {
-                i18n: 'Профиль соединительный универсальный',
                 sku: '10105024'
             },
             connective38: {
-                i18n: 'Профиль соединительный 38',
                 sku:{
                     '60': '10105038',
                     '70': '10405038',
                 }
             },
             connective65: {
-                i18n: 'Профиль соединительный 65',
                 sku: {
                     '60': '10105065',
                     '70': '10405065',
                 }
             },
             fake_impost: {
-                i18n: 'Ложный импост',
                 sku: {
                     '60': '10103062',
                     '62': '10103034',
@@ -347,27 +294,21 @@ export const useFormStore = defineStore('form', {
         },
         boxes: {
             L60_AERO: {
-                i18n: 'L60 AERO',
                 sku: '10001060'
             },
             L60_SUPER_AERO: {
-                i18n: 'L60 SUPER AERO',
                 sku: '10601060'
             },
             L60_ACLASS: {
-                i18n: 'L60 ACLASS',
                 sku: '11101060'
             },
             L64_60_4: {
-                i18n: 'L64 60-4',
                 sku: '10201064'
             },
             L64_70_6: {
-                i18n: 'L64 70-6',
                 sku: '10401064'
             },
             L68_ACLASS: {
-                i18n: 'L68 ACLASS',
                 sku: '11101068'
             }
         },
@@ -474,13 +415,13 @@ export const useFormStore = defineStore('form', {
             let resp = [
                 {
                     key: 'impost',
-                    title: state.views['impost'].i18n,
+                    title: $t('views.impost'),
                     result: this.computeEstimatedDeflection('impost'),
                     tables: this.getResultTables('impost')
                 },
                 {
                     key: 'pilyastr',
-                    title: state.views['pilyastr'].i18n,
+                    title: $t('views.pilyastr'),
                     result: this.computeEstimatedDeflection('pilyastr'),
                     tables: this.getResultTables('pilyastr')
                 }
@@ -491,31 +432,31 @@ export const useFormStore = defineStore('form', {
                     ...[
                         {
                             key: 'connective3',
-                            title: `${state.views['connective3'].i18n}/${this.viewSubSize}`,
+                            title: `${$t('views.connective3')}/${this.viewSubSize}`,
                             result: this.computeEstimatedDeflection('connective3'),
                             tables: this.getResultTables('connective3')
                         },
                         {
                             key: 'universal',
-                            title: state.views['universal'].i18n,
+                            title: $t('views.universal'),
                             result: this.computeEstimatedDeflection('universal'),
                             tables: this.getResultTables('universal')
                         },
                         {
                             key: 'connective38',
-                            title: `${state.views['connective38'].i18n}/${this.viewSubSize}`,
+                            title: `${$t('views.connective38')}/${this.viewSubSize}`,
                             result: this.computeEstimatedDeflection('connective38'),
                             tables: this.getResultTables('connective38')
                         },
                         {
                             key: 'connective65',
-                            title: `${state.views['connective65'].i18n}/${this.viewSubSize}`,
+                            title: `${$t('views.connective65')}/${this.viewSubSize}`,
                             result: this.computeEstimatedDeflection('connective65'),
                             tables: this.getResultTables('connective65')
                         },
                         {
                             key: 'fake_impost',
-                            title: state.views['fake_impost'].i18n,
+                            title: $t('views.fake_impost'),
                             result: this.computeEstimatedDeflection('fake_impost'),
                             tables: this.getResultTables('fake_impost')
                         }
@@ -801,13 +742,12 @@ export const useFormStore = defineStore('form', {
             }
         },
         getResultTables(specKey){
-            let $t = (key) => ru[key];
             return [
-                this.getProfileTable(specKey, $t),
-                this.getReinTable(specKey, $t)
+                this.getProfileTable(specKey),
+                this.getReinTable(specKey)
             ];
         },
-        getProfileTable(specKey, $t){
+        getProfileTable(specKey){
             let table = {
                 thead: [
                     $t('profile'),
@@ -817,9 +757,9 @@ export const useFormStore = defineStore('form', {
             };
 
             if( ['impost', 'pilyastr'].includes(specKey) ){
-                let prefix = this.profileType === 'GLIDE' ? $t('sashes') : this.views['impost'].i18n;
+                let prefix = this.profileType === 'GLIDE' ? $t('sashes') : $t('views.impost');
                 table.tbody.push([
-                    `${prefix} ${this.selectedProfileParams.i18n}`,
+                    `${prefix} ${$t(`profileTypes.${this.profileType}`)}`,
                     this.selectedProfileParams.sku
                 ]);
             }
@@ -830,90 +770,89 @@ export const useFormStore = defineStore('form', {
                 ]);
             }
             if( ['fake_impost'].includes(specKey) ){
-                let selectedParams = this.fakeImpostProfileTypes[this.fakeImpostProfileType],
-                    doorProfiles = [
-                        'ACLASS_T118',
-                        'ACLASS_Z118',
-                        'ACLASS_T94',
-                        'ACLASS_Z94',
-                        'T118_70_6'
-                    ],
-                    prefix = doorProfiles.includes(this.fakeImpostProfileType) ? $t('door_sash') : $t('sash');
+                let doorProfiles = [
+                    'ACLASS_T118',
+                    'ACLASS_Z118',
+                    'ACLASS_T94',
+                    'ACLASS_Z94',
+                    'T118_70_6'
+                ],
+                prefix = doorProfiles.includes(this.fakeImpostProfileType) ? $t('door_sash') : $t('sash');
 
                 table.tbody.push([
-                    `${prefix} ${selectedParams.i18n}`,
-                    selectedParams.sku
+                    `${prefix} ${$t(`fakeImpostProfileTypes.${this.fakeImpostProfileType}`)}`,
+                    this.fakeImpostProfileTypes[this.fakeImpostProfileType].sku
                 ]);
                 table.tbody.push([
-                    `${this.views[specKey].i18n} ${this.fakeImpostSubSize}`,
+                    `${$t(`views.${specKey}`)} ${this.fakeImpostSubSize}`,
                     this.views[specKey].sku[this.fakeImpostSubSize]
                 ]);
             }
             if( ['connective3', 'connective38', 'connective65', 'universal'].includes(specKey) ){
                 if( specKey === 'universal' ){
                     table.tbody.push([
-                        this.views[specKey].i18n,
+                        $t(`views.${specKey}`),
                         this.views[specKey].sku
                     ]);
                 }else{
                     table.tbody.push([
-                        `${this.views[specKey].i18n}/${this.viewSubSize}`,
+                        `${$t(`views.${specKey}`)}/${this.viewSubSize}`,
                         this.views[specKey].sku[this.viewSubSize]
                     ]);
                 }
                 table.tbody.push([
-                    `${$t('box')} ${this.boxes[this.boxByProfileType].i18n}`,
+                    `${$t('box')} ${$t(`boxes.${this.boxByProfileType}`)}`,
                     this.boxes[this.boxByProfileType].sku
                 ]);
             }
             return table;
         },
-        getReinTable(specKey, $t){
+        getReinTable(specKey){
             let table = {
                 thead: [
                     $t('rein_profile'),
                     $t('sku')
                 ],
                 tbody: []
-            }
+            };
             if( ['impost', 'pilyastr'].includes(specKey) ){
                 table.tbody.push([
-                    this.reinTypes[this.reinType].i18n,
+                    $t(`reinTypes.${this.reinType}`),
                     this.reinTypes[this.reinType].sku
                 ]);
             }
             if( ['pilyastr'].includes(specKey) ){
                 table.tbody.push([
-                    this.reinTypes['rt_50x25x2_pipe'].i18n,
+                    $t(`reinTypes.rt_50x25x2_pipe`),
                     this.reinTypes['rt_50x25x2_pipe'].sku
                 ]);
             }
             if( ['fake_impost'].includes(specKey) ){
                 table.tbody.push([
-                    this.fakeImpostReinTypes[this.fakeImpostReinType].i18n,
+                    $t(`fakeImpostReinTypes.${this.fakeImpostReinType}`),
                     this.fakeImpostReinTypes[this.fakeImpostReinType].sku
                 ]);
                 let fi_extra_rt = this.fakeImpostSubSize === 70 ? 'rt_50x15x2' : 'rt_20x26x13';
                 table.tbody.push([
-                    this.fakeImpostReinTypes[fi_extra_rt].i18n,
+                    $t(`fakeImpostReinTypes.${fi_extra_rt}`),
                     this.fakeImpostReinTypes[fi_extra_rt].sku
                 ]);
             }
             if( ['connective38'].includes(specKey) ){
                 table.tbody.push([
-                    this.reinTypes['rt_80x13x2'].i18n,
+                    $t(`reinTypes.rt_80x13x2`),
                     this.reinTypes['rt_80x13x2'].sku
                 ]);
             }
             if( ['connective65'].includes(specKey) ){
                 table.tbody.push([
-                    this.reinTypes['rt_50x40'].i18n,
+                    $t(`reinTypes.rt_50x40`),
                     this.reinTypes['rt_50x40'].sku
                 ]);
             }
             if( ['universal'].includes(specKey) ){
                 table.tbody.push([
-                    this.reinTypes['rt_100x6'].i18n,
+                    $t(`reinTypes.rt_100x6`),
                     this.reinTypes['rt_100x6'].sku
                 ]);
             }
@@ -929,7 +868,7 @@ export const useFormStore = defineStore('form', {
                     });
                 }
                 table.tbody.push([
-                    this.reinTypes[rtKey].i18n,
+                    $t(`reinTypes.${rtKey}`),
                     this.reinTypes[rtKey].sku
                 ]);
             }
@@ -939,7 +878,7 @@ export const useFormStore = defineStore('form', {
             let selects = {
                 windRegion: Object.keys(this.windRegions),
                 terrainType: this.terrainTypes,
-                windSide: Object.keys(this.windSides),
+                windSide: this.windSides,
                 profileType: Object.keys(this.profileTypes),
                 profileColor: Object.keys(this.profileColors),
                 fakeImpostProfileType: Object.keys(this.fakeImpostProfileTypes),

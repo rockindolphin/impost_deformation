@@ -101,7 +101,7 @@
                         <div class="col-span-12 md:col-span-6 md:order-2 flex flex-col items-center justify-center">
                             <el-building />
                             <h5 class="text-2xl uppercase">
-                                {{ $t(`windSideViews.${form.windSide}`) }}
+                                {{ $t(`windSides.${form.windSide}`) }}
                             </h5>
                         </div>
                         <div class="col-span-12 md:col-span-6 md:order-1">
@@ -179,17 +179,17 @@
                                     <multiselect
                                         class="control--multiselect"
                                         v-model="form.windSide"
-                                        :options="Object.keys(form.windSides)"
+                                        :options="form.windSides"
                                         :allow-empty="false"
                                         :placeholder="$t('select_placeholder')"
                                         :searchable="false"
                                         >
                                         <template #singleLabel="props">
-                                            {{ form.windSides[props.option].i18n }}
+                                            {{ $t(`windSides.${props.option}`) }}
                                         </template>
                                         <template #option="props">
                                             <span>
-                                                {{ form.windSides[props.option].i18n }}
+                                                {{ $t(`windSides.${props.option}`) }}
                                             </span>
                                         </template>
                                     </multiselect>
@@ -316,6 +316,14 @@
                                         :placeholder="$t('select_placeholder')"
                                         :searchable="false"
                                         >
+                                        <template #singleLabel="props">
+                                            {{ $t(`profileTypes.${props.option}`) }}
+                                        </template>
+                                        <template #option="props">
+                                            <span>
+                                                {{ $t(`profileTypes.${props.option}`) }}
+                                            </span>
+                                        </template>
                                     </multiselect>
                                 </div>
 
@@ -332,11 +340,11 @@
                                         :searchable="false"
                                         >
                                         <template #singleLabel="props">
-                                            {{ form.profileColors[props.option].i18n }}
+                                            {{ $t(`profileColors.${props.option}`) }}
                                         </template>
                                         <template #option="props">
                                             <span>
-                                                {{ form.profileColors[props.option].i18n }}
+                                                {{ $t(`profileColors.${props.option}`) }}
                                             </span>
                                         </template>
                                     </multiselect>
@@ -355,11 +363,11 @@
                                         :searchable="false"
                                         >
                                         <template #singleLabel="props">
-                                            {{ form.reinTypes[props.option].i18n }}
+                                            {{ $t(`reinTypes.${props.option}`) }}
                                         </template>
                                         <template #option="props">
                                             <span>
-                                                {{ form.reinTypes[props.option].i18n }}
+                                                {{ $t(`reinTypes.${props.option}`) }}
                                             </span>
                                         </template>
                                     </multiselect>
@@ -378,11 +386,11 @@
                                         :searchable="false"
                                         >
                                         <template #singleLabel="props">
-                                            {{ form.reinTypes[props.option].i18n }}
+                                            {{ $t(`reinTypes.${props.option}`) }}
                                         </template>
                                         <template #option="props">
                                             <span>
-                                                {{ form.reinTypes[props.option].i18n }}
+                                                {{ $t(`reinTypes.${props.option}`) }}
                                             </span>
                                         </template>
                                     </multiselect>
@@ -401,11 +409,11 @@
                                         :searchable="false"
                                         >
                                         <template #singleLabel="props">
-                                            {{ form.reinTypes[props.option].i18n }}
+                                            {{ $t(`reinTypes.${props.option}`) }}
                                         </template>
                                         <template #option="props">
                                             <span>
-                                                {{ form.reinTypes[props.option].i18n }}
+                                                {{ $t(`reinTypes.${props.option}`) }}
                                             </span>
                                         </template>
                                     </multiselect>
@@ -452,6 +460,14 @@
                                     :placeholder="$t('select_placeholder')"
                                     :searchable="false"
                                     >
+                                    <template #singleLabel="props">
+                                        {{ $t(`fakeImpostProfileTypes.${props.option}`) }}
+                                    </template>
+                                    <template #option="props">
+                                        <span>
+                                            {{ $t(`fakeImpostProfileTypes.${props.option}`) }}
+                                        </span>
+                                    </template>
                                 </multiselect>
                             </div>
                             <div class="control mb-4">
@@ -467,11 +483,11 @@
                                     :searchable="false"
                                     >
                                     <template #singleLabel="props">
-                                        {{ form.fakeImpostReinTypes[props.option].i18n }}
+                                        {{ $t(`fakeImpostReinTypes.${props.option}`) }}
                                     </template>
                                     <template #option="props">
                                         <span>
-                                            {{ form.fakeImpostReinTypes[props.option].i18n }}
+                                            {{ $t(`fakeImpostReinTypes.${props.option}`) }}
                                         </span>
                                     </template>
                                 </multiselect>

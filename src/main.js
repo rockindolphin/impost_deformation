@@ -4,18 +4,11 @@ import '@/styles/vendors/tippy.css';
 
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
-import { createI18n } from 'vue-i18n';
-import { ru } from '@/i18n/ru';
+import i18n from './i18n';
 import VueTippy from 'vue-tippy';
 import App from './App.vue';
 
 const pinia = createPinia();
-const i18n = createI18n({
-    locale: 'ru',
-    messages: {
-        ru: ru
-    }
-});
 const app = createApp(App);
 
 app.use(pinia);

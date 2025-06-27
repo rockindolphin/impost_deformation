@@ -94,7 +94,7 @@
                             </tr>
                             <tr>
                                 <td colspan="2" class="font-bold text-left pt-4 pb-2">
-                                    {{ form.windSides[form.windSide].i18n }}
+                                    {{ $t(`windSides.${form.windSide}`) }}
                                 </td>
                             </tr>
                             <tr>
@@ -174,7 +174,7 @@
                                     {{ $t('profileColor') }}
                                 </td>
                                 <td>
-                                    {{ form.profileColors[form.profileColor].i18n }}
+                                    {{ $t(`profileColors.${form.profileColor}`) }}
                                 </td>
                             </tr>
                         </tbody>
