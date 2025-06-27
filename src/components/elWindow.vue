@@ -29,7 +29,7 @@
         <text v-bind="svgComp.d_text" class="text" >d</text>
         <text v-bind="svgComp.l_text" class="text" >L</text>
         <text v-bind="svgComp.legend_text" class="text" text-anchor="end" >
-            {{ $t('window_legend') }}
+            {{ $t('lbls.calc_elem') }} 1
         </text>
     </svg>
 </template>

@@ -750,14 +750,14 @@ export const useFormStore = defineStore('form', {
         getProfileTable(specKey){
             let table = {
                 thead: [
-                    $t('profile'),
-                    $t('sku')
+                    $t('lbls.profile'),
+                    $t('lbls.sku')
                 ],
                 tbody: []
             };
 
             if( ['impost', 'pilyastr'].includes(specKey) ){
-                let prefix = this.profileType === 'GLIDE' ? $t('sashes') : $t('views.impost');
+                let prefix = this.profileType === 'GLIDE' ? $t('lbls.sashes') : $t('views.impost');
                 table.tbody.push([
                     `${prefix} ${$t(`profileTypes.${this.profileType}`)}`,
                     this.selectedProfileParams.sku
@@ -777,7 +777,7 @@ export const useFormStore = defineStore('form', {
                     'ACLASS_Z94',
                     'T118_70_6'
                 ],
-                prefix = doorProfiles.includes(this.fakeImpostProfileType) ? $t('door_sash') : $t('sash');
+                prefix = doorProfiles.includes(this.fakeImpostProfileType) ? $t('lbls.door_sash') : $t('lbls.sash');
 
                 table.tbody.push([
                     `${prefix} ${$t(`fakeImpostProfileTypes.${this.fakeImpostProfileType}`)}`,
@@ -801,7 +801,7 @@ export const useFormStore = defineStore('form', {
                     ]);
                 }
                 table.tbody.push([
-                    `${$t('box')} ${$t(`boxes.${this.boxByProfileType}`)}`,
+                    `${$t('lbls.box')} ${$t(`boxes.${this.boxByProfileType}`)}`,
                     this.boxes[this.boxByProfileType].sku
                 ]);
             }
@@ -810,8 +810,8 @@ export const useFormStore = defineStore('form', {
         getReinTable(specKey){
             let table = {
                 thead: [
-                    $t('rein_profile'),
-                    $t('sku')
+                    $t('lbls.rein_profile'),
+                    $t('lbls.sku')
                 ],
                 tbody: []
             };

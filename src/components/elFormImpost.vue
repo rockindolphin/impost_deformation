@@ -12,7 +12,7 @@
                     <div class="wrapper--controls grid gap-7 grid-cols-12">
                         <div class="control col-span-12">
                             <label class="control__label">
-                                {{ $t('windRegion') }}
+                                {{ $t('input.windRegion') }}
                             </label>
                             <multiselect
                                 class="control--multiselect"
@@ -26,7 +26,7 @@
                         </div>
                         <div class="control col-span-12">
                             <label class="control__label">
-                                {{ $t('terrainType') }}
+                                {{ $t('input.terrainType') }}
                             </label>
                             <multiselect
                                 class="control--multiselect"
@@ -40,7 +40,7 @@
                         </div>
                         <label class="block col-span-12" for="Tn">
                             <span class="control__label flex items-center">
-                                {{ $t('Tn') }}
+                                {{ $t('input.Tn') }} ({{ $t('units.cels') }})
                                 <icon-help-circle
                                     class="tippy ml-2"
                                     :content="$t('Tn_tippy')"
@@ -58,7 +58,7 @@
                         </label>
                         <label class="col-span-12" for="Tref">
                             <span class="control__label">
-                                {{ $t('Tref') }}
+                                {{ $t('input.Tref') }} ({{ $t('units.cels') }})
                             </span>
                             <input
                                 id="Tref"
@@ -70,7 +70,7 @@
                         </label>
                         <label class="col-span-12" for="Tv">
                             <span class="control__label flex items-center">
-                                {{ $t('Tv') }}
+                                {{ $t('input.Tv') }} ({{ $t('units.cels') }})
                                 <icon-help-circle
                                     class="tippy ml-2"
                                     :content="$t('Tv_tippy')"
@@ -108,7 +108,7 @@
                             <div class="wrapper--controls grid gap-7 grid-cols-12">
                                 <label class="col-span-12" for="Bh">
                                     <span class="control__label">
-                                        {{ $t('Bh') }}
+                                        {{ $t('input.Bh') }} ({{ $t('units.m') }})
                                     </span>
                                     <input
                                         id="Bh"
@@ -123,7 +123,7 @@
 
                                 <label class="col-span-12" for="Bw">
                                     <span class="control__label">
-                                        {{ $t('Bw') }}
+                                        {{ $t('input.Bw') }} ({{ $t('units.m') }})
                                     </span>
                                     <input
                                         id="Bw"
@@ -138,7 +138,7 @@
 
                                 <label class="col-span-12" for="Bl">
                                     <span class="control__label">
-                                        {{ $t('Bl') }}
+                                        {{ $t('input.Bl') }} ({{ $t('units.m') }})
                                     </span>
                                     <input
                                         id="Bl"
@@ -153,7 +153,7 @@
 
                                 <label class="col-span-12" for="Wh">
                                     <span class="control__label">
-                                        {{ $t('Wh') }}
+                                        {{ $t('input.Wh') }} ({{ $t('units.m') }})
                                     </span>
                                     <input
                                         id="Wh"
@@ -168,10 +168,10 @@
 
                                 <div class="control col-span-12">
                                     <label class="control__label flex items-center">
-                                        {{ $t('windSide') }}
+                                        {{ $t('input.windSide') }}
                                         <icon-help-circle
                                             class="tippy ml-2"
-                                            :content="$t('windSideTippy')"
+                                            :content="$t('windSide_tippy')"
                                             v-tippy="{ trigger : 'mouseenter focus', arrow: true, interactive: true }"
                                             >
                                         </icon-help-circle>
@@ -201,7 +201,7 @@
                                     for="Wgap"
                                     >
                                     <span class="control__label">
-                                        {{ $t('Wgap') }}
+                                        {{ $t('input.Wgap') }} ({{ $t('units.m') }})
                                     </span>
                                     <input
                                         id="Wgap"
@@ -234,7 +234,7 @@
                             <div class="wrapper--controls grid gap-7 grid-cols-12">
                                 <label class="col-span-12" for="L">
                                     <span class="control__label">
-                                        {{ $t('L') }}({{ $t('cm') }})
+                                        {{ $t('input.L') }} L ({{ $t('units.cm') }})
                                     </span>
                                     <input
                                         id="L"
@@ -247,7 +247,7 @@
 
                                 <label class="col-span-12" for="a">
                                     <span class="control__label">
-                                        {{ $t('a') }}
+                                        {{ $t('input.a') }} ({{ $t('units.cm') }})
                                     </span>
                                     <input
                                         id="a"
@@ -260,7 +260,7 @@
 
                                 <label class="col-span-12" for="b">
                                     <span class="control__label">
-                                        {{ $t('b') }}
+                                        {{ $t('input.b') }} ({{ $t('units.cm') }})
                                     </span>
                                     <input
                                         id="b"
@@ -272,7 +272,7 @@
                                 </label>
 
                                 <p class="col-span-12 font-medium">
-                                    {{ $t('d') }}: {{ form.d.toFixed(2) }}
+                                    {{ $t('input.d') }} ({{ $t('units.cm') }}): {{ form.d.toFixed(2) }}
                                 </p>
                             </div>
                         </div>
@@ -306,7 +306,7 @@
                             <div class="wrapper--controls grid gap-7 grid-cols-12">
                                 <div class="control col-span-12">
                                     <label class="control__label">
-                                        {{ $t('profileType') }}
+                                        {{ $t('input.profileType') }}
                                     </label>
                                     <multiselect
                                         class="control--multiselect"
@@ -329,7 +329,7 @@
 
                                 <div class="control col-span-12">
                                     <label class="control__label">
-                                        {{ $t('profileColor') }}
+                                        {{ $t('input.profileColor') }}
                                     </label>
                                     <multiselect
                                         class="control--multiselect"
@@ -352,7 +352,7 @@
 
                                 <div class="control col-span-12">
                                     <label class="control__label">
-                                        {{ $t('reinType') }}
+                                        {{ $t('input.reinType') }}
                                     </label>
                                     <multiselect
                                         class="control--multiselect"
@@ -375,7 +375,7 @@
 
                                 <div class="control col-span-12" v-if="form.isVisible.reinType_60_70">
                                     <label class="control__label">
-                                        {{ $t('reinType_60_70') }}
+                                        {{ $t('input.reinType_60_70') }}
                                     </label>
                                     <multiselect
                                         class="control--multiselect"
@@ -398,7 +398,7 @@
 
                                 <div class="control col-span-12" v-if="form.isVisible.reinType_L68">
                                     <label class="control__label">
-                                        {{ $t('reinType_L68') }}
+                                        {{ $t('input.reinType_L68') }}
                                     </label>
                                     <multiselect
                                         class="control--multiselect"
@@ -420,7 +420,7 @@
                                 </div>
 
                                 <p class="col-span-12 font-medium">
-                                    <span>{{ $t('maxСurve') }}:</span> {{ form.maxСurve.toFixed(3) }}
+                                    <span>{{ $t('max_curve') }} ({{ $t('units.mm') }}):</span> {{ form.maxСurve.toFixed(3) }}
                                 </p>
 
                             </div>
@@ -450,7 +450,7 @@
                         <template v-if="item.key === 'fake_impost'">
                             <div class="control mb-4">
                                 <label class="control__label">
-                                    {{ $t('fakeImpostProfileType') }}
+                                    {{ $t('input.fakeImpostProfileType') }}
                                 </label>
                                 <multiselect
                                     class="control--multiselect"
@@ -472,7 +472,7 @@
                             </div>
                             <div class="control mb-4">
                                 <label class="control__label">
-                                    {{ $t('fakeImpostReinType') }}
+                                    {{ $t('input.fakeImpostReinType') }}
                                 </label>
                                 <multiselect
                                     class="control--multiselect"
@@ -508,7 +508,7 @@
                         </component>
                         <p class="col-span-12 text">
                             <span class="block mb-1">
-                                <span>{{ $t('estimate_deflection') }}:</span> {{ item.result.value.toFixed(2) }}
+                                <span>{{ $t('estimate_curve') }} ({{ $t('units.mm') }}):</span> {{ item.result.value.toFixed(2) }}
                             </span>
                             <span class="block">
                                 <span class="text--success" v-if="item.result.value <= form.maxСurve">
@@ -706,7 +706,7 @@
             shareLink(){
                 this.checkSelectedView().then(() => {
                     navigator.share({
-                        title: this.$t('share_form_title'),
+                        title: this.$t('form_title'),
                         text: this.$t('share_form_text'),
                         url: `?${this.generateUrlParams()}`
                     });
