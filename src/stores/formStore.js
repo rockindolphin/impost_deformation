@@ -313,7 +313,7 @@ export const useFormStore = defineStore('form', {
             }
         },
         selectedViewKey: null, //ключ выбранного варианта
-        printUuid: Math.floor(100000 + Math.random() * 900000) // рандомное число при печати (номер расчета)
+        printUuid: 1 //номер расчета  Math.floor(100000 + Math.random() * 900000)
     }),
     getters: {
         isVisible(state){
@@ -707,6 +707,7 @@ export const useFormStore = defineStore('form', {
             let fw = (qw / (ES * orange + EP * yellow)) * (aM * Math.pow(aM ** 2 - 5 * LM ** 2, 2) + bM * Math.pow(bM ** 2 - 5 * LM ** 2, 2)) / 3840;
             let ft = (K0 * LM ** 2 * EP * yellow - cyan * (H1 * LM ** 2 + H2 * (LM ** 2 - 4 * P ** 2))) / (8 * (ES * orange + EP * yellow));
             return {
+                qw: qw,
                 yellow: yellow,
                 orange: orange,
                 cyan: cyan,

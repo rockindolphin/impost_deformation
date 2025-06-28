@@ -13,8 +13,7 @@
         <line v-bind="svgComp.c_line" />
         <line v-bind="svgComp.d_line" />
         <line v-bind="svgComp.l_line" />
-        <line v-bind="svgComp.legend_line_1" />
-        <line v-bind="svgComp.legend_line_2" />
+        <path v-bind="svgComp.legend_path"></path>
         <rect v-bind="svgComp.a_sep_l" />
         <rect v-bind="svgComp.a_sep_r" />
         <rect v-bind="svgComp.b_sep_r" />
@@ -28,7 +27,7 @@
         <text v-bind="svgComp.c_text" class="text" v-if="form.c !== 0">c</text>
         <text v-bind="svgComp.d_text" class="text" >d</text>
         <text v-bind="svgComp.l_text" class="text" >L</text>
-        <text v-bind="svgComp.legend_text" class="text" text-anchor="end" >
+        <text v-bind="svgComp.legend_text" class="text" >
             {{ $t('lbls.calc_elem') }} 1
         </text>
     </svg>
@@ -55,10 +54,12 @@
             svgComp(){// картинка с окном
                 let windowWidth = this.form.a + this.form.b,
                     windowHeight = this.form.L,
-                    side = 300,
+                    roundedMaxSide = Math.ceil(Math.max(windowWidth, windowHeight) / 100) * 100,
                     lineGap = 15,
                     textGap = 4,
                     sepSize = 12,
+                    side = roundedMaxSide + lineGap*4 + textGap*4,
+                    legendLeft = this.form.a > this.form.b,
                     windowCommon = {
                         'stroke-width': 4,
                         stroke: '#E40032'
@@ -136,20 +137,6 @@
                         x2: window.x + windowWidth + lineGap,
                         y2: window.y + windowHeight
                     },
-                    legend_line_1 = {
-                        ...lineCommon,
-                        x1: window.x + this.form.a + lineGap + 1,
-                        y1: window.y - lineGap,
-                        x2: window.x + this.form.a,
-                        y2: window.y + lineGap*2
-                    },
-                    legend_line_2 = {
-                        ...lineCommon,
-                        x1: window.x + this.form.a + lineGap,
-                        y1: window.y - lineGap,
-                        x2: window.x + this.form.a + windowWidth/2 + lineGap*2,
-                        y2: window.y - lineGap
-                    },
                     a_sep_l = {
                         ...sepCommon,
                         x: a_line.x1 - sepSize/4,
@@ -223,10 +210,19 @@
                         x: l_line.x1 + (l_line.x2 - l_line.x1)/2 + textGap*2,
                         y: l_line.y1 + (l_line.y2 - l_line.y1)/2 + textGap/2
                     },
+                    legend_path = {
+                        ...lineCommon,
+                        d: `
+                            M ${window.x + this.form.a} ${window.y + lineGap*2}
+                            L ${window.x + this.form.a + (legendLeft ? -1*lineGap : lineGap)} ${window.y - lineGap}
+                            L ${legendLeft ? 0 : side} ${window.y - lineGap}
+                        `
+                    },
                     legend_text = {
                         ...textCommon,
-                        x: window.x + this.form.a + windowWidth/2 + lineGap*2,
-                        y: window.y - lineGap - textGap
+                        x: legendLeft ? 0 : side,
+                        y: window.y - lineGap - textGap,
+                        'text-anchor': legendLeft ? 'start' : 'end'
                     };
 
                 return {
@@ -239,8 +235,6 @@
                     c_line: c_line,
                     d_line: d_line,
                     l_line: l_line,
-                    legend_line_1: legend_line_1,
-                    legend_line_2: legend_line_2,
                     a_sep_l: a_sep_l,
                     a_sep_r: a_sep_r,
                     b_sep_r: b_sep_r,
@@ -254,6 +248,7 @@
                     c_text: c_text,
                     d_text: d_text,
                     l_text: l_text,
+                    legend_path: legend_path,
                     legend_text: legend_text
                 };
             }

@@ -1,22 +1,24 @@
 <template>
     <div class="wrapper wrapper--print" v-if="form.selectedView">
         <section class="section">
-            <div class="flex items-center">
-                <h1 class="text--brand text--sz-12 mr-4">
-                    {{ $t('form_title_full') }}
-                </h1>
-                <icon-logo />
+            <div class="wrapper mb-3">
+                <div class="flex items-center mb-1">
+                    <h1 class="text--brand text--sz-12 mr-4">
+                        {{ $t('form_title_full') }}
+                    </h1>
+                    <icon-logo />
+                </div>
+                <small class="text--gray text--sz-8">
+                    {{ $t('sp_20_sp_538') }}
+                </small>
             </div>
-            <small class="text--gray text--sz-8">
-                {{ $t('sp_20_sp_538') }}
-            </small>
-            <p class="text--sz-10">
+            <p class="text--sz-10 mb-2">
                 {{ $t('app_ver') }}
             </p>
-            <h4 class="uppercase text--sz-12">
+            <h4 class="uppercase text--sz-12 mb-2">
                 {{ $t('data_source') }}
             </h4>
-            <div class="grid gap-7 grid-cols-12 items-start">
+            <div class="grid gap-4 grid-cols-12 items-start">
                 <div class="col-span-6">
                     <table class="form__table">
                         <tbody>
@@ -116,20 +118,20 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-span-6">
+                <div class="col-span-6 flex items-start justify-center">
                     <el-window />
                 </div>
-                <div class="col-span-8">
+                <div class="col-span-9">
                     <table class="form__table">
                         <tbody>
                             <tr>
                                 <td>
                                     {{ $t('input.Tn') }} ({{ $t('Tn_details') }}), {{ $t('units.cels') }}
                                 </td>
-                                <td class="whitespace-nowrap">
+                                <td class="whitespace-nowrap text-right">
                                     Tn = {{ form.Tn }}
                                 </td>
-                                <td>
+                                <td style="width: 34%;">
                                     {{ $t('Tn_tippy') }}
                                 </td>
                             </tr>
@@ -137,7 +139,7 @@
                                 <td>
                                     {{ $t('input.Tref') }}, {{ $t('units.cels') }}
                                 </td>
-                                <td class="whitespace-nowrap">
+                                <td class="whitespace-nowrap text-right">
                                     Tref = {{ form.Tref }}
                                 </td>
                                 <td>
@@ -148,22 +150,22 @@
                                 <td>
                                     {{ $t('input.Tv') }}, {{ $t('units.cels') }}
                                 </td>
-                                <td class="whitespace-nowrap">
+                                <td class="whitespace-nowrap text-right ">
                                     Тв = {{ form.Tv }}
                                 </td>
-                                <td>
-                                    {{ $t('Tv_tippy') }}
+                                <td class="whitespace-pre">
+                                    {{ $t('Tv_tippy', {sep: '\r\n'}) }}
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="col-span-6">
-                    <table class="form__table">
+                    <table class="form__table mb-4">
                         <tbody>
                             <tr>
                                 <td>
-                                    {{ $t('input.profileType') }}
+                                    {{ $t('profile_system') }}
                                 </td>
                                 <td>
                                     {{ form.profileType }}
@@ -179,10 +181,10 @@
                             </tr>
                         </tbody>
                     </table>
-                    <h4 class="uppercase text--sz-12">
+                    <h4 class="uppercase text--sz-12 mb-2">
                         {{ $t('result_view') }}
                     </h4>
-                    <table class="form__table">
+                    <table class="form__table mb-1">
                         <tbody>
                             <tr>
                                 <td class="text--sz-12 font-bold">
@@ -195,7 +197,7 @@
                         </tbody>
                     </table>
                     <table
-                        class="form__table"
+                        class="form__table mb-1"
                         v-for="(table, tbl_index) in form.selectedView.tables"
                         :key="`table_${tbl_index}`"
                         >
@@ -291,14 +293,16 @@
             </div>
         </section>
         <section class="section">
-            <p class="text--sz-12 mb-0">
-                1. {{ $t('print.wind_load') }} <span class="font-bold">W</span>
-            </p>
-            <small class="text--sz-8 text--gray">
-                {{ $t('sp_20') }}
-            </small>
-            <div class="wrapper text--sz-14 font-bold">
-                <math xmlns="http://www.w3.org/1998/Math/MathML" class="block">
+            <div class="wrapper mb-2">
+                <p class="uppercase text--sz-12 mb-0">
+                    1. {{ $t('print.wind_load') }} <span class="font-bold">W</span>
+                </p>
+                <small class="text--sz-8 text--gray">
+                    {{ $t('sp_20') }}
+                </small>
+            </div>
+            <div class="wrapper text--sz-14 font-bold mb-2">
+                <math xmlns="http://www.w3.org/1998/Math/MathML" class="block mb-2">
                     <mrow>
                         <mi>w</mi>
                         <mo>=</mo>
@@ -307,7 +311,7 @@
                         <msub><mi>w</mi><mi>p</mi></msub>
                     </mrow>
                 </math>
-                <math xmlns="http://www.w3.org/1998/Math/MathML" class="block">
+                <math xmlns="http://www.w3.org/1998/Math/MathML" class="block mb-2">
                     <mrow>
                         <mi>w</mi>
                         <mo>=</mo>
@@ -315,11 +319,11 @@
                     </mrow>
                 </math>
             </div>
-            <p class="font-bold">
+            <p class="font-bold mb-2">
                 {{ $t('output.Wm') }} Wm
             </p>
-            <div class="wrapper text--sz-14 font-bold">
-                <math xmlns="http://www.w3.org/1998/Math/MathML" class="block">
+            <div class="wrapper text--sz-14 font-bold mb-4">
+                <math xmlns="http://www.w3.org/1998/Math/MathML" class="block mb-2">
                     <mrow>
                         <msub><mi>w</mi><mi>m</mi></msub>
                         <mo>=</mo>
@@ -331,8 +335,8 @@
                         <mi>C</mi>
                     </mrow>
                 </math>
-                <div class="flex items-center justify-between">
-                    <math xmlns="http://www.w3.org/1998/Math/MathML" class="block">
+                <div class="flex items-center justify-between w-100">
+                    <math xmlns="http://www.w3.org/1998/Math/MathML" class="block mb-2">
                         <mrow>
                             <msub><mi>w</mi><mi>m</mi></msub>
                             <mo>=</mo>
@@ -350,7 +354,7 @@
                         <td>
                             {{ $t('input.windRegion') }}
                         </td>
-                        <td>
+                        <td class="whitespace-nowrap text-right">
                             {{ form.windRegion }}
                         </td>
                         <td>
@@ -361,8 +365,8 @@
                         <td>
                             {{ $t('output.W0') }}, {{ $t('units.pa') }}
                         </td>
-                        <td>
-                            {{ form.W0 }}
+                        <td class="whitespace-nowrap text-right">
+                            W0 = {{ form.W0 }}
                         </td>
                         <td>
                             {{ $t('according_to_table') }} 11.1
@@ -372,7 +376,7 @@
                         <td>
                             {{ $t('input.terrainType') }}
                         </td>
-                        <td>
+                        <td class="whitespace-nowrap text-right">
                             {{ form.terrainType }}
                         </td>
                         <td>
@@ -383,7 +387,7 @@
                         <td>
                             {{ $t('output.ZE') }}, {{ $t('units.m') }}
                         </td>
-                        <td>
+                        <td class="whitespace-nowrap text-right">
                             ze = {{ form.ZE }}
                         </td>
                         <td>
@@ -394,7 +398,7 @@
                         <td>
                             {{ $t('output.KZE') }} ze
                         </td>
-                        <td>
+                        <td class="whitespace-nowrap text-right">
                             k(ze) = {{ form.KZE }}
                         </td>
                         <td>
@@ -405,7 +409,7 @@
                         <td>
                             {{ $t('output.CZE') }}
                         </td>
-                        <td>
+                        <td class="whitespace-nowrap text-right">
                             с = {{ form.CZE }}
                         </td>
                         <td>
@@ -414,7 +418,7 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="flex flex-col align-center justify-center">
+            <div class="flex flex-col align-center justify-center my-4">
                 <picture class="flex justify-center">
                     <source srcset="../assets/images/print/plan.webp" type="image/webp">
                     <source srcset="../assets/images/print/plan.png" type="image/png">
@@ -427,11 +431,11 @@
                     {{ $t('lbls.appndx') }} B
                 </div>
             </div>
-            <p class="font-bold">
+            <p class="font-bold mb-2">
                 {{ $t('output.Wp') }} Wp
             </p>
-            <div class="wrapper text--sz-14 font-bold">
-                <math xmlns="http://www.w3.org/1998/Math/MathML" class="block">
+            <div class="wrapper text--sz-14 font-bold mb-2">
+                <math xmlns="http://www.w3.org/1998/Math/MathML" class="block mb-2">
                     <mrow>
                         <msub><mi>w</mi><mi>p</mi></msub>
                         <mo>=</mo>
@@ -443,7 +447,7 @@
                         <mi>V</mi>
                     </mrow>
                 </math>
-                <math xmlns="http://www.w3.org/1998/Math/MathML" class="block">
+                <math xmlns="http://www.w3.org/1998/Math/MathML" class="block mb-2">
                     <mrow>
                         <msub><mi>w</mi><mi>p</mi></msub>
                         <mo>=</mo>
@@ -451,13 +455,13 @@
                     </mrow>
                 </math>
             </div>
-            <table class="form__table">
+            <table class="form__table mb-4">
                 <tbody>
                     <tr>
                         <td>
                             {{ $t('output.DZE') }}
                         </td>
-                        <td>
+                        <td class="whitespace-nowrap text-right">
                             ζ(Ze) = {{ form.DZE.toFixed(2) }}
                         </td>
                         <td>
@@ -468,7 +472,7 @@
                         <td>
                             {{ $t('output.V') }}
                         </td>
-                        <td>
+                        <td class="whitespace-nowrap text-right">
                             V= {{ form.V }}
                         </td>
                         <td>
@@ -477,15 +481,17 @@
                     </tr>
                 </tbody>
             </table>
-            <p class="text--sz-12 mb-0">
-                2.1 {{ $t('deflection_calc_wind') }}
-            </p>
-            <small class="text--sz-8 text--gray">
-                {{ $t('sp_538') }}
-            </small>
+            <div class="wrapper mb-2">
+                <p class="text--sz-12 mb-0 uppercase">
+                    2.1 {{ $t('deflection_calc_wind') }}
+                </p>
+                <small class="text--sz-8 text--gray">
+                    {{ $t('sp_538') }}
+                </small>
+            </div>
             <div class="grid grid-cols-12">
                 <div class="col-span-6">
-                    <div class="wrapper text--sz-14 font-bold">
+                    <div class="wrapper text--sz-14 font-bold mb-4">
                         <math xmlns="http://www.w3.org/1998/Math/MathML">
                             <mrow>
                                 <msub><mi>f</mi><mi>w</mi></msub>
@@ -546,6 +552,22 @@
                     </div>
                     <table class="form__table">
                         <tbody>
+                            <tr>
+                                <td>
+                                    {{ $t('output.qw') }}, {{ $t('units.pa') }}
+                                </td>
+                                <td>
+                                    qw = {{ form.selectedView.result.qw.toFixed(4) }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    {{ $t('output.YC') }}
+                                </td>
+                                <td>
+                                    γс = {{ form.YC }}
+                                </td>
+                            </tr>
                             <tr>
                                 <td colspan="2" class="font-bold text-left pt-4 pb-2">
                                     {{ $t('print.main_moments') }}
@@ -641,11 +663,11 @@
             </table>
         </section>
         <section class="section">
-            <p class="text--sz-12">
+            <p class="text--sz-12 uppercase">
                 2.2 {{ $t('deflection_calc_termal') }}
             </p>
             <div class="wrapper text--sz-14 font-bold">
-                <math xmlns="http://www.w3.org/1998/Math/MathML" class="block">
+                <math xmlns="http://www.w3.org/1998/Math/MathML" class="block mb-2">
                     <mrow>
                         <msub><mi>f</mi><mi>t</mi></msub>
                         <mo>=</mo>
@@ -683,7 +705,7 @@
                         </mfrac>
                     </mrow>
                 </math>
-                <math xmlns="http://www.w3.org/1998/Math/MathML" class="block">
+                <math xmlns="http://www.w3.org/1998/Math/MathML" class="block mb-2">
                     <mrow>
                         <msub><mi>f</mi><mi>t</mi></msub>
                         <mo>=</mo>
@@ -691,13 +713,13 @@
                     </mrow>
                 </math>
             </div>
-            <table class="form__table">
+            <table class="form__table mb-4">
                 <tbody>
                     <tr>
                         <td>
                             {{ $t('lbls.coeff') }}
                         </td>
-                        <td class="whitespace-nowrap">
+                        <td class="whitespace-nowrap text-right">
                             p = {{ form.profileColors[form.profileColor].p }}
                         </td>
                         <td class="whitespace-nowrap">
@@ -708,7 +730,7 @@
                         <td>
                             {{ $t('output.cyan') }}, {{ $t('units.m') }}
                         </td>
-                        <td class="whitespace-nowrap">
+                        <td class="whitespace-nowrap text-right">
                             δ = {{ form.selectedView.result.cyan.toFixed(4) }}
                         </td>
                         <td>
@@ -719,7 +741,7 @@
                         <td>
                             {{ $t('print.longitudinal_forces') }}
                         </td>
-                        <td class="whitespace-nowrap">
+                        <td class="whitespace-nowrap text-right">
                             <span class="block">
                                 H2 = {{ form.selectedView.result.H2.toFixed(6) }}
                             </span>
@@ -735,8 +757,8 @@
                         <td>
                             {{ $t('lbls.coeff') }}
                         </td>
-                        <td class="whitespace-nowrap">
-                            G= {{ form.selectedView.result.G.toFixed(21) }}
+                        <td class="whitespace-nowrap text-right">
+                            G = {{ form.selectedView.result.G.toFixed(21) }}
                         </td>
                         <td class="whitespace-nowrap">
                             {{ $t('according_to') }} В.5.3
@@ -798,7 +820,6 @@
                                         ap = {{ form.AP }}
                                     </span>
                                 </td>
-                                <td></td>
                             </tr>
                             <tr>
                                 <td>
@@ -806,9 +827,9 @@
                                 </td>
                                 <td class="whitespace-nowrap">
                                     tm = {{ form.selectedView.result.tm.toFixed(9) }}
-                                </td>
-                                <td class="whitespace-nowrap">
-                                    {{ $t('according_to') }} В.5.2
+                                    <span class="block whitespace-nowrap">
+                                        {{ $t('according_to') }} В.5.4
+                                    </span>
                                 </td>
                             </tr>
                             <tr>
@@ -817,9 +838,6 @@
                                 </td>
                                 <td class="whitespace-nowrap">
                                     R0 = {{ form.R0 }}
-                                </td>
-                                <td>
-
                                 </td>
                             </tr>
                         </tbody>
@@ -877,7 +895,7 @@
                                         tξ = {{ form.selectedProfileParams.te.toFixed(2) }}
                                     </span>
                                     <span class="block">
-                                        tK = {{ form.selectedProfileParams.tk.toFixed(1) }}
+                                        tK = {{ form.selectedProfileParams.tk.toFixed(2) }}
                                     </span>
                                 </td>
                                 <td></td>
@@ -915,7 +933,7 @@
                             >
                     </picture>
                 </div>
-                <div class="col-span-6 flex items-center justify-end">
+                <div class="col-span-6 flex items-center justify-center">
                     <div class="wrapper flex items-stretch justify-end">
                         <picture>
                             <source srcset="../assets/images/print/deflection.webp" type="image/webp">

@@ -42,8 +42,9 @@
                 let rotateY = 40,
                     windowWidthMeters = (this.form.a + this.form.b)/100,
                     windowHeightMeters = this.form.L/100,
-                    windowScale = 3,
-                    gap = windowWidthMeters*windowScale*5/4;
+                    windowScale = 1,
+                    gap = windowWidthMeters*windowScale*5/4,
+                    trz = -(240/74)*(this.form.Bl - 1);
                 if( this.form.windSide === 'leeward_side'){ rotateY = 220; }
                 if( this.form.windSide === 'side_wall'){
                     rotateY = 60;
@@ -58,6 +59,7 @@
                     --window-width: ${(windowWidthMeters*windowScale*5).toFixed(0)}px;
                     --window-height: ${(windowHeightMeters*windowScale*5).toFixed(0)}px;
                     --window-gap: ${(gap).toFixed(0)}px;
+                    --wrapper-tr-z: ${(trz).toFixed(0)}px;
                 `;
             }
         }

@@ -9,6 +9,7 @@
         --window-height: 30px;
         --window-ih: 0px;
         --window-gap: 4px;
+        --wrapper-tr-z: 0px;
         width: var(--box-width);
         height: var(--box-height);
         margin: 80px;
@@ -20,7 +21,7 @@
         height: var(--box-height);
         position: relative;
         transform-style: preserve-3d;
-        transform: translateZ(0px) rotateX(0deg) rotateY(var(--rotate-y)) rotateX(0deg);
+        transform: translateZ(var(--wrapper-tr-z)) rotateX(0deg) rotateY(var(--rotate-y)) rotateX(0deg);
         transition: transform 1s;
     }
 
@@ -35,6 +36,8 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        transform-origin: center;
+        max-width: none;
     }
 
     .box__face--front,
@@ -77,8 +80,8 @@
         position: absolute;
         bottom: var(--window-ih);
         left: var(--window-gap);
-        width: var(--window-width);
-        height: var(--window-height);
+        width: calc(var(--window-width) - 1px);
+        height: calc(var(--window-height) - 1px);
         border: 1px solid;
         background: white;
     }

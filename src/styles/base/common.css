@@ -66,4 +66,11 @@
         top: -9999px;
     }
 
+    @media print {
+        @page {
+            size: A4;
+            margin: 10mm;
+        }
+    }
+
 }

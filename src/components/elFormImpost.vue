@@ -114,10 +114,9 @@
                                         id="Bh"
                                         v-model.number="form.Bh"
                                         type="number"
-                                        step="0.1"
-                                        min="1"
-                                        max="75"
+                                        v-bind="buildingInputParams.Bh"
                                         class="control control--text"
+                                        @input="onBuildingInputChange($event)"
                                     >
                                 </label>
 
@@ -129,10 +128,9 @@
                                         id="Bw"
                                         v-model.number="form.Bw"
                                         type="number"
-                                        step="0.1"
-                                        min="1"
-                                        max="75"
+                                        v-bind="buildingInputParams.Bw"
                                         class="control control--text"
+                                        @input="onBuildingInputChange($event)"
                                     >
                                 </label>
 
@@ -144,10 +142,9 @@
                                         id="Bl"
                                         v-model.number="form.Bl"
                                         type="number"
-                                        step="0.1"
-                                        min="1"
-                                        max="75"
+                                        v-bind="buildingInputParams.Bl"
                                         class="control control--text"
+                                        @input="onBuildingInputChange($event)"
                                     >
                                 </label>
 
@@ -159,10 +156,9 @@
                                         id="Wh"
                                         v-model.number="form.Wh"
                                         type="number"
-                                        step="0.1"
-                                        min="1"
-                                        max="75"
+                                        v-bind="buildingInputParams.Wh"
                                         class="control control--text"
+                                        @input="onBuildingInputChange($event)"
                                     >
                                 </label>
 
@@ -207,8 +203,9 @@
                                         id="Wgap"
                                         v-model.number="form.Wgap"
                                         type="number"
-                                        step="0.1"
+                                        v-bind="buildingInputParams.Wgap"
                                         class="control control--text"
+                                        @input="onBuildingInputChange($event)"
                                     >
                                 </label>
                             </div>
@@ -665,8 +662,51 @@
                         };
                 }
             },
+            buildingInputParams(){
+                let window = {
+                    w: (this.form.a + this.form.b)/100,
+                    h: this.form.L/100
+                }
+                return {
+                    Bh: {
+                        step: 0.1,
+                        min: 1,
+                        max: 75
+                    },
+                    Bw: {
+                        step: 0.1,
+                        min: 1,
+                        max: 75
+                    },
+                    Bl: {
+                        step: 0.1,
+                        min: 1,
+                        max: 75
+                    },
+                    Wh: {
+                        step: 0.1,
+                        min: 0,
+                        max: parseFloat( (this.form.Bh - window.h).toFixed(1) )
+                    },
+                    Wgap: {
+                        step: 0.1,
+                        min: 0,
+                        max: parseFloat( (this.form.Bl - window.w).toFixed(1) )
+                    }
+                }
+            }
         },
         methods: {
+            onBuildingInputChange(){
+                Object.keys(this.buildingInputParams).map( key => {
+                    if( this.form[key] > this.buildingInputParams[key].max ){
+                        this.form[key] = this.buildingInputParams[key].max;
+                    }
+                    if( this.form[key] < this.buildingInputParams[key].min ){
+                        this.form[key] = this.buildingInputParams[key].min;
+                    }
+                });
+            },
             generateUrlParams(){
                 let params = new URLSearchParams();
                 ['windRegion', 'terrainType', 'windSide', 'profileType', 'profileColor', 'reinType', 'reinType_60_70', 'reinType_L68', 'fakeImpostProfileType', 'fakeImpostReinType', 'Tn', 'Tref', 'Tv', 'Bh', 'Bw', 'Bl', 'Wh', 'Wgap', 'L', 'a','b', 'c', 'selectedViewKey'].map(key => {
