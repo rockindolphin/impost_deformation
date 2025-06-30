@@ -22,8 +22,10 @@ npm install
 npm run dev
 ```
 
-### Compile and Minify for Production
+### Сборка в прод
 
 ```sh
 npm run build
 ```
+
+Нужен nodejs не ниже 18 версии

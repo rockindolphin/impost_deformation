@@ -40,7 +40,7 @@
                         </div>
                         <label class="block col-span-12" for="Tn">
                             <span class="control__label flex items-center">
-                                {{ $t('input.Tn') }} ({{ $t('units.cels') }})
+                                {{ $t('input.Tn') }}, {{ $t('units.cels') }}
                                 <icon-help-circle
                                     class="tippy ml-2"
                                     :content="$t('Tn_tippy')"
@@ -58,7 +58,7 @@
                         </label>
                         <label class="col-span-12" for="Tref">
                             <span class="control__label">
-                                {{ $t('input.Tref') }} ({{ $t('units.cels') }})
+                                {{ $t('input.Tref') }}, {{ $t('units.cels') }}
                             </span>
                             <input
                                 id="Tref"
@@ -70,7 +70,7 @@
                         </label>
                         <label class="col-span-12" for="Tv">
                             <span class="control__label flex items-center">
-                                {{ $t('input.Tv') }} ({{ $t('units.cels') }})
+                                {{ $t('input.Tv') }}, {{ $t('units.cels') }}
                                 <icon-help-circle
                                     class="tippy ml-2"
                                     :content="$t('Tv_tippy')"

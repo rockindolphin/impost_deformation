@@ -168,7 +168,7 @@
                                     {{ $t('profile_system') }}
                                 </td>
                                 <td>
-                                    {{ form.profileType }}
+                                    {{ $t(`profileTypes.${form.profileType}`) }}
                                 </td>
                             </tr>
                             <tr>

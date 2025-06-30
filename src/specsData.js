@@ -443,7 +443,7 @@ const specsData = {// таблицы характеристик
             rt_35x28x1_5: {
                 yellow: 1733930,
                 orange: 421772,
-                cyan: 17.44,
+                cyan: 16.56,
                 purple: 1407,
                 green: 405.5
             },

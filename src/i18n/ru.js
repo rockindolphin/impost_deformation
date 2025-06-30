@@ -165,7 +165,7 @@ export const ru = {
         'T78_SUPER_AERO': 'T78 SUPER AERO',
         'T80_SUPER_AERO': 'T80 SUPER AERO',
         'T78_ACLASS': 'Т78 ACLASS',
-        'T78_ACLASS_L68': 'Т78 ACLASS',
+        'T78_ACLASS_L68': 'Т78 ACLASS L68',
         'T86_60_4': 'T86 60-4',
         'T86_70_6': 'T86 70-6',
         'GLIDE': 'GLIDE',

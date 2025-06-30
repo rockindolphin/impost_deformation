@@ -635,7 +635,7 @@ export const useFormStore = defineStore('form', {
     actions: {
         onProfileTypeChange(){// при смене типа профиля, меняем Тип армирования на первый из списка доступных
             this.reinType = this.reinTypesOptions[0];
-            this.fakeImpostProfileType = this.fakeImpostProfileTypesOptions[0];
+            this.fakeImpostProfileType = this.fakeImpostProfileTypesOptions[0] || null;
             if( ['T86_60_4', 'T86_70_6'].includes(this.profileType) ){// если выбрали 'T86_60_4' или 'T86_70_6' то меняем доп. список
                 this.reinType_60_70 = this.reinTypes_60_70_Options[0];
             }
@@ -758,9 +758,10 @@ export const useFormStore = defineStore('form', {
             };
 
             if( ['impost', 'pilyastr'].includes(specKey) ){
-                let prefix = this.profileType === 'GLIDE' ? $t('lbls.sashes') : $t('views.impost');
+                let prefix = this.profileType === 'GLIDE' ? $t('lbls.sashes') : $t('views.impost'),
+                    profileI18n = this.profileType === 'T78_ACLASS_L68' ? $t(`profileTypes.T78_ACLASS`) : $t(`profileTypes.${this.profileType}`);
                 table.tbody.push([
-                    `${prefix} ${$t(`profileTypes.${this.profileType}`)}`,
+                    `${prefix} ${profileI18n}`,
                     this.selectedProfileParams.sku
                 ]);
                 if( specKey === 'pilyastr' ){
@@ -883,10 +884,10 @@ export const useFormStore = defineStore('form', {
                 profileType: Object.keys(this.profileTypes),
                 profileColor: Object.keys(this.profileColors),
                 fakeImpostProfileType: Object.keys(this.fakeImpostProfileTypes),
-                reinType: this.reinTypesOptions,
-                reinType_60_70: this.reinTypes_60_70_Options,
-                reinType_L68: this.reinTypes_L68_Options,
-                fakeImpostReinType: this.fakeImpostReinTypesOptions,
+                reinType: Object.keys(this.reinTypes),
+                reinType_60_70: Object.keys(this.reinTypes),
+                reinType_L68: Object.keys(this.reinTypes),
+                fakeImpostReinType: Object.keys(this.fakeImpostReinTypes),
                 selectedViewKey: Object.keys(this.views)
             }
             Object.keys(selects).map(key => {
