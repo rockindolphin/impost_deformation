@@ -253,7 +253,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="text-left text--brand">
-                                        <span v-if="form.selectedView.result.value <= form.maxСurve">
+                                        <span v-if="Math.abs(form.selectedView.result.value) <= form.maxСurve">
                                             {{ $t('result_valid') }}
                                         </span>
                                         <span v-else>
@@ -492,7 +492,7 @@
             <div class="grid grid-cols-12">
                 <div class="col-span-6">
                     <div class="wrapper text--sz-14 font-bold mb-4">
-                        <math xmlns="http://www.w3.org/1998/Math/MathML">
+                        <math xmlns="http://www.w3.org/1998/Math/MathML" class="block mb-2">
                             <mrow>
                                 <msub><mi>f</mi><mi>w</mi></msub>
                                 <mo>=</mo>
@@ -547,6 +547,13 @@
                                 <mn>3840</mn>
                                 </mfrac>
 
+                            </mrow>
+                        </math>
+                        <math xmlns="http://www.w3.org/1998/Math/MathML" class="block mb-2">
+                            <mrow>
+                                <msub><mi>f</mi><mi>w</mi></msub>
+                                <mo>=</mo>
+                                <mo>{{ form.selectedView.result.fw.toFixed(9) }}</mo>
                             </mrow>
                         </math>
                     </div>
@@ -640,11 +647,11 @@
                 </div>
                 <div class="col-span-6">
                     <picture class="flex justify-center">
-                        <source srcset="../assets/images/print/scheme.webp" type="image/webp">
-                        <source srcset="../assets/images/print/scheme.png" type="image/png">
+                        <source srcset="../assets/images/print/window.webp" type="image/webp">
+                        <source srcset="../assets/images/print/window.png" type="image/png">
                         <img
-                            src="@/assets/images/print/scheme.png"
-                            alt="scheme"
+                            src="@/assets/images/print/window.png"
+                            alt="window"
                             >
                     </picture>
                 </div>
@@ -924,14 +931,6 @@
                             </tr>
                         </tbody>
                     </table>
-                    <picture class="flex justify-end">
-                        <source srcset="../assets/images/print/stamp.webp" type="image/webp">
-                        <source srcset="../assets/images/print/stamp.png" type="image/png">
-                        <img
-                            src="@/assets/images/print/stamp.png"
-                            alt="brusbox"
-                            >
-                    </picture>
                 </div>
                 <div class="col-span-6 flex items-center justify-center">
                     <div class="wrapper flex items-stretch justify-end">
@@ -965,6 +964,14 @@
                             </span>
                         </div>
                     </div>
+                    <picture class="flex justify-end mt-auto -mb-[50px]">
+                        <source srcset="../assets/images/print/stamp.webp" type="image/webp">
+                        <source srcset="../assets/images/print/stamp.png" type="image/png">
+                        <img
+                            src="@/assets/images/print/stamp.png"
+                            alt="brusbox"
+                            >
+                    </picture>
                 </div>
             </div>
             <table class="form__table">

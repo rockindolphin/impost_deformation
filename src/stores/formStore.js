@@ -718,6 +718,7 @@ export const useFormStore = defineStore('form', {
                 H2: H2,
                 H1: H1,
                 ft: ft,
+                fw: fw,
                 value: (fw+ft)*1000
             };
         },

@@ -508,7 +508,7 @@
                                 <span>{{ $t('estimate_curve') }} ({{ $t('units.mm') }}):</span> {{ item.result.value.toFixed(2) }}
                             </span>
                             <span class="block">
-                                <span class="text--success" v-if="item.result.value <= form.maxСurve">
+                                <span class="text--success" v-if="Math.abs(item.result.value) <= form.maxСurve">
                                     {{ $t('result_valid') }}
                                 </span>
                                 <span class="text--warning" v-else>
@@ -562,7 +562,7 @@
 <script>
 
     import { events } from '@/lib/events';
-    import { defineAsyncComponent } from 'vue';
+    import { defineAsyncComponent, watch } from 'vue';
     import { useFormStore } from '@/stores/formStore';
     import Multiselect from 'vue-multiselect';
     import elBuilding from '@/components/elBuilding.vue';
@@ -587,17 +587,26 @@
         name: 'elFormImpost',
         setup() {
             const form = useFormStore();
-            form.$subscribe((mutation, state) => {
-                if( mutation.events.key === 'profileType'){
-                    form.onProfileTypeChange();
+
+            watch(
+                () => form.profileType,
+                (newVal, oldVal) => {
+                    if (newVal !== oldVal) {
+                        form.onProfileTypeChange();
+                    }
                 }
-                if( mutation.events.key === 'fakeImpostProfileType'){
-                    form.onFakeImpostProfileTypeChange();
+            );
+
+            watch(
+                () => form.fakeImpostProfileType,
+                (newVal, oldVal) => {
+                    if (newVal !== oldVal) {
+                        form.onFakeImpostProfileTypeChange();
+                    }
                 }
-            });
-            return {
-                form
-            }
+            );
+
+            return { form };
         },
         components: {
             Multiselect,
