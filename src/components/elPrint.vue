@@ -3,24 +3,24 @@
         <section class="section">
             <div class="wrapper mb-3">
                 <div class="flex items-center mb-1">
-                    <h1 class="text--brand text--sz-12 mr-4">
+                    <h1 class="text--brand text--sz-14 mr-4">
                         {{ $t('form_title_full') }}
                     </h1>
                     <icon-logo />
                 </div>
-                <small class="text--gray text--sz-8">
+                <small class="text--gray text--sz-10">
                     {{ $t('sp_20_sp_538') }}
                 </small>
             </div>
-            <p class="text--sz-10 mb-2">
+            <p class="text--sz-8 mb-2">
                 {{ $t('app_ver') }}
             </p>
-            <h4 class="uppercase text--sz-12 mb-2">
+            <h4 class="uppercase text--sz-12">
                 {{ $t('data_source') }}
             </h4>
-            <div class="grid gap-4 grid-cols-12 items-start">
-                <div class="col-span-6">
-                    <table class="form__table">
+            <div class="grid gap-1 grid-cols-12">
+                <div class="col-span-6 flex items-center">
+                    <table class="form__table text--sz-12">
                         <tbody>
                             <tr>
                                 <td>
@@ -122,7 +122,7 @@
                     <el-window />
                 </div>
                 <div class="col-span-9">
-                    <table class="form__table">
+                    <table class="form__table text--sz-12">
                         <tbody>
                             <tr>
                                 <td>
@@ -161,7 +161,7 @@
                     </table>
                 </div>
                 <div class="col-span-6">
-                    <table class="form__table mb-4">
+                    <table class="form__table text--sz-12 mb-4">
                         <tbody>
                             <tr>
                                 <td>
@@ -293,145 +293,153 @@
             </div>
         </section>
         <section class="section">
-            <div class="wrapper mb-2">
-                <p class="uppercase text--sz-12 mb-0">
-                    1. {{ $t('print.wind_load') }} <span class="font-bold">W</span>
-                </p>
-                <small class="text--sz-8 text--gray">
-                    {{ $t('sp_20') }}
-                </small>
-            </div>
-            <div class="wrapper text--sz-14 font-bold mb-2">
-                <math xmlns="http://www.w3.org/1998/Math/MathML" class="block mb-2">
-                    <mrow>
-                        <mi>w</mi>
-                        <mo>=</mo>
-                        <msub><mi>w</mi><mi>m</mi></msub>
-                        <mo>+</mo>
-                        <msub><mi>w</mi><mi>p</mi></msub>
-                    </mrow>
-                </math>
-                <math xmlns="http://www.w3.org/1998/Math/MathML" class="block mb-2">
-                    <mrow>
-                        <mi>w</mi>
-                        <mo>=</mo>
-                        <mo>{{ (form.Wm + form.Wp).toFixed(5) }}</mo>
-                    </mrow>
-                </math>
-            </div>
-            <p class="font-bold mb-2">
-                {{ $t('output.Wm') }} Wm
-            </p>
-            <div class="wrapper text--sz-14 font-bold mb-4">
-                <math xmlns="http://www.w3.org/1998/Math/MathML" class="block mb-2">
-                    <mrow>
-                        <msub><mi>w</mi><mi>m</mi></msub>
-                        <mo>=</mo>
-                        <msub><mi>w</mi><mn>0</mn></msub>
-                        <mi>k</mi>
-                        <mo>(</mo>
-                        <msub><mi>z</mi><mi>e</mi></msub>
-                        <mo>)</mo>
-                        <mi>C</mi>
-                    </mrow>
-                </math>
-                <div class="flex items-center justify-between w-100">
-                    <math xmlns="http://www.w3.org/1998/Math/MathML" class="block mb-2">
-                        <mrow>
-                            <msub><mi>w</mi><mi>m</mi></msub>
-                            <mo>=</mo>
-                            <mo>{{ form.Wm.toFixed(1) }}</mo>
-                        </mrow>
-                    </math>
-                    <span class="font-normal text--sz-10">
-                        {{ $t('lbls.section').toLocaleLowerCase() }} 11.1.3
-                    </span>
+            <div class="grid gap-1 grid-cols-12">
+                <div class="col-span-6 flex flex-col justify-center">
+                    <div class="wrapper mb-2">
+                        <p class="uppercase text--sz-12 mb-0">
+                            1. {{ $t('print.wind_load') }} <span class="font-bold">W</span>
+                        </p>
+                        <small class="text--sz-10 text--gray">
+                            {{ $t('sp_20') }}
+                        </small>
+                    </div>
+                    <div class="wrapper text--sz-14 font-bold mb-2">
+                        <math xmlns="http://www.w3.org/1998/Math/MathML" class="block mb-2">
+                            <mrow>
+                                <mi>w</mi>
+                                <mo>=</mo>
+                                <msub><mi>w</mi><mi>m</mi></msub>
+                                <mo>+</mo>
+                                <msub><mi>w</mi><mi>p</mi></msub>
+                            </mrow>
+                        </math>
+                        <math xmlns="http://www.w3.org/1998/Math/MathML" class="block mb-2">
+                            <mrow>
+                                <mi>w</mi>
+                                <mo>=</mo>
+                                <mo>{{ (form.Wm + form.Wp).toFixed(5) }}</mo>
+                            </mrow>
+                        </math>
+                    </div>
+                    <p class="font-bold text--sz-12 mb-2">
+                        {{ $t('output.Wm') }} Wm
+                    </p>
+                    <div class="wrapper text--sz-14 font-bold">
+                        <math xmlns="http://www.w3.org/1998/Math/MathML" class="block mb-2">
+                            <mrow>
+                                <msub><mi>w</mi><mi>m</mi></msub>
+                                <mo>=</mo>
+                                <msub><mi>w</mi><mn>0</mn></msub>
+                                <mi>k</mi>
+                                <mo>(</mo>
+                                <msub><mi>z</mi><mi>e</mi></msub>
+                                <mo>)</mo>
+                                <mi>C</mi>
+                            </mrow>
+                        </math>
+                        <div class="flex items-center justify-between w-100">
+                            <math xmlns="http://www.w3.org/1998/Math/MathML" class="block mb-2">
+                                <mrow>
+                                    <msub><mi>w</mi><mi>m</mi></msub>
+                                    <mo>=</mo>
+                                    <mo>{{ form.Wm.toFixed(1) }}</mo>
+                                </mrow>
+                            </math>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-6 flex items-center">
+                    <div class="flex flex-col align-center justify-center my-4">
+                        <picture class="flex justify-center">
+                            <source srcset="../assets/images/print/plan.webp" type="image/webp">
+                            <source srcset="../assets/images/print/plan.png" type="image/png">
+                            <img
+                                src="@/assets/images/print/plan.png"
+                                alt="plan"
+                                >
+                        </picture>
+                        <div class="small text-sz-8 text--gray text-center">
+                            {{ $t('lbls.appndx') }} B
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-9">
+                    <table class="form__table text--sz-12">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    {{ $t('input.windRegion') }}
+                                </td>
+                                <td class="whitespace-nowrap text-right">
+                                    {{ form.windRegion }}
+                                </td>
+                                <td style="width: 34%;">
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    {{ $t('output.W0') }}, {{ $t('units.pa') }}
+                                </td>
+                                <td class="whitespace-nowrap text-right">
+                                    W0 = {{ form.W0 }}
+                                </td>
+                                <td>
+                                    {{ $t('according_to_table') }} 11.1
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    {{ $t('input.terrainType') }}
+                                </td>
+                                <td class="whitespace-nowrap text-right">
+                                    {{ form.terrainType }}
+                                </td>
+                                <td>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    {{ $t('output.ZE') }}, {{ $t('units.m') }}
+                                </td>
+                                <td class="whitespace-nowrap text-right">
+                                    ze = {{ form.ZE }}
+                                </td>
+                                <td>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    {{ $t('output.KZE') }} ze
+                                </td>
+                                <td class="whitespace-nowrap text-right">
+                                    k(ze) = {{ form.KZE }}
+                                </td>
+                                <td>
+                                    {{ $t('according_to_table') }} 11.2
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    {{ $t('output.CZE') }}
+                                </td>
+                                <td class="whitespace-nowrap text-right">
+                                    с = {{ form.CZE }}
+                                </td>
+                                <td>
+                                    {{ $t('according_to_table') }} В.2
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <table class="form__table">
-                <tbody>
-                    <tr>
-                        <td>
-                            {{ $t('input.windRegion') }}
-                        </td>
-                        <td class="whitespace-nowrap text-right">
-                            {{ form.windRegion }}
-                        </td>
-                        <td>
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            {{ $t('output.W0') }}, {{ $t('units.pa') }}
-                        </td>
-                        <td class="whitespace-nowrap text-right">
-                            W0 = {{ form.W0 }}
-                        </td>
-                        <td>
-                            {{ $t('according_to_table') }} 11.1
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            {{ $t('input.terrainType') }}
-                        </td>
-                        <td class="whitespace-nowrap text-right">
-                            {{ form.terrainType }}
-                        </td>
-                        <td>
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            {{ $t('output.ZE') }}, {{ $t('units.m') }}
-                        </td>
-                        <td class="whitespace-nowrap text-right">
-                            ze = {{ form.ZE }}
-                        </td>
-                        <td>
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            {{ $t('output.KZE') }} ze
-                        </td>
-                        <td class="whitespace-nowrap text-right">
-                            k(ze) = {{ form.KZE }}
-                        </td>
-                        <td>
-                            {{ $t('according_to_table') }} 11.2
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            {{ $t('output.CZE') }}
-                        </td>
-                        <td class="whitespace-nowrap text-right">
-                            с = {{ form.CZE }}
-                        </td>
-                        <td>
-                            {{ $t('according_to_table') }} В.2
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="flex flex-col align-center justify-center my-4">
-                <picture class="flex justify-center">
-                    <source srcset="../assets/images/print/plan.webp" type="image/webp">
-                    <source srcset="../assets/images/print/plan.png" type="image/png">
-                    <img
-                        src="@/assets/images/print/plan.png"
-                        alt="plan"
-                        >
-                </picture>
-                <div class="small text-sz-8 text--gray text-center">
-                    {{ $t('lbls.appndx') }} B
-                </div>
-            </div>
-            <p class="font-bold mb-2">
+            <p class="font-bold text--sz-12 mb-0">
                 {{ $t('output.Wp') }} Wp
             </p>
             <div class="wrapper text--sz-14 font-bold mb-2">
@@ -447,7 +455,7 @@
                         <mi>V</mi>
                     </mrow>
                 </math>
-                <math xmlns="http://www.w3.org/1998/Math/MathML" class="block mb-2">
+                <math xmlns="http://www.w3.org/1998/Math/MathML" class="block">
                     <mrow>
                         <msub><mi>w</mi><mi>p</mi></msub>
                         <mo>=</mo>
@@ -455,7 +463,7 @@
                     </mrow>
                 </math>
             </div>
-            <table class="form__table mb-4">
+            <table class="form__table text--sz-12 mb-4 w-9/12">
                 <tbody>
                     <tr>
                         <td>
@@ -464,7 +472,7 @@
                         <td class="whitespace-nowrap text-right">
                             ζ(Ze) = {{ form.DZE.toFixed(2) }}
                         </td>
-                        <td>
+                        <td style="width: 34%;">
                             {{ $t('according_to_table') }} 11.4
                         </td>
                     </tr>
@@ -485,7 +493,7 @@
                 <p class="text--sz-12 mb-0 uppercase">
                     2.1 {{ $t('deflection_calc_wind') }}
                 </p>
-                <small class="text--sz-8 text--gray">
+                <small class="text--sz-10 text--gray">
                     {{ $t('sp_538') }}
                 </small>
             </div>
@@ -557,7 +565,7 @@
                             </mrow>
                         </math>
                     </div>
-                    <table class="form__table">
+                    <table class="form__table text--sz-12">
                         <tbody>
                             <tr>
                                 <td>
@@ -598,7 +606,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table class="form__table">
+                    <table class="form__table text--sz-12">
                         <tbody>
                             <tr>
                                 <td colspan="2" class="font-bold text-left pt-4 pb-2">
@@ -669,7 +677,7 @@
                 </tbody>
             </table>
         </section>
-        <section class="section">
+        <section class="section justify-start">
             <p class="text--sz-12 uppercase">
                 2.2 {{ $t('deflection_calc_termal') }}
             </p>
@@ -720,7 +728,7 @@
                     </mrow>
                 </math>
             </div>
-            <table class="form__table mb-4">
+            <table class="form__table text--sz-12 mb-4 w-9/12">
                 <tbody>
                     <tr>
                         <td>
@@ -729,7 +737,7 @@
                         <td class="whitespace-nowrap text-right">
                             p = {{ form.profileColors[form.profileColor].p }}
                         </td>
-                        <td class="whitespace-nowrap">
+                        <td class="whitespace-nowrap" style="width: 34%;">
                             {{ $t('according_to') }} B.5.1
                         </td>
                     </tr>
@@ -775,7 +783,7 @@
             </table>
             <div class="grid grid-cols-12">
                 <div class="col-span-6">
-                    <table class="form__table">
+                    <table class="form__table text--sz-12">
                         <tbody>
                             <tr>
                                 <td colspan="2" class="font-bold text-left pt-4 pb-2">
@@ -808,7 +816,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table class="form__table">
+                    <table class="form__table text--sz-12">
                         <tbody>
                             <tr>
                                 <td colspan="2" class="font-bold text-left pt-4 pb-2">
@@ -833,9 +841,11 @@
                                     {{ $t('output.tm') }}, {{ $t('units.cels') }}
                                 </td>
                                 <td class="whitespace-nowrap">
-                                    tm = {{ form.selectedView.result.tm.toFixed(9) }}
-                                    <span class="block whitespace-nowrap">
-                                        {{ $t('according_to') }} В.5.4
+                                    <span class="relative">
+                                        tm = {{ form.selectedView.result.tm.toFixed(9) }}
+                                        <span class="block whitespace-nowrap absolute pl-4" style="transform: translateX(100%); top: 0; right: 0;">
+                                            {{ $t('according_to') }} В.5.4
+                                        </span>
                                     </span>
                                 </td>
                             </tr>
@@ -850,7 +860,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-span-6">
+                <div class="col-span-6 flex justify-end">
                     <picture class="flex justify-center">
                         <source srcset="../assets/images/print/contour.webp" type="image/webp">
                         <source srcset="../assets/images/print/contour.png" type="image/png">
@@ -863,7 +873,7 @@
             </div>
             <div class="grid grid-cols-12">
                 <div class="col-span-6">
-                    <table class="form__table">
+                    <table class="form__table text--sz-12">
                         <tbody>
                             <tr>
                                 <td colspan="3" class="font-bold text-left pt-4 pb-2">
@@ -880,10 +890,9 @@
                                         ав = {{ form.AB }}
                                     </span>
                                 </td>
-                                <td></td>
                             </tr>
                             <tr>
-                                <td colspan="2">
+                                <td>
                                     {{ $t('output.kR') }}
                                 </td>
                                 <td class="whitespace-nowrap">
@@ -905,7 +914,6 @@
                                         tK = {{ form.selectedProfileParams.tk.toFixed(2) }}
                                     </span>
                                 </td>
-                                <td></td>
                             </tr>
                             <tr>
                                 <td>
@@ -914,25 +922,24 @@
                                 <td class="whitespace-nowrap">
                                     с = {{ form.selectedProfileParams.impostWidth }}
                                 </td>
-                                <td>
-
-                                </td>
                             </tr>
                             <tr>
                                 <td>
                                     {{ $t('output.K0') }}, м-1
                                 </td>
                                 <td class="whitespace-nowrap">
-                                    K0 = {{ form.K0.toFixed(11) }}
-                                </td>
-                                <td class="whitespace-nowrap">
-                                    {{ $t('according_to') }} В.5.5
+                                    <span class="relative">
+                                        K0 = {{ form.K0.toFixed(11) }}
+                                        <span class="whitespace-nowrap absolute pl-4" style="transform: translateX(100%); top: 0; right: 0;">
+                                            {{ $t('according_to') }} В.5.5
+                                        </span>
+                                    </span>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="col-span-6 flex items-center justify-center">
+                <div class="col-span-6 flex items-center justify-end">
                     <div class="wrapper flex items-stretch justify-end">
                         <picture>
                             <source srcset="../assets/images/print/deflection.webp" type="image/webp">
@@ -964,17 +971,17 @@
                             </span>
                         </div>
                     </div>
-                    <picture class="flex justify-end mt-auto -mb-[50px]">
-                        <source srcset="../assets/images/print/stamp.webp" type="image/webp">
-                        <source srcset="../assets/images/print/stamp.png" type="image/png">
-                        <img
-                            src="@/assets/images/print/stamp.png"
-                            alt="brusbox"
-                            >
-                    </picture>
                 </div>
             </div>
-            <table class="form__table">
+            <picture class="flex justify-end">
+                <source srcset="../assets/images/print/stamp.webp" type="image/webp">
+                <source srcset="../assets/images/print/stamp.png" type="image/png">
+                <img
+                    src="@/assets/images/print/stamp.png"
+                    alt="brusbox"
+                    >
+            </picture>
+            <table class="form__table mt-auto">
                 <tbody>
                     <tr>
                         <td>

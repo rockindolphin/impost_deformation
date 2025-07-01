@@ -749,6 +749,9 @@
                     if( this.form[key] < this.buildingInputParams[key].min ){
                         this.form[key] = this.buildingInputParams[key].min;
                     }
+                    if( isNaN( parseInt( this.form[key] ) ) ){
+                        this.form[key] = this.buildingInputParams[key].min;
+                    }
                 });
             },
             generateUrlParams(){

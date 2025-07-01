@@ -313,7 +313,7 @@ export const useFormStore = defineStore('form', {
             }
         },
         selectedViewKey: null, //ключ выбранного варианта
-        printUuid: 1 //номер расчета  Math.floor(100000 + Math.random() * 900000)
+        printUuid: Math.floor(100000 + Math.random() * 900000) //номер расчета  Math.floor(100000 + Math.random() * 900000)
     }),
     getters: {
         isVisible(state){
