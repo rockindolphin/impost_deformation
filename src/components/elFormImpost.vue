@@ -53,7 +53,11 @@
                                 v-model="form.Tn"
                                 type="number"
                                 step="0.1"
+                                min="-100"
+                                max="100"
                                 class="control control--text"
+                                v-numeric-only
+                                @change="fixFormNum('Tn', -20)"
                             >
                         </label>
                         <label class="col-span-12" for="Tref">
@@ -65,7 +69,11 @@
                                 v-model="form.Tref"
                                 type="number"
                                 step="0.1"
+                                min="-100"
+                                max="100"
                                 class="control control--text"
+                                v-numeric-only
+                                @change="fixFormNum('Tref', 10)"
                             >
                         </label>
                         <label class="col-span-12" for="Tv">
@@ -83,7 +91,11 @@
                                 v-model="form.Tv"
                                 type="number"
                                 step="0.1"
+                                min="-100"
+                                max="100"
                                 class="control control--text"
+                                v-numeric-only
+                                @change="fixFormNum('Tv', 21)"
                             >
                         </label>
                     </div>
@@ -117,6 +129,7 @@
                                         v-bind="buildingInputParams.Bh"
                                         class="control control--text"
                                         @input="onBuildingInputChange($event)"
+                                        v-numeric-only
                                     >
                                 </label>
 
@@ -131,6 +144,7 @@
                                         v-bind="buildingInputParams.Bw"
                                         class="control control--text"
                                         @input="onBuildingInputChange($event)"
+                                        v-numeric-only
                                     >
                                 </label>
 
@@ -145,6 +159,7 @@
                                         v-bind="buildingInputParams.Bl"
                                         class="control control--text"
                                         @input="onBuildingInputChange($event)"
+                                        v-numeric-only
                                     >
                                 </label>
 
@@ -159,6 +174,7 @@
                                         v-bind="buildingInputParams.Wh"
                                         class="control control--text"
                                         @input="onBuildingInputChange($event)"
+                                        v-numeric-only
                                     >
                                 </label>
 
@@ -206,6 +222,7 @@
                                         v-bind="buildingInputParams.Wgap"
                                         class="control control--text"
                                         @input="onBuildingInputChange($event)"
+                                        v-numeric-only
                                     >
                                 </label>
                             </div>
@@ -238,7 +255,10 @@
                                         v-model.number="form.L"
                                         type="number"
                                         step="0.1"
+                                        min="0"
                                         class="control control--text"
+                                        v-numeric-only
+                                        @change="fixFormNum('L', 180)"
                                     >
                                 </label>
 
@@ -251,7 +271,10 @@
                                         v-model.number="form.a"
                                         type="number"
                                         step="0.1"
+                                        min="0"
                                         class="control control--text"
+                                        v-numeric-only
+                                        @change="fixFormNum('a', 100)"
                                     >
                                 </label>
 
@@ -264,7 +287,10 @@
                                         v-model.number="form.b"
                                         type="number"
                                         step="0.1"
+                                        min="0"
                                         class="control control--text"
+                                        v-numeric-only
+                                        @change="fixFormNum('b', 100)"
                                     >
                                 </label>
 
@@ -564,6 +590,7 @@
     import { events } from '@/lib/events';
     import { defineAsyncComponent, watch } from 'vue';
     import { useFormStore } from '@/stores/formStore';
+    import numericOnly from '@/directives/numericOnly';
     import Multiselect from 'vue-multiselect';
     import elBuilding from '@/components/elBuilding.vue';
     import elWindow from '@/components/elWindow.vue';
@@ -607,6 +634,9 @@
             );
 
             return { form };
+        },
+        directives: {
+            numericOnly: numericOnly
         },
         components: {
             Multiselect,
@@ -706,6 +736,11 @@
             }
         },
         methods: {
+            fixFormNum(formKey, defaultValue){
+                if( isNaN( parseInt(this.form[formKey]) ) ){
+                    this.form[formKey] = defaultValue;
+                }
+            },
             onBuildingInputChange(){
                 Object.keys(this.buildingInputParams).map( key => {
                     if( this.form[key] > this.buildingInputParams[key].max ){

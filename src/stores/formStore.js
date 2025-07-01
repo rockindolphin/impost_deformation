@@ -479,8 +479,8 @@ export const useFormStore = defineStore('form', {
                 [   0.47,   0.56,   0.8    ],
                 [   0.46,   0.54,   0.76   ],
             ],
-            rowNum = null,
-            colNum = null,
+            rowNum = 0,
+            colNum = 0,
             rowRanges = [
                 { min: 0,       max: 5,     value: 0    },
                 { min: 5,       max: 10,    value: 1    },
@@ -534,8 +534,8 @@ export const useFormStore = defineStore('form', {
                 [   0.63,   0.63,   0.61,   0.59,   0.56,   0.51,   0.44  ],
                 [   0.53,   0.53,   0.52,   0.5,    0.47,   0.44,   0.38  ]
             ],
-            rowNum = null,
-            colNum = null,
+            rowNum = 0,
+            colNum = 0,
             rowRanges = [
                 { min: 0,       max: 0.1,       value: 0 },
                 { min: 0.1,     max: 5,         value: 1 },
@@ -581,8 +581,8 @@ export const useFormStore = defineStore('form', {
                 [   2.65,   2.3,    2       ],
                 [   2.75,   2.5,    2.2     ]
             ],
-            rowNum = null,
-            colNum = null,
+            rowNum = 0,
+            colNum = 0,
             rowRanges = [
                 { min: 0,       max: 5,     value: 0 },
                 { min: 5,       max: 10,    value: 1 },
